@@ -1,0 +1,17 @@
+SRCS_DIR  = src
+SRCS      = $(wildcard $(SRCS_DIR)/*.cc)
+OBJS_ALL  = $(SRCS:.cc=.o)
+OBJS_MAIN = $(SRCS_DIR)/main.o
+OBJS      = $(filter-out $(OBJS_MAIN), $(OBJS_ALL))
+
+TEST_SRCS_DIR = test
+TEST_SRCS    = $(wildcard $(TEST_SRCS_DIR)/*.cc)
+TEST_OBJS    = $(TEST_SRCS:.cc=.o)
+
+ARCH    = -arch i386 -arch x86_64
+CFLAGS  = -O2 -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3
+CC      = g++
+INCLUDE = -I./include -I/usr/include/nite -I/usr/include/ni
+LIBS    = -lm -framework OpenGL -framework GLUT $(ARCH) -lOpenNI -lXnVNite
+
+TEST_LIBS = -lgtest

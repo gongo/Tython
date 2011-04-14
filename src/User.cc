@@ -104,3 +104,33 @@ inline bool User::isConfident(XnSkeletonJointPosition p) const
 {
     return p.fConfidence >= THRESHOLD_CONFIDENCE;
 }
+
+Vector User::skeletonRightUpperArm(void)
+{
+    return getSkeletonVector(XN_SKEL_RIGHT_ELBOW, XN_SKEL_RIGHT_SHOULDER);
+}
+
+Vector User::skeletonRightForearm(void)
+{
+    return getSkeletonVector(XN_SKEL_RIGHT_WRIST, XN_SKEL_RIGHT_ELBOW);
+}
+
+Vector User::skeletonRightHand(void)
+{
+    return getSkeletonVector(XN_SKEL_RIGHT_HAND, XN_SKEL_RIGHT_WRIST);
+}
+
+Vector User::skeletonLeftUpperArm(void)
+{
+    return getSkeletonVector(XN_SKEL_LEFT_ELBOW, XN_SKEL_LEFT_SHOULDER);
+}
+
+Vector User::skeletonLeftForearm(void)
+{
+    return getSkeletonVector(XN_SKEL_LEFT_WRIST, XN_SKEL_LEFT_ELBOW);
+}
+
+Vector User::skeletonLeftHand(void)
+{
+    return getSkeletonVector(XN_SKEL_LEFT_HAND, XN_SKEL_LEFT_WRIST);
+}

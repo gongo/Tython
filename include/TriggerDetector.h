@@ -7,7 +7,7 @@
 
 class TriggerDetector : public AbstractDetector {
 public:
-    TriggerDetector(User* _user, int triggerNum, int _timeLimit);
+    TriggerDetector(User* _user);
     virtual ~TriggerDetector(void);
 
     /**
@@ -22,9 +22,22 @@ public:
 
 protected:
     /**
-     * Function list to detect trigger
+     * 制限時間やポーズなど、トリガーに関する設定を行う
+     *
+     * @param  _timeLimit   this->timeLimit
+     * @param  _triggerNum  this->triggerNum
+     * @param ...
+     */
+    void setTrigger(int _timeLimit, int _triggerNum, ...);
+
+    /**
+     * Trigger となるポーズを検出するメソッドの typename
      */
     typedef bool (TriggerDetector::*Trigger)(void);
+
+    /**
+     * Trigger となるポーズを検出するメソッドのリスト
+     */
     Trigger *triggerList;
 
     /**

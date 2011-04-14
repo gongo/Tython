@@ -1,11 +1,12 @@
 #include "LeftJabTriggerDetector.h"
 
 LeftJabTriggerDetector::LeftJabTriggerDetector(User* _user)
-    : TriggerDetector(_user, 3, 2)
+    : TriggerDetector(_user)
 {
-    triggerList[0] = reinterpret_cast<Trigger>(&LeftJabTriggerDetector::isStand);
-    triggerList[1] = reinterpret_cast<Trigger>(&LeftJabTriggerDetector::isLeftJab);
-    triggerList[2] = reinterpret_cast<Trigger>(&LeftJabTriggerDetector::isStand);
+    setTrigger(2, 3,
+               &LeftJabTriggerDetector::isStand,
+               &LeftJabTriggerDetector::isLeftJab,
+               &LeftJabTriggerDetector::isStand);
 }
 
 LeftJabTriggerDetector::~LeftJabTriggerDetector(void)

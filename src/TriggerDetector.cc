@@ -1,14 +1,32 @@
+#include <cstdarg>
 #include "TriggerDetector.h"
 
-TriggerDetector::TriggerDetector(User* _user, int _triggerNum, int _timeLimit)
-    : AbstractDetector(_user), triggerNum(_triggerNum), timeLimit(_timeLimit)
+TriggerDetector::TriggerDetector(User* _user)
+    : AbstractDetector(_user), triggerList(NULL)
 {
-    triggerList = new Trigger[triggerNum];
 }
 
 TriggerDetector::~TriggerDetector(void)
 {
-    delete [] triggerList;
+    if (triggerList != NULL) {
+        delete [] triggerList;
+    }
+}
+
+void TriggerDetector::setTrigger(int _timeLimit, int _triggerNum, ...)
+{
+    va_list ap;
+
+    timeLimit   = _timeLimit;
+    triggerNum  = _triggerNum;
+    triggerList = new Trigger[_triggerNum];
+
+    va_start(ap, _triggerNum);
+    while (_triggerNum > 0) {
+        triggerList[triggerNum - _triggerNum] = va_arg(ap, Trigger);
+        _triggerNum--;
+    }
+    va_end(ap);
 }
 
 bool TriggerDetector::isPosing(void)

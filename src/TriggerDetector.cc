@@ -1,8 +1,9 @@
 #include <cstdarg>
 #include "TriggerDetector.h"
+#include "Timer.h"
 
 TriggerDetector::TriggerDetector(User* _user)
-    : AbstractDetector(_user), triggerList(NULL), currentTime(0)
+    : AbstractDetector(_user), triggerList(NULL), elapsedTime(0)
 {
 }
 
@@ -50,11 +51,22 @@ bool TriggerDetector::isPosing(void)
 
 void TriggerDetector::resetTrigger(void)
 {
-    currentTime = 0;
-    triggerIndex = 0;
+    elapsedTime   = 0;
+    detectionTime = 0;
+    triggerIndex  = 0;
+}
+
+void TriggerDetector::nextTrigger(void)
+{
+    int currentTime = timer->current();
+
+    elapsedTime += (triggerIndex == 0) ? 0 : currentTime - detectionTime;
+    detectionTime = currentTime;
+
+    triggerIndex++;
 }
 
 bool TriggerDetector::withinTimeLimit(void)
 {
-    return true;
+    return elapsedTime <= timeLimit;
 }

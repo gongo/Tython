@@ -2,6 +2,7 @@
 
 AbstractDetector::AbstractDetector(User* _user) : user(_user)
 {
+    timer = Timer::getInstance();
 }
 
 AbstractDetector::~AbstractDetector(void)

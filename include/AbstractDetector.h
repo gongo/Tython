@@ -4,6 +4,7 @@
 #define _TYTHON_ABSTRACT_DETECTOR_H_
 
 #include "User.h"
+#include "Timer.h"
 
 class AbstractDetector {
 public:
@@ -19,7 +20,7 @@ public:
     bool detect(void);
 protected:
     User* user;
-
+    Timer* timer;
 private:
 };
 

@@ -12,9 +12,9 @@ Timer* Timer::getInstance(void)
     return instance;
 }
 
-double Timer::current(void)
+int Timer::current(void)
 {
     gettimeofday(&currentTime, NULL);
 
-    return currentTime.tv_sec - start.tv_sec;
+    return (int)(currentTime.tv_sec - start.tv_sec);
 }

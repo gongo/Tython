@@ -10,8 +10,14 @@ protected:
     }
 };
 
+/**
+ * シングルトンが機能しているか
+ */
 TEST_F(TimerTest, TestGetInstance) {
+    Timer *object2 = Timer::getInstance();
+
     ASSERT_TRUE(NULL != object);
+    ASSERT_TRUE(object == object2);
 }
 
 TEST_F(TimerTest, TestCurrent) {

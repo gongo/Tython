@@ -57,13 +57,20 @@ protected:
      */
     int timeLimit;
 
+private:
+    void resetTrigger(void);
+    void nextTrigger(void);
+    bool withinTimeLimit(void);
+
     /**
      * 最初のポーズ検出後からの経過時間
      */
-    int currentTime;
-private:
-    void resetTrigger(void);
-    bool withinTimeLimit(void);
+    int elapsedTime;
+
+    /**
+     * 一番最後にポーズ検出したときの時間
+     */
+    int detectionTime;
 };
 
 #endif // _TYTHON_TRIGGER_DETECTOR_H_

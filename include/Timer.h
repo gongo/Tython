@@ -14,7 +14,7 @@ public:
      */
     static Timer* getInstance(void);
 
-    double current(void);
+    int current(void);
 
     /**
      * インスタンス生成時の time

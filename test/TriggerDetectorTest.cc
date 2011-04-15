@@ -1,17 +1,28 @@
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 #include "TriggerDetector.h"
-using ::testing::Return;
+
+#define TIMELIMIT 2
 
 class ExampleTriggerDetector : public TriggerDetector {
 public:
     ExampleTriggerDetector(void) : TriggerDetector(NULL) {
-        setTrigger(timeLimit, 2,
-                   &ExampleTriggerDetector::isProc1,
-                   &ExampleTriggerDetector::isProc2);
+        setTrigger(TIMELIMIT, 3,
+                   &ExampleTriggerDetector::isProc,
+                   &ExampleTriggerDetector::isProc,
+                   &ExampleTriggerDetector::isProc);
     }
 
-    static int timeLimit;
+private:
+    bool isProc(void) { return true; }
+};
+
+class ExampleFailureTriggerDetector : public TriggerDetector {
+public:
+    ExampleFailureTriggerDetector(void) : TriggerDetector(NULL) {
+        setTrigger(TIMELIMIT, 2,
+                   &ExampleFailureTriggerDetector::isProc1,
+                   &ExampleFailureTriggerDetector::isProc2);
+    }
 
 private:
     bool isProc1(void) {
@@ -19,37 +30,52 @@ private:
     }
 
     bool isProc2(void) {
-        return true;
+        return false;
     }
 };
-
-int ExampleTriggerDetector::timeLimit = 2;
 
 class TriggerDetectorTest : public testing::Test {
 public:
     ExampleTriggerDetector *object;
+    ExampleFailureTriggerDetector *object2;
 protected:
     virtual void SetUp() {
         object = new ExampleTriggerDetector();
+        object2 = new ExampleFailureTriggerDetector();
+    }
+
+    virtual void TearDown() {
+        delete object;
+        delete object2;
     }
 };
 
 TEST_F(TriggerDetectorTest, TestIsPosing) {
+    // 1週目
+    ASSERT_FALSE(object->isPosing());
     ASSERT_FALSE(object->isPosing());
     ASSERT_TRUE(object->isPosing());
 
+    // 2週目
     ASSERT_FALSE(object->isPosing());
-    sleep(ExampleTriggerDetector::timeLimit - 1);
+    sleep(TIMELIMIT - 1);
+    ASSERT_FALSE(object->isPosing());
     ASSERT_TRUE(object->isPosing());
 }
 
 TEST_F(TriggerDetectorTest, TestIsPosingError) {
-    ASSERT_FALSE(object->isPosing());
-    ASSERT_FALSE(object->isPosing());
+    // 1週目
+    ASSERT_FALSE(object2->isPosing());
+    ASSERT_FALSE(object2->isPosing());
+
+    // 2週目
+    ASSERT_FALSE(object2->isPosing());
+    ASSERT_FALSE(object2->isPosing());
 }
 
 TEST_F(TriggerDetectorTest, TestIsPosingErrorTimeLimit) {
     ASSERT_FALSE(object->isPosing());
-    sleep(ExampleTriggerDetector::timeLimit + 1);
+    ASSERT_FALSE(object->isPosing());
+    sleep(TIMELIMIT + 1);
     ASSERT_FALSE(object->isPosing());
 }

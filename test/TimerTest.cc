@@ -20,6 +20,7 @@ TEST_F(TimerTest, TestCurrent) {
     sleep(wait);
     double stop = object->current();
 
-    ASSERT_GT(stop - start, wait-1); 
-    ASSERT_LE(wait, stop - start);
+    // wait - 1 < time < wait + 1
+    ASSERT_LT(wait-1, stop - start); 
+    ASSERT_LT(stop - start, wait+1);
 }

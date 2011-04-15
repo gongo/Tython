@@ -2,9 +2,12 @@
 #include "TriggerDetector.h"
 #include "Timer.h"
 
-TriggerDetector::TriggerDetector(User* _user)
-    : AbstractDetector(_user), triggerList(NULL), elapsedTime(0)
+TriggerDetector::TriggerDetector(User* _user) : AbstractDetector(_user)
 {
+    triggerList   = NULL;
+    elapsedTime   = 0;
+    detectionTime = 0;
+    triggerIndex  = 0;
 }
 
 TriggerDetector::~TriggerDetector(void)
@@ -32,8 +35,12 @@ void TriggerDetector::setTrigger(int _timeLimit, int _triggerNum, ...)
 
 bool TriggerDetector::isPosing(void)
 {
+    if (triggerList == NULL) {
+        return false;
+    }
+
     if ((this->*triggerList[triggerIndex])()) {
-        triggerIndex++;
+        nextTrigger();
     }
 
     if (!withinTimeLimit()) {

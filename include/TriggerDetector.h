@@ -35,6 +35,21 @@ protected:
      */
     typedef bool (TriggerDetector::*Trigger)(void);
 
+private:
+    void resetTrigger(void);
+    void nextTrigger(void);
+    bool withinTimeLimit(void);
+
+    /**
+     * 最初のポーズ検出後からの経過時間
+     */
+    int elapsedTime;
+
+    /**
+     * 一番最後にポーズ検出したときの時間
+     */
+    int detectionTime;
+
     /**
      * Trigger となるポーズを検出するメソッドのリスト
      */
@@ -56,21 +71,6 @@ protected:
      * Trigger 検出となる制限時間
      */
     int timeLimit;
-
-private:
-    void resetTrigger(void);
-    void nextTrigger(void);
-    bool withinTimeLimit(void);
-
-    /**
-     * 最初のポーズ検出後からの経過時間
-     */
-    int elapsedTime;
-
-    /**
-     * 一番最後にポーズ検出したときの時間
-     */
-    int detectionTime;
 };
 
 #endif // _TYTHON_TRIGGER_DETECTOR_H_

@@ -56,6 +56,11 @@ protected:
      * Trigger 検出となる制限時間
      */
     int timeLimit;
+
+    /**
+     * 最初のポーズ検出後からの経過時間
+     */
+    int currentTime;
 private:
     void resetTrigger(void);
     bool withinTimeLimit(void);

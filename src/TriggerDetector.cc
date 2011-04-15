@@ -2,7 +2,7 @@
 #include "TriggerDetector.h"
 
 TriggerDetector::TriggerDetector(User* _user)
-    : AbstractDetector(_user), triggerList(NULL)
+    : AbstractDetector(_user), triggerList(NULL), currentTime(0)
 {
 }
 
@@ -50,6 +50,7 @@ bool TriggerDetector::isPosing(void)
 
 void TriggerDetector::resetTrigger(void)
 {
+    currentTime = 0;
     triggerIndex = 0;
 }
 

@@ -1,7 +1,6 @@
 #include "LeftJabTriggerDetector.h"
 
-LeftJabTriggerDetector::LeftJabTriggerDetector(User* _user)
-    : TriggerDetector(_user)
+LeftJabTriggerDetector::LeftJabTriggerDetector(User* _user) : TriggerDetector(_user)
 {
     setTrigger(2, 3,
                &LeftJabTriggerDetector::isStand,

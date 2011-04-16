@@ -29,18 +29,11 @@ public:
     virtual Vector skeletonRightUpperArm(void);
 
     /**
-     * 右前腕(右肘から右手首にかけて)のベクトルを取得する
+     * 右前腕(右肘から右手にかけて)のベクトルを取得する
      *
      * @return 右前腕のベクトル
      */
     virtual Vector skeletonRightForearm(void);
-
-    /**
-     * 右手(右手首から右手にかけて)のベクトルを取得する
-     *
-     * @return 右手のベクトル
-     */
-    virtual Vector skeletonRightHand(void);
 
     /**
      * 左上腕(左肩から左肘にかけて)のベクトルを取得する
@@ -50,18 +43,11 @@ public:
     virtual Vector skeletonLeftUpperArm(void);
 
     /**
-     * 左前腕(左肘から左手首にかけて)のベクトルを取得する
+     * 左前腕(左肘から左手にかけて)のベクトルを取得する
      *
      * @return 左前腕のベクトル
      */
     virtual Vector skeletonLeftForearm(void);
-
-    /**
-     * 左手(左手首から左手にかけて)のベクトルを取得する
-     *
-     * @return 左手のベクトル
-     */
-    virtual Vector skeletonLeftHand(void);
 
 protected:
     /**

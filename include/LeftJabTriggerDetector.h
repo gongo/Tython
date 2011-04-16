@@ -10,16 +10,6 @@ public:
     LeftJabTriggerDetector(User* _user);
     virtual ~LeftJabTriggerDetector(void);
 
-    /**
-     * ポーズをとっているか判定
-     * 
-     * 定められた時間内に指定された順番の Pose をしたかを確認する
-     *
-     * @see triggetList()
-     * @return ポーズを検出できれば true
-     */
-    bool isPosing(void);
-
 protected:
 
 private:

@@ -198,3 +198,13 @@ TEST_F(VectorTest, TestWithoutAngle) {
     ASSERT_TRUE(v2.withoutAngle(v4, 130.0f));
     ASSERT_TRUE(v3.withoutAngle(v4, 88.0f));
 }
+
+TEST_F(VectorTest, TestIsStraight) {
+    Vector v1(1.0f, 0.0f, 0.0f); // 0 
+    Vector v2(1.0f, 1.0f, 0.0f); // 45
+    Vector v3(-1.0f, 0.0f, 0.0f); // 180
+
+    ASSERT_FALSE(v1.isStraight(v2));
+    ASSERT_TRUE(v1.isStraight(v3));
+    ASSERT_FALSE(v2.isStraight(v3));
+}

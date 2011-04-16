@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include "Controller.h"
 #include "CrossArmBlockPoseDetector.h"
+#include "LeftJabTriggerDetector.h"
 #include "util.h"
 
 Controller::Controller(void)
@@ -17,16 +18,19 @@ Controller::~Controller(void)
 
 void Controller::main(void)
 {
-    CrossArmBlockPoseDetector *detect = new CrossArmBlockPoseDetector(ctxUser);
+    LeftJabTriggerDetector *detect = new LeftJabTriggerDetector(ctxUser);
+    //    CrossArmBlockPoseDetector *detect = new CrossArmBlockPoseDetector(ctxUser);
 
     while (true) {
         if (detect->detect()) {
             printf("OK!\n");
         } else {
-            printf("Boooooooo........\n");
+            //printf("Boooooooo........\n");
         }
         ctxGlobal.WaitAndUpdateAll();
     }
+
+    delete detect;
 }
 
 void Controller::initXN(void)

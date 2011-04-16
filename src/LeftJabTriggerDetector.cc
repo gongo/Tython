@@ -14,10 +14,16 @@ LeftJabTriggerDetector::~LeftJabTriggerDetector(void)
 
 bool LeftJabTriggerDetector::isStand(void)
 {
-    return true;
+    Vector upperArm = user->skeletonLeftUpperArm();
+    Vector forearm  = user->skeletonLeftForearm();
+    printf("Stand = %f\n", upperArm.dot(forearm));
+    return upperArm.isOrthogonal(forearm);
 }
 
 bool LeftJabTriggerDetector::isLeftJab(void)
 {
-    return true;
+    Vector upperArm = user->skeletonLeftUpperArm();
+    Vector forearm  = user->skeletonLeftForearm();
+    printf("Jab   = %f\n", upperArm.dot(forearm));
+    return upperArm.isStraight(forearm);
 }

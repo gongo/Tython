@@ -132,5 +132,6 @@ bool Vector::isOrthogonal(const Vector& v) const
 
 bool Vector::isStraight(const Vector& v) const
 {
-    return withoutAngle(v, THRESHOLD_STRAIGHT);
+    return withoutAngle(v, THRESHOLD_STRAIGHT)
+        || withinAngle(v, 180.0f - THRESHOLD_STRAIGHT);
 }

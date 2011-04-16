@@ -119,12 +119,9 @@ Vector User::skeletonRightUpperArm(void)
 
 Vector User::skeletonRightForearm(void)
 {
-    return getSkeletonVector(XN_SKEL_RIGHT_WRIST, XN_SKEL_RIGHT_ELBOW);
-}
-
-Vector User::skeletonRightHand(void)
-{
-    return getSkeletonVector(XN_SKEL_RIGHT_HAND, XN_SKEL_RIGHT_WRIST);
+    Vector elbow = getSkeletonPosition(XN_SKEL_RIGHT_ELBOW);
+    Vector hand = getSkeletonPosition(XN_SKEL_RIGHT_HAND);
+    return getSkeletonVector(XN_SKEL_RIGHT_HAND, XN_SKEL_RIGHT_ELBOW);
 }
 
 Vector User::skeletonLeftUpperArm(void)
@@ -134,10 +131,8 @@ Vector User::skeletonLeftUpperArm(void)
 
 Vector User::skeletonLeftForearm(void)
 {
-    return getSkeletonVector(XN_SKEL_LEFT_WRIST, XN_SKEL_LEFT_ELBOW);
+    Vector elbow = getSkeletonPosition(XN_SKEL_LEFT_ELBOW);
+    Vector hand = getSkeletonPosition(XN_SKEL_LEFT_HAND);
+    return getSkeletonVector(XN_SKEL_LEFT_HAND, XN_SKEL_LEFT_ELBOW);
 }
 
-Vector User::skeletonLeftHand(void)
-{
-    return getSkeletonVector(XN_SKEL_LEFT_HAND, XN_SKEL_LEFT_WRIST);
-}

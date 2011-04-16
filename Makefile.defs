@@ -9,9 +9,9 @@ TEST_SRCS    = $(wildcard $(TEST_SRCS_DIR)/*.cc)
 TEST_OBJS    = $(TEST_SRCS:.cc=.o)
 
 ARCH    = -arch i386 -arch x86_64
-CFLAGS  = -O2 -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3
+CFLAGS  = -O2 -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 -g
 CC      = g++
 INCLUDE = -I./include -I/usr/include/nite -I/usr/include/ni
 LIBS    = -lm -framework OpenGL -framework GLUT $(ARCH) -lOpenNI -lXnVNite
 
-TEST_LIBS = -lgtest
+TEST_LIBS = -lgmock -lgtest -lpthread

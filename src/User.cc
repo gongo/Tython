@@ -34,9 +34,16 @@ User::User(xn::Context *ctx)
     userGenerator->GetSkeletonCap().RegisterCalibrationCallbacks(NULL, s_onCalibrationEnd, this, handleCalibrationCallbacks);
 }
 
+User::User(void)
+{
+    userGenerator = NULL;
+}
+
 User::~User(void)
 {
-    delete userGenerator;
+    if (userGenerator != NULL) {
+        delete userGenerator;
+    }
 }
 
 XnUserID User::getTrackingId(void) const

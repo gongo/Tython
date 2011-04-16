@@ -14,12 +14,16 @@ protected:
 
 private:
     /**
-     * 
+     * 構え状態かチェックする
+     *
+     * @return  構え状態であれば true
      */
     bool isStand(void);
 
     /**
-     * 
+     * ジャブ構え状態かチェックする
+     *
+     * @return  ジャブ構え状態であれば true
      */
     bool isLeftJab(void);
 };

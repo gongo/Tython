@@ -12,12 +12,8 @@ protected:
 TEST_F(CrossArmBlockPoseDetectorTest, TestIsPosing) {
     MockUser mock;
 
-    EXPECT_CALL(mock, skeletonRightForearm())
-        .Times(1)
-        .WillOnce(Return(Vector(0, 100, 0)));
-    EXPECT_CALL(mock, skeletonLeftForearm())
-        .Times(1)
-        .WillOnce(Return(Vector(100, 0, 0)));
+    EXPECT_CALL(mock, skeletonRightForearm()).WillOnce(Return(Vector(0, 100, 0)));
+    EXPECT_CALL(mock, skeletonLeftForearm()).WillOnce(Return(Vector(-100, 0, 0)));
 
     object = new CrossArmBlockPoseDetector(&mock);
     
@@ -27,12 +23,8 @@ TEST_F(CrossArmBlockPoseDetectorTest, TestIsPosing) {
 TEST_F(CrossArmBlockPoseDetectorTest, TestIsPosingError) {
     MockUser mock;
 
-    EXPECT_CALL(mock, skeletonRightForearm())
-        .Times(1)
-        .WillOnce(Return(Vector(100, 100, 0)));
-    EXPECT_CALL(mock, skeletonLeftForearm())
-        .Times(1)
-        .WillOnce(Return(Vector(-100, 0, 0)));
+    EXPECT_CALL(mock, skeletonRightForearm()).WillOnce(Return(Vector(0, 100, 0)));
+    EXPECT_CALL(mock, skeletonLeftForearm()).WillOnce(Return(Vector(0, 100, 0)));
 
     object = new CrossArmBlockPoseDetector(&mock);
     

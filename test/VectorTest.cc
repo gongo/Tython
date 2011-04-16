@@ -174,3 +174,27 @@ TEST_F(VectorTest, TestDistance) {
     ASSERT_EQ(0.0f, v1.distance(v1));
     ASSERT_EQ(6.0f, v2.distance(v3));
 }
+
+TEST_F(VectorTest, TestWithinAngle) {
+    Vector v1(1.0f, 0.0f, 0.0f);
+    Vector v2(0.1f, 1.0f, 0.0f);
+    Vector v3(-1.0f, 0.2f, 0.0f);
+
+    ASSERT_TRUE(v1.withinAngle(v2, 90.0f));
+    ASSERT_TRUE(v2.withinAngle(v3, 120.0f));
+    ASSERT_TRUE(v1.withinAngle(v3, 180.0f));
+}
+
+TEST_F(VectorTest, TestWithoutAngle) {
+    Vector v1(1.0f, 0.0f, 0.0f); // 0 
+    Vector v2(1.0f, 1.0f, 0.0f); // 45
+    Vector v3(0.0f, 1.0f, 0.0f); // 90
+    Vector v4(-1.0f, 0.0f, 0.0f); // 180
+
+    ASSERT_TRUE(v1.withoutAngle(v2, 40.0f));
+    ASSERT_TRUE(v2.withoutAngle(v3, 40.0f));
+    ASSERT_TRUE(v1.withoutAngle(v3, 88.0f));
+    ASSERT_TRUE(v1.withoutAngle(v4, 175.0f));
+    ASSERT_TRUE(v2.withoutAngle(v4, 130.0f));
+    ASSERT_TRUE(v3.withoutAngle(v4, 88.0f));
+}

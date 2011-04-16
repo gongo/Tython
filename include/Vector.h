@@ -28,7 +28,37 @@ public:
     float cross(const Vector& v) const;
     Vector normalize(void) const;
     float distance(const Vector& v) const;
+
+    /**
+     * 二つのベクトルが指定した角度より鋭角かチェックする
+     *
+     * @param    v    角度をチェックするベクトル
+     * @param  angle  鋭角と判定基準とする角度
+     */
+    bool withinAngle(const Vector& v, float angle) const;
+
+    /**
+     * 二つのベクトルが指定した角度より鈍角かチェックする
+     *
+     * @param    v    角度をチェックするベクトル
+     * @param  angle  鈍角の判定基準とする角度
+     */
+    bool withoutAngle(const Vector& v, float angle) const;
+
+    /**
+     * 二つのベクトルが直交しているかチェックする
+     *
+     * @param   v  this と直行しているか確認するベクトル
+     * @return  直交していれば true
+     */
     bool isOrthogonal(const Vector& v) const;
+
+    /**
+     * 二つのベクトルが平行かチェックする
+     *
+     * @param   v  this と平行か確認するベクトル
+     * @return  平行であれば true 
+     */
     bool isStraight(const Vector& v) const;
 };
 

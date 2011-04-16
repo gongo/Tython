@@ -1,18 +1,18 @@
 #include <math.h>
 #include "Vector.h"
 
-inline static float deg2rad(float degree)
+static float deg2rad(float degree)
 {
     return degree * M_PI / 180.0f;
 }
 
-inline static float rad2deg(float radian)
+static float rad2deg(float radian)
 {
     return radian * 180.0f / M_PI;
 }
 
-const float Vector::THRESHOLD_ORTHOGONAL = cos(deg2rad(80.0f));
-const float Vector::THRESHOLD_STRAIGHT   = cos(deg2rad(170.0f));
+const float Vector::THRESHOLD_ORTHOGONAL = 80.0f;
+const float Vector::THRESHOLD_STRAIGHT   = 170.0f;
 
 Vector::Vector(void)
 {
@@ -114,12 +114,23 @@ float Vector::distance(const Vector& v) const
     return (*this - v).magnitude();
 }
 
+bool Vector::withinAngle(const Vector& v, float angle) const
+{
+    return dot(v) >= cosf(deg2rad(angle));
+}
+
+bool Vector::withoutAngle(const Vector& v, float angle) const
+{
+    return !withinAngle(v, angle);
+}
+
 bool Vector::isOrthogonal(const Vector& v) const
 {
-    return fabs(dot(v)) < THRESHOLD_ORTHOGONAL;
+    return withoutAngle(v, THRESHOLD_ORTHOGONAL)
+        && withinAngle(v, THRESHOLD_ORTHOGONAL + 20);
 }
 
 bool Vector::isStraight(const Vector& v) const
 {
-    return dot(v) < THRESHOLD_STRAIGHT;
+    return withoutAngle(v, THRESHOLD_STRAIGHT);
 }

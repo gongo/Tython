@@ -12,7 +12,7 @@ static float rad2deg(float radian)
 }
 
 const float Vector::THRESHOLD_ORTHOGONAL = 80.0f;
-const float Vector::THRESHOLD_STRAIGHT   = 170.0f;
+const float Vector::THRESHOLD_STRAIGHT   = 160.0f;
 
 Vector::Vector(void)
 {

@@ -8,7 +8,9 @@ LCOV_INFO = lcov.info
 LCOV_DIR  = gcov
 
 coverage: force
-	lcov -c -b . -d $(SRCS_DIR) -d $(TEST_SRCS_DIR) -o lcov.info
+	lcov -c -b . -d $(SRCS_DIR) -d $(TEST_SRCS_DIR) -o lcov2.info
+	lcov -r lcov2.info '/usr/include/*' '/usr/local/include/*' -o $(LCOV_INFO)
+	rm lcov2.info
 	genhtml -o $(LCOV_DIR) $(LCOV_INFO)
 
 coverage-clean: clean

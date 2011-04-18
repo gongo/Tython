@@ -34,6 +34,11 @@ private:
     }
 };
 
+class ExampleNoSetTriggerDetector : public TriggerDetector {
+public:
+    ExampleNoSetTriggerDetector(void) : TriggerDetector(NULL) {}
+};
+
 class TriggerDetectorTest : public testing::Test {
 public:
     ExampleTriggerDetector *object;
@@ -77,5 +82,9 @@ TEST_F(TriggerDetectorTest, TestIsPosingErrorTimeLimit) {
     ASSERT_FALSE(object->isPosing());
     ASSERT_FALSE(object->isPosing());
     sleep(TIMELIMIT + 1);
+    ASSERT_FALSE(object->isPosing());
+}
+
+TEST_F(TriggerDetectorTest, TestIsPosingErrorNoSetTrigger) {
     ASSERT_FALSE(object->isPosing());
 }

@@ -1,0 +1,8 @@
+include Makefile
+
+CXXFLAGS += -fprofile-arcs -ftest-coverage
+LIBS     += -lgcov
+
+coverage: force
+	lcov -c -d . -o lcov.info
+	genhtml -o gcov lcov.info

@@ -10,5 +10,5 @@ PoseDetector::~PoseDetector(void)
 
 bool PoseDetector::isPosing(void)
 {
-    return true;
+    return false;
 }

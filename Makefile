@@ -4,7 +4,7 @@ TARGET      = Tython
 TEST_TARGET = TestTython
 DEPEND      = Makefile.dep
 
-RM    = rm -f
+RM    = rm -rf
 RM_GC = *~ \#*
 
 TAGS       = gtags

@@ -3,6 +3,13 @@ include Makefile
 CXXFLAGS += -fprofile-arcs -ftest-coverage
 LIBS     += -lgcov
 
+GCOV_OBJS = $(OBJS:.o=.gcno) $(TEST_OBJS:.o=.gcno) $(OBJS:.o=.gcda) $(TEST_OBJS:.o=.gcda)
+LCOV_INFO = lcov.info
+LCOV_DIR  = gcov
+
 coverage: force
-	lcov -c -d . -o lcov.info
-	genhtml -o gcov lcov.info
+	lcov -c -b . -d $(SRCS_DIR) -d $(TEST_SRCS_DIR) -o lcov.info
+	genhtml -o $(LCOV_DIR) $(LCOV_INFO)
+
+coverage-clean: clean
+	$(RM) $(GCOV_OBJS) $(LCOV_INFO) $(LCOV_DIR)

@@ -2,7 +2,7 @@
 
 LeftJabTriggerDetector::LeftJabTriggerDetector(User* _user) : TriggerDetector(_user)
 {
-    setTrigger(2, 3,
+    setTrigger(1, 3,
                &LeftJabTriggerDetector::isStand,
                &LeftJabTriggerDetector::isLeftJab,
                &LeftJabTriggerDetector::isStand);

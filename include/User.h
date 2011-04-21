@@ -21,6 +21,36 @@ public:
     void onPoseStart(XnUserID uid);
     void onCalibrationEnd(XnUserID uid, bool isCalibration);
 
+    void updatePixels(xn::SceneMetaData* data);
+
+    /**
+     * 首の座標を取得する
+     *
+     * @return 首の座標(ベクトル)
+     */
+    virtual Vector positionNeck(void);
+
+    /**
+     * 右肩の座標を取得する
+     *
+     * @return 右肩の座標(ベクトル)
+     */
+    virtual Vector positionRightShoulder(void);
+
+    /**
+     * 右手の座標を取得する
+     *
+     * @return 右手の座標(ベクトル)
+     */
+    virtual Vector positionRightHand(void);
+
+    /**
+     * 右肘の座標を取得する
+     *
+     * @return 右肘の座標(ベクトル)
+     */
+    virtual Vector positionRightElbow(void);
+
     /**
      * 右上腕(右肩から右肘にかけて)のベクトルを取得する
      *

@@ -46,6 +46,11 @@ User::~User(void)
     }
 }
 
+void User::updatePixels(xn::SceneMetaData* data)
+{
+    userGenerator->GetUserPixels(0, *data);
+}
+
 XnUserID User::getTrackingId(void) const
 {
     XnUserID ids[1];
@@ -110,6 +115,26 @@ void User::onPoseStart(XnUserID uid)
 inline bool User::isConfident(XnSkeletonJointPosition p) const
 {
     return p.fConfidence >= THRESHOLD_CONFIDENCE;
+}
+
+Vector User::positionNeck(void)
+{
+    return getSkeletonPosition(XN_SKEL_NECK);
+}
+
+Vector User::positionRightShoulder(void)
+{
+    return getSkeletonPosition(XN_SKEL_RIGHT_SHOULDER);
+}
+
+Vector User::positionRightHand(void)
+{
+    return getSkeletonPosition(XN_SKEL_RIGHT_HAND);
+}
+
+Vector User::positionRightElbow(void)
+{
+    return getSkeletonPosition(XN_SKEL_RIGHT_ELBOW);
 }
 
 Vector User::skeletonRightUpperArm(void)

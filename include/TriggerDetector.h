@@ -31,13 +31,30 @@ protected:
     void setTrigger(int _timeLimit, int _triggerNum, ...);
 
     /**
-     * Trigger となるポーズを検出するメソッドの typename
+     * トリガーとなるポーズを検出するメソッドの typename
      */
     typedef bool (TriggerDetector::*Trigger)(void);
 
 private:
+    /**
+     * リセット
+     *
+     * トリガーとなるポーズの検出状況をリセットする
+     */
     void resetTrigger(void);
+
+    /**
+     * トリガーとなる次のポーズの検出を開始する
+     */
     void nextTrigger(void);
+
+    /**
+     * トリガーを満たす制限時間内かどうかを判定する
+     *
+     * @see  timeLimit
+     *
+     * @return  制限時間内であれば true
+     */
     bool withinTimeLimit(void);
 
     /**

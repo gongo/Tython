@@ -9,13 +9,6 @@ class PoseDetector : public AbstractDetector {
 public:
     PoseDetector(User* _user);
     virtual ~PoseDetector(void);
-
-    /**
-     * ポーズをとっているか判定
-     * 
-     * @return ポーズを検出できれば true
-     */
-    bool isPosing(void);
 protected:
 
 private:

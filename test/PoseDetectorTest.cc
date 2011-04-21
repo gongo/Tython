@@ -1,19 +1,15 @@
 #include <gtest/gtest.h>
 #include "PoseDetector.h"
 
-class PoseDetectorTest : public testing::Test {
-public:
-    virtual void SetUp() {
-        object = new PoseDetector(NULL);
-    }    
+// class PoseDetectorTest : public testing::Test {
+// public:
+//     virtual void SetUp() {
+//         object = new PoseDetector(NULL);
+//     }    
 
-    virtual void TearDown() {
-        delete object;
-    }
-protected:
-    PoseDetector* object;
-};
-
-TEST_F(PoseDetectorTest, TestIsPosing) {
-    ASSERT_FALSE(object->isPosing());
-}
+//     virtual void TearDown() {
+//         delete object;
+//     }
+// protected:
+//     PoseDetector* object;
+// };

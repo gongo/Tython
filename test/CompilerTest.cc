@@ -18,7 +18,7 @@ TEST_F(CompilerTest, TestGetInstance) {
 }
 
 TEST_F(CompilerTest, TestCompile) {
-    ASSERT_FALSE(object->compile("aa"));
+    ASSERT_TRUE(object->compile("aa"));
     ASSERT_FALSE(object->compile("a@@aaa"));
 }
 

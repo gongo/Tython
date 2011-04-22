@@ -1,5 +1,5 @@
 SRCS_DIR  = src
-SRCS      = $(wildcard $(SRCS_DIR)/*.cc)
+SRCS      = $(wildcard $(SRCS_DIR)/**/*.cc) $(wildcard $(SRCS_DIR)/*.cc)
 OBJS_ALL  = $(SRCS:.cc=.o)
 OBJS_MAIN = $(SRCS_DIR)/main.o
 OBJS      = $(filter-out $(OBJS_MAIN), $(OBJS_ALL))

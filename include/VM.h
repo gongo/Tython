@@ -4,13 +4,11 @@
 #define _TYTHON_VM_H_
 
 #include <string>
-#include <stack>
 #include <vector>
 #include <map>
 #include "Instruction.h"
 
 using std::string;
-using std::stack;
 using std::vector;
 using std::map;
 
@@ -52,6 +50,13 @@ public:
      * @param  arg  特に使わず
      */ 
     void swap(int arg);
+
+    /**
+     * スタックトップの下から指定した数だけスタックから削除する
+     *
+     * @param  arg  削除する数
+     */ 
+    void slide(int arg);
 
     /**
      * 0 番目と 1 番目 をスタックから取り出し、加算結果([0]*[1])をプッシュする
@@ -102,6 +107,18 @@ public:
      */
     int pop(void);
 
+    /**
+     * スタックの全要素を削除
+     */
+    void clear(void);
+
+    /**
+     * スタックの要素数を返す
+     *
+     * @return  スタックの要素数
+     */
+    int size(void);
+
 private:
     /**
      * コンストラクタ
@@ -136,7 +153,7 @@ private:
     /**
      * スタック
      */
-    stack<int> _stack;
+    vector<int> _stack;
 };
 
 #endif // _TYTHON_VM_H_

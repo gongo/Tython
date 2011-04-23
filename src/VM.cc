@@ -43,6 +43,15 @@ void VM::swap(int arg)
     push(p2);
 }
 
+void VM::slide(int arg)
+{
+    int p = pop();
+    for (; arg > 0; arg--) {
+        pop();
+    }
+    push(p);
+}
+
 void VM::add(int arg)
 {
     int p1 = pop();
@@ -82,17 +91,29 @@ void VM::num_out(int arg)
 
 void VM::push(int arg)
 {
-    _stack.push(arg);
+    vector<int>::iterator it = _stack.begin();
+    _stack.insert(it, arg);
 }
 
 int VM::top(void)
 {
-    return _stack.top();
+    return _stack.front();
 }
 
 int VM::pop(void)
 {
-    int p = _stack.top();
-    _stack.pop();
+    int p = _stack.front();
+    vector<int>::iterator it = _stack.begin();
+    _stack.erase(it);
     return p;
+}
+
+void VM::clear(void)
+{
+    _stack.clear();
+}
+
+int VM::size(void)
+{
+    return _stack.size();
 }

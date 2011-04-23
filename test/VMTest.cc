@@ -7,6 +7,7 @@ public:
 protected:
     virtual void SetUp() {
         object = VM::instance();
+        object->clear();
     }
 };
 
@@ -34,35 +35,47 @@ TEST_F(VMTest, TestSwap) {
 }
 
 TEST_F(VMTest, TestAdd) {
+    int size = object->size();
+    
     object->push(10);
     object->push(20);
     object->add(NULL);
 
     ASSERT_EQ(30, object->top());
+    ASSERT_EQ(size + 1, object->size());
 }
 
 TEST_F(VMTest, TestSub) {
+    int size = object->size();
+
     object->push(10);
     object->push(20);
     object->sub(NULL);
 
     ASSERT_EQ(10, object->top());
+    ASSERT_EQ(size + 1, object->size());
 }
 
 TEST_F(VMTest, TestMul) {
+    int size = object->size();
+
     object->push(10);
     object->push(20);
     object->mul(NULL);
 
     ASSERT_EQ(200, object->top());
+    ASSERT_EQ(size + 1, object->size());
 }
 
 TEST_F(VMTest, TestDiv) {
+    int size = object->size();
+
     object->push(10);
     object->push(20);
     object->div(NULL);
 
     ASSERT_EQ(2, object->top());
+    ASSERT_EQ(size + 1, object->size());
 }
 
 TEST_F(VMTest, TestPop) {
@@ -71,6 +84,7 @@ TEST_F(VMTest, TestPop) {
 
     object->push(p1);
     object->push(p2);
+
     ASSERT_EQ(p2, object->pop());
     ASSERT_NE(p2, object->top());
     ASSERT_EQ(p1, object->pop());
@@ -82,7 +96,38 @@ TEST_F(VMTest, TestTop) {
 
     object->push(p1);
     object->push(p2);
+
     ASSERT_EQ(p2, object->top());
     ASSERT_EQ(p2, object->top());
     ASSERT_NE(p1, object->top());
+}
+
+
+TEST_F(VMTest, TestClear) {
+    object->push(10);
+    object->push(10);
+    object->push(10);
+    object->clear();
+
+    ASSERT_EQ(0, object->size());
+ }
+
+TEST_F(VMTest, TestSlide) {
+    int p1 = 1;
+    int p2 = 2;
+    int p3 = 3;
+    int p4 = 4;
+    int size;
+    int slide = 3;
+
+    object->push(p1);
+    object->push(p2);
+    object->push(p3);
+    object->push(p4);
+    size = object->size();
+
+    object->slide(slide);
+
+    ASSERT_EQ(p4, object->top());
+    ASSERT_EQ(size - slide, object->size()); 
 }

@@ -41,6 +41,7 @@ bool Compiler::compile(string source)
         } else if ((cur = scan(source, " @@",  index)) != index) {
         } else if ((cur = scan(source, " @ ",  index)) != index) {
         } else if ((cur = scan(source, "   ",  index)) != index) {
+            return true;
         } else if ((cur = scan(source, "@ aa", index)) != index) {
         } else if ((cur = scan(source, "@ a@", index)) != index) {
         } else if ((cur = scan(source, "@ @ ", index)) != index) {
@@ -58,4 +59,26 @@ bool Compiler::compile(string source)
 int Compiler::scan(string str, string target, int index)
 {
     return (str.find(target, index) == index) ? index + target.length() : index;
+}
+
+int Compiler::input(string str, int index)
+{
+    int endIndex;
+    int num = 0;
+    int digit = 0;
+
+    if ((endIndex = str.find('g', index)) == string::npos) {
+        throw 3;
+    }
+
+    string::iterator itSt = str.begin() + index;
+    string::iterator itEd = str.begin() + endIndex - 1;
+
+    while (itSt <= itEd) {
+        char c = *itEd;
+        num += (((c == 'a') ? 1 : 0) << digit++);
+        itEd--;
+    }
+
+    return endIndex + 1;
 }

@@ -19,6 +19,7 @@ TEST_F(CompilerTest, TestGetInstance) {
 
 TEST_F(CompilerTest, TestCompile) {
     ASSERT_TRUE(object->compile("aa"));
+    ASSERT_TRUE(object->compile("aa   "));
     ASSERT_FALSE(object->compile("a@@aaa"));
 }
 
@@ -49,3 +50,12 @@ TEST_F(CompilerTest, TestScan) {
     ASSERT_EQ(5, object->scan(str, key5, 2));
     ASSERT_EQ(3, object->scan(str, key5, 3));
 }
+
+TEST_F(CompilerTest, TestInput) {
+    ASSERT_EQ(6, object->input("aa@a@g", 0)); // 11010
+    ASSERT_EQ(6, object->input("aa@a@g", 3)); // 10
+    ASSERT_EQ(2, object->input("agaa", 0));   // 1
+
+    ASSERT_THROW(object->input("agaaa", 3), int);
+}
+

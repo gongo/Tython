@@ -70,12 +70,7 @@ public:
      * @retrun        解析された値
      * @throw 
      */
-    int input(string str, int &index);
-
-    /**
-     * スタックの 1 番目と 2 番目を入れ替える
-     */ 
-    void swap(void);
+    int input(string str, unsigned int& index);
 
     Instruction* op(string str, int arg);
     Instruction* op(string str);

@@ -56,7 +56,7 @@ TEST_F(CompilerTest, TestScan) {
 }
 
 TEST_F(CompilerTest, TestInput) {
-    int index = 0;
+    unsigned int index = 0;
 
     ASSERT_EQ(26, object->input("aa@a@g", index)); // 11010
     ASSERT_EQ(6, index);
@@ -72,15 +72,3 @@ TEST_F(CompilerTest, TestInput) {
     index = 3;
     ASSERT_THROW(object->input("agaaa", index), int);
 }
-
-TEST_F(CompilerTest, TestSwap) {
-    object->_stack.push(10);
-    object->_stack.push(20);
-
-    object->swap();
-
-    ASSERT_EQ(10, object->_stack.top());
-    object->_stack.pop();
-    ASSERT_EQ(20, object->_stack.top());
-}
-

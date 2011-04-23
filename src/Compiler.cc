@@ -1,6 +1,4 @@
 #include "Compiler.h"
-#include <cstring>
-#include <iostream>
 
 Compiler* Compiler::_instance = new Compiler;
 string Compiler::_treat = " a@g";
@@ -12,8 +10,8 @@ Compiler* Compiler::instance(void)
 
 vector<Instruction*> Compiler::compile(string source)
 {
-    int index = 0;
-    int cur = 0;
+    unsigned int index = 0;
+    unsigned int cur = 0;
 
     std::vector<Instruction*> insns;
 
@@ -80,7 +78,7 @@ int Compiler::scan(string str, string target, int index)
     return (str.find(target, index) == index) ? index + target.length() : index;
 }
 
-int Compiler::input(string str, int& index)
+int Compiler::input(string str, unsigned int& index)
 {
     int endIndex;
     int num = 0;
@@ -101,17 +99,6 @@ int Compiler::input(string str, int& index)
 
     index = endIndex + 1;
     return num;
-}
-
-
-
-void Compiler::swap(void)
-{
-    int p1 = _stack.top(); _stack.pop();
-    int p2 = _stack.top(); _stack.pop();
-
-    _stack.push(p1);
-    _stack.push(p2);
 }
 
 Instruction* Compiler::op(string str, int arg)

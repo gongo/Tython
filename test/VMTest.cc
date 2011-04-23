@@ -1,4 +1,6 @@
 #include <gtest/gtest.h>
+#include <gtest/internal/gtest-port.h>
+
 #include "VM.h"
 #include "Compiler.h"
 
@@ -23,7 +25,9 @@ TEST_F(VMTest, TestRun) {
     Compiler *compiler = Compiler::instance();
     vector<Instruction*> insns = compiler->compile("aaaaagaa@a@g@aaa@ a@"); // 2 + 7 = 9
 
+    testing::internal::CaptureStdout();
     object->run(insns);
+    ASSERT_STREQ("9", testing::internal::GetCapturedStdout().c_str());
 }
 
 TEST_F(VMTest, TestPush) {
@@ -131,6 +135,14 @@ TEST_F(VMTest, TestClear) {
 
     ASSERT_EQ(0, object->size());
  }
+
+TEST_F(VMTest, TestNum_Out) {
+    object->push(20);
+
+    testing::internal::CaptureStdout();
+    object->num_out(NULL);
+    ASSERT_STREQ("20", testing::internal::GetCapturedStdout().c_str());
+}
 
 TEST_F(VMTest, TestSlide) {
     int p1 = 1;

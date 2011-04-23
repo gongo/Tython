@@ -100,7 +100,7 @@ void VM::div(int arg)
 
 void VM::num_out(int arg)
 {
-    std::cout << pop() << std::endl;
+    std::cout << pop();
 }
 
 void VM::push(int arg)

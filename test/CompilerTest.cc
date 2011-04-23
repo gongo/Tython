@@ -17,13 +17,18 @@ TEST_F(CompilerTest, TestGetInstance) {
     ASSERT_TRUE(object == object2);
 }
 
-// TEST_F(CompilerTest, TestCompile) {
-//     ASSERT_TRUE(object->compile("aaaag"));
-//     ASSERT_FALSE(object->compile("a@@aaa"));
-// }
+TEST_F(CompilerTest, TestCompile) {
+    std::vector<Instruction*> insns = object->compile("@aaa@aa@");
+    ASSERT_EQ("add", insns.at(0)->op);
+    ASSERT_EQ("sub", insns.at(1)->op);
+}
+
+TEST_F(CompilerTest, TestCompileErrorOfSyntax) {
+    ASSERT_TRUE(object->compile("ag").empty());
+}
 
 TEST_F(CompilerTest, TestCompileErrorOfUnableToTreat) {
-    ASSERT_FALSE(object->compile("a@a! "));
+    //ASSERT_TRUE(object->compile("a@a! ").empty());
 }
 
 TEST_F(CompilerTest, TestScan) {

@@ -10,6 +10,7 @@
 
 using std::string;
 using std::stack;
+using std::vector;
 
 class Compiler {
 public:
@@ -24,9 +25,9 @@ public:
      * コンパイル
      *
      * @param   sourceCode  コンパイルするコード
-     * @return              コンパイルに成功した場合 true / 失敗した場合 false
+     * @return              命令のリスト / コンパイルに失敗した場合 NULL
      */
-    bool compile(string sourceCode);
+    std::vector<Instruction*> compile(string sourceCode);
 
     /**
      * target が str[index] から全文字含まれているか調べる
@@ -77,6 +78,7 @@ public:
     void swap(void);
 
     Instruction* op(string str, int arg);
+    Instruction* op(string str);
 
     /**
      * スタック

@@ -10,6 +10,7 @@ using std::string;
 typedef struct Instruction {
 public:
     Instruction(void) {}
+    Instruction(std::string _s) : op(_s), arg(NULL) {}
     Instruction(std::string _s, int _v) : op(_s), arg(_v) {}
 
     std::string op;

@@ -5,8 +5,11 @@
 
 #include <string>
 #include <stack>
+#include <vector>
+#include "Instruction.h"
 
 using std::string;
+using std::stack;
 
 class Compiler {
 public:
@@ -47,6 +50,8 @@ public:
      * str[index] から、指定された区切り文字までの間にある文字を
      * 2進数として認識し、その値を返す
      *
+     * インデックスはこのメソッド内で更新される
+     *
      * @todo 区切り文字とか、2進数変換用文字をちゃんと定義しなきゃ
      *
      * <code>
@@ -64,7 +69,20 @@ public:
      * @retrun        解析された値
      * @throw 
      */
-    int input(string str, int index);
+    int input(string str, int &index);
+
+    /**
+     * スタックの 1 番目と 2 番目を入れ替える
+     */ 
+    void swap(void);
+
+    Instruction* op(string str, int arg);
+
+    /**
+     * スタック
+     */
+    stack<int> _stack;
+
 private:
     /**
      * コンストラクタ
@@ -89,11 +107,6 @@ private:
      * コンパイラが扱える文字群
      */
     static string _treat;
-
-    /**
-     * スタック
-     */
-    //    static std::stack<int> _stack;
 };
 
 #endif // _TYTHON_COMPILER_H_

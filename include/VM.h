@@ -82,9 +82,25 @@ public:
     void div(int arg);
 
     /**
-     * スタック
+     * スタックトップを整数で標準出力する
+     *
+     * @param  arg  特に使わず
+     */ 
+    void num_out(int arg);
+
+    /**
+     * スタックトップを返す。
+     *
+     * @return  スタックトップ
      */
-    stack<int> _stack;
+    int top(void);
+
+    /**
+     * スタックトップを取り出して返す。
+     *
+     * @return  スタックトップ
+     */
+    int pop(void);
 
 private:
     /**
@@ -116,6 +132,11 @@ private:
      * プログラムカウンタ
      */
     unsigned int _pc;
+
+    /**
+     * スタック
+     */
+    stack<int> _stack;
 };
 
 #endif // _TYTHON_VM_H_

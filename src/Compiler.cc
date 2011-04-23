@@ -60,6 +60,7 @@ vector<Instruction*> Compiler::compile(string source)
             insns.push_back(op("exit"));
         } else if ((cur = scan(source, "@ aa", index)) != index) {
         } else if ((cur = scan(source, "@ a@", index)) != index) {
+            insns.push_back(op("num_out"));
         } else if ((cur = scan(source, "@ @ ", index)) != index) {
         } else if ((cur = scan(source, "@ @@", index)) != index) {
         } else {

@@ -29,53 +29,70 @@ bool VM::run(vector<Instruction*> insns)
     return true;
 }
 
+void VM::dup(int arg)
+{
+    push(top());
+}
+
+void VM::swap(int arg)
+{
+    int p1 = pop();
+    int p2 = pop();
+
+    push(p1);
+    push(p2);
+}
+
+void VM::add(int arg)
+{
+    int p1 = pop();
+    int p2 = pop();
+
+    push(p1 + p2);
+}
+
+void VM::sub(int arg)
+{
+    int p1 = pop();
+    int p2 = pop();
+
+    push(p1 - p2);
+}
+
+void VM::mul(int arg)
+{
+    int p1 = pop();
+    int p2 = pop();
+
+    push(p1 * p2);
+}
+
+void VM::div(int arg)
+{
+    int p1 = pop();
+    int p2 = pop();
+
+    push(p1 / p2);
+}
+
+void VM::num_out(int arg)
+{
+    std::cout << pop() << std::endl;
+}
+
 void VM::push(int arg)
 {
     _stack.push(arg);
 }
 
-void VM::dup(int arg)
+int VM::top(void)
 {
-    _stack.push(_stack.top());
+    return _stack.top();
 }
 
-void VM::swap(int arg)
+int VM::pop(void)
 {
-    int p1 = _stack.top(); _stack.pop();
-    int p2 = _stack.top(); _stack.pop();
-
-    _stack.push(p1);
-    _stack.push(p2);
-}
-
-void VM::add(int arg)
-{
-    int p1 = _stack.top(); _stack.pop();
-    int p2 = _stack.top(); _stack.pop();
-
-    _stack.push(p1 + p2);
-}
-
-void VM::sub(int arg)
-{
-    int p1 = _stack.top(); _stack.pop();
-    int p2 = _stack.top(); _stack.pop();
-
-    _stack.push(p1 - p2);
-}
-
-void VM::mul(int arg)
-{
-    int p1 = _stack.top(); _stack.pop();
-    int p2 = _stack.top(); _stack.pop();
-
-    _stack.push(p1 * p2);
-}
-
-void VM::div(int arg)
-{
-    int p1 = _stack.top(); _stack.pop();
-    int p2 = _stack.top(); _stack.pop();
-
-    _stack.push(p1 / p2);
+    int p = _stack.top();
+    _stack.pop();
+    return p;
 }

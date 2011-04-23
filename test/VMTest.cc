@@ -19,60 +19,70 @@ TEST_F(VMTest, TestGetInstance) {
 
 TEST_F(VMTest, TestPush) {
     object->push(10);
-    ASSERT_EQ(10, object->_stack.top());
+    ASSERT_EQ(10, object->top());
 }
 
 TEST_F(VMTest, TestSwap) {
-    object->_stack.push(10);
-    object->_stack.push(20);
+    object->push(10);
+    object->push(20);
 
     object->swap(0);
 
-    ASSERT_EQ(10, object->_stack.top());
-    object->_stack.pop();
-    ASSERT_EQ(20, object->_stack.top());
+    ASSERT_EQ(10, object->top());
+    object->pop();
+    ASSERT_EQ(20, object->top());
 }
 
 TEST_F(VMTest, TestAdd) {
-    int size = object->_stack.size();
-
     object->push(10);
     object->push(20);
     object->add(NULL);
 
-    ASSERT_EQ(30, object->_stack.top());
-    ASSERT_EQ(size + 1, object->_stack.size());
+    ASSERT_EQ(30, object->top());
 }
 
 TEST_F(VMTest, TestSub) {
-    int size = object->_stack.size();
-
     object->push(10);
     object->push(20);
     object->sub(NULL);
 
-    ASSERT_EQ(10, object->_stack.top());
-    ASSERT_EQ(size + 1, object->_stack.size());
+    ASSERT_EQ(10, object->top());
 }
 
 TEST_F(VMTest, TestMul) {
-    int size = object->_stack.size();
-
     object->push(10);
     object->push(20);
     object->mul(NULL);
 
-    ASSERT_EQ(200, object->_stack.top());
-    ASSERT_EQ(size + 1, object->_stack.size());
+    ASSERT_EQ(200, object->top());
 }
 
 TEST_F(VMTest, TestDiv) {
-    int size = object->_stack.size();
-
     object->push(10);
     object->push(20);
     object->div(NULL);
 
-    ASSERT_EQ(2, object->_stack.top());
-    ASSERT_EQ(size + 1, object->_stack.size());
+    ASSERT_EQ(2, object->top());
+}
+
+TEST_F(VMTest, TestPop) {
+    int p1 = 3;
+    int p2 = 4;
+
+    object->push(p1);
+    object->push(p2);
+    ASSERT_EQ(p2, object->pop());
+    ASSERT_NE(p2, object->top());
+    ASSERT_EQ(p1, object->pop());
+}
+
+TEST_F(VMTest, TestTop) {
+    int p1 = 3;
+    int p2 = 4;
+
+    object->push(p1);
+    object->push(p2);
+    ASSERT_EQ(p2, object->top());
+    ASSERT_EQ(p2, object->top());
+    ASSERT_NE(p1, object->top());
 }

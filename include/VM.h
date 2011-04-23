@@ -38,6 +38,11 @@ public:
     void push(int arg);
 
     /**
+     * スタックトップを削除
+     */
+    void discard(int arg);
+
+    /**
      * スタックトップを複製し、プッシュする
      *
      * @param  arg  特に使わず

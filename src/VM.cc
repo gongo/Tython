@@ -5,7 +5,16 @@ VM* VM::_instance = new VM;
 
 VM::VM(void) : _pc(0)
 {
-    opset["push"] = &VM::push;
+    opset["push"]    = &VM::push;
+    opset["dup"]     = &VM::dup;
+    opset["swap"]    = &VM::swap;
+    opset["discard"] = &VM::discard;
+    opset["slide"]   = &VM::slide;
+    opset["add"]     = &VM::add;
+    opset["sub"]     = &VM::sub;
+    opset["mul"]     = &VM::mul;
+    opset["div"]     = &VM::div;
+    opset["num_out"] = &VM::num_out;
 }
 
 VM* VM::instance(void)
@@ -41,6 +50,11 @@ void VM::swap(int arg)
 
     push(p1);
     push(p2);
+}
+
+void VM::discard(int arg)
+{
+    pop();
 }
 
 void VM::slide(int arg)

@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "VM.h"
+#include "Compiler.h"
 
 class VMTest : public testing::Test {
 public:
@@ -16,6 +17,13 @@ TEST_F(VMTest, TestGetInstance) {
 
     ASSERT_TRUE(NULL != object);
     ASSERT_TRUE(object == object2);
+}
+
+TEST_F(VMTest, TestRun) {
+    Compiler *compiler = Compiler::instance();
+    vector<Instruction*> insns = compiler->compile("aaaaagaa@a@g@aaa@ a@"); // 2 + 7 = 9
+
+    object->run(insns);
 }
 
 TEST_F(VMTest, TestPush) {
@@ -76,6 +84,18 @@ TEST_F(VMTest, TestDiv) {
 
     ASSERT_EQ(2, object->top());
     ASSERT_EQ(size + 1, object->size());
+}
+
+TEST_F(VMTest, TestDiscard) {
+    int p1 = 3;
+    int p2 = 4;
+
+    object->push(p1);
+    object->push(p2);
+    object->discard(NULL);
+
+    ASSERT_NE(p2, object->top());
+    ASSERT_EQ(p1, object->top());
 }
 
 TEST_F(VMTest, TestPop) {

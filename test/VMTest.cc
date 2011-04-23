@@ -23,16 +23,33 @@ TEST_F(VMTest, TestGetInstance) {
 
 TEST_F(VMTest, TestRun) {
     Compiler *compiler = Compiler::instance();
-    vector<Instruction*> insns = compiler->compile("aaaaagaa@a@g@aaa@ a@"); // 2 + 7 = 9
+    vector<Instruction*> insns;
 
+    // 2 + 7 = 9 を stdout
+    insns = compiler->compile("aaaaagaa@a@g@aaa@ a@");
     testing::internal::CaptureStdout();
     object->run(insns);
     ASSERT_STREQ("9", testing::internal::GetCapturedStdout().c_str());
+
+    // 11 * 23 = 253 を stdout
+    insns = compiler->compile("aaa@aagaaa@aaag@aa @ a@");
+    testing::internal::CaptureStdout();
+    object->run(insns);
+    ASSERT_STREQ("253", testing::internal::GetCapturedStdout().c_str());
 }
 
 TEST_F(VMTest, TestPush) {
     object->push(10);
     ASSERT_EQ(10, object->top());
+}
+
+TEST_F(VMTest, TestDup) {
+    int p = 10;
+
+    object->push(p);
+    object->dup(NULL);
+
+    ASSERT_EQ(p, object->top());
 }
 
 TEST_F(VMTest, TestSwap) {

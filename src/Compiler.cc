@@ -98,10 +98,14 @@ int Compiler::input(string str, unsigned int& index)
     string::iterator itSt = str.begin() + index;
     string::iterator itEd = str.begin() + endIndex - 1;
 
-    while (itSt <= itEd) {
+    while (itSt < itEd) {
         char c = *itEd;
         num += (((c == 'a') ? 1 : 0) << digit++);
         itEd--;
+    }
+
+    if (*itSt == '@') {
+        num = ~num + 1;
     }
 
     index = endIndex + 1;

@@ -58,16 +58,28 @@ TEST_F(CompilerTest, TestScan) {
 TEST_F(CompilerTest, TestInput) {
     unsigned int index = 0;
 
-    ASSERT_EQ(26, object->input("aa@a@g", index)); // 11010
-    ASSERT_EQ(6, index);
+    ASSERT_EQ(26, object->input("aaa@a@g", index)); // +11010 = 26
+    ASSERT_EQ(7, index);
 
     index = 3;
-    ASSERT_EQ(2, object->input("aa@a@g", index)); // 10
-    ASSERT_EQ(6, index);
+    ASSERT_EQ(2, object->input("aaaaa@g", index)); // +10 = 2
+    ASSERT_EQ(7, index);
 
     index = 0;
-    ASSERT_EQ(1, object->input("agaa", index));   // 1
-    ASSERT_EQ(2, index);
+    ASSERT_EQ(1, object->input("aagaa", index));   // +1 = 1
+    ASSERT_EQ(3, index);
+
+    index = 0;
+    ASSERT_EQ(-26, object->input("@aa@a@g", index)); // -11010 = -26
+    ASSERT_EQ(7, index);
+
+    index = 3;
+    ASSERT_EQ(-2, object->input("@aa@a@g", index)); // -10 = -2
+    ASSERT_EQ(7, index);
+
+    index = 0;
+    ASSERT_EQ(-1, object->input("@agaa", index));   // -1 = -1
+    ASSERT_EQ(3, index);
 
     index = 3;
     ASSERT_THROW(object->input("agaaa", index), int);

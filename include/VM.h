@@ -119,6 +119,13 @@ public:
     void jump_negative(int arg);
 
     /**
+     * スタックトップを文字で標準出力する
+     *
+     * @param  arg  特に使わず
+     */ 
+    void char_out(int arg);
+
+    /**
      * スタックトップを整数で標準出力する
      *
      * @param  arg  特に使わず

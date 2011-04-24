@@ -57,12 +57,15 @@ public:
      *
      * <code>
      * // a = 1, @ = 0, g = 区切り文字とする
+     * // 負数を表す場合、先頭文字を @ にする
      *
      * Compiler object = Compiler::instance();
-     * object->input("a@a@g",  0); // -> (1010)2 = 10
-     * object->input("a@a@g",  2); // -> (10)2 = 10
-     * object->input("aag@@a", 0); // -> (11)2 = 3
-     * object->input("aaaa", 0);   // -> throw "区切り文字がない"
+     * object->input("aa@a@g",  0); // -> +(1010)2 = 10
+     * object->input("aa@a@g",  2); // -> +(10)2 = 10
+     * object->input("aaag@@a", 0); // -> +(11)2 = 3
+     * object->input("@a@a@g",  0); // -> -(1010)2 = -10
+     * object->input("@aag@@a", 0); // -> -(11)2 = -3
+     * object->input("aaaaa", 0);   // -> throw "区切り文字がない"
      * </code>
      *
      * @param  str    解析対象文字列

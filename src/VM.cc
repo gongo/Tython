@@ -20,7 +20,7 @@ VM::VM(void) : _pc(0)
     _opset["jump"]          = &VM::jump;
     _opset["jump_zero"]     = &VM::jump_zero;
     _opset["jump_negative"] = &VM::jump_negative;
-    //_opset["char_out"]      = &VM::char_out;
+    _opset["char_out"]      = &VM::char_out;
     _opset["num_out"]       = &VM::num_out;
 }
 
@@ -146,6 +146,11 @@ void VM::jump_negative(int arg)
     if (pop() == 0) {
         jump(arg);
     }
+}
+
+void VM::char_out(int arg)
+{
+    std::cout << (char)pop();
 }
 
 void VM::num_out(int arg)

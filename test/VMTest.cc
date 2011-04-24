@@ -26,16 +26,22 @@ TEST_F(VMTest, TestRun) {
     vector<Instruction*> insns;
 
     // 2 + 7 = 9 を stdout
-    insns = compiler->compile("aaaaagaa@a@g@aaa@ a@");
+    insns = compiler->compile("aaaaaagaaa@a@g@aaa@ a@");
     testing::internal::CaptureStdout();
     object->run(insns);
     ASSERT_STREQ("9", testing::internal::GetCapturedStdout().c_str());
 
     // 11 * 23 = 253 を stdout
-    insns = compiler->compile("aaa@aagaaa@aaag@aa @ a@");
+    insns = compiler->compile("aaaa@aagaaaa@aaag@aa @ a@");
     testing::internal::CaptureStdout();
     object->run(insns);
     ASSERT_STREQ("253", testing::internal::GetCapturedStdout().c_str());
+
+    // 10010111 = 'H' + 1101110 = 'i' = Hi を stdout
+    insns = compiler->compile("aaaa@@a@@@g@ aaaaaaa@a@@ag@ aa");
+    testing::internal::CaptureStdout();
+    object->run(insns);
+    ASSERT_STREQ("Hi", testing::internal::GetCapturedStdout().c_str());
 }
 
 TEST_F(VMTest, TestPush) {
@@ -170,6 +176,14 @@ TEST_F(VMTest, TestNum_Out) {
     testing::internal::CaptureStdout();
     object->num_out(NULL);
     ASSERT_STREQ("20", testing::internal::GetCapturedStdout().c_str());
+}
+
+TEST_F(VMTest, TestChar_Out) {
+    object->push(105);
+
+    testing::internal::CaptureStdout();
+    object->char_out(NULL);
+    ASSERT_STREQ("i", testing::internal::GetCapturedStdout().c_str());
 }
 
 TEST_F(VMTest, TestSlide) {

@@ -1,15 +1,15 @@
 #include "Timer.h"
 
-Timer* Timer::instance = new Timer;
+Timer* Timer::_instance = new Timer;
 
 Timer::Timer(void)
 {
     gettimeofday(&start, NULL);
 }
 
-Timer* Timer::getInstance(void)
+Timer* Timer::instance(void)
 {
-    return instance;
+    return _instance;
 }
 
 int Timer::current(void)

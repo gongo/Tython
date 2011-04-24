@@ -5,9 +5,7 @@
 TriggerDetector::TriggerDetector(User* _user) : AbstractDetector(_user)
 {
     triggerList   = NULL;
-    elapsedTime   = 0;
-    detectionTime = 0;
-    triggerIndex  = 0;
+    resetTrigger();
 }
 
 TriggerDetector::~TriggerDetector(void)
@@ -39,13 +37,13 @@ bool TriggerDetector::isPosing(void)
         return false;
     }
 
-    if ((this->*triggerList[triggerIndex])()) {
-        nextTrigger();
-    }
-
     if (!withinTimeLimit()) {
         resetTrigger();
         return false;
+    }
+
+    if ((this->*triggerList[triggerIndex])()) {
+        nextTrigger();
     }
 
     if (triggerIndex == triggerNum) {
@@ -58,22 +56,24 @@ bool TriggerDetector::isPosing(void)
 
 void TriggerDetector::resetTrigger(void)
 {
-    elapsedTime   = 0;
     detectionTime = 0;
     triggerIndex  = 0;
 }
 
 void TriggerDetector::nextTrigger(void)
 {
-    int currentTime = timer->current();
-
-    elapsedTime += (triggerIndex == 0) ? 0 : currentTime - detectionTime;
-    detectionTime = currentTime;
-
+    if (triggerIndex == 0) {
+        detectionTime = timer->current();
+    }
+    
     triggerIndex++;
 }
 
 bool TriggerDetector::withinTimeLimit(void)
 {
-    return elapsedTime <= timeLimit;
+    if (triggerIndex == 0) {
+        return true;
+    }
+
+    return (timer->current() - detectionTime) <= timeLimit;
 }

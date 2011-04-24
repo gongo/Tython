@@ -65,7 +65,7 @@ void TriggerDetector::nextTrigger(void)
     if (triggerIndex == 0) {
         detectionTime = timer->current();
     }
-    
+
     triggerIndex++;
 }
 

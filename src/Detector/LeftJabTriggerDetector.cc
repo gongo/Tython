@@ -21,7 +21,7 @@ bool LeftJabTriggerDetector::isStand(void)
 
 bool LeftJabTriggerDetector::isLeftJab(void)
 {
-    Vector upperArm = user->skeletonLeftUpperArm();
+    Vector upperArm = user->skeletonLeftUpperArm().reverse();
     Vector forearm  = user->skeletonLeftForearm();
     return upperArm.isStraight(forearm);
 }

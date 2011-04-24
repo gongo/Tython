@@ -92,6 +92,7 @@ TEST_F(TriggerDetectorTest, TestIsPosingErrorTimeLimit) {
     EXPECT_CALL(*timer, current())
         .Times(3)
         .WillOnce(Return(0))
+        .WillOnce(Return(0))
         .WillOnce(Return(TIMELIMIT+1));
 
     ASSERT_FALSE(object->isPosing());

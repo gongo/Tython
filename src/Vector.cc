@@ -11,8 +11,9 @@ static float rad2deg(float radian)
     return radian * 180.0f / M_PI;
 }
 
-const float Vector::THRESHOLD_ORTHOGONAL = 80.0f;
-const float Vector::THRESHOLD_STRAIGHT   = 160.0f;
+const float Vector::THRESHOLD_ORTHOGONAL = 90.0f;
+const float Vector::THRESHOLD_STRAIGHT   = 170.0f;
+const float Vector::THRESHOLD_TOLERANCE  = 20.0f;
 
 Vector::Vector(void)
 {
@@ -114,6 +115,11 @@ float Vector::distance(const Vector& v) const
     return (*this - v).magnitude();
 }
 
+Vector Vector::reverse(void) const
+{
+    return Vector(-X, -Y, -Z);
+}
+
 bool Vector::withinAngle(const Vector& v, float angle) const
 {
     return dot(v) >= cosf(deg2rad(angle));
@@ -126,12 +132,11 @@ bool Vector::withoutAngle(const Vector& v, float angle) const
 
 bool Vector::isOrthogonal(const Vector& v) const
 {
-    return withoutAngle(v, THRESHOLD_ORTHOGONAL)
-        && withinAngle(v, THRESHOLD_ORTHOGONAL + 20);
+    return withoutAngle(v, THRESHOLD_ORTHOGONAL - THRESHOLD_TOLERANCE)
+        && withinAngle(v, THRESHOLD_ORTHOGONAL + THRESHOLD_TOLERANCE);
 }
 
 bool Vector::isStraight(const Vector& v) const
 {
-    return withoutAngle(v, THRESHOLD_STRAIGHT)
-        || withinAngle(v, 180.0f - THRESHOLD_STRAIGHT);
+    return withoutAngle(v, THRESHOLD_STRAIGHT - THRESHOLD_TOLERANCE);
 }

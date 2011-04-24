@@ -21,6 +21,11 @@ public:
      */
     static const float THRESHOLD_STRAIGHT;
 
+    /**
+     * 各しきい値に対する誤差許容範囲値
+     */
+    static const float THRESHOLD_TOLERANCE;
+
     Vector& operator+=(const Vector& v);
     Vector& operator-=(const Vector& v);
     Vector& operator*=(float f);
@@ -67,6 +72,13 @@ public:
      * @return     2ベクトルの距離
      */
     float distance(const Vector& v) const;
+
+    /**
+     * 逆ベクトルを返す
+     *
+     * @return  自身の逆ベクトル
+     */
+    Vector reverse(void) const;
 
     /**
      * 二つのベクトルが指定した角度より鋭角かチェックする

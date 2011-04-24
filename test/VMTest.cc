@@ -107,6 +107,17 @@ TEST_F(VMTest, TestDiv) {
     ASSERT_EQ(size + 1, object->size());
 }
 
+TEST_F(VMTest, TestMod) {
+    int size = object->size();
+
+    object->push(20);
+    object->push(30);
+    object->mod(NULL);
+
+    ASSERT_EQ(10, object->top());
+    ASSERT_EQ(size + 1, object->size());
+}
+
 TEST_F(VMTest, TestDiscard) {
     int p1 = 3;
     int p2 = 4;

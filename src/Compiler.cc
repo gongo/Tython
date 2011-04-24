@@ -50,15 +50,21 @@ vector<Instruction*> Compiler::compile(string source)
         } else if ((cur = scan(source, "@@@",  index)) != index) {
             insns.push_back(op("heap_read"));
         } else if ((cur = scan(source, " aa",  index)) != index) {
+            insns.push_back(op("label", input(source, cur)));
         } else if ((cur = scan(source, " a@",  index)) != index) {
+            insns.push_back(op("call", input(source, cur)));
         } else if ((cur = scan(source, " a ",  index)) != index) {
+            insns.push_back(op("jump", input(source, cur)));
         } else if ((cur = scan(source, " @a",  index)) != index) {
+            insns.push_back(op("jump_zero", input(source, cur)));
         } else if ((cur = scan(source, " @@",  index)) != index) {
+            insns.push_back(op("jump_negative", input(source, cur)));
         } else if ((cur = scan(source, " @ ",  index)) != index) {
             insns.push_back(op("return"));
         } else if ((cur = scan(source, "   ",  index)) != index) {
             insns.push_back(op("exit"));
         } else if ((cur = scan(source, "@ aa", index)) != index) {
+            insns.push_back(op("char_out"));
         } else if ((cur = scan(source, "@ a@", index)) != index) {
             insns.push_back(op("num_out"));
         } else if ((cur = scan(source, "@ @ ", index)) != index) {

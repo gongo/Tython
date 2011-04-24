@@ -92,6 +92,33 @@ public:
     void div(int arg);
 
     /**
+     * 0 番目と 1 番目 をスタックから取り出し、除算結果([0]%[1])をプッシュする
+     *
+     * @param  arg  特に使わず
+     */ 
+    void mod(int arg);
+
+    /**
+     * セットされたラベルを表す。処理はしない
+     */
+    void label(int arg);
+
+    /**
+     * 指定したラベルにジャンプする
+     */
+    void jump(int arg);
+
+    /**
+     * スタックトップが 0 の時、指定したラベルにジャンプする
+     */
+    void jump_zero(int arg);
+
+    /**
+     * スタックトップが 0 未満の時、、指定したラベルにジャンプする
+     */
+    void jump_negative(int arg);
+
+    /**
      * スタックトップを整数で標準出力する
      *
      * @param  arg  特に使わず
@@ -124,6 +151,8 @@ public:
      */
     int size(void);
 
+    void refresh(vector<Instruction*> insns);
+
 private:
     /**
      * コンストラクタ
@@ -144,11 +173,15 @@ private:
      */
     static VM* _instance;
 
+    void findLabel(vector<Instruction*> insns);
+
+    void jump_to(int pc);
+
     /**
      * Operation Set
      */
     typedef void (VM::*opfunc)(int arg);
-    map<string, opfunc> opset;
+    map<string, opfunc> _opset;
 
     /**
      * プログラムカウンタ
@@ -159,6 +192,11 @@ private:
      * スタック
      */
     vector<int> _stack;
+
+    /**
+     * ラベルセット
+     */
+    map<int, int> _labels;
 };
 
 #endif // _TYTHON_VM_H_

@@ -26,6 +26,9 @@ public:
     MOCK_METHOD0(skeletonLeftUpperArm, Vector(void));
     MOCK_METHOD0(skeletonLeftForearm, Vector(void));
     MOCK_METHOD0(skeletonLeftHand, Vector(void));
+    MOCK_METHOD0(positionRightShoulder, Vector(void));
+    MOCK_METHOD0(positionRightElbow, Vector(void));
+    MOCK_METHOD0(positionRightHand, Vector(void));
 };
 
 #endif // _TYTHON_MOCK_USER_H

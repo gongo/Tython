@@ -21,6 +21,12 @@ protected:
 };
 
 TEST_F(LeftJabTriggerDetectorTest, TestIsPosing) {
+    EXPECT_CALL(*mock, positionLeftShoulder())
+        .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
+    EXPECT_CALL(*mock, positionLeftElbow())
+        .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
+    EXPECT_CALL(*mock, positionLeftHand())
+        .WillRepeatedly(Return(Vector(0.0f, 3.0f, 0.0f)));
     EXPECT_CALL(*mock, skeletonLeftUpperArm())
         .Times(3)
         .WillRepeatedly(Return(Vector(1.0f, 0.0f, 0.0f)));
@@ -36,6 +42,12 @@ TEST_F(LeftJabTriggerDetectorTest, TestIsPosing) {
 }
 
 TEST_F(LeftJabTriggerDetectorTest, TestIsPosingError) {
+    EXPECT_CALL(*mock, positionLeftShoulder())
+        .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
+    EXPECT_CALL(*mock, positionLeftElbow())
+        .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
+    EXPECT_CALL(*mock, positionLeftHand())
+        .WillRepeatedly(Return(Vector(0.0f, 3.0f, 0.0f)));
     EXPECT_CALL(*mock, skeletonLeftUpperArm())
         .Times(3)
         .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));

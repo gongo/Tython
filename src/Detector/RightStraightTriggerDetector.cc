@@ -17,11 +17,12 @@ bool RightStraightTriggerDetector::isStand(void)
     Vector shoulder = user->positionRightShoulder();
     Vector elbow    = user->positionRightElbow();
     Vector hand     = user->positionRightHand();
+    Vector upperArm = user->skeletonRightUpperArm().reverse();
     Vector forearm  = user->skeletonRightForearm();
-    Vector upperArm = user->skeletonRightUpperArm();
 
-    return (shoulder.Y < hand.Y) && (hand.Y > elbow.Y)
-        && upperArm.withinAngle(forearm, 80.0f);
+    return shoulder.Y < hand.Y
+        && hand.Y > elbow.Y
+        && upperArm.withinAngle(forearm, 90.0f);
 }
 
 bool RightStraightTriggerDetector::isRightStraight(void)

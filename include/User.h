@@ -52,6 +52,34 @@ public:
     virtual Vector positionRightElbow(void);
 
     /**
+     * 左肩の座標を取得する
+     *
+     * @return 左肩の座標(ベクトル)
+     */
+    virtual Vector positionLeftShoulder(void);
+
+    /**
+     * 左手の座標を取得する
+     *
+     * @return 左手の座標(ベクトル)
+     */
+    virtual Vector positionLeftHand(void);
+
+    /**
+     * 左肘の座標を取得する
+     *
+     * @return 左肘の座標(ベクトル)
+     */
+    virtual Vector positionLeftElbow(void);
+
+    /**
+     * 腰の座標を取得する
+     *
+     * @return 腰の座標(ベクトル)
+     */
+    virtual Vector positionWaist(void);
+
+    /**
      * 右上腕(右肩から右肘にかけて)のベクトルを取得する
      *
      * @return 右上腕のベクトル

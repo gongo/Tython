@@ -137,27 +137,43 @@ Vector User::positionRightElbow(void)
     return getSkeletonPosition(XN_SKEL_RIGHT_ELBOW);
 }
 
+Vector User::positionLeftShoulder(void)
+{
+    return getSkeletonPosition(XN_SKEL_LEFT_SHOULDER);
+}
+
+Vector User::positionLeftHand(void)
+{
+    return getSkeletonPosition(XN_SKEL_LEFT_HAND);
+}
+
+Vector User::positionLeftElbow(void)
+{
+    return getSkeletonPosition(XN_SKEL_LEFT_ELBOW);
+}
+
+Vector User::positionWaist(void)
+{
+    return getSkeletonPosition(XN_SKEL_WAIST);
+}
+
 Vector User::skeletonRightUpperArm(void)
 {
-    return getSkeletonVector(XN_SKEL_RIGHT_ELBOW, XN_SKEL_RIGHT_SHOULDER);
+    return getSkeletonVector(XN_SKEL_RIGHT_SHOULDER, XN_SKEL_RIGHT_ELBOW);
 }
 
 Vector User::skeletonRightForearm(void)
 {
-    Vector elbow = getSkeletonPosition(XN_SKEL_RIGHT_ELBOW);
-    Vector hand = getSkeletonPosition(XN_SKEL_RIGHT_HAND);
-    return getSkeletonVector(XN_SKEL_RIGHT_HAND, XN_SKEL_RIGHT_ELBOW);
+    return getSkeletonVector(XN_SKEL_RIGHT_ELBOW, XN_SKEL_RIGHT_HAND);
 }
 
 Vector User::skeletonLeftUpperArm(void)
 {
-    return getSkeletonVector(XN_SKEL_LEFT_ELBOW, XN_SKEL_LEFT_SHOULDER);
+    return getSkeletonVector(XN_SKEL_LEFT_SHOULDER, XN_SKEL_LEFT_ELBOW);
 }
 
 Vector User::skeletonLeftForearm(void)
 {
-    Vector elbow = getSkeletonPosition(XN_SKEL_LEFT_ELBOW);
-    Vector hand = getSkeletonPosition(XN_SKEL_LEFT_HAND);
-    return getSkeletonVector(XN_SKEL_LEFT_HAND, XN_SKEL_LEFT_ELBOW);
+    return getSkeletonVector(XN_SKEL_LEFT_ELBOW, XN_SKEL_LEFT_HAND);
 }
 

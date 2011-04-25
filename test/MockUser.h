@@ -29,6 +29,10 @@ public:
     MOCK_METHOD0(positionRightShoulder, Vector(void));
     MOCK_METHOD0(positionRightElbow, Vector(void));
     MOCK_METHOD0(positionRightHand, Vector(void));
+    MOCK_METHOD0(positionLeftShoulder, Vector(void));
+    MOCK_METHOD0(positionLeftElbow, Vector(void));
+    MOCK_METHOD0(positionLeftHand, Vector(void));
+    MOCK_METHOD0(positionWaist, Vector(void));
 };
 
 #endif // _TYTHON_MOCK_USER_H

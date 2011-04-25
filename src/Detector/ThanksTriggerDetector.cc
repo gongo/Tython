@@ -15,12 +15,16 @@ ThanksTriggerDetector::~ThanksTriggerDetector(void)
 bool ThanksTriggerDetector::isCrossArm(void)
 {
     Vector rightForearm= user->skeletonRightForearm();
-    Vector rightUpperArm= user->skeletonRightUpperArm();
     Vector leftForearm = user->skeletonLeftForearm();
-    Vector leftUpperArm = user->skeletonLeftUpperArm();
+    Vector rightHand = user->positionRightHand();
+    Vector leftHand = user->positionLeftHand();
+    Vector waist = user->positionWaist();
 
     return rightForearm.isOrthogonal(leftForearm)
-        || rightUpperArm.isStraight(leftUpperArm.reverse());
+        && (rightHand.X < leftHand.X)
+        && (rightHand.Y > waist.Y)
+        && (leftHand.Y > waist.Y);
+    
 }
 
 bool ThanksTriggerDetector::isBottomArm(void)
@@ -29,7 +33,12 @@ bool ThanksTriggerDetector::isBottomArm(void)
     Vector rightUpperArm= user->skeletonRightUpperArm();
     Vector leftForearm = user->skeletonLeftForearm();
     Vector leftUpperArm = user->skeletonLeftUpperArm();
+    Vector rightHand = user->positionRightHand();
+    Vector leftHand = user->positionLeftHand();
+    Vector waist = user->positionWaist();
 
     return rightForearm.isStraight(rightUpperArm.reverse())
-        || leftForearm.isStraight(leftUpperArm.reverse());
+        && leftForearm.isStraight(leftUpperArm.reverse())
+        && rightHand.Y < waist.Y
+        && leftHand.Y < waist.Y;
 }

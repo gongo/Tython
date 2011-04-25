@@ -7,6 +7,8 @@
 #include "ThanksTriggerDetector.h"
 #include "AbstractRenderer.h"
 #include "util.h"
+#include "Instruction.h"
+#include <vector>
 
 LeftJabTriggerDetector *detect1;
 RightStraightTriggerDetector *detect2;
@@ -27,6 +29,9 @@ Controller::Controller(void)
     detect5 = new RightUpperTriggerDetector(ctxUser);
 
     renderer = new AbstractRenderer(&ctxGlobal, ctxUser);
+
+    compiler = Compiler::instance();
+    vm = VM::instance();
 }
 
 Controller::~Controller(void)
@@ -43,19 +48,27 @@ void Controller::main(void)
 {
     renderer->draw();
     if (detect1->detect()) {
-        printf("Jab!\n");
+        printf("'a' Jab!\n");
+        source += 'a';
     }
     if (detect2->detect()) {
-        printf("Straight!\n");
+        printf("'@' Straight!\n");
+        source += '@';
+    }
+    if (detect4->detect()) {
+        printf("' ' hook\n");
+        source += ' ';
+    }
+    if (detect5->detect()) {
+        printf("'g' UPPPERRRRRRR\n");
+        source += 'g';
     }
     if (detect3->detect()) {
         printf("Thanks!!!!\n");
-    }
-    if (detect4->detect()) {
-        printf("hook\n");
-    }
-    if (detect5->detect()) {
-        printf("UPPPERRRRRRR\n");
+        std::vector<Instruction*> insns = compiler->compile(source);
+        vm->run(insns);
+        printf("\n");
+        exit(0);
     }
     ctxGlobal.WaitAndUpdateAll();
 }

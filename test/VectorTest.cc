@@ -317,6 +317,7 @@ TEST_F(VectorTest, TestIsOrthogonal) {
 }
 
 TEST_F(VectorTest, TestIsStraight) {
+    ASSERT_FALSE(v00.isStraight(v00));
     ASSERT_FALSE(v00.isStraight(v30));
     ASSERT_FALSE(v00.isStraight(v60));
     ASSERT_FALSE(v00.isStraight(v90));
@@ -324,23 +325,67 @@ TEST_F(VectorTest, TestIsStraight) {
     ASSERT_FALSE(v00.isStraight(v150));
     ASSERT_TRUE(v00.isStraight(v180));
     
+    ASSERT_FALSE(v30.isStraight(v30));
     ASSERT_FALSE(v30.isStraight(v60));
     ASSERT_FALSE(v30.isStraight(v90));
     ASSERT_FALSE(v30.isStraight(v120));
     ASSERT_FALSE(v30.isStraight(v150));
     ASSERT_FALSE(v30.isStraight(v180));
 
+    ASSERT_FALSE(v60.isStraight(v60));
     ASSERT_FALSE(v60.isStraight(v90));
     ASSERT_FALSE(v60.isStraight(v120));
     ASSERT_FALSE(v60.isStraight(v150));
     ASSERT_FALSE(v60.isStraight(v180));
 
+    ASSERT_FALSE(v90.isStraight(v90));
     ASSERT_FALSE(v90.isStraight(v120));
     ASSERT_FALSE(v90.isStraight(v150));
     ASSERT_FALSE(v90.isStraight(v180));
 
+    ASSERT_FALSE(v120.isStraight(v120));
     ASSERT_FALSE(v120.isStraight(v150));
     ASSERT_FALSE(v120.isStraight(v180));
 
+    ASSERT_FALSE(v150.isStraight(v150));
     ASSERT_FALSE(v150.isStraight(v180));
+
+    ASSERT_FALSE(v180.isStraight(v180));
+}
+
+TEST_F(VectorTest, TestIsParallel) {
+    ASSERT_TRUE(v00.isParallel(v00));
+    ASSERT_FALSE(v00.isParallel(v30));
+    ASSERT_FALSE(v00.isParallel(v60));
+    ASSERT_FALSE(v00.isParallel(v90));
+    ASSERT_FALSE(v00.isParallel(v120));
+    ASSERT_FALSE(v00.isParallel(v150));
+    ASSERT_TRUE(v00.isParallel(v180));
+    
+    ASSERT_TRUE(v30.isParallel(v30));
+    ASSERT_FALSE(v30.isParallel(v60));
+    ASSERT_FALSE(v30.isParallel(v90));
+    ASSERT_FALSE(v30.isParallel(v120));
+    ASSERT_FALSE(v30.isParallel(v150));
+    ASSERT_FALSE(v30.isParallel(v180));
+
+    ASSERT_TRUE(v60.isParallel(v60));
+    ASSERT_FALSE(v60.isParallel(v90));
+    ASSERT_FALSE(v60.isParallel(v120));
+    ASSERT_FALSE(v60.isParallel(v150));
+    ASSERT_FALSE(v60.isParallel(v180));
+
+    ASSERT_TRUE(v90.isParallel(v90));
+    ASSERT_FALSE(v90.isParallel(v120));
+    ASSERT_FALSE(v90.isParallel(v150));
+    ASSERT_FALSE(v90.isParallel(v180));
+
+    ASSERT_TRUE(v120.isParallel(v120));
+    ASSERT_FALSE(v120.isParallel(v150));
+    ASSERT_FALSE(v120.isParallel(v180));
+
+    ASSERT_TRUE(v150.isParallel(v150));
+    ASSERT_FALSE(v150.isParallel(v180));
+
+    ASSERT_TRUE(v180.isParallel(v180));
 }

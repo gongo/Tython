@@ -111,14 +111,35 @@ public:
     bool isOrthogonal(const Vector& v) const;
 
     /**
-     * 二つのベクトルが平行かチェックする
+     * 二つのベクトルがなす角度が直線かどうかチェックする
+     *
+     * ベクトルの向きに注意。
+     *
+     * ◯ <- ->
+     * ×  -> ->
      *
      * @see Vector::THRESHOLD_STRAIGHT
+     * @see Vector::isParallel()
+     *
+     * @param   v  this と直線か確認するベクトル
+     * @return     平行であれば true 
+     */
+    bool isStraight(const Vector& v) const;
+
+    /**
+     * 二つのベクトルが平行かどうかチェックする
+     *
+     * isStraight() と違うのは、ベクトルの向きは気にしない
+     *
+     * ◯ <- -> or  -> ->
+     *
+     * @see Vector::THRESHOLD_STRAIGHT
+     * @see Vector::isParallel()
      *
      * @param   v  this と平行か確認するベクトル
      * @return     平行であれば true 
      */
-    bool isStraight(const Vector& v) const;
+    bool isParallel(const Vector& v) const;
 };
 
 #endif // _TYTHON_VECTOR_H_

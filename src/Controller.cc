@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "Controller.h"
 #include "RightStraightTriggerDetector.h"
+#include "RightUpperTriggerDetector.h"
 #include "LeftJabTriggerDetector.h"
 #include "LeftHookTriggerDetector.h"
 #include "ThanksTriggerDetector.h"
@@ -11,6 +12,7 @@ LeftJabTriggerDetector *detect1;
 RightStraightTriggerDetector *detect2;
 ThanksTriggerDetector *detect3;
 LeftHookTriggerDetector *detect4;
+RightUpperTriggerDetector *detect5;
 AbstractRenderer *renderer;
 
 Controller::Controller(void)
@@ -22,6 +24,8 @@ Controller::Controller(void)
     detect2 = new RightStraightTriggerDetector(ctxUser);
     detect3 = new ThanksTriggerDetector(ctxUser);
     detect4 = new LeftHookTriggerDetector(ctxUser);
+    detect5 = new RightUpperTriggerDetector(ctxUser);
+
     renderer = new AbstractRenderer(&ctxGlobal, ctxUser);
 }
 
@@ -49,6 +53,9 @@ void Controller::main(void)
     }
     if (detect4->detect()) {
         printf("hook\n");
+    }
+    if (detect5->detect()) {
+        printf("UPPPERRRRRRR\n");
     }
     ctxGlobal.WaitAndUpdateAll();
 }

@@ -71,6 +71,7 @@ vector<Instruction*> Compiler::compile(string source)
             insns.clear();
             break;
         }
+
         index = cur;
     }
 

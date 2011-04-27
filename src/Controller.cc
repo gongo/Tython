@@ -1,20 +1,20 @@
 #include <stdio.h>
 #include "Controller.h"
-#include "RightStraightTriggerDetector.h"
-#include "RightUpperTriggerDetector.h"
-#include "LeftJabTriggerDetector.h"
-#include "LeftHookTriggerDetector.h"
-#include "ThanksTriggerDetector.h"
+#include "RightStraightCommandDetector.h"
+#include "RightUpperCommandDetector.h"
+#include "LeftJabCommandDetector.h"
+#include "LeftHookCommandDetector.h"
+#include "ThanksCommandDetector.h"
 #include "AbstractRenderer.h"
 #include "util.h"
 #include "Instruction.h"
 #include <vector>
 
-LeftJabTriggerDetector *detect1;
-RightStraightTriggerDetector *detect2;
-ThanksTriggerDetector *detect3;
-LeftHookTriggerDetector *detect4;
-RightUpperTriggerDetector *detect5;
+LeftJabCommandDetector *detect1;
+RightStraightCommandDetector *detect2;
+ThanksCommandDetector *detect3;
+LeftHookCommandDetector *detect4;
+RightUpperCommandDetector *detect5;
 AbstractRenderer *renderer;
 
 Controller::Controller(void)
@@ -22,11 +22,11 @@ Controller::Controller(void)
     initXN();
     ctxUser = new User(&ctxGlobal);
 
-    detect1 = new LeftJabTriggerDetector(ctxUser);
-    detect2 = new RightStraightTriggerDetector(ctxUser);
-    detect3 = new ThanksTriggerDetector(ctxUser);
-    detect4 = new LeftHookTriggerDetector(ctxUser);
-    detect5 = new RightUpperTriggerDetector(ctxUser);
+    detect1 = new LeftJabCommandDetector(ctxUser);
+    detect2 = new RightStraightCommandDetector(ctxUser);
+    detect3 = new ThanksCommandDetector(ctxUser);
+    detect4 = new LeftHookCommandDetector(ctxUser);
+    detect5 = new RightUpperCommandDetector(ctxUser);
 
     renderer = new AbstractRenderer(&ctxGlobal, ctxUser);
 

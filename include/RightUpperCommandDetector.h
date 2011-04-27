@@ -1,14 +1,14 @@
 // -*- C++ -*-
 
-#ifndef _TYTHON_RIGHT_UPPDER_TRIGGER_DETECTOR_H_
-#define _TYTHON_RIGHT_UPPDER_TRIGGER_DETECTOR_H_
+#ifndef _TYTHON_RIGHT_UPPDER_COMMAND_DETECTOR_H_
+#define _TYTHON_RIGHT_UPPDER_COMMAND_DETECTOR_H_
 
-#include "TriggerDetector.h"
+#include "CommandDetector.h"
 
-class RightUpperTriggerDetector : public TriggerDetector {
+class RightUpperCommandDetector : public CommandDetector {
 public:
-    RightUpperTriggerDetector(User* _user);
-    virtual ~RightUpperTriggerDetector(void);
+    RightUpperCommandDetector(User* _user);
+    virtual ~RightUpperCommandDetector(void);
 
 protected:
 
@@ -35,4 +35,4 @@ private:
     bool isRightUpperAfter(void);
 };
 
-#endif // _TYTHON_RIGHT_UPPDER_TRIGGER_DETECTOR_H_
+#endif // _TYTHON_RIGHT_UPPDER_COMMAND_DETECTOR_H_

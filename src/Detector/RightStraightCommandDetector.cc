@@ -1,18 +1,18 @@
-#include "RightStraightTriggerDetector.h"
+#include "RightStraightCommandDetector.h"
 
-RightStraightTriggerDetector::RightStraightTriggerDetector(User* _user) : TriggerDetector(_user)
+RightStraightCommandDetector::RightStraightCommandDetector(User* _user) : CommandDetector(_user)
 {
-    setTrigger(1, 3,
-               &RightStraightTriggerDetector::isStand,
-               &RightStraightTriggerDetector::isRightStraight,
-               &RightStraightTriggerDetector::isStand);
+    setCommand(1, 3,
+               &RightStraightCommandDetector::isStand,
+               &RightStraightCommandDetector::isRightStraight,
+               &RightStraightCommandDetector::isStand);
 }
 
-RightStraightTriggerDetector::~RightStraightTriggerDetector(void)
+RightStraightCommandDetector::~RightStraightCommandDetector(void)
 {
 }
 
-bool RightStraightTriggerDetector::isStand(void)
+bool RightStraightCommandDetector::isStand(void)
 {
     Vector shoulder = user->positionRightShoulder();
     Vector elbow    = user->positionRightElbow();
@@ -25,7 +25,7 @@ bool RightStraightTriggerDetector::isStand(void)
         && upperArm.withinAngle(forearm, 90.0f);
 }
 
-bool RightStraightTriggerDetector::isRightStraight(void)
+bool RightStraightCommandDetector::isRightStraight(void)
 {
     Vector shoulder = user->positionRightShoulder();
     Vector elbow    = user->positionRightElbow();

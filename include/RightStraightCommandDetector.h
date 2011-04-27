@@ -1,14 +1,14 @@
 // -*- C++ -*-
 
-#ifndef _TYTHON_RIGHT_STRAIGHT_TRIGGER_DETECTOR_H_
-#define _TYTHON_RIGHT_STRAIGHT_TRIGGER_DETECTOR_H_
+#ifndef _TYTHON_RIGHT_STRAIGHT_COMMAND_DETECTOR_H_
+#define _TYTHON_RIGHT_STRAIGHT_COMMAND_DETECTOR_H_
 
-#include "TriggerDetector.h"
+#include "CommandDetector.h"
 
-class RightStraightTriggerDetector : public TriggerDetector {
+class RightStraightCommandDetector : public CommandDetector {
 public:
-    RightStraightTriggerDetector(User* _user);
-    virtual ~RightStraightTriggerDetector(void);
+    RightStraightCommandDetector(User* _user);
+    virtual ~RightStraightCommandDetector(void);
 
 protected:
 
@@ -28,4 +28,4 @@ private:
     bool isRightStraight(void);
 };
 
-#endif // _TYTHON_RIGHT_STRAIGHT_TRIGGER_DETECTOR_H_
+#endif // _TYTHON_RIGHT_STRAIGHT_COMMAND_DETECTOR_H_

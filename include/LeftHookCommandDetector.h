@@ -1,14 +1,14 @@
 // -*- C++ -*-
 
-#ifndef _TYTHON_LEFT_HOOK_TRIGGER_DETECTOR_H_
-#define _TYTHON_LEFT_HOOK_TRIGGER_DETECTOR_H_
+#ifndef _TYTHON_LEFT_HOOK_COMMAND_DETECTOR_H_
+#define _TYTHON_LEFT_HOOK_COMMAND_DETECTOR_H_
 
-#include "TriggerDetector.h"
+#include "CommandDetector.h"
 
-class LeftHookTriggerDetector : public TriggerDetector {
+class LeftHookCommandDetector : public CommandDetector {
 public:
-    LeftHookTriggerDetector(User* _user);
-    virtual ~LeftHookTriggerDetector(void);
+    LeftHookCommandDetector(User* _user);
+    virtual ~LeftHookCommandDetector(void);
 
 protected:
 
@@ -39,4 +39,4 @@ private:
     bool isLeftHookAfter(void);
 };
 
-#endif // _TYTHON_LEFT_HOOK_TRIGGER_DETECTOR_H_
+#endif // _TYTHON_LEFT_HOOK_COMMAND_DETECTOR_H_

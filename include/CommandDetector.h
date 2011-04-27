@@ -1,14 +1,14 @@
 // -*- C++ -*-
 
-#ifndef _TYTHON_TRIGGER_DETECTOR_H_
-#define _TYTHON_TRIGGER_DETECTOR_H_
+#ifndef _TYTHON_COMMAND_DETECTOR_H_
+#define _TYTHON_COMMAND_DETECTOR_H_
 
 #include "AbstractDetector.h"
 
-class TriggerDetector : public AbstractDetector {
+class CommandDetector : public AbstractDetector {
 public:
-    TriggerDetector(User* _user);
-    virtual ~TriggerDetector(void);
+    CommandDetector(User* _user);
+    virtual ~CommandDetector(void);
 
     /**
      * ポーズをとっているか判定
@@ -22,34 +22,34 @@ public:
 
 protected:
     /**
-     * 制限時間やポーズなど、トリガーに関する設定を行う
+     * 制限時間やポーズなど、コマンドに関する設定を行う
      *
      * @param  _timeLimit   this->timeLimit
-     * @param  _triggerNum  this->triggerNum
+     * @param  _commandNum  this->commandNum
      * @param ...
      */
-    void setTrigger(int _timeLimit, int _triggerNum, ...);
+    void setCommand(int _timeLimit, int _commandNum, ...);
 
     /**
-     * トリガーとなるポーズを検出するメソッドの typename
+     * コマンドとなるポーズを検出するメソッドの typename
      */
-    typedef bool (TriggerDetector::*Trigger)(void);
+    typedef bool (CommandDetector::*Command)(void);
 
 private:
     /**
      * リセット
      *
-     * トリガーとなるポーズの検出状況をリセットする
+     * 検出状況をリセットする
      */
-    void resetTrigger(void);
+    void resetCommand(void);
 
     /**
-     * トリガーとなる次のポーズの検出を開始する
+     * 次のポーズの検出を開始する
      */
-    void nextTrigger(void);
+    void nextCommand(void);
 
     /**
-     * トリガーを満たす制限時間内かどうかを判定する
+     * 制限時間内かどうかを判定する
      *
      * @see  timeLimit
      *
@@ -68,26 +68,26 @@ private:
     int detectionTime;
 
     /**
-     * Trigger となるポーズを検出するメソッドのリスト
+     * ポーズを検出するメソッドのリスト
      */
-    Trigger *triggerList;
+    Command *commandList;
 
     /**
      * Current index of traceList[]
      *
-     * @see triggerList()
+     * @see commandList()
      */
-    int triggerIndex;
+    int commandIndex;
 
     /**
-     * Trigger となるポーズの数
+     * コマンド達成に必要なポーズの数
      */
-    int triggerNum;
+    int commandNum;
 
     /**
-     * Trigger 検出となる制限時間
+     * 制限時間
      */
     int timeLimit;
 };
 
-#endif // _TYTHON_TRIGGER_DETECTOR_H_
+#endif // _TYTHON_COMMAND_DETECTOR_H_

@@ -1,18 +1,18 @@
-#include "ThanksTriggerDetector.h"
+#include "ThanksCommandDetector.h"
 #include "CrossArmBlockPoseDetector.h"
 
-ThanksTriggerDetector::ThanksTriggerDetector(User* _user) : TriggerDetector(_user)
+ThanksCommandDetector::ThanksCommandDetector(User* _user) : CommandDetector(_user)
 {
-    setTrigger(2, 2,
-               &ThanksTriggerDetector::isCrossArm,
-               &ThanksTriggerDetector::isBottomArm);
+    setCommand(2, 2,
+               &ThanksCommandDetector::isCrossArm,
+               &ThanksCommandDetector::isBottomArm);
 }
 
-ThanksTriggerDetector::~ThanksTriggerDetector(void)
+ThanksCommandDetector::~ThanksCommandDetector(void)
 {
 }
 
-bool ThanksTriggerDetector::isCrossArm(void)
+bool ThanksCommandDetector::isCrossArm(void)
 {
     Vector rightForearm= user->skeletonRightForearm();
     Vector leftForearm = user->skeletonLeftForearm();
@@ -27,7 +27,7 @@ bool ThanksTriggerDetector::isCrossArm(void)
     
 }
 
-bool ThanksTriggerDetector::isBottomArm(void)
+bool ThanksCommandDetector::isBottomArm(void)
 {
     Vector rightForearm= user->skeletonRightForearm();
     Vector rightUpperArm= user->skeletonRightUpperArm();

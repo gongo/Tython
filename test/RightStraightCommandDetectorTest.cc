@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
-#include "RightStraightTriggerDetector.h"
+#include "RightStraightCommandDetector.h"
 #include "MockUser.h"
 
 using ::testing::Return;
 
-class RightStraightTriggerDetectorTest : public testing::Test {
+class RightStraightCommandDetectorTest : public testing::Test {
 public:
     virtual void SetUp() {
         mock = new MockUser;
-        object = new RightStraightTriggerDetector(mock);
+        object = new RightStraightCommandDetector(mock);
     }    
 
     virtual void TearDown() {
@@ -16,11 +16,11 @@ public:
         delete mock;
     }
 protected:
-    RightStraightTriggerDetector* object;
+    RightStraightCommandDetector* object;
     MockUser* mock;
 };
 
-TEST_F(RightStraightTriggerDetectorTest, TestIsPosing) {
+TEST_F(RightStraightCommandDetectorTest, TestIsPosing) {
     EXPECT_CALL(*mock, positionRightShoulder())
         .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
     EXPECT_CALL(*mock, positionRightElbow())
@@ -41,7 +41,7 @@ TEST_F(RightStraightTriggerDetectorTest, TestIsPosing) {
     ASSERT_TRUE(object->isPosing());
 }
 
-TEST_F(RightStraightTriggerDetectorTest, TestIsPosingError) {
+TEST_F(RightStraightCommandDetectorTest, TestIsPosingError) {
     EXPECT_CALL(*mock, positionRightShoulder())
         .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
     EXPECT_CALL(*mock, positionRightElbow())
@@ -63,7 +63,7 @@ TEST_F(RightStraightTriggerDetectorTest, TestIsPosingError) {
 }
 
 
-TEST_F(RightStraightTriggerDetectorTest, TestIsPosingError2) {
+TEST_F(RightStraightCommandDetectorTest, TestIsPosingError2) {
     EXPECT_CALL(*mock, positionRightShoulder()).WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
     EXPECT_CALL(*mock, positionRightElbow()).WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
     EXPECT_CALL(*mock, positionRightHand()).WillRepeatedly(Return(Vector(0.0f, 3.0f, 0.0f)));

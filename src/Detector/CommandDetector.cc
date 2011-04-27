@@ -1,77 +1,77 @@
 #include <cstdarg>
-#include "TriggerDetector.h"
+#include "CommandDetector.h"
 #include "Timer.h"
 
-TriggerDetector::TriggerDetector(User* _user) : AbstractDetector(_user)
+CommandDetector::CommandDetector(User* _user) : AbstractDetector(_user)
 {
-    triggerList   = NULL;
-    resetTrigger();
+    commandList   = NULL;
+    resetCommand();
 }
 
-TriggerDetector::~TriggerDetector(void)
+CommandDetector::~CommandDetector(void)
 {
-    if (triggerList != NULL) {
-        delete [] triggerList;
+    if (commandList != NULL) {
+        delete [] commandList;
     }
 }
 
-void TriggerDetector::setTrigger(int _timeLimit, int _triggerNum, ...)
+void CommandDetector::setCommand(int _timeLimit, int _commandNum, ...)
 {
     va_list ap;
 
     timeLimit   = _timeLimit;
-    triggerNum  = _triggerNum;
-    triggerList = new Trigger[_triggerNum];
+    commandNum  = _commandNum;
+    commandList = new Command[_commandNum];
 
-    va_start(ap, _triggerNum);
-    while (_triggerNum > 0) {
-        triggerList[triggerNum - _triggerNum] = va_arg(ap, Trigger);
-        _triggerNum--;
+    va_start(ap, _commandNum);
+    while (_commandNum > 0) {
+        commandList[commandNum - _commandNum] = va_arg(ap, Command);
+        _commandNum--;
     }
     va_end(ap);
 }
 
-bool TriggerDetector::isPosing(void)
+bool CommandDetector::isPosing(void)
 {
-    if (triggerList == NULL) {
+    if (commandList == NULL) {
         return false;
     }
 
     if (!withinTimeLimit()) {
-        resetTrigger();
+        resetCommand();
         return false;
     }
 
-    if ((this->*triggerList[triggerIndex])()) {
-        nextTrigger();
+    if ((this->*commandList[commandIndex])()) {
+        nextCommand();
     }
 
-    if (triggerIndex == triggerNum) {
-        resetTrigger();
+    if (commandIndex == commandNum) {
+        resetCommand();
         return true;
     }
 
     return false;
 }
 
-void TriggerDetector::resetTrigger(void)
+void CommandDetector::resetCommand(void)
 {
     detectionTime = 0;
-    triggerIndex  = 0;
+    commandIndex  = 0;
 }
 
-void TriggerDetector::nextTrigger(void)
+void CommandDetector::nextCommand(void)
 {
-    if (triggerIndex == 0) {
+    if (commandIndex == 0) {
         detectionTime = timer->current();
     }
 
-    triggerIndex++;
+    commandIndex++;
 }
 
-bool TriggerDetector::withinTimeLimit(void)
+bool CommandDetector::withinTimeLimit(void)
 {
-    if (triggerIndex == 0) {
+    if (commandIndex == 0) {
         return true;
     }
 

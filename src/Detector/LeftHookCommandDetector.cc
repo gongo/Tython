@@ -1,19 +1,19 @@
-#include "LeftHookTriggerDetector.h"
+#include "LeftHookCommandDetector.h"
 
-LeftHookTriggerDetector::LeftHookTriggerDetector(User* _user) : TriggerDetector(_user)
+LeftHookCommandDetector::LeftHookCommandDetector(User* _user) : CommandDetector(_user)
 {
-    setTrigger(1, 4,
-               &LeftHookTriggerDetector::isStand,
-               &LeftHookTriggerDetector::isLeftHookBefore,
-               &LeftHookTriggerDetector::isLeftHookAfter,
-               &LeftHookTriggerDetector::isStand);
+    setCommand(1, 4,
+               &LeftHookCommandDetector::isStand,
+               &LeftHookCommandDetector::isLeftHookBefore,
+               &LeftHookCommandDetector::isLeftHookAfter,
+               &LeftHookCommandDetector::isStand);
 }
 
-LeftHookTriggerDetector::~LeftHookTriggerDetector(void)
+LeftHookCommandDetector::~LeftHookCommandDetector(void)
 {
 }
 
-bool LeftHookTriggerDetector::isStand(void)
+bool LeftHookCommandDetector::isStand(void)
 {
     Vector shoulder = user->positionLeftShoulder();
     Vector elbow    = user->positionLeftElbow();
@@ -26,7 +26,7 @@ bool LeftHookTriggerDetector::isStand(void)
         && upperArm.isOrthogonal(forearm);
 }
 
-bool LeftHookTriggerDetector::isLeftHookBefore(void)
+bool LeftHookCommandDetector::isLeftHookBefore(void)
 {
     Vector shoulder = user->positionLeftShoulder();
     Vector elbow    = user->positionLeftElbow();
@@ -39,7 +39,7 @@ bool LeftHookTriggerDetector::isLeftHookBefore(void)
         && upperArm.isOrthogonal(forearm);
 }
 
-bool LeftHookTriggerDetector::isLeftHookAfter(void)
+bool LeftHookCommandDetector::isLeftHookAfter(void)
 {
     Vector shoulder = user->positionLeftShoulder();
     Vector elbow    = user->positionLeftElbow();

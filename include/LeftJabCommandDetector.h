@@ -1,14 +1,14 @@
 // -*- C++ -*-
 
-#ifndef _TYTHON_LEFT_JAB_TRIGGER_DETECTOR_H_
-#define _TYTHON_LEFT_JAB_TRIGGER_DETECTOR_H_
+#ifndef _TYTHON_LEFT_JAB_COMMAND_DETECTOR_H_
+#define _TYTHON_LEFT_JAB_COMMAND_DETECTOR_H_
 
-#include "TriggerDetector.h"
+#include "CommandDetector.h"
 
-class LeftJabTriggerDetector : public TriggerDetector {
+class LeftJabCommandDetector : public CommandDetector {
 public:
-    LeftJabTriggerDetector(User* _user);
-    virtual ~LeftJabTriggerDetector(void);
+    LeftJabCommandDetector(User* _user);
+    virtual ~LeftJabCommandDetector(void);
 
 protected:
 
@@ -28,4 +28,4 @@ private:
     bool isLeftJab(void);
 };
 
-#endif // _TYTHON_LEFT_JAB_TRIGGER_DETECTOR_H_
+#endif // _TYTHON_LEFT_JAB_COMMAND_DETECTOR_H_

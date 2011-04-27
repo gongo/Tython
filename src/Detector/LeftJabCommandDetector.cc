@@ -1,18 +1,18 @@
-#include "LeftJabTriggerDetector.h"
+#include "LeftJabCommandDetector.h"
 
-LeftJabTriggerDetector::LeftJabTriggerDetector(User* _user) : TriggerDetector(_user)
+LeftJabCommandDetector::LeftJabCommandDetector(User* _user) : CommandDetector(_user)
 {
-    setTrigger(1, 3,
-               &LeftJabTriggerDetector::isStand,
-               &LeftJabTriggerDetector::isLeftJab,
-               &LeftJabTriggerDetector::isStand);
+    setCommand(1, 3,
+               &LeftJabCommandDetector::isStand,
+               &LeftJabCommandDetector::isLeftJab,
+               &LeftJabCommandDetector::isStand);
 }
 
-LeftJabTriggerDetector::~LeftJabTriggerDetector(void)
+LeftJabCommandDetector::~LeftJabCommandDetector(void)
 {
 }
 
-bool LeftJabTriggerDetector::isStand(void)
+bool LeftJabCommandDetector::isStand(void)
 {
     Vector shoulder = user->positionLeftShoulder();
     Vector elbow    = user->positionLeftElbow();
@@ -25,7 +25,7 @@ bool LeftJabTriggerDetector::isStand(void)
         && upperArm.isOrthogonal(forearm);
 }
 
-bool LeftJabTriggerDetector::isLeftJab(void)
+bool LeftJabCommandDetector::isLeftJab(void)
 {
     Vector shoulder = user->positionLeftShoulder();
     Vector elbow    = user->positionLeftElbow();

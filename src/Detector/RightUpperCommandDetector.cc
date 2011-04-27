@@ -1,19 +1,19 @@
-#include "RightUpperTriggerDetector.h"
+#include "RightUpperCommandDetector.h"
 
-RightUpperTriggerDetector::RightUpperTriggerDetector(User* _user) : TriggerDetector(_user)
+RightUpperCommandDetector::RightUpperCommandDetector(User* _user) : CommandDetector(_user)
 {
-    setTrigger(1, 4,
-               &RightUpperTriggerDetector::isStand,
-               &RightUpperTriggerDetector::isRightUpperBefore,
-               &RightUpperTriggerDetector::isRightUpperAfter,
-               &RightUpperTriggerDetector::isStand);
+    setCommand(1, 4,
+               &RightUpperCommandDetector::isStand,
+               &RightUpperCommandDetector::isRightUpperBefore,
+               &RightUpperCommandDetector::isRightUpperAfter,
+               &RightUpperCommandDetector::isStand);
 }
 
-RightUpperTriggerDetector::~RightUpperTriggerDetector(void)
+RightUpperCommandDetector::~RightUpperCommandDetector(void)
 {
 }
 
-bool RightUpperTriggerDetector::isStand(void)
+bool RightUpperCommandDetector::isStand(void)
 {
     Vector shoulder = user->positionRightShoulder();
     Vector elbow    = user->positionRightElbow();
@@ -26,7 +26,7 @@ bool RightUpperTriggerDetector::isStand(void)
         && upperArm.withinAngle(forearm, 90.0f);
 }
 
-bool RightUpperTriggerDetector::isRightUpperBefore(void)
+bool RightUpperCommandDetector::isRightUpperBefore(void)
 {
     Vector shoulder = user->positionRightShoulder();
     Vector elbow    = user->positionRightElbow();
@@ -41,7 +41,7 @@ bool RightUpperTriggerDetector::isRightUpperBefore(void)
         && upperArm.isOrthogonal(forearm);
 }
 
-bool RightUpperTriggerDetector::isRightUpperAfter(void)
+bool RightUpperCommandDetector::isRightUpperAfter(void)
 {
     Vector shoulder = user->positionRightShoulder();
     Vector elbow    = user->positionRightElbow();

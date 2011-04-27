@@ -3,15 +3,15 @@
 #ifndef _TYTHON_LEFT_THANKS_DETECTOR_H_
 #define _TYTHON_LEFT_THANKS_DETECTOR_H_
 
-#include "TriggerDetector.h"
+#include "CommandDetector.h"
 
 /**
- * 十字礼を検知する TriggerDetector
+ * 十字礼を検知する CommandDetector
  */
-class ThanksTriggerDetector : public TriggerDetector {
+class ThanksCommandDetector : public CommandDetector {
 public:
-    ThanksTriggerDetector(User* _user);
-    virtual ~ThanksTriggerDetector(void);
+    ThanksCommandDetector(User* _user);
+    virtual ~ThanksCommandDetector(void);
 
 protected:
 

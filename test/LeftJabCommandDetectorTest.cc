@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
-#include "LeftJabTriggerDetector.h"
+#include "LeftJabCommandDetector.h"
 #include "MockUser.h"
 
 using ::testing::Return;
 
-class LeftJabTriggerDetectorTest : public testing::Test {
+class LeftJabCommandDetectorTest : public testing::Test {
 public:
     virtual void SetUp() {
         mock = new MockUser;
-        object = new LeftJabTriggerDetector(mock);
+        object = new LeftJabCommandDetector(mock);
     }    
 
     virtual void TearDown() {
@@ -16,11 +16,11 @@ public:
         delete mock;
     }
 protected:
-    LeftJabTriggerDetector* object;
+    LeftJabCommandDetector* object;
     MockUser* mock;
 };
 
-TEST_F(LeftJabTriggerDetectorTest, TestIsPosing) {
+TEST_F(LeftJabCommandDetectorTest, TestIsPosing) {
     EXPECT_CALL(*mock, positionLeftShoulder())
         .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
     EXPECT_CALL(*mock, positionLeftElbow())
@@ -41,7 +41,7 @@ TEST_F(LeftJabTriggerDetectorTest, TestIsPosing) {
     ASSERT_TRUE(object->isPosing());
 }
 
-TEST_F(LeftJabTriggerDetectorTest, TestIsPosingError) {
+TEST_F(LeftJabCommandDetectorTest, TestIsPosingError) {
     EXPECT_CALL(*mock, positionLeftShoulder())
         .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
     EXPECT_CALL(*mock, positionLeftElbow())

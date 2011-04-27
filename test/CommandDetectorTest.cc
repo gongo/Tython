@@ -1,18 +1,18 @@
 
 #include <gtest/gtest.h>
-#include "TriggerDetector.h"
+#include "CommandDetector.h"
 #include "MockTimer.h"
 using ::testing::Return;
 
 #define TIMELIMIT 2
 
-class ExampleTriggerDetector : public TriggerDetector {
+class ExampleCommandDetector : public CommandDetector {
 public:
-    ExampleTriggerDetector(void) : TriggerDetector(NULL) {
-        setTrigger(TIMELIMIT, 3,
-                   &ExampleTriggerDetector::isProc,
-                   &ExampleTriggerDetector::isProc,
-                   &ExampleTriggerDetector::isProc);
+    ExampleCommandDetector(void) : CommandDetector(NULL) {
+        setCommand(TIMELIMIT, 3,
+                   &ExampleCommandDetector::isProc,
+                   &ExampleCommandDetector::isProc,
+                   &ExampleCommandDetector::isProc);
     }
 
     void setTimer(Timer *_timer) {
@@ -23,12 +23,12 @@ private:
     bool isProc(void) { return true; }
 };
 
-class ExampleFailureTriggerDetector : public ExampleTriggerDetector {
+class ExampleFailureCommandDetector : public ExampleCommandDetector {
 public:
-    ExampleFailureTriggerDetector(void) : ExampleTriggerDetector() {
-        setTrigger(TIMELIMIT, 2,
-                   &ExampleFailureTriggerDetector::isProc1,
-                   &ExampleFailureTriggerDetector::isProc2);
+    ExampleFailureCommandDetector(void) : ExampleCommandDetector() {
+        setCommand(TIMELIMIT, 2,
+                   &ExampleFailureCommandDetector::isProc1,
+                   &ExampleFailureCommandDetector::isProc2);
     }
 
 private:
@@ -41,22 +41,22 @@ private:
     }
 };
 
-class ExampleNoSetTriggerDetector : public ExampleTriggerDetector {
+class ExampleNoSetCommandDetector : public ExampleCommandDetector {
 public:
-    ExampleNoSetTriggerDetector(void) : ExampleTriggerDetector() {}
+    ExampleNoSetCommandDetector(void) : ExampleCommandDetector() {}
 };
 
-class TriggerDetectorTest : public testing::Test {
+class CommandDetectorTest : public testing::Test {
 public:
-    ExampleTriggerDetector *object;
-    ExampleFailureTriggerDetector *object2;
-    ExampleNoSetTriggerDetector *object3;
+    ExampleCommandDetector *object;
+    ExampleFailureCommandDetector *object2;
+    ExampleNoSetCommandDetector *object3;
 protected:
     virtual void SetUp() {
         timer = new MockTimer;
-        object = new ExampleTriggerDetector();
-        object2 = new ExampleFailureTriggerDetector();
-        object3 = new ExampleNoSetTriggerDetector();
+        object = new ExampleCommandDetector();
+        object2 = new ExampleFailureCommandDetector();
+        object3 = new ExampleNoSetCommandDetector();
         object->setTimer(timer);
         object2->setTimer(timer);
         object3->setTimer(timer);
@@ -72,7 +72,7 @@ protected:
     MockTimer* timer;
 };
 
-TEST_F(TriggerDetectorTest, TestIsPosing) {
+TEST_F(CommandDetectorTest, TestIsPosing) {
     EXPECT_CALL(*timer, current())
         .Times(6)
         .WillRepeatedly(Return(0));
@@ -88,7 +88,7 @@ TEST_F(TriggerDetectorTest, TestIsPosing) {
     ASSERT_TRUE(object->isPosing());
 }
 
-TEST_F(TriggerDetectorTest, TestIsPosingErrorTimeLimit) {
+TEST_F(CommandDetectorTest, TestIsPosingErrorTimeLimit) {
     EXPECT_CALL(*timer, current())
         .Times(3)
         .WillOnce(Return(0))
@@ -100,7 +100,7 @@ TEST_F(TriggerDetectorTest, TestIsPosingErrorTimeLimit) {
     ASSERT_FALSE(object->isPosing());
 }
 
-TEST_F(TriggerDetectorTest, TestIsPosingError) {
+TEST_F(CommandDetectorTest, TestIsPosingError) {
     EXPECT_CALL(*timer, current())
         .Times(4)
         .WillRepeatedly(Return(0));
@@ -114,7 +114,7 @@ TEST_F(TriggerDetectorTest, TestIsPosingError) {
     ASSERT_FALSE(object2->isPosing());
 }
 
-TEST_F(TriggerDetectorTest, TestIsPosingErrorNoSetTrigger) {
+TEST_F(CommandDetectorTest, TestIsPosingErrorNoSetCommand) {
     EXPECT_CALL(*timer, current())
         .Times(1)
         .WillOnce(Return(0));

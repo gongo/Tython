@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "LeftJabCommandDetector.h"
 #include "MockUser.h"
+#include "MockVector.h"
 
 using ::testing::Return;
 
@@ -27,14 +28,14 @@ TEST_F(LeftJabCommandDetectorTest, TestIsPosing) {
         .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
     EXPECT_CALL(*mock, positionLeftHand())
         .WillRepeatedly(Return(Vector(0.0f, 3.0f, 0.0f)));
+
     EXPECT_CALL(*mock, skeletonLeftUpperArm())
-        .Times(3)
-        .WillRepeatedly(Return(Vector(1.0f, 0.0f, 0.0f)));
+        .Times(3).WillRepeatedly(Return(MockVector::v00));
     EXPECT_CALL(*mock, skeletonLeftForearm())
         .Times(3)
-        .WillOnce(Return(Vector(0.0f, 1.0f, 0.0f)))
-        .WillOnce(Return(Vector(0.0f, 0.0f, 0.0f)))
-        .WillOnce(Return(Vector(0.0f, 1.0f, 0.0f)));
+        .WillOnce(Return(MockVector::v90))
+        .WillOnce(Return(MockVector::v00))
+        .WillOnce(Return(MockVector::v90));
     
     ASSERT_FALSE(object->isPosing());
     ASSERT_FALSE(object->isPosing());
@@ -49,13 +50,12 @@ TEST_F(LeftJabCommandDetectorTest, TestIsPosingError) {
     EXPECT_CALL(*mock, positionLeftHand())
         .WillRepeatedly(Return(Vector(0.0f, 3.0f, 0.0f)));
     EXPECT_CALL(*mock, skeletonLeftUpperArm())
-        .Times(3)
-        .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
+        .Times(3).WillRepeatedly(Return(MockVector::v00));
     EXPECT_CALL(*mock, skeletonLeftForearm())
         .Times(3)
-        .WillOnce(Return(Vector(1.0f, 0.0f, 0.0f)))
-        .WillOnce(Return(Vector(1.0f, 1.0f, 0.0f)))
-        .WillOnce(Return(Vector(1.0f, 0.0f, 0.0f)));
+        .WillOnce(Return(MockVector::v90))
+        .WillOnce(Return(MockVector::v45))
+        .WillOnce(Return(MockVector::v90));
     
     ASSERT_FALSE(object->isPosing());
     ASSERT_FALSE(object->isPosing());

@@ -15,9 +15,5 @@ bool AbstractDetector::detect()
         return false;
     }
 
-    if (isPosing()) {
-        return true;
-    }
-
-    return false;
+    return isPosing();
 }

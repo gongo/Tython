@@ -16,7 +16,7 @@ vector<Instruction*> Compiler::compile(string source)
     std::vector<Instruction*> insns;
 
     /**
-     * @todo ここは例外を投げよう
+     * @todo 縺薙％縺ｯ萓句､悶ｒ謚輔£繧医≧
      */
     if (source.find_first_not_of(Compiler::_treat) != string::npos) {
         //return insns;

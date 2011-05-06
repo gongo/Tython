@@ -1,7 +1,7 @@
 // -*- C++ -*-
 
-#ifndef _TYTHON_ABSTRACT_SYNTAX_H_
-#define _TYTHON_ABSTRACT_SYNTAX_H_
+#ifndef _TYTHON_ABSTRACT_INPUT_METHOD_H_
+#define _TYTHON_ABSTRACT_INPUT_METHOD_H_
 
 #include <map>
 #include <vector>
@@ -12,34 +12,35 @@ using std::map;
 using std::vector;
 using std::string;
 
-typedef map<string, AbstractDetector*> SyntaxInput;
-typedef vector<AbstractDetector*> SyntaxQuit;
+typedef map<string, AbstractDetector*> IMmap;
+typedef vector<AbstractDetector*> IMquit;
 
-class AbstractSyntax {
+class AbstractInputMethod {
 public:
-    AbstractSyntax(void);
-    virtual ~AbstractSyntax(void);
+
+    AbstractInputMethod(void);
+    virtual ~AbstractInputMethod(void);
 
     /**
      * ソースコード入力する Detector と対応するソースコードの map を返す
      */
-    SyntaxInput input(void);
-
+    IMmap input(void);
+    
     /**
      * ソースコード入力を終了する Detector  のリスト
      */
-    SyntaxQuit quit(void);
+    IMquit quit(void);
 
 protected:
     /**
      * ソースコード入力する Detector と対応するソースコードの map
      */
-    SyntaxInput inputList;
+    IMmap inputList;
 
     /**
      * ソースコード入力を終了する Detector  のリスト
      */
-    SyntaxQuit quitList;
+    IMquit quitList;
 };
 
-#endif // _TYTHON_ABSTRACT_SYNTAX_H_
+#endif // _TYTHON_ABSTRACT_INPUT_METHOD_H_

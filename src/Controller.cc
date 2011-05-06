@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "Controller.h"
-#include "TyphonSyntax.h"
+#include "DefaultInputMethod.h"
 #include "AbstractRenderer.h"
 #include "util.h"
 #include "Instruction.h"
@@ -11,18 +11,17 @@ AbstractRenderer *renderer;
 Controller::Controller(void)
 {
     initXN();
-    ctxUser = new User(&ctxGlobal);
 
-    renderer = new AbstractRenderer(&ctxGlobal, ctxUser);
-    syntax = new TyphonSyntax(ctxUser);
-
+    ctxUser  = new User(&ctxGlobal);
+    renderer = new AbstractRenderer(&ctxGlobal, ctxUser);    
+    im       = new DefaultInputMethod(ctxUser);
     compiler = Compiler::instance();
-    vm = VM::instance();
+    vm       = VM::instance();
 }
 
 Controller::~Controller(void)
 {
-    delete syntax;
+    delete im;
     delete renderer;
     delete ctxUser;
     ctxGlobal.Shutdown();
@@ -32,17 +31,17 @@ void Controller::main(void)
 {
     renderer->draw();
 
-    SyntaxInput inputList = syntax->input();
-    SyntaxQuit quitList = syntax->quit();
+    IMmap inputList = im->input();
+    IMquit quitList = im->quit();
 
-    for (SyntaxInput::iterator it = inputList.begin(); it != inputList.end(); ++it) {
+    for (IMmap::iterator it = inputList.begin(); it != inputList.end(); ++it) {
         if (it->second->detect()) {
             source += it->first;
             printf("%s\n", it->first.c_str());
         }
     }
 
-    for (SyntaxQuit::iterator it = quitList.begin(); it != quitList.end(); ++it) {
+    for (IMquit::iterator it = quitList.begin(); it != quitList.end(); ++it) {
         if ((*it)->detect()) {
             printf("%s\n", source.c_str());
             std::vector<Instruction*> insns = compiler->compile(source);

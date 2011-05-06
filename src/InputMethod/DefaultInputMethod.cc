@@ -1,15 +1,15 @@
-#include "TyphonSyntax.h"
+#include "DefaultInputMethod.h"
 #include "RightStraightCommandDetector.h"
 #include "RightUpperCommandDetector.h"
 #include "LeftJabCommandDetector.h"
 #include "LeftHookCommandDetector.h"
 #include "ThanksCommandDetector.h"
 
-TyphonSyntax::TyphonSyntax(void)
+DefaultInputMethod::DefaultInputMethod(void)
 {
 }
 
-TyphonSyntax::TyphonSyntax(User* _user)
+DefaultInputMethod::DefaultInputMethod(User* _user)
 {
     inputList.insert(std::make_pair("a", new LeftJabCommandDetector(_user)));
     inputList.insert(std::make_pair("@", new RightStraightCommandDetector(_user)));

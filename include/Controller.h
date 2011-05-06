@@ -8,8 +8,7 @@
 #include "User.h"
 #include "Compiler.h"
 #include "VM.h"
-#include "AbstractSyntax.h"
-#include "TyphonSyntax.h"
+#include "AbstractInputMethod.h"
 
 using std::string;
 
@@ -58,19 +57,9 @@ private:
     VM* vm;
 
     /**
-     * Syntax 
+     * InputMethod 
      */
-    TyphonSyntax* syntax;
-
-    /**
-     * Syntax 
-     */
-    SyntaxInput inputList;
-
-    /**
-     * Syntax 
-     */
-    SyntaxQuit quitList;
+    AbstractInputMethod* im;
 };
 
 #endif // _TYTHON_CONTROLLER_H_

@@ -32,26 +32,25 @@ void Controller::main(void)
 {
     renderer->draw();
 
-    SyntaxInput::iterator inputIterator = syntax->input().begin();
-    SyntaxQuit::iterator quitIterator = syntax->quit().begin();
+    SyntaxInput inputList = syntax->input();
+    SyntaxQuit quitList = syntax->quit();
 
-    while (inputIterator != inputList.end()) {
-        if (((*inputIterator).second)->detect()) {
-            source += (*inputIterator).first;
-            //printf("%c\n", (*inputIterator).first);
+    for (SyntaxInput::iterator it = inputList.begin(); it != inputList.end(); ++it) {
+        if (it->second->detect()) {
+            source += it->first;
+            printf("%s\n", it->first.c_str());
         }
-        inputIterator++;
     }
 
-    // while (quitIterator != quitList.end()) {
-    //     if ((*quitIterator)->detect()) {
-    //         std::vector<Instruction*> insns = compiler->compile(source);
-    //         vm->run(insns);
-    //         printf("\n");
-    //         exit(0);
-    //     }
-    //     quitIterator++;
-    // }
+    for (SyntaxQuit::iterator it = quitList.begin(); it != quitList.end(); ++it) {
+        if ((*it)->detect()) {
+            printf("%s\n", source.c_str());
+            std::vector<Instruction*> insns = compiler->compile(source);
+            vm->run(insns);
+            printf("\n");
+            exit(0);
+        }
+    }
 
     ctxGlobal.WaitAndUpdateAll();
 }

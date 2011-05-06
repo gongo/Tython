@@ -23,7 +23,7 @@ public:
     /**
      * ソースコード入力する Detector と対応するソースコードの map を返す
      */
-    map<string, AbstractDetector*> input(void);
+    SyntaxInput input(void);
 
     /**
      * ソースコード入力を終了する Detector  のリスト
@@ -34,7 +34,7 @@ protected:
     /**
      * ソースコード入力する Detector と対応するソースコードの map
      */
-    map<string, AbstractDetector*> inputList;
+    SyntaxInput inputList;
 
     /**
      * ソースコード入力を終了する Detector  のリスト

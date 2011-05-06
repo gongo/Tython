@@ -5,9 +5,6 @@
 
 #include "AbstractSyntax.h"
 
-using std::map;
-using std::vector;
-
 class TyphonSyntax : public AbstractSyntax {
 public:
     TyphonSyntax(void);

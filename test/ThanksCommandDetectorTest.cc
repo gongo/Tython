@@ -21,27 +21,27 @@ protected:
     MockUser* mock;
 };
 
-TEST_F(ThanksCommandDetectorTest, TestIsPosing) {
-    EXPECT_CALL(*mock, positionWaist()).WillRepeatedly(Return(Vector()));
-    EXPECT_CALL(*mock, positionRightHand())
-        .WillOnce(Return(Vector(-1.0f, 1.0f, 0.0f)))
-        .WillOnce(Return(Vector(1.0f, -1.0f, 0.0f)));
-    EXPECT_CALL(*mock, positionLeftHand())
-        .WillOnce(Return(Vector(1.0f, 1.0f, 0.0f)))
-        .WillOnce(Return(Vector(-1.0f, -1.0f, 0.0f)));
+// TEST_F(ThanksCommandDetectorTest, TestIsPosing) {
+//     EXPECT_CALL(*mock, positionWaist()).WillRepeatedly(Return(Vector()));
+//     EXPECT_CALL(*mock, positionRightHand())
+//         .WillOnce(Return(Vector(-1.0f, 1.0f, 0.0f)))
+//         .WillOnce(Return(Vector(1.0f, -1.0f, 0.0f)));
+//     EXPECT_CALL(*mock, positionLeftHand())
+//         .WillOnce(Return(Vector(1.0f, 1.0f, 0.0f)))
+//         .WillOnce(Return(Vector(-1.0f, -1.0f, 0.0f)));
 
-    EXPECT_CALL(*mock, skeletonRightUpperArm()).WillOnce(Return(MockVector::v45*-1));
-    EXPECT_CALL(*mock, skeletonLeftUpperArm()).WillOnce(Return(MockVector::v135*-1));
-    EXPECT_CALL(*mock, skeletonRightForearm())
-        .WillOnce(Return(MockVector::v45))
-        .WillOnce(Return(MockVector::v45*-1));
-    EXPECT_CALL(*mock, skeletonLeftForearm())
-        .WillOnce(Return(MockVector::v135))
-        .WillOnce(Return(MockVector::v135*-1));
+//     EXPECT_CALL(*mock, skeletonRightUpperArm()).WillOnce(Return(MockVector::v45*-1));
+//     EXPECT_CALL(*mock, skeletonLeftUpperArm()).WillOnce(Return(MockVector::v135*-1));
+//     EXPECT_CALL(*mock, skeletonRightForearm())
+//         .WillOnce(Return(MockVector::v45))
+//         .WillOnce(Return(MockVector::v45*-1));
+//     EXPECT_CALL(*mock, skeletonLeftForearm())
+//         .WillOnce(Return(MockVector::v135))
+//         .WillOnce(Return(MockVector::v135*-1));
 
-    ASSERT_FALSE(object->isPosing());
-    ASSERT_TRUE(object->isPosing());
-}
+//     ASSERT_FALSE(object->isPosing());
+//     ASSERT_TRUE(object->isPosing());
+// }
 
 TEST_F(ThanksCommandDetectorTest, TestIsPosingError) {
     EXPECT_CALL(*mock, positionWaist()).WillRepeatedly(Return(Vector()));

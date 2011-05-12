@@ -11,23 +11,13 @@ public:
     virtual ~CrossArmBlockPoseDetector(void) {}
 
     /**
-     * ポーズをとっているか判定
-     * 
-     * @return ポーズを検出できれば true
-     */
-    bool isPosing(void);
-
-protected:
-    /**
      * クロスアームブロックのポーズをとっているか判定
      *
      * 両腕を 90 度に交差
      * 
      * @return ポーズを検出できれば true / できなければ false
      */
-    bool isCrossArmBlockForm(void);
-    
-private:
+    bool isPosing(void);
 };
 
 #endif // _TYTHON_CROSS_ARM_BLOCK_POSE_DETECTOR_H_

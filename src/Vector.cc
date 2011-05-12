@@ -130,10 +130,15 @@ bool Vector::withoutAngle(const Vector& v, float angle) const
     return !withinAngle(v, angle);
 }
 
+bool Vector::betweenAngle(const Vector& v, float angle) const
+{
+    return withoutAngle(v, angle - THRESHOLD_TOLERANCE)
+        && withinAngle(v, angle + THRESHOLD_TOLERANCE);
+}
+
 bool Vector::isOrthogonal(const Vector& v) const
 {
-    return withoutAngle(v, THRESHOLD_ORTHOGONAL - THRESHOLD_TOLERANCE)
-        && withinAngle(v, THRESHOLD_ORTHOGONAL + THRESHOLD_TOLERANCE);
+    return betweenAngle(v, THRESHOLD_ORTHOGONAL);
 }
 
 bool Vector::isStraight(const Vector& v) const

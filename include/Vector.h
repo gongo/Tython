@@ -81,6 +81,15 @@ public:
     Vector reverse(void) const;
 
     /**
+     * 二つのベクトルが成す角度が、指定した角度かチェックする
+     *
+     * @param    v    角度をチェックするベクトル
+     * @param  angle  判定基準とする角度
+     * @return        指定した角度であれば true
+     */
+    bool betweenAngle(const Vector& v, float angle) const;
+
+    /**
      * 二つのベクトルが指定した角度より鋭角かチェックする
      *
      * @param    v    角度をチェックするベクトル

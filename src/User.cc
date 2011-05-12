@@ -117,6 +117,11 @@ inline bool User::isConfident(XnSkeletonJointPosition p) const
     return p.fConfidence >= THRESHOLD_CONFIDENCE;
 }
 
+Vector User::positionHead(void)
+{
+    return getSkeletonPosition(XN_SKEL_HEAD);
+}
+
 Vector User::positionNeck(void)
 {
     return getSkeletonPosition(XN_SKEL_NECK);
@@ -155,6 +160,16 @@ Vector User::positionLeftElbow(void)
 Vector User::positionWaist(void)
 {
     return getSkeletonPosition(XN_SKEL_WAIST);
+}
+
+Vector User::skeletonHead(void)
+{
+    return getSkeletonVector(XN_SKEL_NECK, XN_SKEL_HEAD);
+}
+
+Vector User::skeletonMedianLine(void)
+{
+    return getSkeletonVector(XN_SKEL_HEAD, XN_SKEL_WAIST);
 }
 
 Vector User::skeletonRightUpperArm(void)

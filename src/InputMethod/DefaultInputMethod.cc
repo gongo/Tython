@@ -4,6 +4,7 @@
 #include "LeftJabCommandDetector.h"
 #include "LeftHookCommandDetector.h"
 #include "ThanksCommandDetector.h"
+#include "OwataPoseDetector.h"
 
 DefaultInputMethod::DefaultInputMethod(void)
 {
@@ -16,5 +17,5 @@ DefaultInputMethod::DefaultInputMethod(User* _user)
     inputList.insert(std::make_pair("g", new RightUpperCommandDetector(_user)));
     inputList.insert(std::make_pair(" ", new LeftHookCommandDetector(_user)));
 
-    quitList.push_back(new ThanksCommandDetector(_user));
+    quitList.push_back(new OwataPoseDetector(_user));
 }

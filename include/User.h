@@ -24,6 +24,13 @@ public:
     void updatePixels(xn::SceneMetaData* data);
 
     /**
+     * 頭の座標を取得する
+     *
+     * @return 頭の座標(ベクトル)
+     */
+    virtual Vector positionHead(void);
+
+    /**
      * 首の座標を取得する
      *
      * @return 首の座標(ベクトル)
@@ -78,6 +85,20 @@ public:
      * @return 腰の座標(ベクトル)
      */
     virtual Vector positionWaist(void);
+
+    /**
+     * 首から頭へのベクトルを取得する
+     *
+     * @return 首から頭へのベクトル
+     */
+    virtual Vector skeletonHead(void);
+
+    /**
+     * 正中線(頭から腰にかけて)のベクトルを取得する
+     *
+     * @return 正中線のベクトル
+     */
+    virtual Vector skeletonMedianLine(void);
 
     /**
      * 右上腕(右肩から右肘にかけて)のベクトルを取得する

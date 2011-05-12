@@ -8,7 +8,7 @@ TEST_SRCS_DIR = test
 TEST_SRCS    = $(wildcard $(TEST_SRCS_DIR)/*.cc)
 TEST_OBJS    = $(TEST_SRCS:.cc=.o)
 
-CXXFLAGS  = -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 -g
+CXXFLAGS  = -O3 -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3
 CXX       = g++
 
 ARCH    = -arch x86_64 #-arch i386 

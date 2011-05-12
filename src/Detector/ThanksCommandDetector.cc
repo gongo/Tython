@@ -3,7 +3,7 @@
 
 ThanksCommandDetector::ThanksCommandDetector(User* _user) : CommandDetector(_user)
 {
-    setCommand(2, 2,
+    setCommand(2, 1,
                &ThanksCommandDetector::isCrossArm,
                &ThanksCommandDetector::isBottomArm);
 }
@@ -23,8 +23,7 @@ bool ThanksCommandDetector::isCrossArm(void)
     return rightForearm.isOrthogonal(leftForearm)
         && (rightHand.X < leftHand.X)
         && (rightHand.Y > waist.Y)
-        && (leftHand.Y > waist.Y);
-    
+        && (leftHand.Y > waist.Y);    
 }
 
 bool ThanksCommandDetector::isBottomArm(void)
@@ -36,9 +35,10 @@ bool ThanksCommandDetector::isBottomArm(void)
     Vector rightHand = user->positionRightHand();
     Vector leftHand = user->positionLeftHand();
     Vector waist = user->positionWaist();
+    Vector neck = user->positionNeck();
 
     return rightForearm.isStraight(rightUpperArm.reverse())
         && leftForearm.isStraight(leftUpperArm.reverse())
-        && rightHand.Y < waist.Y
-        && leftHand.Y < waist.Y;
+        && rightHand.Y > neck.Y
+        && leftHand.Y > neck.Y;
 }

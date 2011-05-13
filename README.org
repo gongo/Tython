@@ -2,27 +2,52 @@
 
   Tython is programming language, interface and exercise.
 
-** Requirements Device
+** Requirements
 
-   1) Xbox 360&#174; Kinect&#8482; Sensor
-      http://www.xbox.com/ja-JP/xbox360/accessories/kinect/Home
+*** Devices
 
-** Requirements Library
+    1) Xbox 360® Kinect™ Sensor
+       [[http://www.xbox.com/ja-JP/xbox360/accessories/kinect/Home][http://www.xbox.com/ja-JP/xbox360/accessories/kinect/Home]]
 
-   1) OpenNI
-      - source https://github.com/OpenNI/OpenNI
-      - binary http://www.openni.org/downloadfiles/2-openni-binaries
-   2) Sensor - OpenNI Compliant Hardware Binaries
-      - source https://github.com/PrimeSense/Sensor
-      - binary http://www.openni.org/downloadfiles/30-openni-compliant-hardware-binaries
-   3) NITE - OpenNI Compliant Middleware Binaries
-      - binary http://www.openni.org/downloadfiles/12-openni-compliant-middleware-binaries
+*** Libraries
 
-** Optional Requirements (To test)
+    1) OpenNI
+       - source [[https://github.com/OpenNI/OpenNI][https://github.com/OpenNI/OpenNI]]
+       - binary [[http://www.openni.org/downloadfiles/2-openni-binaries][http://www.openni.org/downloadfiles/2-openni-binaries]]
+    2) Sensor - OpenNI Compliant Hardware Binaries
+       - source [[https://github.com/PrimeSense/Sensor][https://github.com/PrimeSense/Sensor]]
+       - binary [[http://www.openni.org/downloadfiles/30-openni-compliant-hardware-binaries][http://www.openni.org/downloadfiles/30-openni-compliant-hardware-binaries]]
+    3) NITE - OpenNI Compliant Middleware Binaries
+       - binary [[http://www.openni.org/downloadfiles/12-openni-compliant-middleware-binaries][http://www.openni.org/downloadfiles/12-openni-compliant-middleware-binaries]]
 
-   1) GoogleTest - Google C++ Testing Framework
-      http://code.google.com/p/googletest/
-   2) GoogleMock - Google C++ Mocking Framework
-      http://code.google.com/p/googlemock/
-      
+*** Optional (To test)
 
+    1) GoogleTest - Google C++ Testing Framework
+       [[http://code.google.com/p/googletest/][http://code.google.com/p/googletest/]]
+    2) GoogleMock - Google C++ Mocking Framework
+       [[http://code.google.com/p/googlemock/][http://code.google.com/p/googlemock/]]
+       
+
+
+** Run
+
+   #+begin_src sh
+   $ make
+   $ ./Tython
+   #+end_src
+
+** Run tests
+
+   #+begin_src sh
+   $ make test
+   #+end_src
+
+** Coverage measure
+
+   #+begin_src sh
+   $ make -f Makefile.coverage test coverage
+   $ $BROWSER ./gcov/index.html
+   #+end_src
+   
+
+** Future

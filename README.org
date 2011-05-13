@@ -1,0 +1,28 @@
+* 肉体言語 Tython
+
+  Tython is programming language, interface and exercise.
+
+** Requirements Device
+
+   1) Xbox 360&#174; Kinect&#8482; Sensor
+      http://www.xbox.com/ja-JP/xbox360/accessories/kinect/Home
+
+** Requirements Library
+
+   1) OpenNI
+      - source https://github.com/OpenNI/OpenNI
+      - binary http://www.openni.org/downloadfiles/2-openni-binaries
+   2) Sensor - OpenNI Compliant Hardware Binaries
+      - source https://github.com/PrimeSense/Sensor
+      - binary http://www.openni.org/downloadfiles/30-openni-compliant-hardware-binaries
+   3) NITE - OpenNI Compliant Middleware Binaries
+      - binary http://www.openni.org/downloadfiles/12-openni-compliant-middleware-binaries
+
+** Optional Requirements (To test)
+
+   1) GoogleTest - Google C++ Testing Framework
+      http://code.google.com/p/googletest/
+   2) GoogleMock - Google C++ Mocking Framework
+      http://code.google.com/p/googlemock/
+      
+

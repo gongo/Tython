@@ -3,6 +3,15 @@
 
 Tython is programming language, interface and exercise.
 
+Article
+=========
+
+### Demo
+[Youtube - 肉体言語 Tython 「Hello, World!」](http://www.youtube.com/watch?v=4iSzg9bOtCY)
+
+### Presentation
+[肉体言語 Tython - slideshare](http://www.slideshare.net/gongoZ/tython-7953587)
+
 Requirements
 ================
 

@@ -20,10 +20,15 @@ static void XN_CALLBACK_TYPE s_onPoseStart(xn::PoseDetectionCapability& capabili
 
 User::User(xn::Context *ctx)
 {
+    XnStatus rc;
+
     userGenerator = new xn::UserGenerator;
     
-    ctx->FindExistingNode(XN_NODE_TYPE_USER, *userGenerator);
-    userGenerator->Create(*ctx);
+    rc = ctx->FindExistingNode(XN_NODE_TYPE_USER, *userGenerator);
+    if (!XN_OK(rc)) {
+        printf("User3 %d\n", rc);
+        userGenerator->Create(*ctx);
+    }
     userGenerator->GetSkeletonCap().SetSkeletonProfile(XN_SKEL_PROFILE_ALL);
 
     DIE_IF(!userGenerator->IsCapabilitySupported(XN_CAPABILITY_SKELETON), "This configuration is not supported.");
@@ -97,10 +102,11 @@ void User::onNewUser(XnUserID uid)
 
 void User::onCalibrationEnd(XnUserID uid, bool isCalibration)
 {
-    printf("onCalibrationEnd\n");
     if (isCalibration) {
+        printf("onCalibrationEnd - Success!\n");
         userGenerator->GetSkeletonCap().StartTracking(uid);
     } else {
+        printf("onCalibrationEnd - Failure...\n");
         userGenerator->GetPoseDetectionCap().StartPoseDetection(poseName, uid);
     }
 }

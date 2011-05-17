@@ -3,11 +3,13 @@
 #ifndef _TYTHON_UTIL_H_
 #define _TYTHON_UTIL_H_
 
-#define CHECK_XN(rc) do {                                            \
-        if (rc != XN_STATUS_OK) {                                    \
+#define XN_OK(rc) (rc == XN_STATUS_OK)
+
+#define CHECK_XN(rc) do {                                               \
+        if (!XN_OK(rc)) {                                                \
             fprintf(stderr, "%s failed: %s\n", #rc, xnGetStatusString(rc)); \
-            exit(rc);                                                \
-        }                                                            \
+            exit(rc);                                                   \
+        }                                                               \
     } while (0)
 
 #define DIE_IF(rc, message) do {                \

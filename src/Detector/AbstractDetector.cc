@@ -11,7 +11,7 @@ AbstractDetector::~AbstractDetector(void)
 
 bool AbstractDetector::detect()
 {
-    if (!user->getTrackingId()) {
+    if (!user->isCalibrated()) {
         return false;
     }
 

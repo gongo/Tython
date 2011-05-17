@@ -12,9 +12,10 @@ Controller::Controller(void)
 {
     initXN();
 
-    ctxUser  = new User(&ctxGlobal);
-    renderer = new AbstractRenderer(&ctxGlobal, ctxUser);    
-    im       = new DefaultInputMethod(ctxUser);
+    ctxUser  = new UserContext(&ctxGlobal);
+    user = new User(ctxUser);
+    renderer = new AbstractRenderer(&ctxGlobal, user);
+    im       = new DefaultInputMethod(user);
     compiler = Compiler::instance();
     vm       = VM::instance();
 }
@@ -23,6 +24,7 @@ Controller::~Controller(void)
 {
     delete im;
     delete renderer;
+    delete user;
     delete ctxUser;
     ctxGlobal.Shutdown();
 }

@@ -34,7 +34,9 @@ private:
     /**
      *
      */
-    User *ctxUser;
+    UserContext *ctxUser;
+
+    User *user;
 
     /**
      *

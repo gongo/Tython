@@ -3,25 +3,21 @@
 #ifndef _TYTHON_USER_H
 #define _TYTHON_USER_H
 
-#include <XnCppWrapper.h>
-#include "Vector.h"
+#include "UserContext.h"
 
 class User {
 public: 
-    User(xn::Context *ctx);
+    User(UserContext *_context);
     ~User(void);
 
     static const float THRESHOLD_CONFIDENCE;
 
-    XnUserID getTrackingId(void) const;
     Vector getSkeletonPosition(XnSkeletonJoint j);
     Vector getSkeletonVector(XnSkeletonJoint j1, XnSkeletonJoint j2);
 
-    void onNewUser(XnUserID uid);
-    void onPoseStart(XnUserID uid);
-    void onCalibrationEnd(XnUserID uid, bool isCalibration);
-
     void updatePixels(xn::SceneMetaData* data);
+    bool isTracking(void);
+    bool isCalibrated(void);
 
     /**
      * 頭の座標を取得する
@@ -146,9 +142,14 @@ private:
     bool isConfident(XnSkeletonJointPosition p) const;
     
     /**
+     * 
+     */
+    int userId;
+
+    /**
      *
      */
-    xn::UserGenerator* userGenerator;
+    UserContext* context;
 
     /**
      * @see XnSkeletonJoint

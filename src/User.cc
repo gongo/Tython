@@ -26,7 +26,6 @@ User::User(xn::Context *ctx)
     
     rc = ctx->FindExistingNode(XN_NODE_TYPE_USER, *userGenerator);
     if (!XN_OK(rc)) {
-        printf("User3 %d\n", rc);
         userGenerator->Create(*ctx);
     }
     userGenerator->GetSkeletonCap().SetSkeletonProfile(XN_SKEL_PROFILE_ALL);

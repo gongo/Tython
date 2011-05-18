@@ -28,8 +28,5 @@ TEST_F(CrossArmBlockPoseDetectorTest, TestIsPosing) {
 }
 
 TEST_F(CrossArmBlockPoseDetectorTest, TestIsPosingError) {
-    EXPECT_CALL(*mock, skeletonRightForearm()).WillOnce(Return(Vector(0, 100, 0)));
-    EXPECT_CALL(*mock, skeletonLeftForearm()).WillOnce(Return(Vector(0, 100, 0)));
-    
     ASSERT_FALSE(object->isPosing());
 }

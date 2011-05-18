@@ -12,12 +12,12 @@ public:
 
     static const float THRESHOLD_CONFIDENCE;
 
-    Vector getSkeletonPosition(XnSkeletonJoint j);
-    Vector getSkeletonVector(XnSkeletonJoint j1, XnSkeletonJoint j2);
+    virtual Vector getSkeletonPosition(XnSkeletonJoint j);
+    virtual Vector getSkeletonVector(XnSkeletonJoint j1, XnSkeletonJoint j2);
 
     void updatePixels(xn::SceneMetaData* data);
-    bool isTracking(void);
-    bool isCalibrated(void);
+    virtual bool isTracking(void);
+    virtual bool isCalibrated(void);
 
     /**
      * 頭の座標を取得する
@@ -123,6 +123,26 @@ public:
      * @return 左前腕のベクトル
      */
     virtual Vector skeletonLeftForearm(void);
+
+    /**
+     * 右腕がまっすぐ伸びているかどうか
+     *
+     * @see skeletonRightForearm()
+     * @see skeletonRightUpperArm()
+     *
+     * @return 右腕がまっすぐ伸びていれば true
+     */
+    virtual bool rightArmIsStraight(void);
+
+    /**
+     * 左腕がまっすぐ伸びているかどうか
+     *
+     * @see skeletonLeftForearm()
+     * @see skeletonLeftUpperArm()
+     *
+     * return 左腕がまっすぐ伸びていれば true
+     */
+    virtual bool leftArmIsStraight(void);
 
 protected:
     /**

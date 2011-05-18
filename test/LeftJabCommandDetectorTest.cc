@@ -21,13 +21,17 @@ protected:
     MockUser* mock;
 };
 
+#define SET_SKELETON_CALL() do {                                \
+        EXPECT_CALL(*mock, positionLeftShoulder())              \
+            .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));  \
+        EXPECT_CALL(*mock, positionLeftElbow())                 \
+            .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));  \
+        EXPECT_CALL(*mock, positionLeftHand())                  \
+            .WillRepeatedly(Return(Vector(0.0f, 3.0f, 0.0f)));  \
+    } while (0)
+
 TEST_F(LeftJabCommandDetectorTest, TestIsPosing) {
-    EXPECT_CALL(*mock, positionLeftShoulder())
-        .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
-    EXPECT_CALL(*mock, positionLeftElbow())
-        .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
-    EXPECT_CALL(*mock, positionLeftHand())
-        .WillRepeatedly(Return(Vector(0.0f, 3.0f, 0.0f)));
+    SET_SKELETON_CALL();
 
     EXPECT_CALL(*mock, skeletonLeftUpperArm())
         .Times(3).WillRepeatedly(Return(MockVector::v00));
@@ -43,12 +47,8 @@ TEST_F(LeftJabCommandDetectorTest, TestIsPosing) {
 }
 
 TEST_F(LeftJabCommandDetectorTest, TestIsPosingError) {
-    EXPECT_CALL(*mock, positionLeftShoulder())
-        .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
-    EXPECT_CALL(*mock, positionLeftElbow())
-        .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
-    EXPECT_CALL(*mock, positionLeftHand())
-        .WillRepeatedly(Return(Vector(0.0f, 3.0f, 0.0f)));
+    SET_SKELETON_CALL();
+
     EXPECT_CALL(*mock, skeletonLeftUpperArm())
         .Times(3).WillRepeatedly(Return(MockVector::v00));
     EXPECT_CALL(*mock, skeletonLeftForearm())

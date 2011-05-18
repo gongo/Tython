@@ -126,3 +126,18 @@ Vector User::skeletonLeftForearm(void)
     return getSkeletonVector(XN_SKEL_LEFT_ELBOW, XN_SKEL_LEFT_HAND);
 }
 
+bool User::rightArmIsStraight(void)
+{
+    Vector forearm = skeletonRightForearm();
+    Vector upperArm = skeletonRightUpperArm();
+    
+    return forearm.isStraight(upperArm.reverse());
+}
+
+bool User::leftArmIsStraight(void)
+{
+    Vector forearm = skeletonLeftForearm();
+    Vector upperArm = skeletonLeftUpperArm();
+
+    return forearm.isStraight(upperArm.reverse());
+}

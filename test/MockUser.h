@@ -8,16 +8,29 @@
 
 class MockUser : public User {
 public:
-    MockUser(void) : User() {}
+    MockUser(void) : User(NULL) {}
     virtual ~MockUser(void) {}
 
     /**
-     * トラッキングされたユーザの ID を返す
+     * トラッキングされているか
      *
-     * @return スタブのため 1 を返す
+     * スタブのため、常時 true を返す
+     *
+     * @return true
      */
-    XnUserID getTrackingId(void) const {
-        return 1;
+    bool isTracking(void) {
+        return true;
+    }
+
+    /**
+     * キャリブレーションされているか
+     *
+     * スタブのため、常時 true を返す
+     *
+     * @return true
+     */
+    bool isCalibrated(void) {
+        return true;
     }
 
     MOCK_METHOD0(skeletonRightUpperArm, Vector(void));
@@ -26,6 +39,8 @@ public:
     MOCK_METHOD0(skeletonLeftUpperArm, Vector(void));
     MOCK_METHOD0(skeletonLeftForearm, Vector(void));
     MOCK_METHOD0(skeletonLeftHand, Vector(void));
+    MOCK_METHOD0(skeletonHead, Vector(void));
+    MOCK_METHOD0(positionHead, Vector(void));
     MOCK_METHOD0(positionNeck, Vector(void));
     MOCK_METHOD0(positionRightShoulder, Vector(void));
     MOCK_METHOD0(positionRightElbow, Vector(void));
@@ -34,6 +49,8 @@ public:
     MOCK_METHOD0(positionLeftElbow, Vector(void));
     MOCK_METHOD0(positionLeftHand, Vector(void));
     MOCK_METHOD0(positionWaist, Vector(void));
+    MOCK_METHOD0(rightArmIsStraight, bool(void));
+    MOCK_METHOD0(leftArmIsStraight, bool(void));
 };
 
 #endif // _TYTHON_MOCK_USER_H

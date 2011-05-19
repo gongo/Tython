@@ -141,3 +141,19 @@ bool User::leftArmIsStraight(void)
 
     return forearm.isStraight(upperArm.reverse());
 }
+
+bool User::rightArmIsBentRightAngle(void)
+{
+    Vector upperArm = skeletonRightUpperArm();
+    Vector forearm  = skeletonRightForearm();
+
+    return upperArm.isOrthogonal(forearm);
+}
+
+bool User::leftArmIsBentLeftAngle(void)
+{
+    Vector upperArm = skeletonLeftUpperArm();
+    Vector forearm  = skeletonLeftForearm();
+
+    return upperArm.isOrthogonal(forearm);
+}

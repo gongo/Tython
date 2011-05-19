@@ -144,6 +144,25 @@ public:
      */
     virtual bool leftArmIsStraight(void);
 
+    /**
+     * 右腕が直角に曲がっているか
+     *
+     * @see skeletonRightForearm()
+     * @see skeletonRightUpperArm()
+     *
+     * @return 右腕が直角に曲がっていれば true
+     */
+    virtual bool rightArmIsBentRightAngle(void);
+
+    /**
+     * 左腕が直角に曲がっているか
+     *
+     * @see skeletonLeftForearm()
+     * @see skeletonLeftUpperArm()
+     *
+     * @return 左腕が直角に曲がっていれば true
+     */
+    virtual bool leftArmIsBentLeftAngle(void);
 protected:
     /**
      * デフォルトコンストラクタ

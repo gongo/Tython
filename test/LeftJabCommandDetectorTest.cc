@@ -33,13 +33,8 @@ protected:
 TEST_F(LeftJabCommandDetectorTest, TestIsPosing) {
     SET_SKELETON_CALL();
 
-    EXPECT_CALL(*mock, skeletonLeftUpperArm())
-        .Times(3).WillRepeatedly(Return(MockVector::v00));
-    EXPECT_CALL(*mock, skeletonLeftForearm())
-        .Times(3)
-        .WillOnce(Return(MockVector::v90))
-        .WillOnce(Return(MockVector::v00))
-        .WillOnce(Return(MockVector::v90));
+    EXPECT_CALL(*mock, leftArmIsBentLeftAngle()).WillRepeatedly(Return(true));
+    EXPECT_CALL(*mock, leftArmIsStraight()).WillRepeatedly(Return(true));
     
     ASSERT_FALSE(object->isPosing());
     ASSERT_FALSE(object->isPosing());
@@ -49,14 +44,9 @@ TEST_F(LeftJabCommandDetectorTest, TestIsPosing) {
 TEST_F(LeftJabCommandDetectorTest, TestIsPosingError) {
     SET_SKELETON_CALL();
 
-    EXPECT_CALL(*mock, skeletonLeftUpperArm())
-        .Times(3).WillRepeatedly(Return(MockVector::v00));
-    EXPECT_CALL(*mock, skeletonLeftForearm())
-        .Times(3)
-        .WillOnce(Return(MockVector::v90))
-        .WillOnce(Return(MockVector::v45))
-        .WillOnce(Return(MockVector::v90));
-    
+    EXPECT_CALL(*mock, leftArmIsBentLeftAngle()).WillRepeatedly(Return(false));
+    EXPECT_CALL(*mock, leftArmIsStraight()).WillRepeatedly(Return(false));
+        
     ASSERT_FALSE(object->isPosing());
     ASSERT_FALSE(object->isPosing());
     ASSERT_FALSE(object->isPosing());

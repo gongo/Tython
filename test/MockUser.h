@@ -6,32 +6,15 @@
 #include <gmock/gmock.h>
 #include "User.h"
 
+using ::testing::Return;
+
 class MockUser : public User {
 public:
-    MockUser(void) : User(NULL) {}
+    MockUser(void) : User(NULL) {
+        ON_CALL(*this, isTracking()).WillByDefault(Return(true));
+        ON_CALL(*this, isCalibrated()).WillByDefault(Return(true));
+    }
     virtual ~MockUser(void) {}
-
-    /**
-     * トラッキングされているか
-     *
-     * スタブのため、常時 true を返す
-     *
-     * @return true
-     */
-    bool isTracking(void) {
-        return true;
-    }
-
-    /**
-     * キャリブレーションされているか
-     *
-     * スタブのため、常時 true を返す
-     *
-     * @return true
-     */
-    bool isCalibrated(void) {
-        return true;
-    }
 
     MOCK_METHOD0(skeletonRightUpperArm, Vector(void));
     MOCK_METHOD0(skeletonRightForearm, Vector(void));
@@ -51,6 +34,10 @@ public:
     MOCK_METHOD0(positionWaist, Vector(void));
     MOCK_METHOD0(rightArmIsStraight, bool(void));
     MOCK_METHOD0(leftArmIsStraight, bool(void));
+    MOCK_METHOD0(rightArmIsBentRightAngle, bool(void));
+    MOCK_METHOD0(leftArmIsBentLeftAngle, bool(void));
+    MOCK_METHOD0(isTracking, bool(void));
+    MOCK_METHOD0(isCalibrated, bool(void));
 };
 
 #endif // _TYTHON_MOCK_USER_H

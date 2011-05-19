@@ -17,12 +17,10 @@ bool LeftJabCommandDetector::isStand(void)
     Vector shoulder = user->positionLeftShoulder();
     Vector elbow    = user->positionLeftElbow();
     Vector hand     = user->positionLeftHand();
-    Vector upperArm = user->skeletonLeftUpperArm();
-    Vector forearm  = user->skeletonLeftForearm();
 
-    return shoulder.Y < hand.Y
-        && hand.Y > elbow.Y
-        && upperArm.isOrthogonal(forearm);
+    return user->leftArmIsBentLeftAngle()
+        && hand.Y > shoulder.Y
+        && hand.Y > elbow.Y;
 }
 
 bool LeftJabCommandDetector::isLeftJab(void)
@@ -30,10 +28,8 @@ bool LeftJabCommandDetector::isLeftJab(void)
     Vector shoulder = user->positionLeftShoulder();
     Vector elbow    = user->positionLeftElbow();
     Vector hand     = user->positionLeftHand();
-    Vector upperArm = user->skeletonLeftUpperArm().reverse();
-    Vector forearm  = user->skeletonLeftForearm();
 
-    return shoulder.Y < hand.Y
-        && hand.Y > elbow.Y
-        && upperArm.isStraight(forearm);
+    return user->leftArmIsStraight()
+        && hand.Y > shoulder.Y
+        && hand.Y > elbow.Y;
 }

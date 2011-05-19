@@ -8,36 +8,37 @@ using ::testing::Return;
 
 class ExampleCommandDetector : public CommandDetector {
 public:
-    ExampleCommandDetector(void) : CommandDetector(NULL) {
-        setCommand(TIMELIMIT, 3,
-                   &ExampleCommandDetector::isProc,
-                   &ExampleCommandDetector::isProc,
-                   &ExampleCommandDetector::isProc);
-    }
+    ExampleCommandDetector(void) : CommandDetector(NULL) { }
 
     void setTimer(Timer *_timer) {
         timer = _timer;
     }
 
-private:
-    bool isProc(void) { return true; }
+    bool successProc(void) {
+        return true;
+    }
+
+    bool failureProc(void) {
+        return false;
+    }
+};
+
+class ExampleSuccessCommandDetector : public ExampleCommandDetector {
+public:
+    ExampleSuccessCommandDetector(void) : ExampleCommandDetector() {
+        setCommand(TIMELIMIT, 3,
+                   &ExampleCommandDetector::successProc,
+                   &ExampleCommandDetector::successProc,
+                   &ExampleCommandDetector::successProc);
+    }
 };
 
 class ExampleFailureCommandDetector : public ExampleCommandDetector {
 public:
     ExampleFailureCommandDetector(void) : ExampleCommandDetector() {
         setCommand(TIMELIMIT, 2,
-                   &ExampleFailureCommandDetector::isProc1,
-                   &ExampleFailureCommandDetector::isProc2);
-    }
-
-private:
-    bool isProc1(void) {
-        return true;
-    }
-
-    bool isProc2(void) {
-        return false;
+                   &ExampleCommandDetector::successProc,
+                   &ExampleCommandDetector::failureProc);
     }
 };
 
@@ -48,13 +49,14 @@ public:
 
 class CommandDetectorTest : public testing::Test {
 public:
-    ExampleCommandDetector *object;
+    ExampleSuccessCommandDetector *object;
     ExampleFailureCommandDetector *object2;
     ExampleNoSetCommandDetector *object3;
+
 protected:
     virtual void SetUp() {
         timer = new MockTimer;
-        object = new ExampleCommandDetector();
+        object = new ExampleSuccessCommandDetector();
         object2 = new ExampleFailureCommandDetector();
         object3 = new ExampleNoSetCommandDetector();
         object->setTimer(timer);
@@ -115,8 +117,5 @@ TEST_F(CommandDetectorTest, TestIsPosingError) {
 }
 
 TEST_F(CommandDetectorTest, TestIsPosingErrorNoSetCommand) {
-    EXPECT_CALL(*timer, current())
-        .Times(1)
-        .WillOnce(Return(0));
     ASSERT_FALSE(object3->isPosing());
 }

@@ -20,19 +20,16 @@ bool RightStraightCommandDetector::isStand(void)
     Vector upperArm = user->skeletonRightUpperArm().reverse();
     Vector forearm  = user->skeletonRightForearm();
 
-    return shoulder.Y < hand.Y
-        && hand.Y > elbow.Y
-        && upperArm.withinAngle(forearm, 90.0f);
+    return upperArm.withinAngle(forearm, 90.0f)
+        && hand.Y > shoulder.Y
+        && hand.Y > elbow.Y;
 }
 
 bool RightStraightCommandDetector::isRightStraight(void)
 {
     Vector shoulder = user->positionRightShoulder();
-    Vector elbow    = user->positionRightElbow();
     Vector hand     = user->positionRightHand();
-    Vector upperArm = user->skeletonRightUpperArm().reverse();
-    Vector forearm  = user->skeletonRightForearm();
 
-    return shoulder.Y < hand.Y
-        && upperArm.isStraight(forearm);
+    return user->rightArmIsStraight()
+        && hand.Y > shoulder.Y;
 }

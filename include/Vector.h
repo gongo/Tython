@@ -34,6 +34,7 @@ public:
     Vector operator-(const Vector& v) const;
     Vector operator*(float f) const;
     Vector operator/(float f) const;
+    bool operator==(const Vector& v) const;
 
     /**
      * ベクトルの大きさ
@@ -81,7 +82,7 @@ public:
     Vector reverse(void) const;
 
     /**
-     * 二つのベクトルが成す角度が、指定した角度かチェックする
+     * 2つのベクトルが成す角度が、指定した角度かチェックする
      *
      * @param    v    角度をチェックするベクトル
      * @param  angle  判定基準とする角度
@@ -90,7 +91,7 @@ public:
     bool betweenAngle(const Vector& v, float angle) const;
 
     /**
-     * 二つのベクトルが指定した角度より鋭角かチェックする
+     * 2つのベクトルが指定した角度より鋭角かチェックする
      *
      * @param    v    角度をチェックするベクトル
      * @param  angle  鋭角と判定基準とする角度
@@ -99,7 +100,7 @@ public:
     bool withinAngle(const Vector& v, float angle) const;
 
     /**
-     * 二つのベクトルが指定した角度より鈍角かチェックする
+     * 2つのベクトルが指定した角度より鈍角かチェックする
      *
      * @see Vector::THRESHOLD_ORTHOGONAL
      *
@@ -110,7 +111,7 @@ public:
     bool withoutAngle(const Vector& v, float angle) const;
 
     /**
-     * 二つのベクトルが直交しているかチェックする
+     * 2つのベクトルが直交しているかチェックする
      *
      * @see Vector::THRESHOLD_ORTHOGONAL
      *
@@ -120,12 +121,13 @@ public:
     bool isOrthogonal(const Vector& v) const;
 
     /**
-     * 二つのベクトルがなす角度が直線かどうかチェックする
+     * 2つのベクトルがなす角度が直線かどうかチェックする
      *
      * ベクトルの向きに注意。
      *
-     * ◯ <- ->
-     * ×  -> ->
+     *         A     B
+     * true    <-   ->
+     * false   ->   ->
      *
      * @see Vector::THRESHOLD_STRAIGHT
      * @see Vector::isParallel()
@@ -136,11 +138,13 @@ public:
     bool isStraight(const Vector& v) const;
 
     /**
-     * 二つのベクトルが平行かどうかチェックする
+     * 2つのベクトルが平行かどうかチェックする
      *
      * isStraight() と違うのは、ベクトルの向きは気にしない
      *
-     * ◯ <- -> or  -> ->
+     *       A   B
+     * true  <-  ->
+     * true  ->  ->
      *
      * @see Vector::THRESHOLD_STRAIGHT
      * @see Vector::isParallel()

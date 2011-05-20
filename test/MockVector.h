@@ -20,6 +20,18 @@ namespace MockVector {
     const Vector v300 = v120*-1;
     const Vector v315 = v135*-1;
     const Vector v330 = v150*-1;
+
+    // [img:https://cacoo.com/diagrams/Bb3xMwCFtoBe92mD-EEFFA.png]
+    const Vector vHEAD           = Vector(0.0f, 5.0f, 0.0f);
+    const Vector vNECK           = Vector(0.0f, 3.0f, 0.0f);
+    const Vector vRIGHT_SHOULDER = Vector(3.0f, 3.0f, 0.0f);
+    const Vector vRIGHT_ELBOW    = Vector(3.0f, 1.0f, 0.0f);
+    const Vector vRIGHT_HAND     = Vector(3.0f, -1.0f, 0.0f);
+    const Vector vLEFT_SHOULDER  = Vector(-3.0f, 3.0f, 0.0f);
+    const Vector vLEFT_ELBOW     = Vector(-3.0f, 1.0f, 0.0f);
+    const Vector vLEFT_HAND      = Vector(-3.0f, -1.0f, 0.0f);
+    const Vector vWAIST          = Vector(0.0f, 0.0f, 0.0f);
+    
 };
 
 #endif // _TYTHON_MOCK_VECTOR_H

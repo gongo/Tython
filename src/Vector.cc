@@ -88,6 +88,11 @@ Vector Vector::operator/(float f) const
     return Vector(X / f, Y / f, Z / f);
 }
 
+bool Vector::operator==(const Vector& v) const
+{
+    return X == v.X && Y == v.Y && Z == v.Z;
+}
+
 float Vector::magnitude(void) const
 {
     return sqrtf(X*X + Y*Y + Z*Z);

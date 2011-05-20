@@ -126,6 +126,15 @@ TEST_F(VectorTest, TestOperatorDiv) {
     ASSERT_EQ(z / f, vec2.Z);
 }
 
+TEST_F(VectorTest, TestOperatorEqual) {
+    Vector vec1(x, y, z);
+    Vector vec2(x, y, z);
+    Vector vec3(x, y + 1, z + 1);
+
+    ASSERT_TRUE(vec1 == vec2);
+    ASSERT_FALSE(vec1 == vec3);
+}
+
 TEST_F(VectorTest, TestMagnitude) {
     Vector vec(x, y, z);
     ASSERT_EQ(sqrtf(x*x + y*y + z*z), vec.magnitude());

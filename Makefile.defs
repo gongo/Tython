@@ -11,8 +11,8 @@ TEST_OBJS    = $(TEST_SRCS:.cc=.o)
 CXXFLAGS  = -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 -g
 CXX       = g++
 
-ARCH    = -arch x86_64 #-arch i386 
-INCLUDE = -I./include -I/usr/include/nite -I/usr/include/ni
-LIBS    = -lm -framework OpenGL -framework GLUT $(ARCH) -lOpenNI -lXnVNite
+ARCH    = -arch x86_64 
+INCLUDE = -I./include -I/usr/include/ni
+LIBS    = -lm -framework OpenGL -framework GLUT $(ARCH) -lOpenNI
 
 TEST_LIBS = -lgmock -lgtest -lpthread

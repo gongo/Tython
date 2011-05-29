@@ -13,7 +13,6 @@ public:
     static const float THRESHOLD_CONFIDENCE;
 
     virtual Vector getSkeletonPosition(XnSkeletonJoint j);
-    virtual Vector getSkeletonVector(XnSkeletonJoint j1, XnSkeletonJoint j2);
 
     void updatePixels(xn::SceneMetaData* data);
     virtual bool isTracking(void);
@@ -34,25 +33,25 @@ public:
     virtual Vector positionNeck(void);
 
     /**
-     * 右肩の座標を取得する
+     * 胴の座標を取得する
      *
-     * @return 右肩の座標(ベクトル)
+     * @return 胴の座標(ベクトル)
      */
-    virtual Vector positionRightShoulder(void);
+    virtual Vector positionTorso(void);
 
     /**
-     * 右手の座標を取得する
+     * 腰の座標を取得する
      *
-     * @return 右手の座標(ベクトル)
+     * @return 腰の座標(ベクトル)
      */
-    virtual Vector positionRightHand(void);
+    virtual Vector positionWaist(void);
 
     /**
-     * 右肘の座標を取得する
+     * 左鎖骨の座標を取得する
      *
-     * @return 右肘の座標(ベクトル)
+     * @return 左鎖骨の座標(ベクトル)
      */
-    virtual Vector positionRightElbow(void);
+    virtual Vector positionLeftCollar(void);
 
     /**
      * 左肩の座標を取得する
@@ -62,13 +61,6 @@ public:
     virtual Vector positionLeftShoulder(void);
 
     /**
-     * 左手の座標を取得する
-     *
-     * @return 左手の座標(ベクトル)
-     */
-    virtual Vector positionLeftHand(void);
-
-    /**
      * 左肘の座標を取得する
      *
      * @return 左肘の座標(ベクトル)
@@ -76,11 +68,123 @@ public:
     virtual Vector positionLeftElbow(void);
 
     /**
-     * 腰の座標を取得する
+     * 左手首の座標を取得する
      *
-     * @return 腰の座標(ベクトル)
+     * @return 左手首の座標(ベクトル)
      */
-    virtual Vector positionWaist(void);
+    virtual Vector positionLeftWrist(void);
+
+    /**
+     * 左手の座標を取得する
+     *
+     * @return 左手の座標(ベクトル)
+     */
+    virtual Vector positionLeftHand(void);
+
+    /**
+     * 左手先の座標を取得する
+     *
+     * @return 左手先の座標(ベクトル)
+     */
+    virtual Vector positionLeftFingertip(void);
+
+    /**
+     * 右鎖骨の座標を取得する
+     *
+     * @return 右鎖骨の座標(ベクトル)
+     */
+    virtual Vector positionRightCollar(void);
+
+    /**
+     * 右肩の座標を取得する
+     *
+     * @return 右肩の座標(ベクトル)
+     */
+    virtual Vector positionRightShoulder(void);
+
+    /**
+     * 右肘の座標を取得する
+     *
+     * @return 右肘の座標(ベクトル)
+     */
+    virtual Vector positionRightElbow(void);
+
+    /**
+     * 右手首の座標を取得する
+     *
+     * @return 右手首の座標(ベクトル)
+     */
+    virtual Vector positionRightWrist(void);
+
+    /**
+     * 右手の座標を取得する
+     *
+     * @return 右手の座標(ベクトル)
+     */
+    virtual Vector positionRightHand(void);
+
+    /**
+     * 右手先の座標を取得する
+     *
+     * @return 右手先の座標(ベクトル)
+     */
+    virtual Vector positionRightFingertip(void);
+
+    /**
+     * 左尻の座標を取得する
+     *
+     * @return 左尻の座標(ベクトル)
+     */
+    virtual Vector positionLeftHip(void);
+
+    /**
+     * 左膝の座標を取得する
+     *
+     * @return 左膝の座標(ベクトル)
+     */
+    virtual Vector positionLeftKnee(void);
+
+    /**
+     * 左足首の座標を取得する
+     *
+     * @return 左足首の座標(ベクトル)
+     */
+    virtual Vector positionLeftAnkle(void);
+
+    /**
+     * 左足の座標を取得する
+     *
+     * @return 左足の座標(ベクトル)
+     */
+    virtual Vector positionLeftFoot(void);
+
+    /**
+     * 右尻の座標を取得する
+     *
+     * @return 右尻の座標(ベクトル)
+     */
+    virtual Vector positionRightHip(void);
+
+    /**
+     * 右膝の座標を取得する
+     *
+     * @return 右膝の座標(ベクトル)
+     */
+    virtual Vector positionRightKnee(void);
+
+    /**
+     * 右足首の座標を取得する
+     *
+     * @return 右足首の座標(ベクトル)
+     */
+    virtual Vector positionRightAnkle(void);
+
+    /**
+     * 右足の座標を取得する
+     *
+     * @return 右足の座標(ベクトル)
+     */
+    virtual Vector positionRightFoot(void);
 
     /**
      * 首から頭へのベクトルを取得する
@@ -123,6 +227,34 @@ public:
      * @return 左前腕のベクトル
      */
     virtual Vector skeletonLeftForearm(void);
+
+    /**
+     * 左上腿(左尻から左膝にかけて)のベクトルを取得する
+     *
+     * @return 左上腿のベクトル
+     */
+    virtual Vector skeletonLeftUpperThigh(void);
+
+    /**
+     * 左下腿(左膝から左足首にかけて)のベクトルを取得する
+     *
+     * @return 左下腿のベクトル
+     */
+    virtual Vector skeletonLeftLowerThigh(void);
+
+    /**
+     * 右上腿(右尻から右膝にかけて)のベクトルを取得する
+     *
+     * @return 右上腿のベクトル
+     */
+    virtual Vector skeletonRightUpperThigh(void);
+
+    /**
+     * 右下腿(右膝から右足首にかけて)のベクトルを取得する
+     *
+     * @return 右下腿のベクトル
+     */
+    virtual Vector skeletonRightLowerThigh(void);
 
     /**
      * 右腕がまっすぐ伸びているかどうか

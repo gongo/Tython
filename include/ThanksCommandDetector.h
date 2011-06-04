@@ -13,9 +13,6 @@ public:
     ThanksCommandDetector(User* _user);
     virtual ~ThanksCommandDetector(void);
 
-protected:
-
-private:
     /**
      * 胴の前で腕を十字にしているかチェックする
      *

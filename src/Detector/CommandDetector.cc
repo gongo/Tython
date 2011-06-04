@@ -15,7 +15,7 @@ CommandDetector::~CommandDetector(void)
     }
 }
 
-void CommandDetector::setCommand(int _timeLimit, int _commandNum, ...)
+void CommandDetector::setCommand(XnUInt64 _timeLimit, int _commandNum, ...)
 {
     va_list ap;
 
@@ -71,9 +71,5 @@ void CommandDetector::nextCommand(void)
 
 bool CommandDetector::withinTimeLimit(void)
 {
-    if (commandIndex == 0) {
-        return true;
-    }
-
-    return (timer->current() - detectionTime) <= timeLimit;
+    return (commandIndex == 0) || ((timer->current() - detectionTime) <= timeLimit);
 }

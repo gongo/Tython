@@ -10,29 +10,26 @@ public:
     RightUpperCommandDetector(User* _user);
     virtual ~RightUpperCommandDetector(void);
 
-protected:
-
-private:
     /**
      * 構え状態かチェックする
      *
      * @return  構え状態であれば true
      */
-    bool isStand(void);
+    bool isStand(void) const;
 
     /**
      * アッパー打つ前の体勢かどうかチェックする
      *
      * @return  構え状態であれば true
      */
-    bool isRightUpperBefore(void);
+    bool isRightUpperBefore(void) const;
 
     /**
      * アッパー打った後の体勢かどうかチェックする
      *
      * @return  構え状態であれば true
      */
-    bool isRightUpperAfter(void);
+    bool isRightUpperAfter(void) const;
 };
 
 #endif // _TYTHON_RIGHT_UPPDER_COMMAND_DETECTOR_H_

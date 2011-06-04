@@ -10,22 +10,19 @@ public:
     LeftJabCommandDetector(User* _user);
     virtual ~LeftJabCommandDetector(void);
 
-protected:
-
-private:
     /**
      * 構え状態かチェックする
      *
      * @return  構え状態であれば true
      */
-    bool isStand(void);
+    bool isStand(void) const;
 
     /**
      * ジャブ構え状態かチェックする
      *
      * @return  ジャブ構え状態であれば true
      */
-    bool isLeftJab(void);
+    bool isLeftJab(void) const;
 };
 
 #endif // _TYTHON_LEFT_JAB_COMMAND_DETECTOR_H_

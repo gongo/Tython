@@ -28,7 +28,7 @@ protected:
      * @param  _commandNum  this->commandNum
      * @param ...
      */
-    void setCommand(int _timeLimit, int _commandNum, ...);
+    void setCommand(XnUInt64 _timeLimit, int _commandNum, ...);
 
     /**
      * コマンドとなるポーズを検出するメソッドの typename
@@ -60,12 +60,12 @@ private:
     /**
      * 最初のポーズ検出後からの経過時間
      */
-    int elapsedTime;
+    XnUInt64 elapsedTime;
 
     /**
      * 一番最後にポーズ検出したときの時間
      */
-    int detectionTime;
+    XnUInt64 detectionTime;
 
     /**
      * ポーズを検出するメソッドのリスト
@@ -87,7 +87,7 @@ private:
     /**
      * 制限時間
      */
-    int timeLimit;
+    XnUInt64 timeLimit;
 };
 
 #endif // _TYTHON_COMMAND_DETECTOR_H_

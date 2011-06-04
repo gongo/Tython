@@ -12,7 +12,7 @@ LeftJabCommandDetector::~LeftJabCommandDetector(void)
 {
 }
 
-bool LeftJabCommandDetector::isStand(void)
+bool LeftJabCommandDetector::isStand(void) const
 {
     Vector shoulder = user->positionLeftShoulder();
     Vector elbow    = user->positionLeftElbow();
@@ -23,7 +23,7 @@ bool LeftJabCommandDetector::isStand(void)
         && hand.Y > elbow.Y;
 }
 
-bool LeftJabCommandDetector::isLeftJab(void)
+bool LeftJabCommandDetector::isLeftJab(void) const
 {
     Vector shoulder = user->positionLeftShoulder();
     Vector elbow    = user->positionLeftElbow();

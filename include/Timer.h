@@ -3,7 +3,7 @@
 #ifndef _TYTHON_TIMER_H_
 #define _TYTHON_TIMER_H_
 
-#include <sys/time.h>
+#include <ni/XnOS.h>
 
 class Timer {
 public:
@@ -14,38 +14,38 @@ public:
      */
     static Timer* instance(void);
 
-    virtual int current(void);
-
     /**
-     * インスタンス生成時の time
+     * プログラム起動から現在までの経過秒数を返す
+     *
+     * @return プログラム起動から現在までの経過秒数
      */
-    timeval start;
-
-    /**
-     * 
-     */
-    timeval currentTime;
+    virtual XnUInt64 current(void);
 
 protected:
     /**
      * コンストラクタ
      *
-     * Singleton だが MockTimer のため、protected で定義
+     * Singleton だが、MockTimer のため protected で定義
      */
     Timer(void);
 
     /**
-     * コンストラクタ
+     * コピーコンストラクタ
      *
-     * Singleton だが MockTimer のため、protected で定義
+     * Singleton だが、 MockTimer のため protected で定義
      */
     Timer(const Timer& obj) {}
 
 private:
     /**
-     * Time クラスインスタンス
+     * Timer インスタンス
      */
     static Timer* _instance;
+
+    /**
+     * XnOSTimer
+     */
+    XnOSTimer tick;
 };
 
 #endif // _TYTHON_TIMER_H_

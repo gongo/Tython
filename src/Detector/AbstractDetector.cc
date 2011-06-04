@@ -11,9 +11,5 @@ AbstractDetector::~AbstractDetector(void)
 
 bool AbstractDetector::detect()
 {
-    if (!user->isCalibrated()) {
-        return false;
-    }
-
-    return isPosing();
+    return user->isCalibrated() && isPosing();
 }

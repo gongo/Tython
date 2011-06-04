@@ -30,32 +30,30 @@ protected:
             .WillRepeatedly(Return(Vector(0.0f, 3.0f, 0.0f)));  \
     } while (0)
 
-TEST_F(RightStraightCommandDetectorTest, TestIsPosing) {
+TEST_F(RightStraightCommandDetectorTest, TestIsStand) {
     SET_SKELETON_CALL();
+    EXPECT_CALL(*mock, skeletonRightUpperArm()).WillRepeatedly(Return(MockVector::v00));
+    EXPECT_CALL(*mock, skeletonRightForearm()).WillRepeatedly(Return(MockVector::v120));
 
-    EXPECT_CALL(*mock, rightArmIsStraight())
-        .WillRepeatedly(Return(true));
-    EXPECT_CALL(*mock, skeletonRightUpperArm())
-        .WillRepeatedly(Return(MockVector::v00));
-    EXPECT_CALL(*mock, skeletonRightForearm())
-        .WillRepeatedly(Return(MockVector::v120));
-
-    ASSERT_FALSE(object->isPosing());
-    ASSERT_FALSE(object->isPosing());
-    ASSERT_TRUE(object->isPosing());
+    ASSERT_TRUE(object->isStand());
 }
 
-TEST_F(RightStraightCommandDetectorTest, TestIsPosingError) {
+TEST_F(RightStraightCommandDetectorTest, TestIsStandError) {
     SET_SKELETON_CALL();
+    EXPECT_CALL(*mock, skeletonRightUpperArm()).WillOnce(Return(MockVector::v00));
+    EXPECT_CALL(*mock, skeletonRightForearm()).WillOnce(Return(MockVector::v60));
 
-    EXPECT_CALL(*mock, rightArmIsStraight())
-        .WillRepeatedly(Return(false));
-    EXPECT_CALL(*mock, skeletonRightUpperArm())
-        .WillRepeatedly(Return(MockVector::v00));
-    EXPECT_CALL(*mock, skeletonRightForearm())
-        .WillRepeatedly(Return(MockVector::v120));
-    
-    ASSERT_FALSE(object->isPosing());
-    ASSERT_FALSE(object->isPosing());
-    ASSERT_FALSE(object->isPosing());
+    ASSERT_FALSE(object->isStand());
+}
+
+TEST_F(RightStraightCommandDetectorTest, TestIsRightStraight) {
+    SET_SKELETON_CALL();
+    EXPECT_CALL(*mock, rightArmIsStraight()).WillOnce(Return(true));
+    ASSERT_TRUE(object->isRightStraight());
+}
+
+TEST_F(RightStraightCommandDetectorTest, TestIsRightStraightError) {
+    SET_SKELETON_CALL();
+    EXPECT_CALL(*mock, rightArmIsStraight()).WillOnce(Return(false));
+    ASSERT_FALSE(object->isRightStraight());
 }

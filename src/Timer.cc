@@ -4,7 +4,7 @@ Timer* Timer::_instance = new Timer;
 
 Timer::Timer(void)
 {
-    gettimeofday(&start, NULL);
+    xnOSStartTimer(&tick);
 }
 
 Timer* Timer::instance(void)
@@ -12,9 +12,10 @@ Timer* Timer::instance(void)
     return _instance;
 }
 
-int Timer::current(void)
+XnUInt64 Timer::current(void)
 {
-    gettimeofday(&currentTime, NULL);
+    XnUInt64 now;
+    xnOSQueryTimer(tick, &now);
 
-    return (int)(currentTime.tv_sec - start.tv_sec);
+    return now / 1000000;
 }

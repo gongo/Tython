@@ -7,6 +7,7 @@ using ::testing::DefaultValue;
 void setMockDefaultValue(void)
 {
     DefaultValue<Vector>::Set(Vector(0.0f, 0.0f, 0.0f));
+    DefaultValue<XnUInt64>::Set(0);
 }
 
 int main(int argc, char **argv) {

@@ -10,15 +10,12 @@ public:
     LeftHookCommandDetector(User* _user);
     virtual ~LeftHookCommandDetector(void);
 
-protected:
-
-private:
     /**
      * 構え状態かチェックする
      *
      * @return  構え状態であれば true
      */
-    bool isStand(void);
+    bool isStand(void) const;
 
     /**
      * フックを撃つ前の体勢かどうかチェックする
@@ -27,7 +24,7 @@ private:
      *
      * @return  構え状態であれば true
      */
-    bool isLeftHookBefore(void);
+    bool isLeftHookBefore(void) const;
 
     /**
      * フックを撃った後の体勢かどうかチェックする
@@ -36,7 +33,7 @@ private:
      *
      * @return  構え状態であれば true
      */
-    bool isLeftHookAfter(void);
+    bool isLeftHookAfter(void) const;
 };
 
 #endif // _TYTHON_LEFT_HOOK_COMMAND_DETECTOR_H_

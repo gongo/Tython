@@ -30,24 +30,26 @@ protected:
             .WillRepeatedly(Return(Vector(0.0f, 3.0f, 0.0f)));  \
     } while (0)
 
-TEST_F(LeftJabCommandDetectorTest, TestIsPosing) {
+TEST_F(LeftJabCommandDetectorTest, TestIsStand) {
     SET_SKELETON_CALL();
-
-    EXPECT_CALL(*mock, leftArmIsBentLeftAngle()).WillRepeatedly(Return(true));
-    EXPECT_CALL(*mock, leftArmIsStraight()).WillRepeatedly(Return(true));
-    
-    ASSERT_FALSE(object->isPosing());
-    ASSERT_FALSE(object->isPosing());
-    ASSERT_TRUE(object->isPosing());
+    EXPECT_CALL(*mock, leftArmIsBentLeftAngle()).WillOnce(Return(true));    
+    ASSERT_TRUE(object->isStand());
 }
 
-TEST_F(LeftJabCommandDetectorTest, TestIsPosingError) {
+TEST_F(LeftJabCommandDetectorTest, TestIsStandError) {
     SET_SKELETON_CALL();
+    EXPECT_CALL(*mock, leftArmIsBentLeftAngle()).WillOnce(Return(false));
+    ASSERT_FALSE(object->isStand());
+}
 
-    EXPECT_CALL(*mock, leftArmIsBentLeftAngle()).WillRepeatedly(Return(false));
-    EXPECT_CALL(*mock, leftArmIsStraight()).WillRepeatedly(Return(false));
-        
-    ASSERT_FALSE(object->isPosing());
-    ASSERT_FALSE(object->isPosing());
-    ASSERT_FALSE(object->isPosing());
+TEST_F(LeftJabCommandDetectorTest, TestIsLeftJab) {
+    SET_SKELETON_CALL();
+    EXPECT_CALL(*mock, leftArmIsStraight()).WillOnce(Return(true));
+    ASSERT_TRUE(object->isLeftJab());
+}
+
+TEST_F(LeftJabCommandDetectorTest, TestIsLeftJabError) {
+    SET_SKELETON_CALL();
+    EXPECT_CALL(*mock, leftArmIsStraight()).WillOnce(Return(false));
+    ASSERT_FALSE(object->isLeftJab());
 }

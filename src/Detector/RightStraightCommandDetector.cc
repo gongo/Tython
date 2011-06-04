@@ -12,7 +12,7 @@ RightStraightCommandDetector::~RightStraightCommandDetector(void)
 {
 }
 
-bool RightStraightCommandDetector::isStand(void)
+bool RightStraightCommandDetector::isStand(void) const
 {
     Vector shoulder = user->positionRightShoulder();
     Vector elbow    = user->positionRightElbow();
@@ -25,7 +25,7 @@ bool RightStraightCommandDetector::isStand(void)
         && hand.Y > elbow.Y;
 }
 
-bool RightStraightCommandDetector::isRightStraight(void)
+bool RightStraightCommandDetector::isRightStraight(void) const
 {
     Vector shoulder = user->positionRightShoulder();
     Vector hand     = user->positionRightHand();

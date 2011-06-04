@@ -8,10 +8,12 @@
 
 class MockTimer : public Timer {
 public:
-    MockTimer(void) {}
+    MockTimer(void) {
+        ON_CALL(*this, current()).WillByDefault(::testing::Return(0));
+    }
     virtual ~MockTimer(void) {}
 
-    MOCK_METHOD0(current, int(void));
+    MOCK_METHOD0(current, XnUInt64(void));
 };
 
 #endif // _TYTHON_MOCK_TIMER_H

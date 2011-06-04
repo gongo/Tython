@@ -13,20 +13,18 @@ LeftHookCommandDetector::~LeftHookCommandDetector(void)
 {
 }
 
-bool LeftHookCommandDetector::isStand(void)
+bool LeftHookCommandDetector::isStand(void) const
 {
     Vector shoulder = user->positionLeftShoulder();
     Vector elbow    = user->positionLeftElbow();
     Vector hand     = user->positionLeftHand();
-    Vector upperArm = user->skeletonLeftUpperArm();
-    Vector forearm  = user->skeletonLeftForearm();
 
-    return shoulder.Y < hand.Y
-        && hand.Y > elbow.Y
-        && upperArm.isOrthogonal(forearm);
+    return user->leftArmIsBentLeftAngle()
+        && hand.Y > shoulder.Y
+        && hand.Y > elbow.Y;
 }
 
-bool LeftHookCommandDetector::isLeftHookBefore(void)
+bool LeftHookCommandDetector::isLeftHookBefore(void) const
 {
     Vector shoulder = user->positionLeftShoulder();
     Vector elbow    = user->positionLeftElbow();
@@ -34,22 +32,20 @@ bool LeftHookCommandDetector::isLeftHookBefore(void)
     Vector upperArm = user->skeletonLeftUpperArm().reverse();
     Vector forearm  = user->skeletonLeftForearm();
 
-    return shoulder.X > hand.X
-        && shoulder.X > elbow.X
-        && upperArm.isOrthogonal(forearm);
+    return user->leftArmIsBentLeftAngle()
+        && shoulder.X > hand.X
+        && shoulder.X > elbow.X;
 }
 
-bool LeftHookCommandDetector::isLeftHookAfter(void)
+bool LeftHookCommandDetector::isLeftHookAfter(void) const
 {
     Vector shoulder = user->positionLeftShoulder();
     Vector elbow    = user->positionLeftElbow();
     Vector hand     = user->positionLeftHand();
     Vector neck     = user->positionNeck();
-    Vector upperArm = user->skeletonLeftUpperArm();
-    Vector forearm  = user->skeletonLeftForearm();
 
-    return shoulder.X < elbow.X
+    return user->leftArmIsBentLeftAngle()
+        && shoulder.X < elbow.X
         && elbow.X < hand.X
-        && neck.X < hand.X
-        && upperArm.isOrthogonal(forearm);
+        && neck.X < hand.X;
 }

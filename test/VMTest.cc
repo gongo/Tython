@@ -43,6 +43,13 @@ TEST_F(VMTest, TestRun) {
     object->run(insns);
     ASSERT_STREQ("Hi", testing::internal::GetCapturedStdout().c_str());
 
+    // 1010100(T) 1101000(h) 1100001(a) 1101110(n)
+    // 1101011(k) 1110011(s)  100001(!)  100001(!)
+    insns = compiler->compile("aaaa@@@@agaaaa@@@@agaaaaaa@@aagaaaaa@a@aagaaaaa@aaa@gaaaaa@@@@agaaaaa@a@@@gaaaa@a@a@@g@ aa@ aa@ aa@ aa@ aa@ aa@ aa@ aa");
+    testing::internal::CaptureStdout();
+    object->run(insns);
+    ASSERT_STREQ("Thanks!!", testing::internal::GetCapturedStdout().c_str());
+
     // 1001000(H) 1100101(e) 1101100(l) 1101100(l) 1101111(o) 101100(,) 100000( )
     // 1010111(W) 1101111(o) 1110010(r) 1101100(l) 1100100(d) 100001(!)
     insns = compiler->compile("aaaa@@@@agaaaaa@@a@@gaaaaa@aa@@gaaaaaa@@a@gaaaaa@aaaagaaaa@a@aaagaaaa@@@@@gaaaa@aa@@gaaaaa@aaaagaaaaa@aa@@gaaaaa@aa@@gaaaaa@@a@agaaaa@@a@@@g@ aa@ aa@ aa@ aa@ aa@ aa@ aa@ aa@ aa@ aa@ aa@ aa@ aa");

@@ -4,6 +4,7 @@
 #include "AbstractRenderer.h"
 #include "util.h"
 #include "Instruction.h"
+#include "UserFactory.h"
 #include <vector>
 
 AbstractRenderer *renderer;
@@ -12,8 +13,8 @@ Controller::Controller(void)
 {
     initXN();
 
-    ctxUser  = new UserContext(&ctxGlobal);
-    user = new User(ctxUser);
+    UserFactory::setContext(&ctxGlobal);
+    user     = UserFactory::get(1);
     renderer = new AbstractRenderer(&ctxGlobal, user);
     im       = new DefaultInputMethod(user);
     compiler = Compiler::instance();
@@ -39,7 +40,21 @@ void Controller::main(void)
     for (IMmap::iterator it = inputList.begin(); it != inputList.end(); ++it) {
         if (it->second->detect()) {
             source += it->first;
-            printf("%s\n", it->first.c_str());
+            //printf("%s\n", it->first.c_str());
+            switch ((int)(*it->first.c_str())) {
+            case 97:
+                printf("左ジャブ\n");
+                break;
+            case 64:
+                printf("右ストレート\n");
+                break;
+            case 32:
+                printf("左フック\n");
+                break;
+            case 103:
+                printf("右アッパー\n");
+                break;
+            }
         }
     }
 

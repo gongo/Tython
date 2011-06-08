@@ -3,13 +3,17 @@
 
 const float User::THRESHOLD_CONFIDENCE = 0.5;
 
-User::User(UserContext *_context) : context(_context)
+User::User(UserContext *_context) : context(_context), userId(1)
 {
-    userId = 1;
 }
 
-User::~User(void)
+User::User(UserContext *_context, int id) : context(_context), userId(id)
 {
+}
+
+int User::id(void)
+{
+    return userId;
 }
 
 void User::updatePixels(xn::SceneMetaData* data)

@@ -6,9 +6,25 @@
 #include "UserContext.h"
 
 class User {
-public: 
+public:
+    /**
+     * コンストラクタ
+     *
+     * ユーザID が 1 の User を生成
+     */
     User(UserContext *_context);
-    ~User(void);
+
+    /**
+     * コンストラクタ
+     *
+     * ユーザID が id の User を生成
+     */
+    User(UserContext *_context, int id);
+
+    /**
+     * デストラクタ
+     */
+    ~User(void) {}
 
     static const float THRESHOLD_CONFIDENCE;
 
@@ -17,6 +33,15 @@ public:
     void updatePixels(xn::SceneMetaData* data);
     virtual bool isTracking(void);
     virtual bool isCalibrated(void);
+
+    /**
+     * ユーザの ID を返す
+     *
+     * @see userId
+     * 
+     * @return ユーザ ID
+     */
+    int id(void);
 
     /**
      * 頭の座標を取得する
@@ -313,14 +338,14 @@ private:
     bool isConfident(XnSkeletonJointPosition p) const;
     
     /**
-     * 
-     */
-    int userId;
-
-    /**
      *
      */
     UserContext* context;
+
+    /**
+     * ユーザ ID
+     */
+    const int userId;
 
     /**
      * @see XnSkeletonJoint

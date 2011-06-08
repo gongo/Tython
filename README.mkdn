@@ -6,6 +6,8 @@ Tython is programming language, interface and exercise.
 Article
 =========
 
+[肉体言語 Tython - 質のないDiary H](http://d.hatena.ne.jp/gongoZ/20110514/1305372647)
+
 ### Demo
 [Youtube - 肉体言語 Tython 「Hello, World!」](http://www.youtube.com/watch?v=4iSzg9bOtCY)
 
@@ -27,8 +29,6 @@ Requirements
 2. Sensor - OpenNI Compliant Hardware 
    * source [https://github.com/PrimeSense/Sensor](https://github.com/PrimeSense/Sensor)
    * binary [http://www.openni.org/downloadfiles/30-openni-compliant-hardware-binaries](http://www.openni.org/downloadfiles/30-openni-compliant-hardware-binaries)
-3. NITE - OpenNI Compliant Middleware 
-   * binary [http://www.openni.org/downloadfiles/12-openni-compliant-middleware-binaries](http://www.openni.org/downloadfiles/12-openni-compliant-middleware-binaries)
 
 ### Optional (To test)
 

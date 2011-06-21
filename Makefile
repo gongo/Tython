@@ -25,7 +25,7 @@ $(TEST_TARGET): $(OBJS) $(TEST_OBJS)
 	$(CXX) $(LIBS) $(TEST_LIBS) $(OBJS) $(TEST_OBJS) -o $@
 
 test: $(TEST_TARGET) force
-	./$(TEST_TARGET) –gtest_output=xml
+	./$(TEST_TARGET) --gtest_output=xml
 
 clean:
 	$(RM) $(RM_GC)

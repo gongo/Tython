@@ -25,7 +25,7 @@ $(TEST_TARGET): $(OBJS) $(TEST_OBJS)
 	$(CXX) $(LIBS) $(TEST_LIBS) $(OBJS) $(TEST_OBJS) -o $@
 
 test: $(TEST_TARGET) force
-	./$(TEST_TARGET)
+	./$(TEST_TARGET) –gtest_output=xml
 
 clean:
 	$(RM) $(RM_GC)
@@ -34,6 +34,7 @@ clean:
 	$(RM) $(DEPEND)
 	$(RM) $(TAGSFILE)
 	$(RM) $(OBJS_GCOV)
+	$(RM) test_detail.xml
 	cd $(SRCS_DIR)      && $(RM) $(RM_GC)
 	cd $(TEST_SRCS_DIR) && $(RM) $(RM_GC)
 

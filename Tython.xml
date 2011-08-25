@@ -18,6 +18,6 @@
 				<Mirror on="true"/>
 			</Configuration>
 		</Node>
-		<Node type="User" />
+		<Node type="User" name="User1" />
 	</ProductionNodes>
 </OpenNI>

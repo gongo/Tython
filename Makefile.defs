@@ -12,7 +12,7 @@ CXXFLAGS  = -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 -g
 CXX       = g++
 
 ARCH    = -arch x86_64 
-INCLUDE = -I./include -I/usr/include/ni
-LIBS    = -lm -framework OpenGL -framework GLUT $(ARCH) -lOpenNI
+INCLUDE = -I./include -I$(HOME)/.kinect/usr/include/ni
+LIBS    = -lm -framework OpenGL -framework GLUT $(ARCH) -L$(HOME)/.kinect/usr/lib -lOpenNI
 
 TEST_LIBS = -lgmock -lgtest -lpthread

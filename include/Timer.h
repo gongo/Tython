@@ -3,7 +3,7 @@
 #ifndef _TYTHON_TIMER_H_
 #define _TYTHON_TIMER_H_
 
-#include <ni/XnOS.h>
+#include <XnOS.h>
 
 class Timer {
 public:

@@ -27,23 +27,25 @@ void Controller::main(void)
     IMmap inputList = im->input();
     IMquit quitList = im->quit();
 
-    for (IMmap::iterator it = inputList.begin(); it != inputList.end(); ++it) {
-        if (it->second->detect()) {
-            eventRef = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)(it->first), true);
-            CGEventPost(kCGSessionEventTap, eventRef);
+    while(true) {
+        for (IMmap::iterator it = inputList.begin(); it != inputList.end(); ++it) {
+            if (it->second->detect()) {
+                eventRef = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)(it->first), true);
+                CGEventPost(kCGSessionEventTap, eventRef);
+            }
         }
-    }
 
-    for (IMquit::iterator it = quitList.begin(); it != quitList.end(); ++it) {
-        if ((*it)->detect()) {
-            eventRef = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)53, true);
-            CGEventPost(kCGSessionEventTap, eventRef);
-            CFRelease(eventRef); 
-            exit(0);
+        for (IMquit::iterator it = quitList.begin(); it != quitList.end(); ++it) {
+            if ((*it)->detect()) {
+                eventRef = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)53, true);
+                CGEventPost(kCGSessionEventTap, eventRef);
+                CFRelease(eventRef); 
+                return;
+            }
         }
-    }
 
-    ctxGlobal.WaitAndUpdateAll();
+        ctxGlobal.WaitAndUpdateAll();
+    }
 }
 
 void Controller::initXN(void)

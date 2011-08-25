@@ -6,8 +6,6 @@
 #include <XnCppWrapper.h>
 #include <string>
 #include "User.h"
-#include "Compiler.h"
-#include "VM.h"
 #include "AbstractInputMethod.h"
 
 using std::string;
@@ -42,21 +40,6 @@ private:
      *
      */
     xn::DepthGenerator ctxDepth;
-
-    /**
-     * source code
-     */
-    string source;
-
-    /**
-     *
-     */
-    Compiler *compiler;
-
-    /**
-     * VM
-     */
-    VM* vm;
 
     /**
      * InputMethod 

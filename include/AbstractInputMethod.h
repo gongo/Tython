@@ -5,14 +5,12 @@
 
 #include <map>
 #include <vector>
-#include <string>
 #include "AbstractDetector.h"
 
 using std::map;
 using std::vector;
-using std::string;
 
-typedef map<string, AbstractDetector*> IMmap;
+typedef map<int, AbstractDetector*> IMmap;
 typedef vector<AbstractDetector*> IMquit;
 
 class AbstractInputMethod {

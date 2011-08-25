@@ -1,9 +1,6 @@
 #include "DefaultInputMethod.h"
 #include "RightStraightCommandDetector.h"
-#include "RightUpperCommandDetector.h"
 #include "LeftJabCommandDetector.h"
-#include "LeftHookCommandDetector.h"
-#include "ThanksCommandDetector.h"
 #include "OwataPoseDetector.h"
 
 DefaultInputMethod::DefaultInputMethod(void)
@@ -12,10 +9,8 @@ DefaultInputMethod::DefaultInputMethod(void)
 
 DefaultInputMethod::DefaultInputMethod(User* _user)
 {
-    inputList.insert(std::make_pair("a", new LeftJabCommandDetector(_user)));
-    inputList.insert(std::make_pair("@", new RightStraightCommandDetector(_user)));
-    inputList.insert(std::make_pair("g", new RightUpperCommandDetector(_user)));
-    inputList.insert(std::make_pair(" ", new LeftHookCommandDetector(_user)));
+    inputList.insert(std::make_pair(123, new LeftJabCommandDetector(_user)));
+    inputList.insert(std::make_pair(124, new RightStraightCommandDetector(_user)));
 
     quitList.push_back(new OwataPoseDetector(_user));
 }

@@ -25,22 +25,18 @@ void Controller::main(void)
 {
     CGEventRef eventRef; 
     IMmap inputList = im->input();
-    IMquit quitList = im->quit();
+    int keymask = 0x7f;
+    int keycode = 0;
+    int keyflag = 0;
 
     while(true) {
         for (IMmap::iterator it = inputList.begin(); it != inputList.end(); ++it) {
             if (it->second->detect()) {
-                eventRef = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)(it->first), true);
+                keycode = (it->first) & keymask;
+                keyflag = (it->first) & ~keymask;
+                eventRef = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)keycode, true);
+                CGEventSetFlags(eventRef, keyflag);
                 CGEventPost(kCGSessionEventTap, eventRef);
-            }
-        }
-
-        for (IMquit::iterator it = quitList.begin(); it != quitList.end(); ++it) {
-            if ((*it)->detect()) {
-                eventRef = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)53, true);
-                CGEventPost(kCGSessionEventTap, eventRef);
-                CFRelease(eventRef); 
-                return;
             }
         }
 

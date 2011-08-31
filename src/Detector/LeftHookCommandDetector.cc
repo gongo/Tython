@@ -42,8 +42,7 @@ bool LeftHookCommandDetector::isLeftHookAfter(void) const
     Vector hand     = user->positionLeftHand();
     Vector neck     = user->positionNeck();
 
-    return user->leftArmIsBentLeftAngle()
-        && shoulder.X < elbow.X
+    return shoulder.X < elbow.X
         && elbow.X < hand.X
         && neck.X < hand.X;
 }

@@ -1,3 +1,4 @@
+# Source Path
 SRCS_DIR  = src
 SRCS      = $(wildcard $(SRCS_DIR)/**/*.cc) $(wildcard $(SRCS_DIR)/*.cc)
 OBJS_ALL  = $(SRCS:.cc=.o)
@@ -8,11 +9,15 @@ TEST_SRCS_DIR = test
 TEST_SRCS    = $(wildcard $(TEST_SRCS_DIR)/*.cc)
 TEST_OBJS    = $(TEST_SRCS:.cc=.o)
 
+# OpenNI Path
+OPENNI_INCLUDE_PATH = $(HOME)/.kinect/usr/include/ni
+OPENNI_LIBRARY_PATH = $(HOME)/.kinect/usr/lib
+
+# Compile Option
 CXXFLAGS  = -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 -g
 CXX       = g++
-
-ARCH    = -arch x86_64 
-INCLUDE = -I./include -I/usr/include/ni
-LIBS    = -lm -framework OpenGL -framework GLUT $(ARCH) -lOpenNI
+ARCH      = 
+INCLUDE   = -I./include -I$(OPENNI_INCLUDE_PATH)
+LIBS      = -lm -framework OpenGL -framework GLUT -L$(OPENNI_LIBRARY_PATH) -lOpenNI
 
 TEST_LIBS = -lgmock -lgtest -lpthread

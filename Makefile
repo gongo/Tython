@@ -2,7 +2,6 @@ include ./Makefile.defs
 
 TARGET      = Tython
 TEST_TARGET = TestTython
-DEPEND      = Makefile.dep
 
 RM    = rm -rf
 RM_GC = *~ \#*
@@ -15,14 +14,18 @@ OBJS_GCOV = $(OBJS:.o=.gcno) $(TEST_OBJS:.o=.gcno) lcov.info
 
 .SUFFIXES: .cc .o 
 
-.cc.o:
-	$(CXX) $(CXXFLAGS) $(ARCH) $(INCLUDE) -c $< -o $@ 
+%.o : %.cc
+$(TEST_SRCS_DIR)/%.o : test/%.cc
+	$(CXX) $(TEST_CXXFLAGS) -c $< -o $@ 
+%.o : %.cc
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 
 $(TARGET): $(OBJS_ALL)
 	$(CXX) $(LIBS) $(OBJS_ALL) -o $@
 
 $(TEST_TARGET): $(OBJS) $(TEST_OBJS)
-	$(CXX) $(LIBS) $(TEST_LIBS) $(OBJS) $(TEST_OBJS) -o $@
+	$(CXX) $(TEST_LIBS) $(OBJS) $(TEST_OBJS) -o $@
 
 test: $(TEST_TARGET) force
 	./$(TEST_TARGET) --gtest_output=xml
@@ -38,8 +41,6 @@ clean:
 	cd $(SRCS_DIR)      && $(RM) $(RM_GC)
 	cd $(TEST_SRCS_DIR) && $(RM) $(RM_GC)
 
-depend:
-	$(CXX) $(CXXFLAGS) $(INCLUDE) $(SRCS) -E -MM > $(DEPEND)
 
 tags:
 	@$(TAGS) $(TAGSOPTION)
@@ -47,6 +48,3 @@ tags:
 force:
 
 all: $(TARGET)
-
--include $(DEPEND)
-

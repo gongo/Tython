@@ -29,6 +29,8 @@ Requirements
 2. Sensor - OpenNI Compliant Hardware 
    * source [https://github.com/PrimeSense/Sensor](https://github.com/PrimeSense/Sensor)
    * binary [http://www.openni.org/downloadfiles/30-openni-compliant-hardware-binaries](http://www.openni.org/downloadfiles/30-openni-compliant-hardware-binaries)
+3. NITE - OpenNI Compliant Middleware 
+   * binary [http://www.openni.org/downloadfiles/12-openni-compliant-middleware-binaries](http://www.openni.org/downloadfiles/12-openni-compliant-middleware-binaries)
 
 ### Optional (To test)
 

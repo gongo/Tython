@@ -35,7 +35,7 @@ public:
     MOCK_METHOD0(rightArmIsStraight, bool(void));
     MOCK_METHOD0(leftArmIsStraight, bool(void));
     MOCK_METHOD0(rightArmIsBentRightAngle, bool(void));
-    MOCK_METHOD0(leftArmIsBentLeftAngle, bool(void));
+    MOCK_METHOD0(leftArmIsBentRightAngle, bool(void));
     MOCK_METHOD0(isTracking, bool(void));
     MOCK_METHOD0(isCalibrated, bool(void));
 };

@@ -319,7 +319,7 @@ public:
      *
      * @return 左腕が直角に曲がっていれば true
      */
-    virtual bool leftArmIsBentLeftAngle(void);
+    virtual bool leftArmIsBentRightAngle(void);
 protected:
     /**
      * デフォルトコンストラクタ

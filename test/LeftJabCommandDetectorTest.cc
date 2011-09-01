@@ -32,13 +32,13 @@ protected:
 
 TEST_F(LeftJabCommandDetectorTest, TestIsStand) {
     SET_SKELETON_CALL();
-    EXPECT_CALL(*mock, leftArmIsBentLeftAngle()).WillOnce(Return(true));    
+    EXPECT_CALL(*mock, leftArmIsBentRightAngle()).WillOnce(Return(true));    
     ASSERT_TRUE(object->isStand());
 }
 
 TEST_F(LeftJabCommandDetectorTest, TestIsStandError) {
     SET_SKELETON_CALL();
-    EXPECT_CALL(*mock, leftArmIsBentLeftAngle()).WillOnce(Return(false));
+    EXPECT_CALL(*mock, leftArmIsBentRightAngle()).WillOnce(Return(false));
     ASSERT_FALSE(object->isStand());
 }
 

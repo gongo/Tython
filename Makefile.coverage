@@ -1,7 +1,8 @@
 include Makefile
 
-CXXFLAGS += -fprofile-arcs -ftest-coverage
-LIBS     += -lgcov
+CXX      = g++-4.2
+CXXFLAGS += -fprofile-arcs -ftest-coverage -g -arch x86_64
+LIBS     += -lgcov -fprofile-arcs -ftest-coverage
 
 GCOV_OBJS = $(OBJS:.o=.gcno) $(TEST_OBJS:.o=.gcno) $(OBJS:.o=.gcda) $(TEST_OBJS:.o=.gcda)
 LCOV_INFO = lcov.info
@@ -19,4 +20,4 @@ coverage: test
 	genhtml -o $(LCOV_DIR) $(LCOV_INFO)
 
 coverage-clean: clean
-	$(RM) $(GCOV_OBJS) $(LCOV_INFO) $(LCOV_DIR)
+	$(RM) -r $(GCOV_OBJS) $(LCOV_INFO) $(LCOV_DIR)

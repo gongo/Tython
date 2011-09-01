@@ -19,7 +19,7 @@ CXX       = g++
 TEST_CXXFLAGS = $(shell gmock-config --cppflags --cxxflags) $(CXXFLAGS)
 TEST_LIBS     = -L$(shell gtest-config --libdir) \
 		-lgtest -L$(shell gmock-config --libdir) -lgmock \
-		-lm -L$(OPENNI_LIBRARY_PATH) -lOpenNI
+		-lm -L$(OPENNI_LIBRARY_PATH) -lOpenNI $(LIBS)
 
 # Other Command
 AR         = ar

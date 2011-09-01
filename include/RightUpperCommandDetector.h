@@ -5,6 +5,8 @@
 
 #include "CommandDetector.h"
 
+namespace ty {
+
 class RightUpperCommandDetector : public CommandDetector {
 public:
     RightUpperCommandDetector(User* _user);
@@ -31,5 +33,7 @@ public:
      */
     bool isRightUpperAfter(void) const;
 };
+
+} // namespace ty
 
 #endif // _TYTHON_RIGHT_UPPDER_COMMAND_DETECTOR_H_

@@ -1,5 +1,7 @@
 #include "ThanksCommandDetector.h"
 
+namespace ty {
+
 ThanksCommandDetector::ThanksCommandDetector(User* _user) : CommandDetector(_user)
 {
     setCommand(1, 2,
@@ -42,3 +44,5 @@ bool ThanksCommandDetector::isBottomArm(void)
         && rightHand.Y < waist.Y
         && leftHand.Y < waist.Y;
 }
+
+} // namespace ty

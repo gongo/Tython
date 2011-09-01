@@ -6,6 +6,8 @@
 #include "AbstractDetector.h"
 #include "Vector.h"
 
+namespace ty {
+
 class LocusDetector : public AbstractDetector {
 public:
     LocusDetector(User* _user);
@@ -53,5 +55,7 @@ protected:
 
 private:
 };
+
+} // namespace ty
 
 #endif // _TYTHON_LOCUS_DETECTOR_H_

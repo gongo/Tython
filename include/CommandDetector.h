@@ -5,6 +5,8 @@
 
 #include "AbstractDetector.h"
 
+namespace ty {
+
 class CommandDetector : public AbstractDetector {
 public:
     CommandDetector(User* _user);
@@ -89,5 +91,7 @@ private:
      */
     XnUInt64 timeLimit;
 };
+
+} // namespace
 
 #endif // _TYTHON_COMMAND_DETECTOR_H_

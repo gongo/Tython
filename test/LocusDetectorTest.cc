@@ -5,10 +5,10 @@ class LocusDetectorTest : public testing::Test {
 protected:
     void SetUp(void)
     {
-        object = new LocusDetector(NULL);
+        object = new ty::LocusDetector(NULL);
     }
 
-    LocusDetector* object;
+    ty::LocusDetector* object;
 };
 
 // TEST_F(LocusDetectorTest, TestIsTraceCondition) {

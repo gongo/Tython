@@ -4,18 +4,18 @@
 
 using ::testing::Return;
 
-class SuccessAbstractDetector : public AbstractDetector {
+class SuccessAbstractDetector : public ty::AbstractDetector {
 public:
-    SuccessAbstractDetector(User* _user) : AbstractDetector(_user) {}
+    SuccessAbstractDetector(ty::User* _user) : AbstractDetector(_user) {}
 
     bool isPosing(void) {
         return true;
     }
 };
 
-class FailureAbstractDetector : public AbstractDetector {
+class FailureAbstractDetector : public ty::AbstractDetector {
 public:
-    FailureAbstractDetector(User* _user) : AbstractDetector(_user) {}
+    FailureAbstractDetector(ty::User* _user) : AbstractDetector(_user) {}
 
     bool isPosing(void) {
         return false;

@@ -9,7 +9,7 @@ class ThanksCommandDetectorTest : public testing::Test {
 public:
     virtual void SetUp() {
         mock = new MockUser;
-        object = new ThanksCommandDetector(mock);
+        object = new ty::ThanksCommandDetector(mock);
     }    
 
     virtual void TearDown() {
@@ -17,21 +17,21 @@ public:
         delete mock;
     }
 protected:
-    ThanksCommandDetector* object;
+    ty::ThanksCommandDetector* object;
     MockUser* mock;
 };
 
 TEST_F(ThanksCommandDetectorTest, TestIsPosing) {
     EXPECT_CALL(*mock, positionNeck())
-        .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));
+        .WillRepeatedly(Return(ty::Vector(0.0f, 1.0f, 0.0f)));
     EXPECT_CALL(*mock, positionWaist())
-        .WillRepeatedly(Return(Vector(0.0f, -1.0f, 0.0f)));
+        .WillRepeatedly(Return(ty::Vector(0.0f, -1.0f, 0.0f)));
     EXPECT_CALL(*mock, positionRightHand())
-        .WillOnce(Return(Vector(-1.0f, 0.5f, 0.0f)))
-        .WillOnce(Return(Vector(1.0f, -1.5f, 0.0f)));
+        .WillOnce(Return(ty::Vector(-1.0f, 0.5f, 0.0f)))
+        .WillOnce(Return(ty::Vector(1.0f, -1.5f, 0.0f)));
     EXPECT_CALL(*mock, positionLeftHand())
-        .WillOnce(Return(Vector(1.0f, 0.5f, 0.0f)))
-        .WillOnce(Return(Vector(-1.0f, -1.5f, 0.0f)));
+        .WillOnce(Return(ty::Vector(1.0f, 0.5f, 0.0f)))
+        .WillOnce(Return(ty::Vector(-1.0f, -1.5f, 0.0f)));
 
     EXPECT_CALL(*mock, skeletonRightUpperArm())
         .WillOnce(Return(MockVector::v225));

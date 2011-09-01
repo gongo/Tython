@@ -5,6 +5,8 @@
 
 #include "CommandDetector.h"
 
+namespace ty {
+
 class LeftHookCommandDetector : public CommandDetector {
 public:
     LeftHookCommandDetector(User* _user);
@@ -35,5 +37,7 @@ public:
      */
     bool isLeftHookAfter(void) const;
 };
+
+} // namespace ty
 
 #endif // _TYTHON_LEFT_HOOK_COMMAND_DETECTOR_H_

@@ -5,6 +5,8 @@
 
 #include "CommandDetector.h"
 
+namespace ty {
+
 /**
  * 十字礼を検知する CommandDetector
  */
@@ -27,5 +29,7 @@ public:
      */
     bool isBottomArm(void);
 };
+
+} // namespace ty
 
 #endif // _TYTHON_LEFT_THANKS_DETECTOR_H_

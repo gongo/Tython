@@ -9,7 +9,7 @@ class LeftJabCommandDetectorTest : public testing::Test {
 public:
     virtual void SetUp() {
         mock = new MockUser;
-        object = new LeftJabCommandDetector(mock);
+        object = new ty::LeftJabCommandDetector(mock);
     }    
 
     virtual void TearDown() {
@@ -17,17 +17,17 @@ public:
         delete mock;
     }
 protected:
-    LeftJabCommandDetector* object;
+    ty::LeftJabCommandDetector* object;
     MockUser* mock;
 };
 
-#define SET_SKELETON_CALL() do {                                \
-        EXPECT_CALL(*mock, positionLeftShoulder())              \
-            .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));  \
-        EXPECT_CALL(*mock, positionLeftElbow())                 \
-            .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));  \
-        EXPECT_CALL(*mock, positionLeftHand())                  \
-            .WillRepeatedly(Return(Vector(0.0f, 3.0f, 0.0f)));  \
+#define SET_SKELETON_CALL() do {                                        \
+        EXPECT_CALL(*mock, positionLeftShoulder())                      \
+            .WillRepeatedly(Return(ty::Vector(0.0f, 1.0f, 0.0f)));      \
+        EXPECT_CALL(*mock, positionLeftElbow())                         \
+            .WillRepeatedly(Return(ty::Vector(0.0f, 1.0f, 0.0f)));      \
+        EXPECT_CALL(*mock, positionLeftHand())                          \
+            .WillRepeatedly(Return(ty::Vector(0.0f, 3.0f, 0.0f)));      \
     } while (0)
 
 TEST_F(LeftJabCommandDetectorTest, TestIsStand) {

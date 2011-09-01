@@ -3,10 +3,10 @@
 
 class TimerTest : public testing::Test {
 public:
-    Timer *object;
+    ty::Timer *object;
 protected:
     virtual void SetUp() {
-        object = Timer::instance();
+        object = ty::Timer::instance();
     }
 };
 
@@ -14,8 +14,8 @@ protected:
  * シングルトンが機能しているか
  */
 TEST_F(TimerTest, TestGetInstance) {
-    Timer *object2 = Timer::instance();
-
+    ty::Timer *object2 = ty::Timer::instance();
+    
     ASSERT_TRUE(NULL != object);
     ASSERT_TRUE(object == object2);
 }

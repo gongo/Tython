@@ -5,6 +5,8 @@
 
 #include "UserContext.h"
 
+namespace ty {
+
 class User {
 public:
     /**
@@ -28,7 +30,7 @@ public:
 
     static const float THRESHOLD_CONFIDENCE;
 
-    virtual Vector getSkeletonPosition(XnSkeletonJoint j);
+    virtual ty::Vector getSkeletonPosition(XnSkeletonJoint j);
 
     void updatePixels(xn::SceneMetaData* data);
     virtual bool isTracking(void);
@@ -48,238 +50,238 @@ public:
      *
      * @return 頭の座標(ベクトル)
      */
-    virtual Vector positionHead(void);
+    virtual ty::Vector positionHead(void);
 
     /**
      * 首の座標を取得する
      *
      * @return 首の座標(ベクトル)
      */
-    virtual Vector positionNeck(void);
+    virtual ty::Vector positionNeck(void);
 
     /**
      * 胴の座標を取得する
      *
      * @return 胴の座標(ベクトル)
      */
-    virtual Vector positionTorso(void);
+    virtual ty::Vector positionTorso(void);
 
     /**
      * 腰の座標を取得する
      *
      * @return 腰の座標(ベクトル)
      */
-    virtual Vector positionWaist(void);
+    virtual ty::Vector positionWaist(void);
 
     /**
      * 左鎖骨の座標を取得する
      *
      * @return 左鎖骨の座標(ベクトル)
      */
-    virtual Vector positionLeftCollar(void);
+    virtual ty::Vector positionLeftCollar(void);
 
     /**
      * 左肩の座標を取得する
      *
      * @return 左肩の座標(ベクトル)
      */
-    virtual Vector positionLeftShoulder(void);
+    virtual ty::Vector positionLeftShoulder(void);
 
     /**
      * 左肘の座標を取得する
      *
      * @return 左肘の座標(ベクトル)
      */
-    virtual Vector positionLeftElbow(void);
+    virtual ty::Vector positionLeftElbow(void);
 
     /**
      * 左手首の座標を取得する
      *
      * @return 左手首の座標(ベクトル)
      */
-    virtual Vector positionLeftWrist(void);
+    virtual ty::Vector positionLeftWrist(void);
 
     /**
      * 左手の座標を取得する
      *
      * @return 左手の座標(ベクトル)
      */
-    virtual Vector positionLeftHand(void);
+    virtual ty::Vector positionLeftHand(void);
 
     /**
      * 左手先の座標を取得する
      *
      * @return 左手先の座標(ベクトル)
      */
-    virtual Vector positionLeftFingertip(void);
+    virtual ty::Vector positionLeftFingertip(void);
 
     /**
      * 右鎖骨の座標を取得する
      *
      * @return 右鎖骨の座標(ベクトル)
      */
-    virtual Vector positionRightCollar(void);
+    virtual ty::Vector positionRightCollar(void);
 
     /**
      * 右肩の座標を取得する
      *
      * @return 右肩の座標(ベクトル)
      */
-    virtual Vector positionRightShoulder(void);
+    virtual ty::Vector positionRightShoulder(void);
 
     /**
      * 右肘の座標を取得する
      *
      * @return 右肘の座標(ベクトル)
      */
-    virtual Vector positionRightElbow(void);
+    virtual ty::Vector positionRightElbow(void);
 
     /**
      * 右手首の座標を取得する
      *
      * @return 右手首の座標(ベクトル)
      */
-    virtual Vector positionRightWrist(void);
+    virtual ty::Vector positionRightWrist(void);
 
     /**
      * 右手の座標を取得する
      *
      * @return 右手の座標(ベクトル)
      */
-    virtual Vector positionRightHand(void);
+    virtual ty::Vector positionRightHand(void);
 
     /**
      * 右手先の座標を取得する
      *
      * @return 右手先の座標(ベクトル)
      */
-    virtual Vector positionRightFingertip(void);
+    virtual ty::Vector positionRightFingertip(void);
 
     /**
      * 左尻の座標を取得する
      *
      * @return 左尻の座標(ベクトル)
      */
-    virtual Vector positionLeftHip(void);
+    virtual ty::Vector positionLeftHip(void);
 
     /**
      * 左膝の座標を取得する
      *
      * @return 左膝の座標(ベクトル)
      */
-    virtual Vector positionLeftKnee(void);
+    virtual ty::Vector positionLeftKnee(void);
 
     /**
      * 左足首の座標を取得する
      *
      * @return 左足首の座標(ベクトル)
      */
-    virtual Vector positionLeftAnkle(void);
+    virtual ty::Vector positionLeftAnkle(void);
 
     /**
      * 左足の座標を取得する
      *
      * @return 左足の座標(ベクトル)
      */
-    virtual Vector positionLeftFoot(void);
+    virtual ty::Vector positionLeftFoot(void);
 
     /**
      * 右尻の座標を取得する
      *
      * @return 右尻の座標(ベクトル)
      */
-    virtual Vector positionRightHip(void);
+    virtual ty::Vector positionRightHip(void);
 
     /**
      * 右膝の座標を取得する
      *
      * @return 右膝の座標(ベクトル)
      */
-    virtual Vector positionRightKnee(void);
+    virtual ty::Vector positionRightKnee(void);
 
     /**
      * 右足首の座標を取得する
      *
      * @return 右足首の座標(ベクトル)
      */
-    virtual Vector positionRightAnkle(void);
+    virtual ty::Vector positionRightAnkle(void);
 
     /**
      * 右足の座標を取得する
      *
      * @return 右足の座標(ベクトル)
      */
-    virtual Vector positionRightFoot(void);
+    virtual ty::Vector positionRightFoot(void);
 
     /**
      * 首から頭へのベクトルを取得する
      *
      * @return 首から頭へのベクトル
      */
-    virtual Vector skeletonHead(void);
+    virtual ty::Vector skeletonHead(void);
 
     /**
      * 正中線(頭から腰にかけて)のベクトルを取得する
      *
      * @return 正中線のベクトル
      */
-    virtual Vector skeletonMedianLine(void);
+    virtual ty::Vector skeletonMedianLine(void);
 
     /**
      * 右上腕(右肩から右肘にかけて)のベクトルを取得する
      *
      * @return 右上腕のベクトル
      */
-    virtual Vector skeletonRightUpperArm(void);
+    virtual ty::Vector skeletonRightUpperArm(void);
 
     /**
      * 右前腕(右肘から右手にかけて)のベクトルを取得する
      *
      * @return 右前腕のベクトル
      */
-    virtual Vector skeletonRightForearm(void);
+    virtual ty::Vector skeletonRightForearm(void);
 
     /**
      * 左上腕(左肩から左肘にかけて)のベクトルを取得する
      *
      * @return 左上腕のベクトル
      */
-    virtual Vector skeletonLeftUpperArm(void);
+    virtual ty::Vector skeletonLeftUpperArm(void);
 
     /**
      * 左前腕(左肘から左手にかけて)のベクトルを取得する
      *
      * @return 左前腕のベクトル
      */
-    virtual Vector skeletonLeftForearm(void);
+    virtual ty::Vector skeletonLeftForearm(void);
 
     /**
      * 左上腿(左尻から左膝にかけて)のベクトルを取得する
      *
      * @return 左上腿のベクトル
      */
-    virtual Vector skeletonLeftUpperThigh(void);
+    virtual ty::Vector skeletonLeftUpperThigh(void);
 
     /**
      * 左下腿(左膝から左足首にかけて)のベクトルを取得する
      *
      * @return 左下腿のベクトル
      */
-    virtual Vector skeletonLeftLowerThigh(void);
+    virtual ty::Vector skeletonLeftLowerThigh(void);
 
     /**
      * 右上腿(右尻から右膝にかけて)のベクトルを取得する
      *
      * @return 右上腿のベクトル
      */
-    virtual Vector skeletonRightUpperThigh(void);
+    virtual ty::Vector skeletonRightUpperThigh(void);
 
     /**
      * 右下腿(右膝から右足首にかけて)のベクトルを取得する
      *
      * @return 右下腿のベクトル
      */
-    virtual Vector skeletonRightLowerThigh(void);
+    virtual ty::Vector skeletonRightLowerThigh(void);
 
     /**
      * 右腕がまっすぐ伸びているかどうか
@@ -361,5 +363,7 @@ private:
     XnCallbackHandle handleCalibrationCallbacks;
     XnCallbackHandle handlePoseCallbacks;
 };
+
+} // namespace ty
 
 #endif // _TYTHON_USER_H

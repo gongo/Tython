@@ -5,6 +5,8 @@
 
 #include "PoseDetector.h"
 
+namespace ty {
+
 class OwataPoseDetector : public PoseDetector {
 public:
     OwataPoseDetector(User* _user) : PoseDetector(_user) {}
@@ -23,5 +25,7 @@ public:
      */
     bool isPosing(void);
 };
+
+} // namespace ty
 
 #endif // _TYTHON_OWATA_POSE_DETECTOR_H_

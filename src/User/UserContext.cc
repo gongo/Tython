@@ -1,6 +1,8 @@
 #include "UserContext.h"
 #include "util.h"
 
+namespace ty {
+
 static void XN_CALLBACK_TYPE s_onNewUser(xn::UserGenerator& generator, XnUserID uid, void* t)
 {
     static_cast<UserContext*>(t)->onNewUser(uid);
@@ -98,3 +100,5 @@ void UserContext::onPoseStart(XnUserID uid)
     userGenerator->GetPoseDetectionCap().StopPoseDetection(uid);
     userGenerator->GetSkeletonCap().RequestCalibration(uid, true);
 }
+
+} // namespace ty

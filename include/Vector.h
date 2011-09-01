@@ -5,6 +5,8 @@
 
 #include <XnOpenNI.h>
 
+namespace ty {
+
 class Vector : public XnVector3D {
 public:
     Vector(void);
@@ -154,5 +156,7 @@ public:
      */
     bool isParallel(const Vector& v) const;
 };
+
+} // namespace ty
 
 #endif // _TYTHON_VECTOR_H_

@@ -6,6 +6,8 @@
 #include "User.h"
 #include "Timer.h"
 
+namespace ty {
+
 class AbstractDetector {
 public:
     AbstractDetector(User* _user);
@@ -23,5 +25,7 @@ protected:
     Timer* timer;
 private:
 };
+
+} // namespace ty
 
 #endif // _TYTHON_ABSTRACT_DETECTOR_H_

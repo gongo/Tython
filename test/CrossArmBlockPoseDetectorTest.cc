@@ -8,7 +8,7 @@ class CrossArmBlockPoseDetectorTest : public testing::Test {
 public:
     virtual void SetUp() {
         mock = new MockUser;
-        object = new CrossArmBlockPoseDetector(mock);
+        object = new ty::CrossArmBlockPoseDetector(mock);
     }    
 
     virtual void TearDown() {
@@ -16,13 +16,15 @@ public:
         delete mock;
     }
 protected:
-    CrossArmBlockPoseDetector* object;
+    ty::CrossArmBlockPoseDetector* object;
     MockUser* mock;
 };
 
 TEST_F(CrossArmBlockPoseDetectorTest, TestIsPosing) {
-    EXPECT_CALL(*mock, skeletonRightForearm()).WillOnce(Return(Vector(0, 100, 0)));
-    EXPECT_CALL(*mock, skeletonLeftForearm()).WillOnce(Return(Vector(100, 0, 0)));
+    EXPECT_CALL(*mock, skeletonRightForearm())
+        .WillOnce(Return(ty::Vector(0, 100, 0)));
+    EXPECT_CALL(*mock, skeletonLeftForearm())
+        .WillOnce(Return(ty::Vector(100, 0, 0)));
     
     ASSERT_TRUE(object->isPosing());
 }

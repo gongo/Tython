@@ -1,5 +1,7 @@
 #include "OwataPoseDetector.h"
 
+namespace ty {
+
 bool OwataPoseDetector::isPosing(void)
 {
     Vector rightUpperArm = user->skeletonRightUpperArm();
@@ -16,3 +18,5 @@ bool OwataPoseDetector::isPosing(void)
         && head.Y < rightHand.Y
         && head.Y < leftHand.Y;
 }
+
+} // namespace ty

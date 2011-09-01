@@ -9,7 +9,7 @@ class RightStraightCommandDetectorTest : public testing::Test {
 public:
     virtual void SetUp() {
         mock = new MockUser;
-        object = new RightStraightCommandDetector(mock);
+        object = new ty::RightStraightCommandDetector(mock);
     }    
 
     virtual void TearDown() {
@@ -17,17 +17,17 @@ public:
         delete mock;
     }
 protected:
-    RightStraightCommandDetector* object;
+    ty::RightStraightCommandDetector* object;
     MockUser* mock;
 };
 
-#define SET_SKELETON_CALL() do {                                \
-        EXPECT_CALL(*mock, positionRightShoulder())             \
-            .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));  \
-        EXPECT_CALL(*mock, positionRightElbow())                \
-            .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));  \
-        EXPECT_CALL(*mock, positionRightHand())                 \
-            .WillRepeatedly(Return(Vector(0.0f, 3.0f, 0.0f)));  \
+#define SET_SKELETON_CALL() do {                                    \
+        EXPECT_CALL(*mock, positionRightShoulder())                 \
+            .WillRepeatedly(Return(ty::Vector(0.0f, 1.0f, 0.0f)));  \
+        EXPECT_CALL(*mock, positionRightElbow())                    \
+            .WillRepeatedly(Return(ty::Vector(0.0f, 1.0f, 0.0f)));  \
+        EXPECT_CALL(*mock, positionRightHand())                     \
+            .WillRepeatedly(Return(ty::Vector(0.0f, 3.0f, 0.0f)));  \
     } while (0)
 
 TEST_F(RightStraightCommandDetectorTest, TestIsStand) {

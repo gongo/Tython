@@ -2,6 +2,8 @@
 #include "CommandDetector.h"
 #include "Timer.h"
 
+namespace ty {
+
 CommandDetector::CommandDetector(User* _user) : AbstractDetector(_user)
 {
     commandList   = NULL;
@@ -73,3 +75,5 @@ bool CommandDetector::withinTimeLimit(void)
 {
     return (commandIndex == 0) || ((timer->current() - detectionTime) <= timeLimit);
 }
+
+} // namespace ty

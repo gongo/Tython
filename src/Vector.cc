@@ -1,6 +1,8 @@
 #include <math.h>
 #include "Vector.h"
 
+namespace ty {
+
 static float deg2rad(float degree)
 {
     return degree * M_PI / 180.0f;
@@ -155,3 +157,5 @@ bool Vector::isParallel(const Vector& v) const
 {
     return isStraight(v) || withinAngle(v, THRESHOLD_TOLERANCE);
 }
+
+} // namespace ty

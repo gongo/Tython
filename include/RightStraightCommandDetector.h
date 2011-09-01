@@ -5,6 +5,8 @@
 
 #include "CommandDetector.h"
 
+namespace ty {
+
 class RightStraightCommandDetector : public CommandDetector {
 public:
     RightStraightCommandDetector(User* _user);
@@ -24,5 +26,7 @@ public:
      */
     bool isRightStraight(void) const;
 };
+
+} //namespace
 
 #endif // _TYTHON_RIGHT_STRAIGHT_COMMAND_DETECTOR_H_

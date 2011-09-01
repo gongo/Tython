@@ -1,5 +1,7 @@
 #include "LocusDetector.h"
 
+namespace ty {
+
 LocusDetector::LocusDetector(User* _user)
     : AbstractDetector(_user), timeLimit(0.0f), moveThreshold(0.0f)
 {
@@ -19,3 +21,5 @@ bool LocusDetector::isTraceCondition (const Vector& v_st,
 {
     return v_st.distance(v_ed) > moveThreshold;
 }
+
+} // namespace ty

@@ -5,6 +5,8 @@
 
 #include "CommandDetector.h"
 
+namespace ty {
+
 class LeftJabCommandDetector : public CommandDetector {
 public:
     LeftJabCommandDetector(User* _user);
@@ -24,5 +26,7 @@ public:
      */
     bool isLeftJab(void) const;
 };
+
+} // namespace ty
 
 #endif // _TYTHON_LEFT_JAB_COMMAND_DETECTOR_H_

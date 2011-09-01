@@ -6,7 +6,7 @@
 #include <gmock/gmock.h>
 #include "Timer.h"
 
-class MockTimer : public Timer {
+class MockTimer : public ty::Timer {
 public:
     MockTimer(void) {
         ON_CALL(*this, current()).WillByDefault(::testing::Return(0));

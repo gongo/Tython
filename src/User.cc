@@ -1,6 +1,9 @@
 #include "User.h"
 #include "util.h"
 
+
+namespace ty {
+
 const float User::THRESHOLD_CONFIDENCE = 0.5;
 
 User::User(UserContext *_context) : context(_context), userId(1)
@@ -249,3 +252,5 @@ inline bool User::leftArmIsBentRightAngle(void)
 
     return upperArm.isOrthogonal(forearm);
 }
+
+} // namespace ty

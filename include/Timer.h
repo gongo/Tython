@@ -5,6 +5,8 @@
 
 #include <XnOS.h>
 
+namespace ty {
+
 class Timer {
 public:
     /**
@@ -47,5 +49,7 @@ private:
      */
     XnOSTimer tick;
 };
+
+} // namespace ty
 
 #endif // _TYTHON_TIMER_H_

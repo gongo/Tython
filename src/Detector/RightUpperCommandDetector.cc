@@ -1,5 +1,7 @@
 #include "RightUpperCommandDetector.h"
 
+namespace ty {
+
 RightUpperCommandDetector::RightUpperCommandDetector(User* _user) : CommandDetector(_user)
 {
     setCommand(1, 4,
@@ -49,3 +51,5 @@ bool RightUpperCommandDetector::isRightUpperAfter(void) const
         && neck.X < hand.X
         && neck.X < elbow.X;
 }
+
+} // namespace ty

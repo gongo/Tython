@@ -1,5 +1,7 @@
 #include "LeftJabCommandDetector.h"
 
+namespace ty {
+
 LeftJabCommandDetector::LeftJabCommandDetector(User* _user) : CommandDetector(_user)
 {
     setCommand(1, 3,
@@ -33,3 +35,5 @@ bool LeftJabCommandDetector::isLeftJab(void) const
         && hand.Y > shoulder.Y
         && hand.Y > elbow.Y;
 }
+
+} // namespace ty

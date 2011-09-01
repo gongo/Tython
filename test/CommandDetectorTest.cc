@@ -1,4 +1,3 @@
-
 #include <gtest/gtest.h>
 #include "CommandDetector.h"
 #include "MockTimer.h"
@@ -6,11 +5,11 @@ using ::testing::Return;
 
 #define TIMELIMIT 2
 
-class ExampleCommandDetector : public CommandDetector {
+class ExampleCommandDetector : public ty::CommandDetector {
 public:
     ExampleCommandDetector(void) : CommandDetector(NULL) { }
 
-    void setTimer(Timer *_timer) {
+    void setTimer(ty::Timer *_timer) {
         timer = _timer;
     }
 

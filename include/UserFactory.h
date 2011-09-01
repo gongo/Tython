@@ -6,6 +6,8 @@
 #include "UserContext.h"
 #include "User.h"
 
+namespace ty {
+
 class UserFactory {
 public: 
     /**
@@ -54,5 +56,7 @@ private:
      */
     static User** list;
 };
+
+} // namespace ty
 
 #endif // _TYTHON_USER_FACTORY_H

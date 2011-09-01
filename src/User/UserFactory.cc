@@ -1,5 +1,7 @@
 #include "UserFactory.h"
 
+namespace ty {
+
 const int UserFactory::MAX = 8;
 UserContext* UserFactory::context = NULL;
 User** UserFactory::list = NULL;
@@ -18,3 +20,5 @@ User* UserFactory::get(int userId)
 {
     return list[userId - 1];
 }
+
+} // namespace ty

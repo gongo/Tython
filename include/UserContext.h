@@ -6,6 +6,8 @@
 #include <XnCppWrapper.h>
 #include "Vector.h"
 
+namespace ty {
+
 class UserContext {
 public: 
     UserContext(xn::Context *ctx);
@@ -47,5 +49,7 @@ private:
     XnCallbackHandle handleCalibrationCallbacks;
     XnCallbackHandle handlePoseCallbacks;
 };
+
+} // namespace ty
 
 #endif // _TYTHON_USER_CONTEXT_H

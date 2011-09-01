@@ -1,5 +1,7 @@
 #include "RightStraightCommandDetector.h"
 
+namespace ty {
+
 RightStraightCommandDetector::RightStraightCommandDetector(User* _user) : CommandDetector(_user)
 {
     setCommand(1, 3,
@@ -33,3 +35,5 @@ bool RightStraightCommandDetector::isRightStraight(void) const
     return user->rightArmIsStraight()
         && hand.Y > shoulder.Y;
 }
+
+} // namespace ty

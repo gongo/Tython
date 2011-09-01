@@ -8,7 +8,7 @@
 
 using ::testing::Return;
 
-class MockUser : public User {
+class MockUser : public ty::User {
 public:
     MockUser(void) : User(NULL) {
         ON_CALL(*this, isTracking()).WillByDefault(Return(true));
@@ -16,22 +16,22 @@ public:
     }
     virtual ~MockUser(void) {}
 
-    MOCK_METHOD0(skeletonRightUpperArm, Vector(void));
-    MOCK_METHOD0(skeletonRightForearm, Vector(void));
-    MOCK_METHOD0(skeletonRightHand, Vector(void));
-    MOCK_METHOD0(skeletonLeftUpperArm, Vector(void));
-    MOCK_METHOD0(skeletonLeftForearm, Vector(void));
-    MOCK_METHOD0(skeletonLeftHand, Vector(void));
-    MOCK_METHOD0(skeletonHead, Vector(void));
-    MOCK_METHOD0(positionHead, Vector(void));
-    MOCK_METHOD0(positionNeck, Vector(void));
-    MOCK_METHOD0(positionRightShoulder, Vector(void));
-    MOCK_METHOD0(positionRightElbow, Vector(void));
-    MOCK_METHOD0(positionRightHand, Vector(void));
-    MOCK_METHOD0(positionLeftShoulder, Vector(void));
-    MOCK_METHOD0(positionLeftElbow, Vector(void));
-    MOCK_METHOD0(positionLeftHand, Vector(void));
-    MOCK_METHOD0(positionWaist, Vector(void));
+    MOCK_METHOD0(skeletonRightUpperArm, ty::Vector(void));
+    MOCK_METHOD0(skeletonRightForearm, ty::Vector(void));
+    MOCK_METHOD0(skeletonRightHand, ty::Vector(void));
+    MOCK_METHOD0(skeletonLeftUpperArm, ty::Vector(void));
+    MOCK_METHOD0(skeletonLeftForearm, ty::Vector(void));
+    MOCK_METHOD0(skeletonLeftHand, ty::Vector(void));
+    MOCK_METHOD0(skeletonHead, ty::Vector(void));
+    MOCK_METHOD0(positionHead, ty::Vector(void));
+    MOCK_METHOD0(positionNeck, ty::Vector(void));
+    MOCK_METHOD0(positionRightShoulder, ty::Vector(void));
+    MOCK_METHOD0(positionRightElbow, ty::Vector(void));
+    MOCK_METHOD0(positionRightHand, ty::Vector(void));
+    MOCK_METHOD0(positionLeftShoulder, ty::Vector(void));
+    MOCK_METHOD0(positionLeftElbow, ty::Vector(void));
+    MOCK_METHOD0(positionLeftHand, ty::Vector(void));
+    MOCK_METHOD0(positionWaist, ty::Vector(void));
     MOCK_METHOD0(rightArmIsStraight, bool(void));
     MOCK_METHOD0(leftArmIsStraight, bool(void));
     MOCK_METHOD0(rightArmIsBentRightAngle, bool(void));

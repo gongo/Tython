@@ -1,5 +1,7 @@
 #include "LeftHookCommandDetector.h"
 
+namespace ty {
+
 LeftHookCommandDetector::LeftHookCommandDetector(User* _user) : CommandDetector(_user)
 {
     setCommand(1, 4,
@@ -46,3 +48,5 @@ bool LeftHookCommandDetector::isLeftHookAfter(void) const
         && elbow.X < hand.X
         && neck.X < hand.X;
 }
+
+} // namespace ty

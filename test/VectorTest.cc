@@ -14,7 +14,7 @@ public:
 };
 
 TEST_F(VectorTest, TestConstructor) {
-    Vector vec;
+    ty::Vector vec;
 
     ASSERT_EQ(0.0f, vec.X);
     ASSERT_EQ(0.0f, vec.Y);
@@ -23,7 +23,7 @@ TEST_F(VectorTest, TestConstructor) {
 
 TEST_F(VectorTest, TestConstructorWithXnVector3D) {
     XnVector3D v  = {x, y, z};
-    Vector vec(v);
+    ty::Vector vec(v);
 
     ASSERT_EQ(v.X, vec.X);
     ASSERT_EQ(v.Y, vec.Y);
@@ -31,7 +31,7 @@ TEST_F(VectorTest, TestConstructorWithXnVector3D) {
 }
 
 TEST_F(VectorTest, TestConstructorWithFloat) {
-    Vector vec(x, y, z);
+    ty::Vector vec(x, y, z);
 
     ASSERT_EQ(x, vec.X);
     ASSERT_EQ(y, vec.Y);
@@ -39,8 +39,8 @@ TEST_F(VectorTest, TestConstructorWithFloat) {
 }
 
 TEST_F(VectorTest, TestAssignOperatorPlus) {
-    Vector vec1(x, y, z);
-    Vector vec2(x, y, z);
+    ty::Vector vec1(x, y, z);
+    ty::Vector vec2(x, y, z);
 
     vec1 += vec2;
     
@@ -50,8 +50,8 @@ TEST_F(VectorTest, TestAssignOperatorPlus) {
 }
 
 TEST_F(VectorTest, TestAssignOperatorMinus) {
-    Vector vec1(x, y, z);
-    Vector vec2(x, y, z);
+    ty::Vector vec1(x, y, z);
+    ty::Vector vec2(x, y, z);
 
     vec1 -= vec2;
     
@@ -61,7 +61,7 @@ TEST_F(VectorTest, TestAssignOperatorMinus) {
 }
 
 TEST_F(VectorTest, TestAssignOperatorMulti) {
-    Vector vec(x, y, z);
+    ty::Vector vec(x, y, z);
     float f = 3.0f;
 
     vec *= f;
@@ -72,7 +72,7 @@ TEST_F(VectorTest, TestAssignOperatorMulti) {
 }
 
 TEST_F(VectorTest, TestAssignOperatorDiv) {
-    Vector vec(x, y, z);
+    ty::Vector vec(x, y, z);
     float f = 3.0f;
 
     vec /= f;
@@ -83,10 +83,10 @@ TEST_F(VectorTest, TestAssignOperatorDiv) {
 }
 
 TEST_F(VectorTest, TestOperatorPlus) {
-    Vector vec1(x, y, z);
-    Vector vec2(x, y, z);
+    ty::Vector vec1(x, y, z);
+    ty::Vector vec2(x, y, z);
 
-    Vector vec3 = vec1 + vec2;
+    ty::Vector vec3 = vec1 + vec2;
     
     ASSERT_EQ(x + x, vec3.X);
     ASSERT_EQ(y + y, vec3.Y);
@@ -94,10 +94,10 @@ TEST_F(VectorTest, TestOperatorPlus) {
 }
 
 TEST_F(VectorTest, TestOperatorMinus) {
-    Vector vec1(x, y, z);
-    Vector vec2(x, y, z);
+    ty::Vector vec1(x, y, z);
+    ty::Vector vec2(x, y, z);
 
-    Vector vec3 = vec1 - vec2;
+    ty::Vector vec3 = vec1 - vec2;
     
     ASSERT_EQ(x - x, vec3.X);
     ASSERT_EQ(y - y, vec3.Y);
@@ -105,10 +105,10 @@ TEST_F(VectorTest, TestOperatorMinus) {
 }
 
 TEST_F(VectorTest, TestOperatorMulti) {
-    Vector vec1(x, y, z);
+    ty::Vector vec1(x, y, z);
     float f = 3.0f;
 
-    Vector vec2 = vec1 * f;
+    ty::Vector vec2 = vec1 * f;
     
     ASSERT_EQ(x * f, vec2.X);
     ASSERT_EQ(y * f, vec2.Y);
@@ -116,10 +116,10 @@ TEST_F(VectorTest, TestOperatorMulti) {
 }
 
 TEST_F(VectorTest, TestOperatorDiv) {
-    Vector vec1(x, y, z);
+    ty::Vector vec1(x, y, z);
     float f = 3.0f;
 
-    Vector vec2 = vec1 / f;
+    ty::Vector vec2 = vec1 / f;
     
     ASSERT_EQ(x / f, vec2.X);
     ASSERT_EQ(y / f, vec2.Y);
@@ -127,32 +127,32 @@ TEST_F(VectorTest, TestOperatorDiv) {
 }
 
 TEST_F(VectorTest, TestOperatorEqual) {
-    Vector vec1(x, y, z);
-    Vector vec2(x, y, z);
-    Vector vec3(x, y + 1, z + 1);
+    ty::Vector vec1(x, y, z);
+    ty::Vector vec2(x, y, z);
+    ty::Vector vec3(x, y + 1, z + 1);
 
     ASSERT_TRUE(vec1 == vec2);
     ASSERT_FALSE(vec1 == vec3);
 }
 
 TEST_F(VectorTest, TestMagnitude) {
-    Vector vec(x, y, z);
+    ty::Vector vec(x, y, z);
     ASSERT_EQ(sqrtf(x*x + y*y + z*z), vec.magnitude());
 }
 
 TEST_F(VectorTest, TestNormalize) {
-    Vector v(x, y, z);
-    Vector nv = v.normalize();
+    ty::Vector v(x, y, z);
+    ty::Vector nv = v.normalize();
 
     ASSERT_GE(1.0f,   nv.magnitude()); // 誤差範囲内をテスト
     ASSERT_LT(0.999f, nv.magnitude()); // 1.0 >= magnitude > 0.999
 }
 
 TEST_F(VectorTest, TestDot) {
-    Vector vec1(3.0f, 0.0f, 0.0f);
-    Vector vec2(0.0f, 1.0f, 0.0f);
-    Vector vec3(1.0f, 1.0f, 1.0f);
-    Vector vec4(-12.0f, 0.0f, 0.0f);
+    ty::Vector vec1(3.0f, 0.0f, 0.0f);
+    ty::Vector vec2(0.0f, 1.0f, 0.0f);
+    ty::Vector vec3(1.0f, 1.0f, 1.0f);
+    ty::Vector vec4(-12.0f, 0.0f, 0.0f);
 
     ASSERT_EQ( 1.0f, vec1.dot(vec1)); // 平行(同方向)
     ASSERT_EQ( 0.0f, vec1.dot(vec2)); // 直行
@@ -162,11 +162,11 @@ TEST_F(VectorTest, TestDot) {
 }
 
 TEST_F(VectorTest, TestCross) {
-    Vector vec0;
-    Vector vec1(3.0f, 0.0f, 0.0f);
-    Vector vec2(0.0f, 1.0f, 0.0f);
-    Vector vec3(1.0f, 1.0f, 1.0f);
-    Vector vec4(-12.0f, 0.0f, 0.0f);
+    ty::Vector vec0;
+    ty::Vector vec1(3.0f, 0.0f, 0.0f);
+    ty::Vector vec2(0.0f, 1.0f, 0.0f);
+    ty::Vector vec3(1.0f, 1.0f, 1.0f);
+    ty::Vector vec4(-12.0f, 0.0f, 0.0f);
 
     ASSERT_EQ(0.0f, vec1.cross(vec1)); // 平行(同方向)
     ASSERT_EQ(1.0f, vec1.cross(vec2)); // 直行
@@ -176,17 +176,17 @@ TEST_F(VectorTest, TestCross) {
 }
 
 TEST_F(VectorTest, TestDistance) {
-    Vector v1(1.0f, 0.0f, 3.0f);
-    Vector v2(3.0f, 0.0f, 0.0f);
-    Vector v3(-3.0f, 0.0f, 0.0f);
+    ty::Vector v1(1.0f, 0.0f, 3.0f);
+    ty::Vector v2(3.0f, 0.0f, 0.0f);
+    ty::Vector v3(-3.0f, 0.0f, 0.0f);
 
     ASSERT_EQ(0.0f, v1.distance(v1));
     ASSERT_EQ(6.0f, v2.distance(v3));
 }
 
 TEST_F(VectorTest, TestReverse) {
-    Vector vec(x, y, z);
-    Vector rev = vec.reverse();
+    ty::Vector vec(x, y, z);
+    ty::Vector rev = vec.reverse();
     
     ASSERT_EQ(-x, rev.X);
     ASSERT_EQ(-y, rev.Y);

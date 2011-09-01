@@ -1,5 +1,7 @@
 #include "Timer.h"
 
+namespace ty {
+
 Timer* Timer::_instance = new Timer;
 
 Timer::Timer(void)
@@ -19,3 +21,5 @@ XnUInt64 Timer::current(void)
 
     return now / 1000000;
 }
+
+} // namespace ty

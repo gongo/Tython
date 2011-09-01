@@ -5,6 +5,8 @@
 
 #include "AbstractDetector.h"
 
+namespace ty {
+
 class PoseDetector : public AbstractDetector {
 public:
     PoseDetector(User* _user);
@@ -13,5 +15,7 @@ protected:
 
 private:
 };
+
+} // namespace ty
 
 #endif // _TYTHON_POSE_DETECTOR_H_

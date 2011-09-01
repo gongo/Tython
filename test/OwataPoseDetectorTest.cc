@@ -8,7 +8,7 @@ class OwataPoseDetectorTest : public testing::Test {
 public:
     virtual void SetUp() {
         mock = new MockUser;
-        object = new OwataPoseDetector(mock);
+        object = new ty::OwataPoseDetector(mock);
     }    
 
     virtual void TearDown() {
@@ -16,23 +16,23 @@ public:
         delete mock;
     }
 protected:
-    OwataPoseDetector* object;
+    ty::OwataPoseDetector* object;
     MockUser* mock;
 };
 
 #define SET_SKELETON_CALL() do {                                        \
         EXPECT_CALL(*mock, skeletonRightUpperArm())                     \
-            .WillRepeatedly(Return(Vector(1.4f, 1.4f, 0.0f)));          \
+            .WillRepeatedly(Return(ty::Vector(1.4f, 1.4f, 0.0f)));      \
         EXPECT_CALL(*mock, skeletonLeftUpperArm())                      \
-            .WillRepeatedly(Return(Vector(-1.4f, 1.4f, 0.0f)));         \
+            .WillRepeatedly(Return(ty::Vector(-1.4f, 1.4f, 0.0f)));     \
         EXPECT_CALL(*mock, skeletonHead())                              \
-            .WillRepeatedly(Return(Vector(0.0f, 1.4f, 0.0f)));          \
+            .WillRepeatedly(Return(ty::Vector(0.0f, 1.4f, 0.0f)));      \
         EXPECT_CALL(*mock, positionHead())                              \
-            .WillRepeatedly(Return(Vector(0.0f, 1.0f, 0.0f)));          \
+            .WillRepeatedly(Return(ty::Vector(0.0f, 1.0f, 0.0f)));      \
         EXPECT_CALL(*mock, positionRightHand())                         \
-            .WillRepeatedly(Return(Vector(0.0f, 2.0f, 0.0f)));          \
+            .WillRepeatedly(Return(ty::Vector(0.0f, 2.0f, 0.0f)));      \
         EXPECT_CALL(*mock, positionLeftHand())                          \
-            .WillRepeatedly(Return(Vector(0.0f, 2.0f, 0.0f)));          \
+            .WillRepeatedly(Return(ty::Vector(0.0f, 2.0f, 0.0f)));      \
     } while (0)
 
 TEST_F(OwataPoseDetectorTest, TestIsPosing) {

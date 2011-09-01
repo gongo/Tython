@@ -5,6 +5,8 @@
 
 #include "PoseDetector.h"
 
+namespace ty {
+
 class CrossArmBlockPoseDetector : public PoseDetector {
 public:
     CrossArmBlockPoseDetector(User* _user) : PoseDetector(_user) {}
@@ -19,5 +21,7 @@ public:
      */
     bool isPosing(void);
 };
+
+} // namespace ty
 
 #endif // _TYTHON_CROSS_ARM_BLOCK_POSE_DETECTOR_H_

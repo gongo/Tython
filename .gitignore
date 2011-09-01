@@ -3,3 +3,7 @@ Tython
 TestTython
 .cimg/
 libTython.a
+GPATH
+GRTAGS
+GSYMS
+GTAGS

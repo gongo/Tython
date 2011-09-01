@@ -13,8 +13,8 @@ Controller::Controller(void)
 {
     initXN();
 
-    UserFactory::setContext(&ctxGlobal);
-    user     = UserFactory::get(1);
+    ty::UserFactory::setContext(&ctxGlobal);
+    user     = ty::UserFactory::get(1);
     renderer = new AbstractRenderer(&ctxGlobal, user);
     im       = new DefaultInputMethod(user);
     compiler = Compiler::instance();

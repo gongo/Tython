@@ -10,11 +10,11 @@
 
 class AbstractRenderer {
 public:
-    AbstractRenderer(xn::Context *ctx, User* _user);
+    AbstractRenderer(xn::Context *ctx, ty::User* _user);
     virtual ~AbstractRenderer(void);
     void draw(void);
 protected:
-    User* user;
+    ty::User* user;
     xn::DepthGenerator* depthGenerator;
     xn::DepthMetaData* depthMeta;
     xn::SceneMetaData* sceneMeta;
@@ -24,7 +24,7 @@ private:
     int texWidth;
     int texHeight;
     GLuint texID;
-    Vector* depthBuf;
+    ty::Vector* depthBuf;
     unsigned char* sceneBuf;
 };
 

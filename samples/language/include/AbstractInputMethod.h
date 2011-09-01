@@ -12,8 +12,8 @@ using std::map;
 using std::vector;
 using std::string;
 
-typedef map<string, AbstractDetector*> IMmap;
-typedef vector<AbstractDetector*> IMquit;
+typedef map<string, ty::AbstractDetector*> IMmap;
+typedef vector<ty::AbstractDetector*> IMquit;
 
 class AbstractInputMethod {
 public:

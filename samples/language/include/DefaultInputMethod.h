@@ -8,7 +8,7 @@
 class DefaultInputMethod : public AbstractInputMethod {
 public:
     DefaultInputMethod(void);
-    DefaultInputMethod(User* _user);
+    DefaultInputMethod(ty::User* _user);
 };
 
 #endif // _TYTHON_DEFAULT_INPUT_METHOD_H_

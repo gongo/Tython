@@ -10,12 +10,12 @@ DefaultInputMethod::DefaultInputMethod(void)
 {
 }
 
-DefaultInputMethod::DefaultInputMethod(User* _user)
+DefaultInputMethod::DefaultInputMethod(ty::User* _user)
 {
-    inputList.insert(std::make_pair("a", new LeftJabCommandDetector(_user)));
-    inputList.insert(std::make_pair("@", new RightStraightCommandDetector(_user)));
-    inputList.insert(std::make_pair("g", new RightUpperCommandDetector(_user)));
-    inputList.insert(std::make_pair(" ", new LeftHookCommandDetector(_user)));
+    inputList.insert(std::make_pair("a", new ty::LeftJabCommandDetector(_user)));
+    inputList.insert(std::make_pair("@", new ty::RightStraightCommandDetector(_user)));
+    inputList.insert(std::make_pair("g", new ty::RightUpperCommandDetector(_user)));
+    inputList.insert(std::make_pair(" ", new ty::LeftHookCommandDetector(_user)));
 
-    quitList.push_back(new OwataPoseDetector(_user));
+    quitList.push_back(new ty::OwataPoseDetector(_user));
 }

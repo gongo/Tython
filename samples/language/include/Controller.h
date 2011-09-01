@@ -34,9 +34,9 @@ private:
     /**
      *
      */
-    UserContext *ctxUser;
+    ty::UserContext *ctxUser;
 
-    User *user;
+    ty::User *user;
 
     /**
      *

@@ -12,7 +12,7 @@ unsigned int getClosestPowerOfTwo(unsigned int n)
 
 GLfloat texcoords[8] = {0.8, 0.8, 0.8, 0.0, 0.0, 0.0, 0.0, 0.8};
 
-AbstractRenderer::AbstractRenderer(xn::Context *ctx, User* _user) : user(_user)
+AbstractRenderer::AbstractRenderer(xn::Context *ctx, ty::User* _user) : user(_user)
 {
     depthGenerator = new xn::DepthGenerator;
     depthMeta = new xn::DepthMetaData;
@@ -25,8 +25,8 @@ AbstractRenderer::AbstractRenderer(xn::Context *ctx, User* _user) : user(_user)
     height = depthMeta->YRes();
     texWidth = getClosestPowerOfTwo(width);
     texHeight = getClosestPowerOfTwo(height);
-
-    depthBuf = new Vector[texWidth*texHeight];
+    
+    depthBuf = new ty::Vector[texWidth*texHeight];
     sceneBuf = new unsigned char[texWidth*texHeight*4];
 
     texcoords[0] = (float)width/(float)texWidth;

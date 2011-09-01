@@ -169,52 +169,52 @@ inline Vector User::positionRightFoot(void)
 
 inline Vector User::skeletonHead(void)
 {
-    return positionNeck() - positionHead();
+    return positionHead() - positionNeck();
 }
 
 inline Vector User::skeletonMedianLine(void)
 {
-    return positionHead() - positionWaist();
+    return positionWaist() - positionHead();
 }
 
 inline Vector User::skeletonRightUpperArm(void)
 {
-    return positionRightShoulder() - positionRightElbow();
+    return positionRightElbow() - positionRightShoulder();
 }
 
 inline Vector User::skeletonRightForearm(void)
 {
-    return positionRightElbow() - positionRightHand();
+    return positionRightHand() - positionRightElbow();
 }
 
 inline Vector User::skeletonLeftUpperArm(void)
 {
-    return positionLeftShoulder() - positionLeftElbow();
+    return positionLeftElbow() - positionLeftShoulder();
 }
 
 inline Vector User::skeletonLeftForearm(void)
 {
-    return positionLeftElbow() - positionLeftHand();
+    return positionLeftHand() - positionLeftElbow();
 }
 
 inline Vector User::skeletonLeftUpperThigh(void)
 {
-    return positionLeftHip() - positionLeftKnee();
+    return positionLeftKnee() - positionLeftHip();
 }
 
 inline Vector User::skeletonLeftLowerThigh(void)
 {
-    return positionLeftKnee() - positionLeftAnkle();
+    return positionLeftAnkle() - positionLeftKnee();
 }
 
 inline Vector User::skeletonRightUpperThigh(void)
 {
-    return positionRightHip() - positionRightKnee();
+    return positionRightKnee() - positionRightHip();
 }
 
 inline Vector User::skeletonRightLowerThigh(void)
 {
-    return positionRightKnee() - positionRightAnkle();
+    return positionRightAnkle() - positionRightKnee();
 }
 
 inline bool User::rightArmIsStraight(void)
@@ -241,7 +241,7 @@ inline bool User::rightArmIsBentRightAngle(void)
     return upperArm.isOrthogonal(forearm);
 }
 
-inline bool User::leftArmIsBentLeftAngle(void)
+inline bool User::leftArmIsBentRightAngle(void)
 {
     Vector upperArm = skeletonLeftUpperArm();
     Vector forearm  = skeletonLeftForearm();

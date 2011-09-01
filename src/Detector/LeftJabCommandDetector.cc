@@ -18,7 +18,7 @@ bool LeftJabCommandDetector::isStand(void) const
     Vector elbow    = user->positionLeftElbow();
     Vector hand     = user->positionLeftHand();
 
-    return user->leftArmIsBentLeftAngle()
+    return user->leftArmIsBentRightAngle()
         && hand.Y > shoulder.Y
         && hand.Y > elbow.Y;
 }

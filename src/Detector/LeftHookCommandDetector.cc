@@ -19,7 +19,7 @@ bool LeftHookCommandDetector::isStand(void) const
     Vector elbow    = user->positionLeftElbow();
     Vector hand     = user->positionLeftHand();
 
-    return user->leftArmIsBentLeftAngle()
+    return user->leftArmIsBentRightAngle()
         && hand.Y > shoulder.Y
         && hand.Y > elbow.Y;
 }
@@ -30,7 +30,7 @@ bool LeftHookCommandDetector::isLeftHookBefore(void) const
     Vector elbow    = user->positionLeftElbow();
     Vector hand     = user->positionLeftHand();
 
-    return user->leftArmIsBentLeftAngle()
+    return user->leftArmIsBentRightAngle()
         && shoulder.X > hand.X
         && shoulder.X > elbow.X;
 }

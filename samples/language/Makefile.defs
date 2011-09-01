@@ -1,11 +1,13 @@
 # Source Path
 SRCS_DIR  = src
 SRCS      = $(wildcard $(SRCS_DIR)/**/*.cc) $(wildcard $(SRCS_DIR)/*.cc)
-OBJS      = $(SRCS:.cc=.o)
+OBJS_ALL  = $(SRCS:.cc=.o)
+OBJS_MAIN = $(SRCS_DIR)/main.o
+OBJS      = $(filter-out $(OBJS_MAIN), $(OBJS_ALL))
 
 TEST_SRCS_DIR = test
-TEST_SRCS     = $(wildcard $(TEST_SRCS_DIR)/*.cc)
-TEST_OBJS     = $(TEST_SRCS:.cc=.o)
+TEST_SRCS    = $(wildcard $(TEST_SRCS_DIR)/*.cc)
+TEST_OBJS    = $(TEST_SRCS:.cc=.o)
 
 # OpenNI Path
 OPENNI_INCLUDE_PATH = $(HOME)/.kinect/usr/include/ni
@@ -13,20 +15,9 @@ OPENNI_LIBRARY_PATH = $(HOME)/.kinect/usr/lib
 
 # Compile Option
 INCLUDE   = -I./include -I$(OPENNI_INCLUDE_PATH) 
+LIBS      = -lm -framework OpenGL -framework GLUT -L$(OPENNI_LIBRARY_PATH) -lOpenNI
 CXXFLAGS  = -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 $(INCLUDE)
 CXX       = g++
 
 TEST_CXXFLAGS = $(shell gmock-config --cppflags --cxxflags) $(CXXFLAGS)
-TEST_LIBS     = -L$(shell gtest-config --libdir) \
-		-lgtest -L$(shell gmock-config --libdir) -lgmock \
-		-lm -L$(OPENNI_LIBRARY_PATH) -lOpenNI
-
-# Other Command
-AR         = ar
-ARFLAGS    = r
-RANLIB     = ranlib
-RM         = rm -f
-RM_GC      = *~ \#*
-TAGS       = gtags
-TAGSOPTION = 
-TAGSFILE   = GPATH GRTAGS GSYMS GTAGS 
+TEST_LIBS     = -L$(shell gtest-config --libdir) -lgtest -L$(shell gmock-config --libdir) -lgmock $(LIBS)

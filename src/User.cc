@@ -241,6 +241,7 @@ inline bool User::rightArmIsBentRightAngle(void)
     return upperArm.isOrthogonal(forearm);
 }
 
+
 inline bool User::leftArmIsBentRightAngle(void)
 {
     Vector upperArm = skeletonLeftUpperArm();

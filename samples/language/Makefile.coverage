@@ -1,0 +1,22 @@
+include Makefile
+
+CXXFLAGS += -fprofile-arcs -ftest-coverage
+LIBS     += -lgcov
+
+GCOV_OBJS = $(OBJS:.o=.gcno) $(TEST_OBJS:.o=.gcno) $(OBJS:.o=.gcda) $(TEST_OBJS:.o=.gcda)
+LCOV_INFO = lcov.info
+LCOV_DIR  = gcov
+
+coverage: test
+	$(RM) $(LCOV_INFO) $(LCOV_DIR)
+	lcov -c -b . -d $(SRCS_DIR) -d $(TEST_SRCS_DIR) -o lcov2.info
+	lcov -r lcov2.info '/usr/include/*'       \
+	                   '/usr/local/include/*' \
+	                   'test/*'               \
+	                   'include/*.h'          \
+             -o $(LCOV_INFO)
+	rm lcov2.info
+	genhtml -o $(LCOV_DIR) $(LCOV_INFO)
+
+coverage-clean: clean
+	$(RM) $(GCOV_OBJS) $(LCOV_INFO) $(LCOV_DIR)

@@ -5,6 +5,10 @@ TEST_TARGET = libTythonTest
 
 OBJS_GCOV = $(OBJS:.o=.gcno) $(TEST_OBJS:.o=.gcno) lcov.info
 
+DOXYGEN  = doxygen
+DOXYCONF = Tython.doxygen
+DOXYOUT  = docs
+
 .SUFFIXES: .cc .o 
 
 .PHONY: test clean tags force all
@@ -32,12 +36,16 @@ clean:
 	$(RM) $(TAGSFILE)
 	$(RM) $(OBJS_GCOV)
 	$(RM) test_detail.xml
+	$(RM) -r $(DOXYOUT)
 	cd $(SRCS_DIR)      && $(RM) $(RM_GC)
 	cd $(TEST_SRCS_DIR) && $(RM) $(RM_GC)
 
 
 tags:
 	@$(TAGS) $(TAGSOPTION)
+
+doxygen:
+	$(DOXYGEN) $(DOXYCONF)
 
 force:
 

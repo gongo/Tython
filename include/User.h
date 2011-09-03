@@ -333,6 +333,18 @@ protected:
      */
     User(void);
 
+    /**
+     * ユーザの骨格座標を持つ
+     *
+     * <pre>
+     * 
+     * </pre>
+     *
+     * @see XnSkeletonJoint
+     *
+     */
+    XnSkeletonJointPosition skeletonPosition[24];
+
 private:
     /**
      *
@@ -348,11 +360,6 @@ private:
      * ユーザ ID
      */
     const int userId;
-
-    /**
-     * @see XnSkeletonJoint
-     */
-    XnSkeletonJointPosition skeletonPosition[24];
 
     /**
      *

@@ -225,7 +225,7 @@ inline bool User::rightArmIsStraight(void)
     Vector forearm = skeletonRightForearm();
     Vector upperArm = skeletonRightUpperArm();
     
-    return forearm.isStraight(upperArm.reverse());
+    return forearm.isStraight(upperArm);
 }
 
 inline bool User::leftArmIsStraight(void)
@@ -233,7 +233,7 @@ inline bool User::leftArmIsStraight(void)
     Vector forearm = skeletonLeftForearm();
     Vector upperArm = skeletonLeftUpperArm();
 
-    return forearm.isStraight(upperArm.reverse());
+    return forearm.isStraight(upperArm);
 }
 
 inline bool User::rightArmIsBentRightAngle(void)

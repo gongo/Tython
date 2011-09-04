@@ -1,7 +1,5 @@
 #include <gtest/gtest.h>
-#include "LeftJabCommandDetector.h"
 #include "MockUser.h"
-#include "MockVector.h"
 
 using ::testing::Return;
 using ::testing::Invoke;

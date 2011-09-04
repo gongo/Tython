@@ -150,12 +150,12 @@ bool Vector::isOrthogonal(const Vector& v) const
 
 bool Vector::isStraight(const Vector& v) const
 {
-    return withoutAngle(v, THRESHOLD_STRAIGHT - THRESHOLD_TOLERANCE);
+    return withinAngle(v, THRESHOLD_TOLERANCE);
 }
 
 bool Vector::isParallel(const Vector& v) const
 {
-    return isStraight(v) || withinAngle(v, THRESHOLD_TOLERANCE);
+    return isStraight(v) || withoutAngle(v, THRESHOLD_STRAIGHT - THRESHOLD_TOLERANCE);
 }
 
 } // namespace ty

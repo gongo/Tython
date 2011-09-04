@@ -39,8 +39,8 @@ bool ThanksCommandDetector::isBottomArm(void)
     Vector leftHand = user->positionLeftHand();
     Vector waist = user->positionWaist();
 
-    return rightForearm.isStraight(rightUpperArm.reverse())
-        && leftForearm.isStraight(leftUpperArm.reverse())
+    return rightForearm.isStraight(rightUpperArm)
+        && leftForearm.isStraight(leftUpperArm)
         && rightHand.Y < waist.Y
         && leftHand.Y < waist.Y;
 }

@@ -313,40 +313,40 @@ TEST_F(VectorTest, TestIsOrthogonal) {
 }
 
 TEST_F(VectorTest, TestIsStraight) {
-    ASSERT_FALSE(MockVector::v00.isStraight(MockVector::v00));
+    ASSERT_TRUE(MockVector::v00.isStraight(MockVector::v00));
     ASSERT_FALSE(MockVector::v00.isStraight(MockVector::v30));
     ASSERT_FALSE(MockVector::v00.isStraight(MockVector::v60));
     ASSERT_FALSE(MockVector::v00.isStraight(MockVector::v90));
     ASSERT_FALSE(MockVector::v00.isStraight(MockVector::v120));
     ASSERT_FALSE(MockVector::v00.isStraight(MockVector::v150));
-    ASSERT_TRUE(MockVector::v00.isStraight(MockVector::v180));
+    ASSERT_FALSE(MockVector::v00.isStraight(MockVector::v180));
     
-    ASSERT_FALSE(MockVector::v30.isStraight(MockVector::v30));
+    ASSERT_TRUE(MockVector::v30.isStraight(MockVector::v30));
     ASSERT_FALSE(MockVector::v30.isStraight(MockVector::v60));
     ASSERT_FALSE(MockVector::v30.isStraight(MockVector::v90));
     ASSERT_FALSE(MockVector::v30.isStraight(MockVector::v120));
     ASSERT_FALSE(MockVector::v30.isStraight(MockVector::v150));
     ASSERT_FALSE(MockVector::v30.isStraight(MockVector::v180));
 
-    ASSERT_FALSE(MockVector::v60.isStraight(MockVector::v60));
+    ASSERT_TRUE(MockVector::v60.isStraight(MockVector::v60));
     ASSERT_FALSE(MockVector::v60.isStraight(MockVector::v90));
     ASSERT_FALSE(MockVector::v60.isStraight(MockVector::v120));
     ASSERT_FALSE(MockVector::v60.isStraight(MockVector::v150));
     ASSERT_FALSE(MockVector::v60.isStraight(MockVector::v180));
 
-    ASSERT_FALSE(MockVector::v90.isStraight(MockVector::v90));
+    ASSERT_TRUE(MockVector::v90.isStraight(MockVector::v90));
     ASSERT_FALSE(MockVector::v90.isStraight(MockVector::v120));
     ASSERT_FALSE(MockVector::v90.isStraight(MockVector::v150));
     ASSERT_FALSE(MockVector::v90.isStraight(MockVector::v180));
-
-    ASSERT_FALSE(MockVector::v120.isStraight(MockVector::v120));
+    
+    ASSERT_TRUE(MockVector::v120.isStraight(MockVector::v120));
     ASSERT_FALSE(MockVector::v120.isStraight(MockVector::v150));
     ASSERT_FALSE(MockVector::v120.isStraight(MockVector::v180));
 
-    ASSERT_FALSE(MockVector::v150.isStraight(MockVector::v150));
+    ASSERT_TRUE(MockVector::v150.isStraight(MockVector::v150));
     ASSERT_FALSE(MockVector::v150.isStraight(MockVector::v180));
 
-    ASSERT_FALSE(MockVector::v180.isStraight(MockVector::v180));
+    ASSERT_TRUE(MockVector::v180.isStraight(MockVector::v180));
 }
 
 TEST_F(VectorTest, TestIsParallel) {

@@ -9,7 +9,7 @@ LCOV_INFO = lcov.info
 LCOV_DIR  = gcov
 
 coverage: test
-	$(RM) $(LCOV_INFO) $(LCOV_DIR)
+	$(RM) -r $(LCOV_INFO) $(LCOV_DIR)
 	lcov -c -b . -d $(SRCS_DIR) -d $(TEST_SRCS_DIR) -o lcov2.info
 	lcov -r lcov2.info '/usr/include/*'       \
 	                   '/usr/local/include/*' \

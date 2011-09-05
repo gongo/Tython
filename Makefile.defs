@@ -13,7 +13,7 @@ OPENNI_LIBRARY_PATH = $(HOME)/.kinect/usr/lib
 
 # Compile Option
 INCLUDE   = -I./include -I$(OPENNI_INCLUDE_PATH) 
-CXXFLAGS  = -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 $(INCLUDE)
+CXXFLAGS  = -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 $(INCLUDE) -g
 CXX       = g++
 
 TEST_CXXFLAGS = $(shell gmock-config --cppflags --cxxflags) $(CXXFLAGS)

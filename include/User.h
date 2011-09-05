@@ -28,12 +28,29 @@ public:
      */
     ~User(void) {}
 
-    static const float THRESHOLD_CONFIDENCE;
-
+    /**
+     *
+     */
     virtual ty::Vector getSkeletonPosition(XnSkeletonJoint j);
 
     void updatePixels(xn::SceneMetaData* data);
+
+    /**
+     * ユーザがトラッキングされているかチェックする
+     *
+     * @see userId
+     *
+     * @return トラッキングされていれば true
+     */
     virtual bool isTracking(void);
+
+    /**
+     * ユーザがキャリブレーションされているかチェックする
+     *
+     * @see userId
+     *
+     * @return キャリブレーションされていれば true
+     */
     virtual bool isCalibrated(void);
 
     /**
@@ -322,6 +339,14 @@ public:
      * @return 左腕が直角に曲がっていれば true
      */
     virtual bool leftArmIsBentRightAngle(void);
+
+    /**
+     * 認識のしきい値
+     *
+     * @see isConfident
+     */
+    static const float THRESHOLD_CONFIDENCE;
+
 protected:
     /**
      * デフォルトコンストラクタ
@@ -336,23 +361,27 @@ protected:
     /**
      * ユーザの骨格座標を持つ
      *
-     * <pre>
-     * 
-     * </pre>
-     *
      * @see XnSkeletonJoint
-     *
      */
     XnSkeletonJointPosition skeletonPosition[24];
 
 private:
     /**
+     * 座標の認識度がしきい値を超えているかチェックする
      *
+     * 超えていなければ、認識できていないと判断し、
+     * skeletonPosition に保存された値を使うようにする
+     *
+     * @see skeletonPosition
+     * @see getSkeletonPosition
+     *
+     * @param   p
+     * @return    しきい値を超えていれば true
      */
     bool isConfident(XnSkeletonJointPosition p) const;
     
     /**
-     *
+     * UserContext のインスタンス
      */
     UserContext* context;
 

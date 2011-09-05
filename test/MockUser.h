@@ -7,6 +7,7 @@
 #include "User.h"
 
 using ::testing::Return;
+using ::testing::_;
 
 class MockUser : public ty::User {
 public:
@@ -14,13 +15,22 @@ public:
         _fake = new User(NULL);
         ON_CALL(*this, isTracking()).WillByDefault(Return(true));
         ON_CALL(*this, isCalibrated()).WillByDefault(Return(true));
+        ON_CALL(*this, isConfident(_)).WillByDefault(Return(true));
     }
     virtual ~MockUser(void) {}
+
+    void setFakeSkeletonPosition(XnSkeletonJoint j, ty::Vector v) {
+        skeletonPosition[j - 1].position = v;
+    }
 
     MOCK_METHOD0(skeletonRightUpperArm, ty::Vector(void));
     MOCK_METHOD0(skeletonRightForearm, ty::Vector(void));
     MOCK_METHOD0(skeletonLeftUpperArm, ty::Vector(void));
     MOCK_METHOD0(skeletonLeftForearm, ty::Vector(void));
+    MOCK_METHOD0(skeletonRightUpperThigh, ty::Vector(void));
+    MOCK_METHOD0(skeletonRightLowerThigh, ty::Vector(void));
+    MOCK_METHOD0(skeletonLeftUpperThigh, ty::Vector(void));
+    MOCK_METHOD0(skeletonLeftLowerThigh, ty::Vector(void));
     MOCK_METHOD0(skeletonHead, ty::Vector(void));
     MOCK_METHOD0(positionHead, ty::Vector(void));
     MOCK_METHOD0(positionNeck, ty::Vector(void));
@@ -30,6 +40,14 @@ public:
     MOCK_METHOD0(positionLeftShoulder, ty::Vector(void));
     MOCK_METHOD0(positionLeftElbow, ty::Vector(void));
     MOCK_METHOD0(positionLeftHand, ty::Vector(void));
+    MOCK_METHOD0(positionRightHip, ty::Vector(void));
+    MOCK_METHOD0(positionRightKnee, ty::Vector(void));
+    MOCK_METHOD0(positionRightAnkle, ty::Vector(void));
+    MOCK_METHOD0(positionRightFoot, ty::Vector(void));
+    MOCK_METHOD0(positionLeftHip, ty::Vector(void));
+    MOCK_METHOD0(positionLeftKnee, ty::Vector(void));
+    MOCK_METHOD0(positionLeftAnkle, ty::Vector(void));
+    MOCK_METHOD0(positionLeftFoot, ty::Vector(void));
     MOCK_METHOD0(positionWaist, ty::Vector(void));
     MOCK_METHOD0(rightArmIsStraight, bool(void));
     MOCK_METHOD0(leftArmIsStraight, bool(void));
@@ -37,6 +55,7 @@ public:
     MOCK_METHOD0(leftArmIsBentRightAngle, bool(void));
     MOCK_METHOD0(isTracking, bool(void));
     MOCK_METHOD0(isCalibrated, bool(void));
+    MOCK_CONST_METHOD1(isConfident, bool(XnSkeletonJointPosition p));
 
     ty::Vector FakeSkeletonRightUpperArm(void) {
         return ty::User::skeletonRightUpperArm();
@@ -49,6 +68,18 @@ public:
     }
     ty::Vector FakeSkeletonLeftForearm(void) {
         return ty::User::skeletonLeftForearm();
+    }
+    ty::Vector FakeSkeletonRightUpperThigh(void) {
+        return ty::User::skeletonRightUpperThigh();
+    }
+    ty::Vector FakeSkeletonRightLowerThigh(void) {
+        return ty::User::skeletonRightLowerThigh();
+    }
+    ty::Vector FakeSkeletonLeftUpperThigh(void) {
+        return ty::User::skeletonLeftUpperThigh();
+    }
+    ty::Vector FakeSkeletonLeftLowerThigh(void) {
+        return ty::User::skeletonLeftLowerThigh();
     }
     ty::Vector FakeSkeletonHead(void) {
         return ty::User::skeletonHead();
@@ -76,6 +107,30 @@ public:
     }
     ty::Vector FakePositionLeftHand(void) {
         return ty::User::positionLeftHand();
+    }
+    ty::Vector FakePositionRightHip(void) {
+        return ty::User::positionRightHip();
+    }
+    ty::Vector FakePositionRightKnee(void) {
+        return ty::User::positionRightKnee();
+    }
+    ty::Vector FakePositionRightAnkle(void) {
+        return ty::User::positionRightAnkle();
+    }
+    ty::Vector FakePositionRightFoot(void) {
+        return ty::User::positionRightFoot();
+    }
+    ty::Vector FakePositionLeftHip(void) {
+        return ty::User::positionLeftHip();
+    }
+    ty::Vector FakePositionLeftKnee(void) {
+        return ty::User::positionLeftKnee();
+    }
+    ty::Vector FakePositionLeftAnkle(void) {
+        return ty::User::positionLeftAnkle();
+    }
+    ty::Vector FakePositionLeftFoot(void) {
+        return ty::User::positionLeftFoot();
     }
     ty::Vector FakePositionWaist(void) {
         return ty::User::positionWaist();

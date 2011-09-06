@@ -19,7 +19,9 @@ OPENNI_LIBRARY_PATH = $(HOME)/.kinect/usr/lib
 
 # Compile Option
 INCLUDE   = -I./include -I$(OPENNI_INCLUDE_PATH) -I$(TYTHON_INCLUDE_PATH)
-LIBS      = -lm -framework OpenGL -framework GLUT -L$(OPENNI_LIBRARY_PATH) -lOpenNI $(TYTHON_LIBRARY_PATH)/libTython.a
+LIBS      = -lm -framework OpenGL -framework GLUT \
+            -L$(OPENNI_LIBRARY_PATH) -lOpenNI \
+            -L$(TYTHON_LIBRARY_PATH) -lTython
 CXXFLAGS  = -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 $(INCLUDE)
 CXX       = g++
 

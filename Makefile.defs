@@ -12,14 +12,18 @@ OPENNI_INCLUDE_PATH = $(HOME)/.kinect/usr/include/ni
 OPENNI_LIBRARY_PATH = $(HOME)/.kinect/usr/lib
 
 # Compile Option
-INCLUDE   = -I./include -I$(OPENNI_INCLUDE_PATH) 
-CXXFLAGS  = -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 $(INCLUDE) -g
 CXX       = g++
+INCLUDE   = -I./include -I$(OPENNI_INCLUDE_PATH) 
+CXXFLAGS  = -Wall -O3 \
+            -fno-tree-pre -fno-strict-aliasing \
+            -msse3 -mssse3 \
+            $(INCLUDE)
+LIBS      = -lm -L$(OPENNI_LIBRARY_PATH) -lOpenNI 
 
 TEST_CXXFLAGS = $(shell gmock-config --cppflags --cxxflags) $(CXXFLAGS)
 TEST_LIBS     = -L$(shell gtest-config --libdir) \
 		-lgtest -L$(shell gmock-config --libdir) -lgmock \
-		-lm -L$(OPENNI_LIBRARY_PATH) -lOpenNI $(LIBS)
+		$(LIBS)
 
 # Other Command
 AR         = ar

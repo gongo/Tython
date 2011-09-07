@@ -13,9 +13,11 @@ public:
     virtual ~OwataPoseDetector(void) {}
 
     /**
+     * <pre>
      * ＼(^o^)／
      *     |
      *    / \
+     * </pre>
      *
      * 1. 両腕はまっすぐ
      * @todo 2. 正中線と両腕は角度45度

@@ -399,15 +399,6 @@ private:
      * ユーザ ID
      */
     const int userId;
-
-    /**
-     *
-     */
-    XnChar poseName[20];
-
-    XnCallbackHandle handleUserCallbacks;
-    XnCallbackHandle handleCalibrationCallbacks;
-    XnCallbackHandle handlePoseCallbacks;
 };
 
 } // namespace ty

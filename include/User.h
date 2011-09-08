@@ -304,6 +304,13 @@ public:
     virtual ty::Vector vectorRightLowerThigh(void);
 
     /**
+     * 上半身が向いているベクトルを取得する
+     *
+     * @return 上半身の向いているベクトル
+     */
+    virtual ty::Vector vectorUpperBodyForward(void);
+
+    /**
      * 右腕がまっすぐ伸びているかどうか
      *
      * @see vectorRightForearm()

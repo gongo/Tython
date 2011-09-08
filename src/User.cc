@@ -218,6 +218,11 @@ inline Vector User::vectorRightLowerThigh(void)
     return rightAnkle() - rightKnee();
 }
 
+inline Vector User::vectorUpperBodyForward(void)
+{
+    return (rightShoulder() - torso()).cross(leftShoulder() - torso()).reverse();
+}
+
 inline bool User::rightArmIsStraight(void)
 {
     Vector forearm = vectorRightForearm();

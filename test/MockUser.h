@@ -31,8 +31,10 @@ public:
     MOCK_METHOD0(vectorLeftUpperThigh, ty::Vector(void));
     MOCK_METHOD0(vectorLeftLowerThigh, ty::Vector(void));
     MOCK_METHOD0(vectorHead, ty::Vector(void));
+    MOCK_METHOD0(vectorUpperBodyForward, ty::Vector(void));
     MOCK_METHOD0(head, ty::Vector(void));
     MOCK_METHOD0(neck, ty::Vector(void));
+    MOCK_METHOD0(torso, ty::Vector(void));
     MOCK_METHOD0(rightShoulder, ty::Vector(void));
     MOCK_METHOD0(rightElbow, ty::Vector(void));
     MOCK_METHOD0(rightHand, ty::Vector(void));
@@ -83,11 +85,17 @@ public:
     ty::Vector FakeVectorHead(void) {
         return ty::User::vectorHead();
     }
+    ty::Vector FakeVectorUpperBodyForward(void) {
+        return ty::User::vectorUpperBodyForward();
+    }
     ty::Vector FakeHead(void) {
         return ty::User::head();
     }
     ty::Vector FakeNeck(void) {
         return ty::User::neck();
+    }
+    ty::Vector FakeTorso(void) {
+        return ty::User::torso();
     }
     ty::Vector FakeRightShoulder(void) {
         return ty::User::rightShoulder();

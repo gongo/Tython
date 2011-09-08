@@ -113,6 +113,29 @@ TEST_F(UserTest, TesVectorLeftLowerThigh) {
     ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->vectorLeftLowerThigh());
 }
 
+TEST_F(UserTest, TesVectorUpperBodyForward) {
+    ON_CALL(*object, vectorUpperBodyForward())
+        .WillByDefault(Invoke(object, &MockUser::FakeVectorUpperBodyForward));
+
+    EXPECT_CALL(*object, torso())
+        .WillRepeatedly(Return(ty::Vector(0.0f, 0.0f, 0.0f)));
+    EXPECT_CALL(*object, rightShoulder())
+        .WillOnce(Return(ty::Vector( 3.0f, 3.0f,  0.0f)))
+        .WillOnce(Return(ty::Vector( 0.0f, 3.0f,  3.0f)))
+        .WillOnce(Return(ty::Vector(-3.0f, 3.0f,  0.0f)))
+        .WillOnce(Return(ty::Vector( 0.0f, 3.0f, -3.0f)));
+    EXPECT_CALL(*object, leftShoulder())
+        .WillOnce(Return(ty::Vector(-3.0f, 3.0f,  0.0f)))
+        .WillOnce(Return(ty::Vector( 0.0f, 3.0f, -3.0f)))
+        .WillOnce(Return(ty::Vector( 3.0f, 3.0f,  0.0f)))
+        .WillOnce(Return(ty::Vector( 0.0f, 3.0f,  3.0f)));
+
+    ASSERT_TRUE(ty::Vector( 0.0f, 0.0f, -1.0f) == object->vectorUpperBodyForward());
+    ASSERT_TRUE(ty::Vector( 1.0f, 0.0f,  0.0f) == object->vectorUpperBodyForward());
+    ASSERT_TRUE(ty::Vector( 0.0f, 0.0f,  1.0f) == object->vectorUpperBodyForward());
+    ASSERT_TRUE(ty::Vector(-1.0f, 0.0f,  0.0f) == object->vectorUpperBodyForward());
+}
+
 TEST_F(UserTest, TestLeftArmIsStriaght) {
     ON_CALL(*object, leftArmIsStraight())
         .WillByDefault(Invoke(object, &MockUser::FakeLeftArmIsStraight));

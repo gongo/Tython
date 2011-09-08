@@ -4,12 +4,12 @@ namespace ty {
 
 bool OwataPoseDetector::isPosing(void)
 {
-    Vector rightUpperArm = user->skeletonRightUpperArm();
-    Vector leftUpperArm  = user->skeletonLeftUpperArm();
-    Vector medianLine    = user->skeletonHead();
-    Vector rightHand     = user->positionRightHand();
-    Vector leftHand      = user->positionLeftHand();
-    Vector head          = user->positionHead();
+    Vector rightUpperArm = user->vectorRightUpperArm();
+    Vector leftUpperArm  = user->vectorLeftUpperArm();
+    Vector medianLine    = user->vectorHead();
+    Vector rightHand     = user->rightHand();
+    Vector leftHand      = user->leftHand();
+    Vector head          = user->head();
 
     return user->rightArmIsStraight()
         && user->leftArmIsStraight()

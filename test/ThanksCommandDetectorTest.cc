@@ -22,25 +22,25 @@ protected:
 };
 
 TEST_F(ThanksCommandDetectorTest, TestIsPosing) {
-    EXPECT_CALL(*mock, positionNeck())
+    EXPECT_CALL(*mock, neck())
         .WillRepeatedly(Return(ty::Vector(0.0f, 1.0f, 0.0f)));
-    EXPECT_CALL(*mock, positionWaist())
+    EXPECT_CALL(*mock, waist())
         .WillRepeatedly(Return(ty::Vector(0.0f, -1.0f, 0.0f)));
-    EXPECT_CALL(*mock, positionRightHand())
+    EXPECT_CALL(*mock, rightHand())
         .WillOnce(Return(ty::Vector(-1.0f, 0.5f, 0.0f)))
         .WillOnce(Return(ty::Vector(1.0f, -1.5f, 0.0f)));
-    EXPECT_CALL(*mock, positionLeftHand())
+    EXPECT_CALL(*mock, leftHand())
         .WillOnce(Return(ty::Vector(1.0f, 0.5f, 0.0f)))
         .WillOnce(Return(ty::Vector(-1.0f, -1.5f, 0.0f)));
 
-    EXPECT_CALL(*mock, skeletonRightUpperArm())
+    EXPECT_CALL(*mock, vectorRightUpperArm())
         .WillOnce(Return(MockVector::v225));
-    EXPECT_CALL(*mock, skeletonLeftUpperArm())
+    EXPECT_CALL(*mock, vectorLeftUpperArm())
         .WillOnce(Return(MockVector::v315));
-    EXPECT_CALL(*mock, skeletonRightForearm())
+    EXPECT_CALL(*mock, vectorRightForearm())
         .WillOnce(Return(MockVector::v45))
         .WillOnce(Return(MockVector::v225));
-    EXPECT_CALL(*mock, skeletonLeftForearm())
+    EXPECT_CALL(*mock, vectorLeftForearm())
         .WillOnce(Return(MockVector::v135))
         .WillOnce(Return(MockVector::v315));
 

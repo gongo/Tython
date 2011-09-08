@@ -21,9 +21,9 @@ protected:
 };
 
 TEST_F(CrossArmBlockPoseDetectorTest, TestIsPosing) {
-    EXPECT_CALL(*mock, skeletonRightForearm())
+    EXPECT_CALL(*mock, vectorRightForearm())
         .WillOnce(Return(ty::Vector(0, 100, 0)));
-    EXPECT_CALL(*mock, skeletonLeftForearm())
+    EXPECT_CALL(*mock, vectorLeftForearm())
         .WillOnce(Return(ty::Vector(100, 0, 0)));
     
     ASSERT_TRUE(object->isPosing());

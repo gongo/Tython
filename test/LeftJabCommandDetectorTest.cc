@@ -22,11 +22,11 @@ protected:
 };
 
 #define SET_SKELETON_CALL() do {                                        \
-        EXPECT_CALL(*mock, positionLeftShoulder())                      \
+        EXPECT_CALL(*mock, leftShoulder())                              \
             .WillRepeatedly(Return(ty::Vector(0.0f, 1.0f, 0.0f)));      \
-        EXPECT_CALL(*mock, positionLeftElbow())                         \
+        EXPECT_CALL(*mock, leftElbow())                                 \
             .WillRepeatedly(Return(ty::Vector(0.0f, 1.0f, 0.0f)));      \
-        EXPECT_CALL(*mock, positionLeftHand())                          \
+        EXPECT_CALL(*mock, leftHand())                                  \
             .WillRepeatedly(Return(ty::Vector(0.0f, 3.0f, 0.0f)));      \
     } while (0)
 

@@ -4,8 +4,8 @@ namespace ty {
 
 bool CrossArmBlockPoseDetector::isPosing(void)
 {
-    Vector rarm = user->skeletonRightForearm();
-    Vector larm = user->skeletonLeftForearm();
+    Vector rarm = user->vectorRightForearm();
+    Vector larm = user->vectorLeftForearm();
     return rarm.isOrthogonal(larm);
 }
 

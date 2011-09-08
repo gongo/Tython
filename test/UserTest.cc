@@ -17,109 +17,109 @@ protected:
     MockUser* object;
 };
 
-TEST_F(UserTest, TesSkeletonRightUpperArm) {
-    ON_CALL(*object, skeletonRightUpperArm())
-        .WillByDefault(Invoke(object, &MockUser::FakeSkeletonRightUpperArm));
+TEST_F(UserTest, TesVectorRightUpperArm) {
+    ON_CALL(*object, vectorRightUpperArm())
+        .WillByDefault(Invoke(object, &MockUser::FakeVectorRightUpperArm));
 
-    EXPECT_CALL(*object, positionRightShoulder())
+    EXPECT_CALL(*object, rightShoulder())
         .WillOnce(Return(ty::Vector(0.0f, 0.0f, 0.0f)));
-    EXPECT_CALL(*object, positionRightElbow())
+    EXPECT_CALL(*object, rightElbow())
         .WillOnce(Return(ty::Vector(3.0f, 3.0f, 0.0f)));
 
-    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->skeletonRightUpperArm());
+    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->vectorRightUpperArm());
 }
 
-TEST_F(UserTest, TesSkeletonRightForearm) {
-    ON_CALL(*object, skeletonRightForearm())
-        .WillByDefault(Invoke(object, &MockUser::FakeSkeletonRightForearm));
+TEST_F(UserTest, TesVectorRightForearm) {
+    ON_CALL(*object, vectorRightForearm())
+        .WillByDefault(Invoke(object, &MockUser::FakeVectorRightForearm));
 
-    EXPECT_CALL(*object, positionRightElbow())
+    EXPECT_CALL(*object, rightElbow())
         .WillOnce(Return(ty::Vector(0.0f, 0.0f, 0.0f)));
-    EXPECT_CALL(*object, positionRightHand())
+    EXPECT_CALL(*object, rightHand())
         .WillOnce(Return(ty::Vector(3.0f, 3.0f, 0.0f)));
 
-    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->skeletonRightForearm());
+    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->vectorRightForearm());
 }
 
-TEST_F(UserTest, TesSkeletonLeftUpperArm) {
-    ON_CALL(*object, skeletonLeftUpperArm())
-        .WillByDefault(Invoke(object, &MockUser::FakeSkeletonLeftUpperArm));
+TEST_F(UserTest, TesVectorLeftUpperArm) {
+    ON_CALL(*object, vectorLeftUpperArm())
+        .WillByDefault(Invoke(object, &MockUser::FakeVectorLeftUpperArm));
 
-    EXPECT_CALL(*object, positionLeftShoulder())
+    EXPECT_CALL(*object, leftShoulder())
         .WillOnce(Return(ty::Vector(0.0f, 0.0f, 0.0f)));
-    EXPECT_CALL(*object, positionLeftElbow())
+    EXPECT_CALL(*object, leftElbow())
         .WillOnce(Return(ty::Vector(3.0f, 3.0f, 0.0f)));
 
-    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->skeletonLeftUpperArm());
+    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->vectorLeftUpperArm());
 }
 
-TEST_F(UserTest, TesSkeletonLeftForearm) {
-    ON_CALL(*object, skeletonLeftForearm())
-        .WillByDefault(Invoke(object, &MockUser::FakeSkeletonLeftForearm));
+TEST_F(UserTest, TesVectorLeftForearm) {
+    ON_CALL(*object, vectorLeftForearm())
+        .WillByDefault(Invoke(object, &MockUser::FakeVectorLeftForearm));
 
-    EXPECT_CALL(*object, positionLeftElbow())
+    EXPECT_CALL(*object, leftElbow())
         .WillOnce(Return(ty::Vector(0.0f, 0.0f, 0.0f)));
-    EXPECT_CALL(*object, positionLeftHand())
+    EXPECT_CALL(*object, leftHand())
         .WillOnce(Return(ty::Vector(3.0f, 3.0f, 0.0f)));
 
-    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->skeletonLeftForearm());
+    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->vectorLeftForearm());
 }
 
-TEST_F(UserTest, TesSkeletonRightUpperThigh) {
-    ON_CALL(*object, skeletonRightUpperThigh())
-        .WillByDefault(Invoke(object, &MockUser::FakeSkeletonRightUpperThigh));
+TEST_F(UserTest, TesVectorRightUpperThigh) {
+    ON_CALL(*object, vectorRightUpperThigh())
+        .WillByDefault(Invoke(object, &MockUser::FakeVectorRightUpperThigh));
 
-    EXPECT_CALL(*object, positionRightHip())
+    EXPECT_CALL(*object, rightHip())
         .WillOnce(Return(ty::Vector(0.0f, 0.0f, 0.0f)));
-    EXPECT_CALL(*object, positionRightKnee())
+    EXPECT_CALL(*object, rightKnee())
         .WillOnce(Return(ty::Vector(3.0f, 3.0f, 0.0f)));
 
-    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->skeletonRightUpperThigh());
+    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->vectorRightUpperThigh());
 }
 
-TEST_F(UserTest, TesSkeletonRightLowerThigh) {
-    ON_CALL(*object, skeletonRightLowerThigh())
-        .WillByDefault(Invoke(object, &MockUser::FakeSkeletonRightLowerThigh));
+TEST_F(UserTest, TesVectorRightLowerThigh) {
+    ON_CALL(*object, vectorRightLowerThigh())
+        .WillByDefault(Invoke(object, &MockUser::FakeVectorRightLowerThigh));
 
-    EXPECT_CALL(*object, positionRightKnee())
+    EXPECT_CALL(*object, rightKnee())
         .WillOnce(Return(ty::Vector(0.0f, 0.0f, 0.0f)));
-    EXPECT_CALL(*object, positionRightAnkle())
+    EXPECT_CALL(*object, rightAnkle())
         .WillOnce(Return(ty::Vector(3.0f, 3.0f, 0.0f)));
 
-    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->skeletonRightLowerThigh());
+    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->vectorRightLowerThigh());
 }
 
-TEST_F(UserTest, TesSkeletonLeftUpperThigh) {
-    ON_CALL(*object, skeletonLeftUpperThigh())
-        .WillByDefault(Invoke(object, &MockUser::FakeSkeletonLeftUpperThigh));
+TEST_F(UserTest, TesVectorLeftUpperThigh) {
+    ON_CALL(*object, vectorLeftUpperThigh())
+        .WillByDefault(Invoke(object, &MockUser::FakeVectorLeftUpperThigh));
 
-    EXPECT_CALL(*object, positionLeftHip())
+    EXPECT_CALL(*object, leftHip())
         .WillOnce(Return(ty::Vector(0.0f, 0.0f, 0.0f)));
-    EXPECT_CALL(*object, positionLeftKnee())
+    EXPECT_CALL(*object, leftKnee())
         .WillOnce(Return(ty::Vector(3.0f, 3.0f, 0.0f)));
 
-    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->skeletonLeftUpperThigh());
+    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->vectorLeftUpperThigh());
 }
 
-TEST_F(UserTest, TesSkeletonLeftLowerThigh) {
-    ON_CALL(*object, skeletonLeftLowerThigh())
-        .WillByDefault(Invoke(object, &MockUser::FakeSkeletonLeftLowerThigh));
+TEST_F(UserTest, TesVectorLeftLowerThigh) {
+    ON_CALL(*object, vectorLeftLowerThigh())
+        .WillByDefault(Invoke(object, &MockUser::FakeVectorLeftLowerThigh));
 
-    EXPECT_CALL(*object, positionLeftKnee())
+    EXPECT_CALL(*object, leftKnee())
         .WillOnce(Return(ty::Vector(0.0f, 0.0f, 0.0f)));
-    EXPECT_CALL(*object, positionLeftAnkle())
+    EXPECT_CALL(*object, leftAnkle())
         .WillOnce(Return(ty::Vector(3.0f, 3.0f, 0.0f)));
 
-    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->skeletonLeftLowerThigh());
+    ASSERT_TRUE(ty::Vector(3.0f, 3.0f, 0.0f) == object->vectorLeftLowerThigh());
 }
 
 TEST_F(UserTest, TestLeftArmIsStriaght) {
     ON_CALL(*object, leftArmIsStraight())
         .WillByDefault(Invoke(object, &MockUser::FakeLeftArmIsStraight));
 
-    EXPECT_CALL(*object, skeletonLeftUpperArm())
+    EXPECT_CALL(*object, vectorLeftUpperArm())
         .WillRepeatedly(Return(ty::Vector(3.0f, 0.0f, 0.0f)));
-    EXPECT_CALL(*object, skeletonLeftForearm())
+    EXPECT_CALL(*object, vectorLeftForearm())
         .WillOnce(Return(ty::Vector(3.0f, 0.0f, 0.0f)))
         .WillOnce(Return(ty::Vector(0.0f, 3.0f, 0.0f)));
 
@@ -131,9 +131,9 @@ TEST_F(UserTest, TestLeftArmIsBentRightAngle) {
     ON_CALL(*object, leftArmIsBentRightAngle())
         .WillByDefault(Invoke(object, &MockUser::FakeLeftArmIsBentRightAngle));
 
-    EXPECT_CALL(*object, skeletonLeftUpperArm())
+    EXPECT_CALL(*object, vectorLeftUpperArm())
         .WillRepeatedly(Return(ty::Vector(3.0f, 0.0f, 0.0f)));
-    EXPECT_CALL(*object, skeletonLeftForearm())
+    EXPECT_CALL(*object, vectorLeftForearm())
         .WillOnce(Return(ty::Vector(0.0f, 3.0f, 0.0f)))
         .WillOnce(Return(ty::Vector(3.0f, 0.0f, 0.0f)));
 
@@ -145,9 +145,9 @@ TEST_F(UserTest, TestRightArmIsBentRightAngle) {
     ON_CALL(*object, rightArmIsBentRightAngle())
         .WillByDefault(Invoke(object, &MockUser::FakeRightArmIsBentRightAngle));
 
-    EXPECT_CALL(*object, skeletonRightUpperArm())
+    EXPECT_CALL(*object, vectorRightUpperArm())
         .WillRepeatedly(Return(ty::Vector(3.0f, 0.0f, 0.0f)));
-    EXPECT_CALL(*object, skeletonRightForearm())
+    EXPECT_CALL(*object, vectorRightForearm())
         .WillOnce(Return(ty::Vector(0.0f, 3.0f, 0.0f)))
         .WillOnce(Return(ty::Vector(3.0f, 0.0f, 0.0f)));
 
@@ -159,9 +159,9 @@ TEST_F(UserTest, TestRightArmIsStriaght) {
     ON_CALL(*object, rightArmIsStraight())
         .WillByDefault(Invoke(object, &MockUser::FakeRightArmIsStraight));
 
-    EXPECT_CALL(*object, skeletonRightUpperArm())
+    EXPECT_CALL(*object, vectorRightUpperArm())
         .WillRepeatedly(Return(ty::Vector(3.0f, 0.0f, 0.0f)));
-    EXPECT_CALL(*object, skeletonRightForearm())
+    EXPECT_CALL(*object, vectorRightForearm())
         .WillOnce(Return(ty::Vector(3.0f, 0.0f, 0.0f)))
         .WillOnce(Return(ty::Vector(0.0f, 3.0f, 0.0f)));
 

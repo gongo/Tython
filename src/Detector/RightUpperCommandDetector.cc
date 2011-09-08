@@ -17,9 +17,9 @@ RightUpperCommandDetector::~RightUpperCommandDetector(void)
 
 bool RightUpperCommandDetector::isStand(void) const
 {
-    Vector shoulder = user->positionRightShoulder();
-    Vector elbow    = user->positionRightElbow();
-    Vector hand     = user->positionRightHand();
+    Vector shoulder = user->rightShoulder();
+    Vector elbow    = user->rightElbow();
+    Vector hand     = user->rightHand();
 
     return user->rightArmIsBentRightAngle()
         && hand.Y > shoulder.Y
@@ -28,10 +28,10 @@ bool RightUpperCommandDetector::isStand(void) const
 
 bool RightUpperCommandDetector::isRightUpperBefore(void) const
 {
-    Vector shoulder = user->positionRightShoulder();
-    Vector elbow    = user->positionRightElbow();
-    Vector hand     = user->positionRightHand();
-    Vector neck     = user->positionNeck();
+    Vector shoulder = user->rightShoulder();
+    Vector elbow    = user->rightElbow();
+    Vector hand     = user->rightHand();
+    Vector neck     = user->neck();
 
     return user->rightArmIsBentRightAngle()
         && shoulder.Y > hand.Y
@@ -41,10 +41,10 @@ bool RightUpperCommandDetector::isRightUpperBefore(void) const
 
 bool RightUpperCommandDetector::isRightUpperAfter(void) const
 {
-    Vector shoulder = user->positionRightShoulder();
-    Vector elbow    = user->positionRightElbow();
-    Vector hand     = user->positionRightHand();
-    Vector neck     = user->positionNeck();
+    Vector shoulder = user->rightShoulder();
+    Vector elbow    = user->rightElbow();
+    Vector hand     = user->rightHand();
+    Vector neck     = user->neck();
 
     return user->rightArmIsBentRightAngle()
         && shoulder.Y < hand.Y

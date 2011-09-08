@@ -16,9 +16,9 @@ LeftJabCommandDetector::~LeftJabCommandDetector(void)
 
 bool LeftJabCommandDetector::isStand(void) const
 {
-    Vector shoulder = user->positionLeftShoulder();
-    Vector elbow    = user->positionLeftElbow();
-    Vector hand     = user->positionLeftHand();
+    Vector shoulder = user->leftShoulder();
+    Vector elbow    = user->leftElbow();
+    Vector hand     = user->leftHand();
 
     return user->leftArmIsBentRightAngle()
         && hand.Y > shoulder.Y
@@ -27,9 +27,9 @@ bool LeftJabCommandDetector::isStand(void) const
 
 bool LeftJabCommandDetector::isLeftJab(void) const
 {
-    Vector shoulder = user->positionLeftShoulder();
-    Vector elbow    = user->positionLeftElbow();
-    Vector hand     = user->positionLeftHand();
+    Vector shoulder = user->leftShoulder();
+    Vector elbow    = user->leftElbow();
+    Vector hand     = user->leftHand();
 
     return user->leftArmIsStraight()
         && hand.Y > shoulder.Y

@@ -15,12 +15,12 @@ ThanksCommandDetector::~ThanksCommandDetector(void)
 
 bool ThanksCommandDetector::isCrossArm(void)
 {
-    Vector rightForearm= user->skeletonRightForearm();
-    Vector leftForearm = user->skeletonLeftForearm();
-    Vector rightHand = user->positionRightHand();
-    Vector leftHand = user->positionLeftHand();
-    Vector neck = user->positionNeck();
-    Vector waist = user->positionWaist();
+    Vector rightForearm= user->vectorRightForearm();
+    Vector leftForearm = user->vectorLeftForearm();
+    Vector rightHand = user->rightHand();
+    Vector leftHand = user->leftHand();
+    Vector neck = user->neck();
+    Vector waist = user->waist();
 
     return rightForearm.isOrthogonal(leftForearm)
         && rightHand.Y < neck.Y
@@ -31,13 +31,13 @@ bool ThanksCommandDetector::isCrossArm(void)
 
 bool ThanksCommandDetector::isBottomArm(void)
 {
-    Vector rightForearm= user->skeletonRightForearm();
-    Vector rightUpperArm= user->skeletonRightUpperArm();
-    Vector leftForearm = user->skeletonLeftForearm();
-    Vector leftUpperArm = user->skeletonLeftUpperArm();
-    Vector rightHand = user->positionRightHand();
-    Vector leftHand = user->positionLeftHand();
-    Vector waist = user->positionWaist();
+    Vector rightForearm= user->vectorRightForearm();
+    Vector rightUpperArm= user->vectorRightUpperArm();
+    Vector leftForearm = user->vectorLeftForearm();
+    Vector leftUpperArm = user->vectorLeftUpperArm();
+    Vector rightHand = user->rightHand();
+    Vector leftHand = user->leftHand();
+    Vector waist = user->waist();
 
     return rightForearm.isStraight(rightUpperArm)
         && leftForearm.isStraight(leftUpperArm)

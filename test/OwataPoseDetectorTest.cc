@@ -21,17 +21,17 @@ protected:
 };
 
 #define SET_SKELETON_CALL() do {                                        \
-        EXPECT_CALL(*mock, skeletonRightUpperArm())                     \
+        EXPECT_CALL(*mock, vectorRightUpperArm())                     \
             .WillRepeatedly(Return(ty::Vector(1.4f, 1.4f, 0.0f)));      \
-        EXPECT_CALL(*mock, skeletonLeftUpperArm())                      \
+        EXPECT_CALL(*mock, vectorLeftUpperArm())                      \
             .WillRepeatedly(Return(ty::Vector(-1.4f, 1.4f, 0.0f)));     \
-        EXPECT_CALL(*mock, skeletonHead())                              \
+        EXPECT_CALL(*mock, vectorHead())                              \
             .WillRepeatedly(Return(ty::Vector(0.0f, 1.4f, 0.0f)));      \
-        EXPECT_CALL(*mock, positionHead())                              \
+        EXPECT_CALL(*mock, head())                                      \
             .WillRepeatedly(Return(ty::Vector(0.0f, 1.0f, 0.0f)));      \
-        EXPECT_CALL(*mock, positionRightHand())                         \
+        EXPECT_CALL(*mock, rightHand())                                 \
             .WillRepeatedly(Return(ty::Vector(0.0f, 2.0f, 0.0f)));      \
-        EXPECT_CALL(*mock, positionLeftHand())                          \
+        EXPECT_CALL(*mock, leftHand())                                  \
             .WillRepeatedly(Return(ty::Vector(0.0f, 2.0f, 0.0f)));      \
     } while (0)
 

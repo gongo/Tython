@@ -1,6 +1,4 @@
 #include "User.h"
-#include "util.h"
-
 
 namespace ty {
 
@@ -50,205 +48,204 @@ inline bool User::isConfident(XnSkeletonJointPosition p) const
     return p.fConfidence >= THRESHOLD_CONFIDENCE;
 }
 
-inline Vector User::positionHead(void)
+inline Vector User::head(void)
 {
     return getSkeletonPosition(XN_SKEL_HEAD);
 }
 
-inline Vector User::positionNeck(void)
+inline Vector User::neck(void)
 {
     return getSkeletonPosition(XN_SKEL_NECK);
 }
 
-inline Vector User::positionTorso(void)
+inline Vector User::torso(void)
 {
     return getSkeletonPosition(XN_SKEL_TORSO);
 }
 
-inline Vector User::positionWaist(void)
+inline Vector User::waist(void)
 {
     return getSkeletonPosition(XN_SKEL_WAIST);
 }
 
-inline Vector User::positionLeftCollar(void)
+inline Vector User::leftCollar(void)
 {
     return getSkeletonPosition(XN_SKEL_LEFT_COLLAR);
 }
 
-inline Vector User::positionLeftShoulder(void)
+inline Vector User::leftShoulder(void)
 {
     return getSkeletonPosition(XN_SKEL_LEFT_SHOULDER);
 }
 
-inline Vector User::positionLeftElbow(void)
+inline Vector User::leftElbow(void)
 {
     return getSkeletonPosition(XN_SKEL_LEFT_ELBOW);
 }
 
-inline Vector User::positionLeftWrist(void)
+inline Vector User::leftWrist(void)
 {
     return getSkeletonPosition(XN_SKEL_LEFT_WRIST);
 }
 
-inline Vector User::positionLeftHand(void)
+inline Vector User::leftHand(void)
 {
     return getSkeletonPosition(XN_SKEL_LEFT_HAND);
 }
 
-inline Vector User::positionLeftFingertip(void)
+inline Vector User::leftFingertip(void)
 {
     return getSkeletonPosition(XN_SKEL_LEFT_FINGERTIP);
 }
 
-inline Vector User::positionRightCollar(void)
+inline Vector User::rightCollar(void)
 {
     return getSkeletonPosition(XN_SKEL_RIGHT_COLLAR);
 }
 
-inline Vector User::positionRightShoulder(void)
+inline Vector User::rightShoulder(void)
 {
     return getSkeletonPosition(XN_SKEL_RIGHT_SHOULDER);
 }
 
-inline Vector User::positionRightElbow(void)
+inline Vector User::rightElbow(void)
 {
     return getSkeletonPosition(XN_SKEL_RIGHT_ELBOW);
 }
 
-inline Vector User::positionRightWrist(void)
+inline Vector User::rightWrist(void)
 {
     return getSkeletonPosition(XN_SKEL_RIGHT_WRIST);
 }
 
-inline Vector User::positionRightHand(void)
+inline Vector User::rightHand(void)
 {
     return getSkeletonPosition(XN_SKEL_RIGHT_HAND);
 }
 
-inline Vector User::positionRightFingertip(void)
+inline Vector User::rightFingertip(void)
 {
     return getSkeletonPosition(XN_SKEL_RIGHT_FINGERTIP);
 }
 
-inline Vector User::positionLeftHip(void)
+inline Vector User::leftHip(void)
 {
     return getSkeletonPosition(XN_SKEL_LEFT_HIP);
 }
 
-inline Vector User::positionLeftKnee(void)
+inline Vector User::leftKnee(void)
 {
     return getSkeletonPosition(XN_SKEL_LEFT_KNEE);
 }
 
-inline Vector User::positionLeftAnkle(void)
+inline Vector User::leftAnkle(void)
 {
     return getSkeletonPosition(XN_SKEL_LEFT_ANKLE);
 }
 
-inline Vector User::positionLeftFoot(void)
+inline Vector User::leftFoot(void)
 {
     return getSkeletonPosition(XN_SKEL_LEFT_FOOT);
 }
 
-inline Vector User::positionRightHip(void)
+inline Vector User::rightHip(void)
 {
     return getSkeletonPosition(XN_SKEL_RIGHT_HIP);
 }
 
-inline Vector User::positionRightKnee(void)
+inline Vector User::rightKnee(void)
 {
     return getSkeletonPosition(XN_SKEL_RIGHT_KNEE);
 }
 
-inline Vector User::positionRightAnkle(void)
+inline Vector User::rightAnkle(void)
 {
     return getSkeletonPosition(XN_SKEL_RIGHT_ANKLE);
 }
 
-inline Vector User::positionRightFoot(void)
+inline Vector User::rightFoot(void)
 {
     return getSkeletonPosition(XN_SKEL_RIGHT_FOOT);
 }
 
-inline Vector User::skeletonHead(void)
+inline Vector User::vectorHead(void)
 {
-    return positionHead() - positionNeck();
+    return head() - neck();
 }
 
-inline Vector User::skeletonMedianLine(void)
+inline Vector User::vectorMedianLine(void)
 {
-    return positionWaist() - positionHead();
+    return waist() - head();
 }
 
-inline Vector User::skeletonRightUpperArm(void)
+inline Vector User::vectorRightUpperArm(void)
 {
-    return positionRightElbow() - positionRightShoulder();
+    return rightElbow() - rightShoulder();
 }
 
-inline Vector User::skeletonRightForearm(void)
+inline Vector User::vectorRightForearm(void)
 {
-    return positionRightHand() - positionRightElbow();
+    return rightHand() - rightElbow();
 }
 
-inline Vector User::skeletonLeftUpperArm(void)
+inline Vector User::vectorLeftUpperArm(void)
 {
-    return positionLeftElbow() - positionLeftShoulder();
+    return leftElbow() - leftShoulder();
 }
 
-inline Vector User::skeletonLeftForearm(void)
+inline Vector User::vectorLeftForearm(void)
 {
-    return positionLeftHand() - positionLeftElbow();
+    return leftHand() - leftElbow();
 }
 
-inline Vector User::skeletonLeftUpperThigh(void)
+inline Vector User::vectorLeftUpperThigh(void)
 {
-    return positionLeftKnee() - positionLeftHip();
+    return leftKnee() - leftHip();
 }
 
-inline Vector User::skeletonLeftLowerThigh(void)
+inline Vector User::vectorLeftLowerThigh(void)
 {
-    return positionLeftAnkle() - positionLeftKnee();
+    return leftAnkle() - leftKnee();
 }
 
-inline Vector User::skeletonRightUpperThigh(void)
+inline Vector User::vectorRightUpperThigh(void)
 {
-    return positionRightKnee() - positionRightHip();
+    return rightKnee() - rightHip();
 }
 
-inline Vector User::skeletonRightLowerThigh(void)
+inline Vector User::vectorRightLowerThigh(void)
 {
-    return positionRightAnkle() - positionRightKnee();
+    return rightAnkle() - rightKnee();
 }
 
 inline bool User::rightArmIsStraight(void)
 {
-    Vector forearm = skeletonRightForearm();
-    Vector upperArm = skeletonRightUpperArm();
+    Vector forearm = vectorRightForearm();
+    Vector upperArm = vectorRightUpperArm();
     
     return forearm.isStraight(upperArm);
 }
 
 inline bool User::leftArmIsStraight(void)
 {
-    Vector forearm = skeletonLeftForearm();
-    Vector upperArm = skeletonLeftUpperArm();
+    Vector forearm = vectorLeftForearm();
+    Vector upperArm = vectorLeftUpperArm();
 
     return forearm.isStraight(upperArm);
 }
 
 inline bool User::rightArmIsBentRightAngle(void)
 {
-    Vector upperArm = skeletonRightUpperArm();
-    Vector forearm  = skeletonRightForearm();
+    Vector upperArm = vectorRightUpperArm();
+    Vector forearm  = vectorRightForearm();
 
     return upperArm.isOrthogonal(forearm);
 }
 
-
 inline bool User::leftArmIsBentRightAngle(void)
 {
-    Vector upperArm = skeletonLeftUpperArm();
-    Vector forearm  = skeletonLeftForearm();
+    Vector upperArm = vectorLeftUpperArm();
+    Vector forearm  = vectorLeftForearm();
 
     return upperArm.isOrthogonal(forearm);
 }

@@ -12,7 +12,6 @@ using ::testing::_;
 class MockUser : public ty::User {
 public:
     MockUser(void) : User(NULL) {
-        _fake = new User(NULL);
         ON_CALL(*this, isTracking()).WillByDefault(Return(true));
         ON_CALL(*this, isCalibrated()).WillByDefault(Return(true));
         ON_CALL(*this, isConfident(_)).WillByDefault(Return(true));
@@ -23,32 +22,32 @@ public:
         skeletonPosition[j - 1].position = v;
     }
 
-    MOCK_METHOD0(skeletonRightUpperArm, ty::Vector(void));
-    MOCK_METHOD0(skeletonRightForearm, ty::Vector(void));
-    MOCK_METHOD0(skeletonLeftUpperArm, ty::Vector(void));
-    MOCK_METHOD0(skeletonLeftForearm, ty::Vector(void));
-    MOCK_METHOD0(skeletonRightUpperThigh, ty::Vector(void));
-    MOCK_METHOD0(skeletonRightLowerThigh, ty::Vector(void));
-    MOCK_METHOD0(skeletonLeftUpperThigh, ty::Vector(void));
-    MOCK_METHOD0(skeletonLeftLowerThigh, ty::Vector(void));
-    MOCK_METHOD0(skeletonHead, ty::Vector(void));
-    MOCK_METHOD0(positionHead, ty::Vector(void));
-    MOCK_METHOD0(positionNeck, ty::Vector(void));
-    MOCK_METHOD0(positionRightShoulder, ty::Vector(void));
-    MOCK_METHOD0(positionRightElbow, ty::Vector(void));
-    MOCK_METHOD0(positionRightHand, ty::Vector(void));
-    MOCK_METHOD0(positionLeftShoulder, ty::Vector(void));
-    MOCK_METHOD0(positionLeftElbow, ty::Vector(void));
-    MOCK_METHOD0(positionLeftHand, ty::Vector(void));
-    MOCK_METHOD0(positionRightHip, ty::Vector(void));
-    MOCK_METHOD0(positionRightKnee, ty::Vector(void));
-    MOCK_METHOD0(positionRightAnkle, ty::Vector(void));
-    MOCK_METHOD0(positionRightFoot, ty::Vector(void));
-    MOCK_METHOD0(positionLeftHip, ty::Vector(void));
-    MOCK_METHOD0(positionLeftKnee, ty::Vector(void));
-    MOCK_METHOD0(positionLeftAnkle, ty::Vector(void));
-    MOCK_METHOD0(positionLeftFoot, ty::Vector(void));
-    MOCK_METHOD0(positionWaist, ty::Vector(void));
+    MOCK_METHOD0(vectorRightUpperArm, ty::Vector(void));
+    MOCK_METHOD0(vectorRightForearm, ty::Vector(void));
+    MOCK_METHOD0(vectorLeftUpperArm, ty::Vector(void));
+    MOCK_METHOD0(vectorLeftForearm, ty::Vector(void));
+    MOCK_METHOD0(vectorRightUpperThigh, ty::Vector(void));
+    MOCK_METHOD0(vectorRightLowerThigh, ty::Vector(void));
+    MOCK_METHOD0(vectorLeftUpperThigh, ty::Vector(void));
+    MOCK_METHOD0(vectorLeftLowerThigh, ty::Vector(void));
+    MOCK_METHOD0(vectorHead, ty::Vector(void));
+    MOCK_METHOD0(head, ty::Vector(void));
+    MOCK_METHOD0(neck, ty::Vector(void));
+    MOCK_METHOD0(rightShoulder, ty::Vector(void));
+    MOCK_METHOD0(rightElbow, ty::Vector(void));
+    MOCK_METHOD0(rightHand, ty::Vector(void));
+    MOCK_METHOD0(leftShoulder, ty::Vector(void));
+    MOCK_METHOD0(leftElbow, ty::Vector(void));
+    MOCK_METHOD0(leftHand, ty::Vector(void));
+    MOCK_METHOD0(rightHip, ty::Vector(void));
+    MOCK_METHOD0(rightKnee, ty::Vector(void));
+    MOCK_METHOD0(rightAnkle, ty::Vector(void));
+    MOCK_METHOD0(rightFoot, ty::Vector(void));
+    MOCK_METHOD0(leftHip, ty::Vector(void));
+    MOCK_METHOD0(leftKnee, ty::Vector(void));
+    MOCK_METHOD0(leftAnkle, ty::Vector(void));
+    MOCK_METHOD0(leftFoot, ty::Vector(void));
+    MOCK_METHOD0(waist, ty::Vector(void));
     MOCK_METHOD0(rightArmIsStraight, bool(void));
     MOCK_METHOD0(leftArmIsStraight, bool(void));
     MOCK_METHOD0(rightArmIsBentRightAngle, bool(void));
@@ -57,83 +56,83 @@ public:
     MOCK_METHOD0(isCalibrated, bool(void));
     MOCK_CONST_METHOD1(isConfident, bool(XnSkeletonJointPosition p));
 
-    ty::Vector FakeSkeletonRightUpperArm(void) {
-        return ty::User::skeletonRightUpperArm();
+    ty::Vector FakeVectorRightUpperArm(void) {
+        return ty::User::vectorRightUpperArm();
     }
-    ty::Vector FakeSkeletonRightForearm(void) {
-        return ty::User::skeletonRightForearm();
+    ty::Vector FakeVectorRightForearm(void) {
+        return ty::User::vectorRightForearm();
     }
-    ty::Vector FakeSkeletonLeftUpperArm(void) {
-        return ty::User::skeletonLeftUpperArm();
+    ty::Vector FakeVectorLeftUpperArm(void) {
+        return ty::User::vectorLeftUpperArm();
     }
-    ty::Vector FakeSkeletonLeftForearm(void) {
-        return ty::User::skeletonLeftForearm();
+    ty::Vector FakeVectorLeftForearm(void) {
+        return ty::User::vectorLeftForearm();
     }
-    ty::Vector FakeSkeletonRightUpperThigh(void) {
-        return ty::User::skeletonRightUpperThigh();
+    ty::Vector FakeVectorRightUpperThigh(void) {
+        return ty::User::vectorRightUpperThigh();
     }
-    ty::Vector FakeSkeletonRightLowerThigh(void) {
-        return ty::User::skeletonRightLowerThigh();
+    ty::Vector FakeVectorRightLowerThigh(void) {
+        return ty::User::vectorRightLowerThigh();
     }
-    ty::Vector FakeSkeletonLeftUpperThigh(void) {
-        return ty::User::skeletonLeftUpperThigh();
+    ty::Vector FakeVectorLeftUpperThigh(void) {
+        return ty::User::vectorLeftUpperThigh();
     }
-    ty::Vector FakeSkeletonLeftLowerThigh(void) {
-        return ty::User::skeletonLeftLowerThigh();
+    ty::Vector FakeVectorLeftLowerThigh(void) {
+        return ty::User::vectorLeftLowerThigh();
     }
-    ty::Vector FakeSkeletonHead(void) {
-        return ty::User::skeletonHead();
+    ty::Vector FakeVectorHead(void) {
+        return ty::User::vectorHead();
     }
-    ty::Vector FakePositionHead(void) {
-        return ty::User::positionHead();
+    ty::Vector FakeHead(void) {
+        return ty::User::head();
     }
-    ty::Vector FakePositionNeck(void) {
-        return ty::User::positionNeck();
+    ty::Vector FakeNeck(void) {
+        return ty::User::neck();
     }
-    ty::Vector FakePositionRightShoulder(void) {
-        return ty::User::positionRightShoulder();
+    ty::Vector FakeRightShoulder(void) {
+        return ty::User::rightShoulder();
     }
-    ty::Vector FakePositionRightElbow(void) {
-        return ty::User::positionRightElbow();
+    ty::Vector FakeRightElbow(void) {
+        return ty::User::rightElbow();
     }
-    ty::Vector FakePositionRightHand(void) {
-        return ty::User::positionLeftHand();
+    ty::Vector FakeRightHand(void) {
+        return ty::User::leftHand();
     }
-    ty::Vector FakePositionLeftShoulder(void) {
-        return ty::User::positionLeftShoulder();
+    ty::Vector FakeLeftShoulder(void) {
+        return ty::User::leftShoulder();
     }
-    ty::Vector FakePositionLeftElbow(void) {
-        return ty::User::positionLeftElbow();
+    ty::Vector FakeLeftElbow(void) {
+        return ty::User::leftElbow();
     }
-    ty::Vector FakePositionLeftHand(void) {
-        return ty::User::positionLeftHand();
+    ty::Vector FakeLeftHand(void) {
+        return ty::User::leftHand();
     }
-    ty::Vector FakePositionRightHip(void) {
-        return ty::User::positionRightHip();
+    ty::Vector FakeRightHip(void) {
+        return ty::User::rightHip();
     }
-    ty::Vector FakePositionRightKnee(void) {
-        return ty::User::positionRightKnee();
+    ty::Vector FakeRightKnee(void) {
+        return ty::User::rightKnee();
     }
-    ty::Vector FakePositionRightAnkle(void) {
-        return ty::User::positionRightAnkle();
+    ty::Vector FakeRightAnkle(void) {
+        return ty::User::rightAnkle();
     }
-    ty::Vector FakePositionRightFoot(void) {
-        return ty::User::positionRightFoot();
+    ty::Vector FakeRightFoot(void) {
+        return ty::User::rightFoot();
     }
-    ty::Vector FakePositionLeftHip(void) {
-        return ty::User::positionLeftHip();
+    ty::Vector FakeLeftHip(void) {
+        return ty::User::leftHip();
     }
-    ty::Vector FakePositionLeftKnee(void) {
-        return ty::User::positionLeftKnee();
+    ty::Vector FakeLeftKnee(void) {
+        return ty::User::leftKnee();
     }
-    ty::Vector FakePositionLeftAnkle(void) {
-        return ty::User::positionLeftAnkle();
+    ty::Vector FakeLeftAnkle(void) {
+        return ty::User::leftAnkle();
     }
-    ty::Vector FakePositionLeftFoot(void) {
-        return ty::User::positionLeftFoot();
+    ty::Vector FakeLeftFoot(void) {
+        return ty::User::leftFoot();
     }
-    ty::Vector FakePositionWaist(void) {
-        return ty::User::positionWaist();
+    ty::Vector FakeWaist(void) {
+        return ty::User::waist();
     }
     bool FakeRightArmIsStraight(void) {
         return ty::User::rightArmIsStraight();
@@ -153,9 +152,6 @@ public:
     bool FakeIsCalibrated(void) {
         return ty::User::isCalibrated();
     }
-    
-private:
-    User *_fake;
 };
 
 #endif // _TYTHON_MOCK_USER_H

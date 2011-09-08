@@ -17,9 +17,9 @@ LeftHookCommandDetector::~LeftHookCommandDetector(void)
 
 bool LeftHookCommandDetector::isStand(void) const
 {
-    Vector shoulder = user->positionLeftShoulder();
-    Vector elbow    = user->positionLeftElbow();
-    Vector hand     = user->positionLeftHand();
+    Vector shoulder = user->leftShoulder();
+    Vector elbow    = user->leftElbow();
+    Vector hand     = user->leftHand();
 
     return user->leftArmIsBentRightAngle()
         && hand.Y > shoulder.Y
@@ -28,9 +28,9 @@ bool LeftHookCommandDetector::isStand(void) const
 
 bool LeftHookCommandDetector::isLeftHookBefore(void) const
 {
-    Vector shoulder = user->positionLeftShoulder();
-    Vector elbow    = user->positionLeftElbow();
-    Vector hand     = user->positionLeftHand();
+    Vector shoulder = user->leftShoulder();
+    Vector elbow    = user->leftElbow();
+    Vector hand     = user->leftHand();
 
     return user->leftArmIsBentRightAngle()
         && shoulder.X > hand.X
@@ -39,10 +39,10 @@ bool LeftHookCommandDetector::isLeftHookBefore(void) const
 
 bool LeftHookCommandDetector::isLeftHookAfter(void) const
 {
-    Vector shoulder = user->positionLeftShoulder();
-    Vector elbow    = user->positionLeftElbow();
-    Vector hand     = user->positionLeftHand();
-    Vector neck     = user->positionNeck();
+    Vector shoulder = user->leftShoulder();
+    Vector elbow    = user->leftElbow();
+    Vector hand     = user->leftHand();
+    Vector neck     = user->neck();
 
     return shoulder.X < elbow.X
         && elbow.X < hand.X

@@ -22,26 +22,30 @@ protected:
 };
 
 #define SET_SKELETON_CALL() do {                                    \
-        EXPECT_CALL(*mock, positionRightShoulder())                 \
+        EXPECT_CALL(*mock, rightShoulder())                         \
             .WillRepeatedly(Return(ty::Vector(0.0f, 1.0f, 0.0f)));  \
-        EXPECT_CALL(*mock, positionRightElbow())                    \
+        EXPECT_CALL(*mock, rightElbow())                            \
             .WillRepeatedly(Return(ty::Vector(0.0f, 1.0f, 0.0f)));  \
-        EXPECT_CALL(*mock, positionRightHand())                     \
+        EXPECT_CALL(*mock, rightHand())                             \
             .WillRepeatedly(Return(ty::Vector(0.0f, 3.0f, 0.0f)));  \
     } while (0)
 
 TEST_F(RightStraightCommandDetectorTest, TestIsStand) {
     SET_SKELETON_CALL();
-    EXPECT_CALL(*mock, skeletonRightUpperArm()).WillRepeatedly(Return(MockVector::v00));
-    EXPECT_CALL(*mock, skeletonRightForearm()).WillRepeatedly(Return(MockVector::v120));
+    EXPECT_CALL(*mock, vectorRightUpperArm())
+        .WillRepeatedly(Return(MockVector::v00));
+    EXPECT_CALL(*mock, vectorRightForearm())
+        .WillRepeatedly(Return(MockVector::v120));
 
     ASSERT_TRUE(object->isStand());
 }
 
 TEST_F(RightStraightCommandDetectorTest, TestIsStandError) {
     SET_SKELETON_CALL();
-    EXPECT_CALL(*mock, skeletonRightUpperArm()).WillOnce(Return(MockVector::v00));
-    EXPECT_CALL(*mock, skeletonRightForearm()).WillOnce(Return(MockVector::v60));
+    EXPECT_CALL(*mock, vectorRightUpperArm())
+        .WillOnce(Return(MockVector::v00));
+    EXPECT_CALL(*mock, vectorRightForearm())
+        .WillOnce(Return(MockVector::v60));
 
     ASSERT_FALSE(object->isStand());
 }

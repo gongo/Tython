@@ -17,7 +17,7 @@ coverage: test
 	                   'include/*.h'          \
              -o $(LCOV_INFO)
 	rm lcov2.info
-	genhtml -o $(LCOV_DIR) $(LCOV_INFO)
+	genhtml -t Tython -o $(LCOV_DIR) $(LCOV_INFO)
 
 coverage-clean: clean
 	$(RM) -r $(GCOV_OBJS) $(LCOV_INFO) $(LCOV_DIR)

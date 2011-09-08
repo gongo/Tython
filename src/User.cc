@@ -32,14 +32,18 @@ bool User::isCalibrated(void)
     return context->isCalibrated(userId);
 }
 
-Vector User::getSkeletonPosition(XnSkeletonJoint j)
+void User::updateSkeletonJointPosition(XnSkeletonJoint j)
 {
     XnSkeletonJointPosition p = context->getSkeletonJointPosition(userId, j);
 
     if (isConfident(p)) {
         skeletonPosition[j - 1] = p;
-    }
+    }    
+}
 
+Vector User::getSkeletonPosition(XnSkeletonJoint j)
+{
+    updateSkeletonJointPosition(j);
     return Vector(skeletonPosition[j - 1].position);
 }
 

@@ -17,6 +17,246 @@ protected:
     MockUser* object;
 };
 
+TEST_F(UserTest, TestHead) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, head())
+        .WillByDefault(Invoke(object, &MockUser::FakeHead));
+    object->setFakeSkeletonPosition(XN_SKEL_HEAD, v);
+
+    ASSERT_TRUE(v == object->head());
+}
+
+TEST_F(UserTest, TestNeck) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, neck())
+        .WillByDefault(Invoke(object, &MockUser::FakeNeck));
+    object->setFakeSkeletonPosition(XN_SKEL_NECK, v);
+
+    ASSERT_TRUE(v == object->neck());
+}
+
+TEST_F(UserTest, TestTorso) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, torso())
+        .WillByDefault(Invoke(object, &MockUser::FakeTorso));
+    object->setFakeSkeletonPosition(XN_SKEL_TORSO, v);
+
+    ASSERT_TRUE(v == object->torso());
+}
+
+TEST_F(UserTest, TestWaist) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, waist())
+        .WillByDefault(Invoke(object, &MockUser::FakeWaist));
+    object->setFakeSkeletonPosition(XN_SKEL_WAIST, v);
+
+    ASSERT_TRUE(v == object->waist());
+}
+
+TEST_F(UserTest, TestLeftCollar) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, leftCollar())
+        .WillByDefault(Invoke(object, &MockUser::FakeLeftCollar));
+    object->setFakeSkeletonPosition(XN_SKEL_LEFT_COLLAR, v);
+
+    ASSERT_TRUE(v == object->leftCollar());
+}
+
+TEST_F(UserTest, TestLeftShoulder) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, leftShoulder())
+        .WillByDefault(Invoke(object, &MockUser::FakeLeftShoulder));
+    object->setFakeSkeletonPosition(XN_SKEL_LEFT_SHOULDER, v);
+
+    ASSERT_TRUE(v == object->leftShoulder());
+}
+
+TEST_F(UserTest, TestLeftElbow) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, leftElbow())
+        .WillByDefault(Invoke(object, &MockUser::FakeLeftElbow));
+    object->setFakeSkeletonPosition(XN_SKEL_LEFT_ELBOW, v);
+
+    ASSERT_TRUE(v == object->leftElbow());
+}
+
+TEST_F(UserTest, TestLeftWrist) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, leftWrist())
+        .WillByDefault(Invoke(object, &MockUser::FakeLeftWrist));
+    object->setFakeSkeletonPosition(XN_SKEL_LEFT_WRIST, v);
+
+    ASSERT_TRUE(v == object->leftWrist());
+}
+
+TEST_F(UserTest, TestLeftHand) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, leftHand())
+        .WillByDefault(Invoke(object, &MockUser::FakeLeftHand));
+    object->setFakeSkeletonPosition(XN_SKEL_LEFT_HAND, v);
+
+    ASSERT_TRUE(v == object->leftHand());
+}
+
+TEST_F(UserTest, TestLeftFingertip) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, leftFingertip())
+        .WillByDefault(Invoke(object, &MockUser::FakeLeftFingertip));
+    object->setFakeSkeletonPosition(XN_SKEL_LEFT_FINGERTIP, v);
+
+    ASSERT_TRUE(v == object->leftFingertip());
+}
+
+TEST_F(UserTest, TestRightCollar) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, rightCollar())
+        .WillByDefault(Invoke(object, &MockUser::FakeRightCollar));
+    object->setFakeSkeletonPosition(XN_SKEL_RIGHT_COLLAR, v);
+
+    ASSERT_TRUE(v == object->rightCollar());
+}
+
+TEST_F(UserTest, TestRightShoulder) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, rightShoulder())
+        .WillByDefault(Invoke(object, &MockUser::FakeRightShoulder));
+    object->setFakeSkeletonPosition(XN_SKEL_RIGHT_SHOULDER, v);
+
+    ASSERT_TRUE(v == object->rightShoulder());
+}
+
+TEST_F(UserTest, TestRightElbow) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, rightElbow())
+        .WillByDefault(Invoke(object, &MockUser::FakeRightElbow));
+    object->setFakeSkeletonPosition(XN_SKEL_RIGHT_ELBOW, v);
+
+    ASSERT_TRUE(v == object->rightElbow());
+}
+
+TEST_F(UserTest, TestRightWrist) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, rightWrist())
+        .WillByDefault(Invoke(object, &MockUser::FakeRightWrist));
+    object->setFakeSkeletonPosition(XN_SKEL_RIGHT_WRIST, v);
+
+    ASSERT_TRUE(v == object->rightWrist());
+}
+
+TEST_F(UserTest, TestRightHand) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, rightHand())
+        .WillByDefault(Invoke(object, &MockUser::FakeRightHand));
+    object->setFakeSkeletonPosition(XN_SKEL_RIGHT_HAND, v);
+
+    ASSERT_TRUE(v == object->rightHand());
+}
+
+TEST_F(UserTest, TestRightFingertip) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, rightFingertip())
+        .WillByDefault(Invoke(object, &MockUser::FakeRightFingertip));
+    object->setFakeSkeletonPosition(XN_SKEL_RIGHT_FINGERTIP, v);
+
+    ASSERT_TRUE(v == object->rightFingertip());
+}
+
+TEST_F(UserTest, TestLeftHip) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, leftHip())
+        .WillByDefault(Invoke(object, &MockUser::FakeLeftHip));
+    object->setFakeSkeletonPosition(XN_SKEL_LEFT_HIP, v);
+
+    ASSERT_TRUE(v == object->leftHip());
+}
+
+TEST_F(UserTest, TestLeftKnee) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, leftKnee())
+        .WillByDefault(Invoke(object, &MockUser::FakeLeftKnee));
+    object->setFakeSkeletonPosition(XN_SKEL_LEFT_KNEE, v);
+
+    ASSERT_TRUE(v == object->leftKnee());
+}
+
+TEST_F(UserTest, TestLeftAnkle) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, leftAnkle())
+        .WillByDefault(Invoke(object, &MockUser::FakeLeftAnkle));
+    object->setFakeSkeletonPosition(XN_SKEL_LEFT_ANKLE, v);
+
+    ASSERT_TRUE(v == object->leftAnkle());
+}
+
+TEST_F(UserTest, TestLeftFoot) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, leftFoot())
+        .WillByDefault(Invoke(object, &MockUser::FakeLeftFoot));
+    object->setFakeSkeletonPosition(XN_SKEL_LEFT_FOOT, v);
+
+    ASSERT_TRUE(v == object->leftFoot());
+}
+
+TEST_F(UserTest, TestRightHip) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, rightHip())
+        .WillByDefault(Invoke(object, &MockUser::FakeRightHip));
+    object->setFakeSkeletonPosition(XN_SKEL_RIGHT_HIP, v);
+
+    ASSERT_TRUE(v == object->rightHip());
+}
+
+TEST_F(UserTest, TestRightKnee) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, rightKnee())
+        .WillByDefault(Invoke(object, &MockUser::FakeRightKnee));
+    object->setFakeSkeletonPosition(XN_SKEL_RIGHT_KNEE, v);
+
+    ASSERT_TRUE(v == object->rightKnee());
+}
+
+TEST_F(UserTest, TestRightAnkle) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, rightAnkle())
+        .WillByDefault(Invoke(object, &MockUser::FakeRightAnkle));
+    object->setFakeSkeletonPosition(XN_SKEL_RIGHT_ANKLE, v);
+
+    ASSERT_TRUE(v == object->rightAnkle());
+}
+
+TEST_F(UserTest, TestRightFoot) {
+    ty::Vector v(1.0f, 2.0f, 3.0f);
+
+    ON_CALL(*object, rightFoot())
+        .WillByDefault(Invoke(object, &MockUser::FakeRightFoot));
+    object->setFakeSkeletonPosition(XN_SKEL_RIGHT_FOOT, v);
+
+    ASSERT_TRUE(v == object->rightFoot());
+}
+
 TEST_F(UserTest, TesVectorRightUpperArm) {
     ON_CALL(*object, vectorRightUpperArm())
         .WillByDefault(Invoke(object, &MockUser::FakeVectorRightUpperArm));

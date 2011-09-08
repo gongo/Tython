@@ -22,6 +22,8 @@ public:
         skeletonPosition[j - 1].position = v;
     }
 
+    void updateSkeletonJointPosition(XnSkeletonJoint j) {}
+
     MOCK_METHOD0(vectorRightUpperArm, ty::Vector(void));
     MOCK_METHOD0(vectorRightForearm, ty::Vector(void));
     MOCK_METHOD0(vectorLeftUpperArm, ty::Vector(void));
@@ -35,12 +37,18 @@ public:
     MOCK_METHOD0(head, ty::Vector(void));
     MOCK_METHOD0(neck, ty::Vector(void));
     MOCK_METHOD0(torso, ty::Vector(void));
+    MOCK_METHOD0(rightCollar, ty::Vector(void));
     MOCK_METHOD0(rightShoulder, ty::Vector(void));
     MOCK_METHOD0(rightElbow, ty::Vector(void));
+    MOCK_METHOD0(rightWrist, ty::Vector(void));
     MOCK_METHOD0(rightHand, ty::Vector(void));
+    MOCK_METHOD0(rightFingertip, ty::Vector(void));
+    MOCK_METHOD0(leftCollar, ty::Vector(void));
     MOCK_METHOD0(leftShoulder, ty::Vector(void));
     MOCK_METHOD0(leftElbow, ty::Vector(void));
+    MOCK_METHOD0(leftWrist, ty::Vector(void));
     MOCK_METHOD0(leftHand, ty::Vector(void));
+    MOCK_METHOD0(leftFingertip, ty::Vector(void));
     MOCK_METHOD0(rightHip, ty::Vector(void));
     MOCK_METHOD0(rightKnee, ty::Vector(void));
     MOCK_METHOD0(rightAnkle, ty::Vector(void));
@@ -97,14 +105,26 @@ public:
     ty::Vector FakeTorso(void) {
         return ty::User::torso();
     }
+    ty::Vector FakeRightCollar(void) {
+        return ty::User::rightCollar();
+    }
     ty::Vector FakeRightShoulder(void) {
         return ty::User::rightShoulder();
     }
     ty::Vector FakeRightElbow(void) {
         return ty::User::rightElbow();
     }
+    ty::Vector FakeRightWrist(void) {
+        return ty::User::rightWrist();
+    }
     ty::Vector FakeRightHand(void) {
-        return ty::User::leftHand();
+        return ty::User::rightHand();
+    }
+    ty::Vector FakeRightFingertip(void) {
+        return ty::User::rightFingertip();
+    }
+    ty::Vector FakeLeftCollar(void) {
+        return ty::User::leftCollar();
     }
     ty::Vector FakeLeftShoulder(void) {
         return ty::User::leftShoulder();
@@ -112,8 +132,14 @@ public:
     ty::Vector FakeLeftElbow(void) {
         return ty::User::leftElbow();
     }
+    ty::Vector FakeLeftWrist(void) {
+        return ty::User::leftWrist();
+    }
     ty::Vector FakeLeftHand(void) {
         return ty::User::leftHand();
+    }
+    ty::Vector FakeLeftFingertip(void) {
+        return ty::User::leftFingertip();
     }
     ty::Vector FakeRightHip(void) {
         return ty::User::rightHip();

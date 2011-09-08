@@ -164,16 +164,16 @@ TEST_F(VectorTest, TestDot) {
 
 TEST_F(VectorTest, TestCross) {
     ty::Vector vec0;
-    ty::Vector vec1(3.0f, 0.0f, 0.0f);
-    ty::Vector vec2(0.0f, 1.0f, 0.0f);
-    ty::Vector vec3(1.0f, 1.0f, 1.0f);
-    ty::Vector vec4(-12.0f, 0.0f, 0.0f);
+    ty::Vector vecX(1.0f, 0.0f, 0.0f);
+    ty::Vector vecY(0.0f, 1.0f, 0.0f);
+    ty::Vector vecZ(0.0f, 0.0f, 1.0f);
 
-    ASSERT_EQ(0.0f, vec1.cross(vec1)); // 平行(同方向)
-    ASSERT_EQ(1.0f, vec1.cross(vec2)); // 直行
-    ASSERT_LT(0.0f, vec1.cross(vec3)); // 鋭角
-    ASSERT_EQ(0.0f, vec1.cross(vec4)); // 平行(逆方向)
-    ASSERT_LT(0.0f, vec3.cross(vec4)); // 鈍角
+    ASSERT_TRUE(ty::Vector(0.0f, 0.0f,  1.0f) == vecX.cross(vecY));
+    ASSERT_TRUE(ty::Vector(0.0f, 0.0f, -1.0f) == vecY.cross(vecX));
+    ASSERT_TRUE(ty::Vector(0.0f, -1.0f, 0.0f) == vecX.cross(vecZ));
+    ASSERT_TRUE(ty::Vector(0.0f,  1.0f, 0.0f) == vecZ.cross(vecX));
+    ASSERT_TRUE(ty::Vector( 1.0f, 0.0f, 0.0f) == vecY.cross(vecZ));
+    ASSERT_TRUE(ty::Vector(-1.0f, 0.0f, 0.0f) == vecZ.cross(vecY));
 }
 
 TEST_F(VectorTest, TestDistance) {

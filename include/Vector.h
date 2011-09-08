@@ -59,7 +59,7 @@ public:
      * @param   v  対象のベクトル
      * @return     外積 |v1 × v2|
      */
-    float cross(const Vector& v) const;
+    Vector cross(const Vector& v) const;
 
     /**
      * ベクトルの正規化

@@ -111,10 +111,9 @@ float Vector::dot(const Vector& v) const
     return (X*v.X + Y*v.Y + Z*v.Z) / magnitude() / v.magnitude();
 }
 
-float Vector::cross(const Vector& v) const
+Vector Vector::cross(const Vector& v) const
 {
-    Vector c(Y*v.Z - Z*v.Y, Z*v.X - X*v.Z, X*v.Y - Y*v.X);
-    return c.magnitude() / magnitude() / v.magnitude();
+    return Vector(Y*v.Z - Z*v.Y, Z*v.X - X*v.Z, X*v.Y - Y*v.X).normalize();
 }
 
 float Vector::distance(const Vector& v) const

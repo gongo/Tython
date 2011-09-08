@@ -1,4 +1,6 @@
 *.o
+*.gcda
+*.gcno
 Tython
 TestTython
 .cimg/

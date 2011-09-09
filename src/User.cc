@@ -228,35 +228,23 @@ inline Vector User::vectorUpperBodyForward(void)
 }
 
 inline bool User::rightArmIsStraight(void)
-{
-    Vector forearm = vectorRightForearm();
-    Vector upperArm = vectorRightUpperArm();
-    
-    return forearm.isStraight(upperArm);
+{   
+    return vectorRightForearm().isStraight(vectorRightUpperArm());
 }
 
 inline bool User::leftArmIsStraight(void)
 {
-    Vector forearm = vectorLeftForearm();
-    Vector upperArm = vectorLeftUpperArm();
-
-    return forearm.isStraight(upperArm);
+    return vectorLeftForearm().isStraight(vectorLeftUpperArm());
 }
 
 inline bool User::rightArmIsBentRightAngle(void)
 {
-    Vector upperArm = vectorRightUpperArm();
-    Vector forearm  = vectorRightForearm();
-
-    return upperArm.isOrthogonal(forearm);
+    return vectorRightUpperArm().isOrthogonal(vectorRightForearm());
 }
 
 inline bool User::leftArmIsBentRightAngle(void)
 {
-    Vector upperArm = vectorLeftUpperArm();
-    Vector forearm  = vectorLeftForearm();
-
-    return upperArm.isOrthogonal(forearm);
+    return vectorLeftUpperArm().isOrthogonal(vectorLeftForearm());
 }
 
 } // namespace ty

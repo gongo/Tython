@@ -9,85 +9,93 @@ namespace ty {
 
 class CommandDetector : public AbstractDetector {
 public:
+    /**
+     * @brief コンストラクタ
+     *
+     * コマンドのリストと経過時間を初期化する
+     * 
+     * @param _user User インスタンス
+     */
     CommandDetector(User* _user);
+
+    /**
+     * @brief デストラクタ
+     *
+     * コマンドリストがセットされていれば、delete する
+     */
     virtual ~CommandDetector(void);
 
     /**
-     * ポーズをとっているか判定
+     * @brief ポーズをとっているか判定
      * 
      * 定められた時間内に指定された順番の Pose をしたかを確認する
      *
-     * @see triggetList()
      * @return ポーズを検出できれば true
      */
     bool isPosing(void);
 
 protected:
     /**
-     * 制限時間やポーズなど、コマンドに関する設定を行う
+     * @brief 制限時間やポーズなど、コマンドに関する設定を行う
      *
      * @param  _timeLimit   this->timeLimit
      * @param  _commandNum  this->commandNum
-     * @param ...
+     * @param ...           ポーズ検出関数
      */
     void setCommand(XnUInt64 _timeLimit, int _commandNum, ...);
 
     /**
-     * コマンドとなるポーズを検出するメソッドの typename
+     * @brief コマンドとなるポーズを検出するメソッドの typename
      */
     typedef bool (CommandDetector::*Command)(void);
 
 private:
     /**
-     * リセット
-     *
-     * 検出状況をリセットする
+     * @brief 検出状況をリセットする
      */
     void resetCommand(void);
 
     /**
-     * 次のポーズの検出を開始する
+     * @brief 次のポーズの検出を開始する
      */
     void nextCommand(void);
 
     /**
-     * 制限時間内かどうかを判定する
-     *
-     * @see  timeLimit
+     * @brief 制限時間内かどうかを判定する
      *
      * @return  制限時間内であれば true
      */
     bool withinTimeLimit(void);
 
     /**
-     * 最初のポーズ検出後からの経過時間
+     * @brief 最初のポーズ検出後からの経過時間
      */
     XnUInt64 elapsedTime;
 
     /**
-     * 一番最後にポーズ検出したときの時間
+     * @brief 一番最後にポーズ検出したときの時間
      */
     XnUInt64 detectionTime;
 
     /**
-     * ポーズを検出するメソッドのリスト
+     * @brief ポーズを検出するメソッドのリスト
      */
     Command *commandList;
 
     /**
-     * Current index of traceList[]
+     * @brief Current index of traceList[]
      *
-     * @see commandList()
+     * @see commandList
      */
     int commandIndex;
 
     /**
-     * コマンド達成に必要なポーズの数
+     * @brief コマンド達成に必要なポーズの数
      */
     int commandNum;
 
     /**
-     * 制限時間
+     * @brief 制限時間
      */
     XnUInt64 timeLimit;
 };

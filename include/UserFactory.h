@@ -20,8 +20,6 @@ public:
     /**
      * User を取得する
      *
-     * @todo userId が 1 から UserFactory::MAX の範囲外の例外処理
-     *
      * @return ユーザID が userId の User
      */
     static User* get(int userId);
@@ -29,7 +27,7 @@ public:
     /**
      * User 最大数
      */
-    static const int MAX;
+    static const int MAX = 8;
 
 private:
     /**
@@ -47,6 +45,9 @@ private:
      */
     ~UserFactory(void);
 
+    /**
+     * UserContext インスタンス
+     */
     static UserContext* context;
 
     /**
@@ -54,7 +55,7 @@ private:
      *
      * @see UserFactory::MAX
      */
-    static User** list;
+    static User* list[UserFactory::MAX];
 };
 
 } // namespace ty

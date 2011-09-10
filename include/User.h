@@ -26,7 +26,7 @@ public:
     /**
      * デストラクタ
      */
-    ~User(void) {}
+    ~User(void);
 
     /**
      * 指定したパーツの座標を取得する
@@ -36,7 +36,12 @@ public:
      */
     virtual ty::Vector getSkeletonPosition(XnSkeletonJoint j);
 
-    void updatePixels(xn::SceneMetaData* data);
+    /**
+     * ユーザの SceneMetaData を取得する
+     *
+     * @param  data  取得したデータを格納する
+     */
+    xn::SceneMetaData* scene(void);
 
     /**
      * ユーザがトラッキングされているかチェックする
@@ -45,7 +50,7 @@ public:
      *
      * @return トラッキングされていれば true
      */
-    virtual bool isTracking(void);
+    virtual bool isTracking(void) const;
 
     /**
      * ユーザがキャリブレーションされているかチェックする
@@ -54,7 +59,7 @@ public:
      *
      * @return キャリブレーションされていれば true
      */
-    virtual bool isCalibrated(void);
+    virtual bool isCalibrated(void) const;
 
     /**
      * ユーザの ID を返す
@@ -63,7 +68,7 @@ public:
      * 
      * @return ユーザ ID
      */
-    int id(void);
+    int id(void) const;
 
     /**
      * 頭の座標を取得する
@@ -402,6 +407,11 @@ private:
      * UserContext のインスタンス
      */
     UserContext* context;
+
+    /**
+     * xn::SceneMetaData のインスタンス
+     */
+    xn::SceneMetaData* sceneData;
 
     /**
      * ユーザ ID

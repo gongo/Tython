@@ -15,8 +15,6 @@ GLfloat texcoords[8] = {0.8, 0.8, 0.8, 0.0, 0.0, 0.0, 0.0, 0.8};
 AbstractRenderer::AbstractRenderer(ty::WorldContext *_ctx, ty::User* _user)
     : ctx(_ctx), user(_user)
 {
-    sceneMeta = new xn::SceneMetaData;
-
     width     = ctx->screenWidth();
     height    = ctx->screenHeight();
     texWidth  = getClosestPowerOfTwo(width);
@@ -37,7 +35,6 @@ AbstractRenderer::AbstractRenderer(ty::WorldContext *_ctx, ty::User* _user)
 
 AbstractRenderer::~AbstractRenderer(void)
 {
-    delete sceneMeta;
     delete [] sceneBuf;
 }
 
@@ -47,10 +44,8 @@ void AbstractRenderer::draw(void)
     width  = ctx->screenWidth();
     height = ctx->screenWidth();
 
-    user->updatePixels(sceneMeta);
-
     const XnDepthPixel* depth = ctx->depthData();
-    const XnLabel* label = sceneMeta->Data();
+    const XnLabel* label = user->scene()->Data();
     unsigned char* vp = sceneBuf; 
 
     for (int y = 0; y < height; y++) {

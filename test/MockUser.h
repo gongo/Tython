@@ -62,8 +62,8 @@ public:
     MOCK_METHOD0(leftArmIsStraight, bool(void));
     MOCK_METHOD0(rightArmIsBentRightAngle, bool(void));
     MOCK_METHOD0(leftArmIsBentRightAngle, bool(void));
-    MOCK_METHOD0(isTracking, bool(void));
-    MOCK_METHOD0(isCalibrated, bool(void));
+    MOCK_CONST_METHOD0(isTracking, bool(void));
+    MOCK_CONST_METHOD0(isCalibrated, bool(void));
     MOCK_CONST_METHOD1(isConfident, bool(XnSkeletonJointPosition p));
 
     ty::Vector FakeVectorRightUpperArm(void) {

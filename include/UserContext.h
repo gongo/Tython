@@ -13,9 +13,30 @@ public:
     UserContext(xn::Context *ctx);
     ~UserContext(void);
 
-    void updatePixels(int userId, xn::SceneMetaData* data);
+    /**
+     * 指定したユーザの SceneMetaData を取得する
+     *
+     * @param  userId  ユーザID
+     * @param  data    取得したデータを格納する
+     */
+    void setSceneData(int userId, xn::SceneMetaData* data);
+
+    /**
+     * 指定したユーザがトラッキングされているかチェックする
+     *
+     * @param   userId  ユーザID
+     * @return  トラッキングされていれば true
+     */
     bool isTracking(int userId);
+
+    /**
+     * 指定したユーザがキャリブレーションされているかチェックする
+     *
+     * @param   userId  ユーザID
+     * @return  キャリブレーションされていれば true
+     */
     bool isCalibrated(int userId);
+
     XnSkeletonJointPosition getSkeletonJointPosition(int userId, XnSkeletonJoint joint);
 
     void onNewUser(XnUserID uid);

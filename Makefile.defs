@@ -14,7 +14,7 @@ OPENNI_LIBRARY_PATH = $(HOME)/.kinect/usr/lib
 # Compile Option
 CXX       = g++
 INCLUDE   = -I./include -I$(OPENNI_INCLUDE_PATH) 
-CXXFLAGS  = -Wall -O3 \
+CXXFLAGS  = -Wall -g \
             -fno-tree-pre -fno-strict-aliasing \
             -msse3 -mssse3 \
             $(INCLUDE)

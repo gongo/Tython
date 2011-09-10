@@ -4,30 +4,41 @@ namespace ty {
 
 const float User::THRESHOLD_CONFIDENCE = 0.5;
 
+/**
+ * @todo delegating constructor みたいにしたいよね...
+ */
 User::User(UserContext *_context) : context(_context), userId(1)
 {
+    sceneData = new xn::SceneMetaData;
 }
 
 User::User(UserContext *_context, int id) : context(_context), userId(id)
 {
+    sceneData = new xn::SceneMetaData;
 }
 
-int User::id(void)
+User::~User(void)
+{
+    delete sceneData;
+}
+
+int User::id(void) const
 {
     return userId;
 }
 
-void User::updatePixels(xn::SceneMetaData* data)
+xn::SceneMetaData* User::scene(void)
 {
-    context->updatePixels(userId, data);
+    context->setSceneData(userId, sceneData);
+    return sceneData;
 }
 
-bool User::isTracking(void)
+bool User::isTracking(void) const
 {
     return context->isTracking(userId);
 }
 
-bool User::isCalibrated(void)
+bool User::isCalibrated(void) const
 {
     return context->isCalibrated(userId);
 }

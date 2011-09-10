@@ -17,7 +17,6 @@ public:
 protected:
     ty::User* user;
     ty::WorldContext* ctx;
-    xn::SceneMetaData* sceneMeta;
 private:
     int width;
     int height;

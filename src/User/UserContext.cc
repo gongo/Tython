@@ -48,7 +48,7 @@ UserContext::~UserContext(void)
     delete userGenerator;
 }
 
-void UserContext::updatePixels(int userId, xn::SceneMetaData* data)
+void UserContext::setSceneData(int userId, xn::SceneMetaData* data)
 {
     userGenerator->GetUserPixels(userId, *data);
 }

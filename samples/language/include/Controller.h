@@ -6,6 +6,7 @@
 #include <XnCppWrapper.h>
 #include <string>
 #include "User.h"
+#include "WorldContext.h"
 #include "Compiler.h"
 #include "VM.h"
 #include "AbstractInputMethod.h"
@@ -37,6 +38,8 @@ private:
     ty::UserContext *ctxUser;
 
     ty::User *user;
+
+    ty::WorldContext *world;
 
     /**
      *

@@ -30,8 +30,8 @@ UserContext::UserContext(xn::Context *ctx)
     userGenerator = new xn::UserGenerator;
     
     rc = ctx->FindExistingNode(XN_NODE_TYPE_USER, *userGenerator);
-    if (!XN_OK(rc)) {
-        userGenerator->Create(*ctx);
+    if (!ty::xnCheck(rc)) {
+        ty::xnRuntimeCheck(userGenerator->Create(*ctx));
     }
     userGenerator->GetSkeletonCap().SetSkeletonProfile(XN_SKEL_PROFILE_ALL);
 

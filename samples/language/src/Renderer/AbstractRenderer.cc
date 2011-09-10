@@ -12,21 +12,16 @@ unsigned int getClosestPowerOfTwo(unsigned int n)
 
 GLfloat texcoords[8] = {0.8, 0.8, 0.8, 0.0, 0.0, 0.0, 0.0, 0.8};
 
-AbstractRenderer::AbstractRenderer(xn::Context *ctx, ty::User* _user) : user(_user)
+AbstractRenderer::AbstractRenderer(ty::WorldContext *_ctx, ty::User* _user)
+    : ctx(_ctx), user(_user)
 {
-    depthGenerator = new xn::DepthGenerator;
-    depthMeta = new xn::DepthMetaData;
     sceneMeta = new xn::SceneMetaData;
 
-    CHECK_XN(ctx->FindExistingNode(XN_NODE_TYPE_DEPTH, *depthGenerator));
-
-    depthGenerator->GetMetaData(*depthMeta);
-    width  = depthMeta->XRes();
-    height = depthMeta->YRes();
-    texWidth = getClosestPowerOfTwo(width);
+    width     = ctx->screenWidth();
+    height    = ctx->screenHeight();
+    texWidth  = getClosestPowerOfTwo(width);
     texHeight = getClosestPowerOfTwo(height);
     
-    depthBuf = new ty::Vector[texWidth*texHeight];
     sceneBuf = new unsigned char[texWidth*texHeight*4];
 
     texcoords[0] = (float)width/(float)texWidth;
@@ -42,26 +37,24 @@ AbstractRenderer::AbstractRenderer(xn::Context *ctx, ty::User* _user) : user(_us
 
 AbstractRenderer::~AbstractRenderer(void)
 {
-    delete depthGenerator;
-    delete depthMeta;
-    delete [] depthBuf;
+    delete sceneMeta;
     delete [] sceneBuf;
 }
 
 void AbstractRenderer::draw(void)
 {
-    width  = depthMeta->XRes();
-    height = depthMeta->YRes();
+    ctx->updateDepth();
+    width  = ctx->screenWidth();
+    height = ctx->screenWidth();
 
-    depthGenerator->GetMetaData(*depthMeta);
     user->updatePixels(sceneMeta);
 
-    const XnDepthPixel* depth = depthMeta->Data();
+    const XnDepthPixel* depth = ctx->depthData();
     const XnLabel* label = sceneMeta->Data();
     unsigned char* vp = sceneBuf; 
 
-    for (int y = 0; y < depthMeta->YRes(); y++) {
-        for (int x = 0; x < depthMeta->XRes(); x++, label++) {
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++, label++) {
             if (*label != 0) {
                 vp[0] = 128;
                 vp[1] = 255;
@@ -75,7 +68,7 @@ void AbstractRenderer::draw(void)
             }
             vp += 4;
         }
-        vp += (texWidth - depthMeta->XRes())*4;
+        vp += (texWidth - width)*4;
     }
 
     glEnable(GL_TEXTURE_2D);

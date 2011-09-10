@@ -15,7 +15,8 @@ Controller::Controller(void)
 
     ty::UserFactory::setContext(&ctxGlobal);
     user     = ty::UserFactory::get(1);
-    renderer = new AbstractRenderer(&ctxGlobal, user);
+    world    = new ty::WorldContext(&ctxGlobal);
+    renderer = new AbstractRenderer(world, user);
     im       = new DefaultInputMethod(user);
     compiler = Compiler::instance();
     vm       = VM::instance();
@@ -27,6 +28,7 @@ Controller::~Controller(void)
     delete renderer;
     delete user;
     delete ctxUser;
+    delete world;
     ctxGlobal.Shutdown();
 }
 
@@ -68,12 +70,12 @@ void Controller::main(void)
         }
     }
 
-    ctxGlobal.WaitAndUpdateAll();
+    ty::xnRuntimeCheck(ctxGlobal.WaitAndUpdateAll());
 }
 
 void Controller::initXN(void)
 {
-    CHECK_XN(ctxGlobal.InitFromXmlFile("Tython.xml"));
-    CHECK_XN(ctxGlobal.SetGlobalMirror(true));
+    ty::xnRuntimeCheck(ctxGlobal.InitFromXmlFile("Tython.xml"));
+    ty::xnRuntimeCheck(ctxGlobal.SetGlobalMirror(true));
 }
 

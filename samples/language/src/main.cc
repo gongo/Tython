@@ -1,5 +1,7 @@
+#include <stdexcept>
 #include <GLUT/glut.h>
 #include "Controller.h"
+#include <iostream>
 
 Controller *controller;
 
@@ -46,8 +48,14 @@ void initGL(int *argc, char* argv[])
 
 int main(int argc, char **argv)
 {
-    initGL(&argc, argv);
-    controller = new Controller();
-    glutMainLoop();
-    return 0;
+    try {
+        initGL(&argc, argv);
+        controller = new Controller();
+        glutMainLoop();
+    } catch (std::runtime_error e) {
+        std::cout << e.what() << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
 }

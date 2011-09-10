@@ -6,17 +6,17 @@
 #include <XnCppWrapper.h>
 #include <Glut/glut.h>
 #include "User.h"
+#include "WorldContext.h"
 #include "Vector.h"
 
 class AbstractRenderer {
 public:
-    AbstractRenderer(xn::Context *ctx, ty::User* _user);
+    AbstractRenderer(ty::WorldContext *ctx, ty::User* _user);
     virtual ~AbstractRenderer(void);
     void draw(void);
 protected:
     ty::User* user;
-    xn::DepthGenerator* depthGenerator;
-    xn::DepthMetaData* depthMeta;
+    ty::WorldContext* ctx;
     xn::SceneMetaData* sceneMeta;
 private:
     int width;
@@ -24,7 +24,6 @@ private:
     int texWidth;
     int texHeight;
     GLuint texID;
-    ty::Vector* depthBuf;
     unsigned char* sceneBuf;
 };
 

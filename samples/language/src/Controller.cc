@@ -8,19 +8,23 @@
 #include <vector>
 
 AbstractRenderer *renderer;
+xn::Player player;
+Controller::Controller(const XnChar* recordFileName)
+{
+    ty::xnRuntimeCheck(ctxGlobal.Init());
+    ty::xnRuntimeCheck(ctxGlobal.OpenFileRecording(recordFileName, player));
+    player.SetRepeat(false);
 
+    initXN();
+}
 Controller::Controller(void)
 {
+    ty::xnRuntimeCheck(ctxGlobal.InitFromXmlFile("Tython.xml"));
+    ty::xnRuntimeCheck(ctxGlobal.SetGlobalMirror(true));
+
     initXN();
 
-    ty::UserFactory::setContext(&ctxGlobal);
-    user     = ty::UserFactory::get(1);
-    world    = new ty::WorldContext(&ctxGlobal, ty::WorldContext::NODE_USE_DEPTH | ty::WorldContext::NODE_USE_IMAGE);
     world->enableRecord("hoge.oni");
-    renderer = new AbstractRenderer(world, user);
-    im       = new DefaultInputMethod(user);
-    compiler = Compiler::instance();
-    vm       = VM::instance();
 }
 
 Controller::~Controller(void)
@@ -77,7 +81,13 @@ void Controller::main(void)
 
 void Controller::initXN(void)
 {
-    ty::xnRuntimeCheck(ctxGlobal.InitFromXmlFile("Tython.xml"));
-    ty::xnRuntimeCheck(ctxGlobal.SetGlobalMirror(true));
+    ty::UserFactory::setContext(&ctxGlobal);
+    user     = ty::UserFactory::get(1);
+    world    = new ty::WorldContext(&ctxGlobal,
+                                    ty::WorldContext::NODE_USE_DEPTH | ty::WorldContext::NODE_USE_IMAGE);
+    renderer = new AbstractRenderer(world, user);
+    im       = new DefaultInputMethod(user);
+    compiler = Compiler::instance();
+    vm       = VM::instance();
 }
 

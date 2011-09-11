@@ -16,6 +16,7 @@ using std::string;
 class Controller {
 public:
     Controller(void);
+    Controller(const XnChar* recordFileName);
     virtual ~Controller(void);
 
     void main(void);

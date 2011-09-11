@@ -50,7 +50,11 @@ int main(int argc, char **argv)
 {
     try {
         initGL(&argc, argv);
-        controller = new Controller();
+        if (argc > 1) {
+            controller = new Controller(argv[0]);
+        } else {
+            controller = new Controller();
+        }
         glutMainLoop();
         delete controller;
     } catch (std::runtime_error e) {

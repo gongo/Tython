@@ -94,6 +94,16 @@ public:
     void updateImage(void);
 
     /**
+     * @brief Recorder を有効化する
+     *
+     * ImageNode が有効であれば、圧縮形式をノードのデフォルト設定として保存する
+     * DepthNode が有効であれば、圧縮形式をノードのデフォルト設定として保存する
+     *
+     * @param  recordFileName  記録するファイル名
+     */
+    void enableRecord(const XnChar* recordFileName);
+
+    /**
      * Depth Node を使うフラグ値
      */
     static const int NODE_USE_DEPTH = (1 << 0);

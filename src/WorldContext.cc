@@ -73,4 +73,20 @@ const XnDepthPixel* WorldContext::depthData(void) const
     return metaDepth.Data();
 }
 
+void WorldContext::enableRecord(const XnChar* recordFileName)
+{
+    xnRuntimeCheck(ctxRecorder.Create(*ctxGlobal));
+    xnRuntimeCheck(ctxRecorder.SetDestination(XN_RECORD_MEDIUM_FILE, recordFileName));
+
+    if (ctxImage.IsValid()) {
+        xnRuntimeCheck(ctxRecorder.AddNodeToRecording(ctxImage, XN_CODEC_NULL));
+    }
+        
+    if (ctxDepth.IsValid()) {
+        xnRuntimeCheck(ctxRecorder.AddNodeToRecording(ctxDepth, XN_CODEC_NULL));
+    }
+        
+    xnRuntimeCheck(ctxRecorder.Record());
+}
+
 } // namespace ty

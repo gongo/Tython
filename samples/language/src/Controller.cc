@@ -15,7 +15,8 @@ Controller::Controller(void)
 
     ty::UserFactory::setContext(&ctxGlobal);
     user     = ty::UserFactory::get(1);
-    world    = new ty::WorldContext(&ctxGlobal, ty::WorldContext::NODE_USE_DEPTH);
+    world    = new ty::WorldContext(&ctxGlobal, ty::WorldContext::NODE_USE_DEPTH | ty::WorldContext::NODE_USE_IMAGE);
+    world->enableRecord("hoge.oni");
     renderer = new AbstractRenderer(world, user);
     im       = new DefaultInputMethod(user);
     compiler = Compiler::instance();
@@ -66,6 +67,7 @@ void Controller::main(void)
             std::vector<Instruction*> insns = compiler->compile(source);
             vm->run(insns);
             printf("\n");
+            ctxGlobal.Shutdown();
             exit(0);
         }
     }

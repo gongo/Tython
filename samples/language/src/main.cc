@@ -52,6 +52,7 @@ int main(int argc, char **argv)
         initGL(&argc, argv);
         controller = new Controller();
         glutMainLoop();
+        delete controller;
     } catch (std::runtime_error e) {
         std::cout << e.what() << std::endl;
         return EXIT_FAILURE;

@@ -15,7 +15,7 @@ Controller::Controller(void)
 
     ty::UserFactory::setContext(&ctxGlobal);
     user     = ty::UserFactory::get(1);
-    world    = new ty::WorldContext(&ctxGlobal);
+    world    = new ty::WorldContext(&ctxGlobal, ty::WorldContext::NODE_USE_DEPTH);
     renderer = new AbstractRenderer(world, user);
     im       = new DefaultInputMethod(user);
     compiler = Compiler::instance();

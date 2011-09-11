@@ -10,12 +10,21 @@ namespace ty {
 class WorldContext {
 public:
     /**
-     * コンストラクタ
+     * @brief コンストラクタ
+     *
+     * nodeType で生成する Generator を選択する
+     *
+     * @code 
+     * WorldContext *world = new WorldContext(ctx, NODE_USE_DEPTH | NODE_USE_IMAGE);
+     * @endcode
+     * 
+     * @param  _ctx      Init 済みの xn::Context のインスタンス
+     * @param  nodeType  生成するノード
      */
-    WorldContext(xn::Context* _ctx);
+    WorldContext(xn::Context* _ctx, const int nodeType);
 
     /**
-     * デストラクタ
+     * @brief デストラクタ
      */
     virtual ~WorldContext(void);
 
@@ -39,25 +48,60 @@ public:
     const XnDepthPixel* depthData(void) const;
 
     /**
-     * 画面の横ピクセル数を返す
+     * @brief Image の横ピクセル数を返す
      *
-     * @return 画面の横ピクセル数
+     * Image が登録されていない場合は 0 を返す
+     *
+     * @return Image の横ピクセル数
      */
-    XnUInt32 screenWidth(void) const;    
+    XnUInt32 imageWidth(void) const;    
 
     /**
-     * 画面の縦ピクセル数を返す
+     * @brief Image の縦ピクセル数を返す
      *
-     * @return 画面の縦ピクセル数
+     * Image が登録されていない場合は 0 を返す
+     *
+     * @return Image の縦ピクセル数
      */
-    XnUInt32 screenHeight(void) const;    
+    XnUInt32 imageHeight(void) const;    
 
     /**
-     * @brief 画面周りの初期化
+     * @brief Depth の横ピクセル数を返す
      *
-     * xn::Context, xn::DepthGenerator, xn::ImageGenerator の初期化
+     * Depth が登録されていない場合は 0 を返す
+     *
+     * @return Depth の横ピクセル数
+     */
+    XnUInt32 depthWidth(void) const;    
+
+    /**
+     * @brief Depth の縦ピクセル数を返す
+     *
+     * Depth が登録されていない場合は 0 を返す
+     *
+     * @return Depth の縦ピクセル数
+     */
+    XnUInt32 depthHeight(void) const;    
+
+    /**
+     * @brief Depth Meta Data の更新
      */
     void updateDepth(void);
+
+    /**
+     * @brief Image Meta Data の更新
+     */
+    void updateImage(void);
+
+    /**
+     * Depth Node を使うフラグ値
+     */
+    static const int NODE_USE_DEPTH = (1 << 0);
+
+    /**
+     * Image Node を使うフラグ値
+     */
+    static const int NODE_USE_IMAGE = (1 << 1);
 
 protected:
     /**
@@ -84,9 +128,19 @@ private:
     xn::ImageGenerator ctxImage;
 
     /**
+     * xn::Recorder インスタンス
+     */
+    xn::Recorder ctxRecorder;
+
+    /**
      * xn::DepthMetaData インスタンス
      */
     xn::DepthMetaData metaDepth;
+
+    /**
+     * xn::DepthMetaData インスタンス
+     */
+    xn::ImageMetaData metaImage;
 };
 
 } // namespace ty

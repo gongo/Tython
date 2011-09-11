@@ -3,14 +3,19 @@
 
 namespace ty {
 
-WorldContext::WorldContext(xn::Context *_ctx) : ctxGlobal(_ctx)
+WorldContext::WorldContext(xn::Context *_ctx, const int nodeType) : ctxGlobal(_ctx)
 {
-    // create Generator
-    ty::xnRuntimeCheck(ctxGlobal->FindExistingNode(XN_NODE_TYPE_IMAGE, ctxImage));
-    ty::xnRuntimeCheck(ctxGlobal->FindExistingNode(XN_NODE_TYPE_DEPTH, ctxDepth));
+    if (nodeType & NODE_USE_IMAGE) {
+        xnRuntimeCheck(ctxGlobal->FindExistingNode(XN_NODE_TYPE_IMAGE, ctxImage));
+    }
+
+    if (nodeType & NODE_USE_DEPTH) {
+        xnRuntimeCheck(ctxGlobal->FindExistingNode(XN_NODE_TYPE_DEPTH, ctxDepth));
+    }
     
-    // 深度データを、RGB データに調整して取得する
-    ty::xnRuntimeCheck(ctxDepth.GetAlternativeViewPointCap().SetViewPoint(ctxImage));
+    if (ctxImage.IsValid() && ctxDepth.IsValid()) {
+        xnRuntimeCheck(ctxDepth.GetAlternativeViewPointCap().SetViewPoint(ctxImage));
+    }
 
     updateDepth();
 }
@@ -21,7 +26,16 @@ WorldContext::~WorldContext(void)
 
 void WorldContext::updateDepth(void)
 {
-    ctxDepth.GetMetaData(metaDepth);
+    if (ctxDepth.IsValid()) {
+        ctxDepth.GetMetaData(metaDepth);
+    }
+}
+
+void WorldContext::updateImage(void)
+{
+    if (ctxImage.IsValid()) {
+        ctxImage.GetMetaData(metaImage);
+    }
 }
 
 xn::DepthGenerator* WorldContext::depthGenerator(void)
@@ -34,12 +48,22 @@ xn::ImageGenerator* WorldContext::imageGenerator(void)
     return &ctxImage;
 }
 
-XnUInt32 WorldContext::screenWidth(void) const
+XnUInt32 WorldContext::imageWidth(void) const
+{
+    return metaImage.XRes();
+}
+
+XnUInt32 WorldContext::imageHeight(void) const
+{
+    return metaImage.YRes();
+}
+
+XnUInt32 WorldContext::depthWidth(void) const
 {
     return metaDepth.XRes();
 }
 
-XnUInt32 WorldContext::screenHeight(void) const
+XnUInt32 WorldContext::depthHeight(void) const
 {
     return metaDepth.YRes();
 }

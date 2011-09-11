@@ -22,7 +22,7 @@ INCLUDE   = -I./include -I$(OPENNI_INCLUDE_PATH) -I$(TYTHON_INCLUDE_PATH)
 LIBS      = -lm -framework OpenGL -framework GLUT \
             -L$(OPENNI_LIBRARY_PATH) -lOpenNI \
             -L$(TYTHON_LIBRARY_PATH) -lTython
-CXXFLAGS  = -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 $(INCLUDE)
+CXXFLAGS  = -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 $(INCLUDE) -g
 CXX       = g++
 
 TEST_CXXFLAGS = $(shell gmock-config --cppflags --cxxflags) $(CXXFLAGS)

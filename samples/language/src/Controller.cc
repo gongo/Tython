@@ -1,3 +1,4 @@
+#include <iostream>
 #include <stdio.h>
 #include "Controller.h"
 #include "DefaultInputMethod.h"
@@ -16,6 +17,8 @@ Controller::Controller(const XnChar* recordFileName)
     player.SetRepeat(false);
 
     initXN();
+
+    ctxGlobal.StartGeneratingAll();
 }
 Controller::Controller(void)
 {
@@ -25,6 +28,7 @@ Controller::Controller(void)
     initXN();
 
     world->enableRecord("hoge.oni");
+    ctxGlobal.StartGeneratingAll();
 }
 
 Controller::~Controller(void)
@@ -34,11 +38,14 @@ Controller::~Controller(void)
     delete user;
     delete ctxUser;
     delete world;
+    ctxGlobal.StopGeneratingAll();
     ctxGlobal.Shutdown();
 }
 
 void Controller::main(void)
 {
+    ctxGlobal.WaitAndUpdateAll();
+
     renderer->draw();
 
     IMmap inputList = im->input();
@@ -75,8 +82,6 @@ void Controller::main(void)
             exit(0);
         }
     }
-
-    ty::xnRuntimeCheck(ctxGlobal.WaitAndUpdateAll());
 }
 
 void Controller::initXN(void)
@@ -84,7 +89,7 @@ void Controller::initXN(void)
     ty::UserFactory::setContext(&ctxGlobal);
     user     = ty::UserFactory::get(1);
     world    = new ty::WorldContext(&ctxGlobal,
-                                    ty::WorldContext::NODE_USE_DEPTH | ty::WorldContext::NODE_USE_IMAGE);
+                                    ty::WorldContext::NODE_USE_DEPTH);
     renderer = new AbstractRenderer(world, user);
     im       = new DefaultInputMethod(user);
     compiler = Compiler::instance();

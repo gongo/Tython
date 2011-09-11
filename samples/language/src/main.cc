@@ -51,7 +51,7 @@ int main(int argc, char **argv)
     try {
         initGL(&argc, argv);
         if (argc > 1) {
-            controller = new Controller(argv[0]);
+            controller = new Controller(argv[1]);
         } else {
             controller = new Controller();
         }

@@ -18,10 +18,13 @@ WorldContext::WorldContext(xn::Context *_ctx, const int nodeType) : ctxGlobal(_c
     }
 
     updateDepth();
+    updateImage();
 }
 
 WorldContext::~WorldContext(void)
 {
+    ctxImage.Release();
+    ctxDepth.Release();
 }
 
 void WorldContext::updateDepth(void)

@@ -10,11 +10,11 @@ LCOV_DIR  = gcov
 
 COVERAGE_XML = coverage.xml
 
-COVERAGE += $(GCOV_OBJS) $(LCOV_INFO) $(LCOV_DIR) $(COVERAGE_XML)
+# COVERAGE += $(GCOV_OBJS) $(LCOV_INFO) $(LCOV_DIR) $(COVERAGE_XML)
 
 coverage: test
 	$(RM) -r $(LCOV_INFO) $(LCOV_DIR)
-	gcovr -e test -e samples -b -x > $(COVERAGE_XML)
+	gcovr -f "`pwd`/(src|include)" -b -x > $(COVERAGE_XML)
 	lcov -c -b . -d $(SRCS_DIR) -d $(TEST_SRCS_DIR) -o lcov2.info
 	lcov -r lcov2.info '/usr/include/*'       \
 	                   '/usr/local/include/*' \

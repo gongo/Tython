@@ -8,8 +8,13 @@ GCOV_OBJS = $(OBJS:.o=.gcno) $(TEST_OBJS:.o=.gcno) $(OBJS:.o=.gcda) $(TEST_OBJS:
 LCOV_INFO = lcov.info
 LCOV_DIR  = gcov
 
+COVERAGE_XML = coverage.xml
+
+COVERAGE += $(GCOV_OBJS) $(LCOV_INFO) $(LCOV_DIR) $(COVERAGE_XML)
+
 coverage: test
 	$(RM) -r $(LCOV_INFO) $(LCOV_DIR)
+	gcovr -e test -e samples -b -x > $(COVERAGE_XML)
 	lcov -c -b . -d $(SRCS_DIR) -d $(TEST_SRCS_DIR) -o lcov2.info
 	lcov -r lcov2.info '/usr/include/*'       \
 	                   '/usr/local/include/*' \
@@ -18,6 +23,3 @@ coverage: test
              -o $(LCOV_INFO)
 	rm lcov2.info
 	genhtml -t Tython -o $(LCOV_DIR) $(LCOV_INFO)
-
-coverage-clean: clean
-	$(RM) -r $(GCOV_OBJS) $(LCOV_INFO) $(LCOV_DIR)

@@ -3,12 +3,12 @@ include ./Makefile.defs
 TARGET_LIB  = Tython
 TARGET      = lib$(TARGET_LIB).so
 TEST_TARGET = libTythonTest
-
-OBJS_GCOV = $(OBJS:.o=.gcno) $(TEST_OBJS:.o=.gcno) lcov.info
+TEST_XML     = unittest.xml
 
 DOXYGEN  = doxygen
 DOXYCONF = Tython.doxygen
 DOXYOUT  = docs
+COVERAGE = 
 
 .SUFFIXES: .cc .o 
 
@@ -27,7 +27,7 @@ $(TEST_TARGET): $(TARGET) $(TEST_OBJS)
 	$(CXX) $(TEST_LIBS) -L. -l$(TARGET_LIB) $(TEST_OBJS) -o $@
 
 test: $(TEST_TARGET) force
-	./$(TEST_TARGET) --gtest_output=xml
+	./$(TEST_TARGET) --gtest_output="xml:$(TEST_XML)"
 
 clean:
 	$(RM) $(RM_GC)
@@ -35,8 +35,8 @@ clean:
 	$(RM) $(OBJS) $(TEST_OBJS)
 	$(RM) $(TAGSFILE)
 	$(RM) $(OBJS_GCOV)
-	$(RM) test_detail.xml
-	$(RM) -r $(DOXYOUT)
+	$(RM) $(TEST_XML)
+	$(RM) -r $(DOXYOUT) $(COVERAGE)
 	cd $(SRCS_DIR)      && $(RM) $(RM_GC)
 	cd $(TEST_SRCS_DIR) && $(RM) $(RM_GC)
 

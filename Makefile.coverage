@@ -10,7 +10,7 @@ LCOV_DIR  = gcov
 
 COVERAGE_XML = coverage.xml
 
-# COVERAGE += $(GCOV_OBJS) $(LCOV_INFO) $(LCOV_DIR) $(COVERAGE_XML)
+COVERAGE += $(GCOV_OBJS) $(LCOV_INFO) $(LCOV_DIR) $(COVERAGE_XML)
 
 coverage: test
 	$(RM) -r $(LCOV_INFO) $(LCOV_DIR)

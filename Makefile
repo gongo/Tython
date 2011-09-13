@@ -8,7 +8,7 @@ TEST_XML     = unittest.xml
 DOXYGEN  = doxygen
 DOXYCONF = Tython.doxygen
 DOXYOUT  = docs
-COVERAGE = 
+COVERAGE = $(TEST_XML)
 
 .SUFFIXES: .cc .o 
 
@@ -35,7 +35,6 @@ clean:
 	$(RM) $(OBJS) $(TEST_OBJS)
 	$(RM) $(TAGSFILE)
 	$(RM) $(OBJS_GCOV)
-	$(RM) $(TEST_XML)
 	$(RM) -r $(DOXYOUT) $(COVERAGE)
 	cd $(SRCS_DIR)      && $(RM) $(RM_GC)
 	cd $(TEST_SRCS_DIR) && $(RM) $(RM_GC)

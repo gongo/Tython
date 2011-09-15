@@ -48,6 +48,11 @@ public:
     const XnDepthPixel* depthData(void) const;
 
     /**
+     * RGB24Map を返す
+     */
+    const xn::RGB24Map& imageRGB24Map(void) const;
+
+    /**
      * @brief Image の横ピクセル数を返す
      *
      * Image が登録されていない場合は 0 を返す

@@ -76,6 +76,11 @@ const XnDepthPixel* WorldContext::depthData(void) const
     return metaDepth.Data();
 }
 
+const xn::RGB24Map& WorldContext::imageRGB24Map(void) const
+{
+    return metaImage.RGB24Map();
+}
+
 void WorldContext::enableRecord(const XnChar* recordFileName)
 {
     xnRuntimeCheck(ctxRecorder.Create(*ctxGlobal));

@@ -4,7 +4,7 @@
 #define _TYTHON_ABSTRACT_RENDERER_H_
 
 #include <XnCppWrapper.h>
-#include <Glut/glut.h>
+#include <opencv2/opencv.hpp>
 #include "User.h"
 #include "WorldContext.h"
 #include "Vector.h"
@@ -15,15 +15,10 @@ public:
     virtual ~AbstractRenderer(void);
     void draw(void);
 protected:
-    ty::User* user;
     ty::WorldContext* ctx;
+    ty::User* user;
 private:
-    int width;
-    int height;
-    int texWidth;
-    int texHeight;
-    GLuint texID;
-    unsigned char* sceneBuf;
+    cv::Ptr<IplImage> camera;
 };
 
 #endif // _TYTHON_ABSTRACT_RENDERER_H_

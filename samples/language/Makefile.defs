@@ -17,11 +17,18 @@ TYTHON_LIBRARY_PATH = ../../
 OPENNI_INCLUDE_PATH = $(HOME)/.kinect/usr/include/ni
 OPENNI_LIBRARY_PATH = $(HOME)/.kinect/usr/lib
 
+# OpenCV Path
+OPENCV_INCLUDE_PATH = $(HOME)/.homebrew/include
+OPENCV_LIBRARY_PATH = $(HOME)/.homebrew/lib
+
 # Compile Option
-INCLUDE   = -I./include -I$(OPENNI_INCLUDE_PATH) -I$(TYTHON_INCLUDE_PATH)
-LIBS      = -lm -framework OpenGL -framework GLUT \
+INCLUDE = -I./include -I$(OPENNI_INCLUDE_PATH) \
+	-I$(TYTHON_INCLUDE_PATH) \
+	-I$(OPENCV_INCLUDE_PATH)
+LIBS      = -lm \
             -L$(OPENNI_LIBRARY_PATH) -lOpenNI \
-            -L$(TYTHON_LIBRARY_PATH) -lTython
+            -L$(TYTHON_LIBRARY_PATH) -lTython \
+	    -L$(OPENCV_LIBRARY_PATH) -lopencv_core -lopencv_highgui -lopencv_video -lopencv_imgproc
 CXXFLAGS  = -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 $(INCLUDE) -g
 CXX       = g++
 

@@ -13,7 +13,9 @@ WorldContext::WorldContext(xn::Context *_ctx, const int nodeType) : ctxGlobal(_c
         xnRuntimeCheck(ctxGlobal->FindExistingNode(XN_NODE_TYPE_DEPTH, ctxDepth));
     }
     
-    if (ctxImage.IsValid() && ctxDepth.IsValid()) {
+    if (ctxDepth.IsValid()
+        && ctxDepth.IsCapabilitySupported(XN_CAPABILITY_ALTERNATIVE_VIEW_POINT)
+        && ctxImage.IsValid()) {
         xnRuntimeCheck(ctxDepth.GetAlternativeViewPointCap().SetViewPoint(ctxImage));
     }
 

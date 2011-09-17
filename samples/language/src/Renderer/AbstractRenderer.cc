@@ -48,5 +48,4 @@ void AbstractRenderer::draw(void)
 
     ::cvCvtColor(camera, camera, CV_BGR2RGB);
     ::cvShowImage("KinectImage", camera);
-    cvWaitKey(30);
 }

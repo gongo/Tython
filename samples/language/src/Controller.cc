@@ -7,6 +7,7 @@
 #include "Instruction.h"
 #include "UserFactory.h"
 #include <vector>
+#include <opencv2/opencv.hpp>
 
 AbstractRenderer *renderer;
 xn::Player player;
@@ -49,6 +50,8 @@ void Controller::main(void)
 
         renderer->draw();
 
+        if ((cvWaitKey(30) & 0xff) == 'q') break;
+
         IMmap inputList = im->input();
         IMquit quitList = im->quit();
 
@@ -90,8 +93,7 @@ void Controller::initXN(void)
     ty::UserFactory::setContext(&ctxGlobal);
     user     = ty::UserFactory::get(1);
     world    = new ty::WorldContext(&ctxGlobal,
-                                    ty::WorldContext::NODE_USE_IMAGE |
-                                    ty::WorldContext::NODE_USE_DEPTH);
+                                    ty::WorldContext::NODE_USE_IMAGE);
     renderer = new AbstractRenderer(world, user);
     im       = new DefaultInputMethod(user);
     compiler = Compiler::instance();

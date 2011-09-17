@@ -34,8 +34,8 @@ void AbstractRenderer::draw(void)
             XnRGB24Pixel pixel = rgb(x, y);
 
             if (label[y*ctx->imageWidth() + x]) {
-                dest[0] = 0;
-                dest[1] = 255;
+                dest[0] = 255;
+                dest[1] = 0;
                 dest[2] = 0; 
             } else {
                 dest[0] = pixel.nRed;

@@ -45,7 +45,7 @@ Controller::~Controller(void)
 
 void Controller::main(void)
 {
-    while (1) {
+    while (!player.IsValid() || !player.IsEOF()) {
         ctxGlobal.WaitAndUpdateAll();
 
         renderer->draw();
@@ -93,7 +93,9 @@ void Controller::initXN(void)
     ty::UserFactory::setContext(&ctxGlobal);
     user     = ty::UserFactory::get(1);
     world    = new ty::WorldContext(&ctxGlobal,
-                                    ty::WorldContext::NODE_USE_IMAGE);
+                                    ty::WorldContext::NODE_USE_IMAGE |
+                                    ty::WorldContext::NODE_USE_DEPTH
+                                    );
     renderer = new AbstractRenderer(world, user);
     im       = new DefaultInputMethod(user);
     compiler = Compiler::instance();

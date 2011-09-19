@@ -39,10 +39,67 @@ public:
 
     XnSkeletonJointPosition getSkeletonJointPosition(int userId, XnSkeletonJoint joint);
 
-    void onNewUser(XnUserID uid);
-    void onPoseStart(XnUserID uid);
-    void onCalibrationStart(XnUserID uid);
-    void onCalibrationEnd(XnUserID uid, bool isCalibration);
+    /**
+     * @brief ユーザを検出したときにコールバックされる関数
+     *
+     * userGenerator->RegisterUserCallbacks() に登録するため
+     * static として宣言している。
+     * ty::UserContext::onNewUser へのつなぎ役
+     *
+     * @see ty::onNewUser
+     */
+    static void XN_CALLBACK_TYPE onNewUserCallback(xn::UserGenerator& generator,
+                                                   XnUserID uid,
+                                                   void* t) {
+        static_cast<UserContext*>(t)->onNewUser(uid);
+    }
+
+    /**
+     * @brief 検出されたユーザがポーズを取り始めたときにコールバックされる関数
+     *
+     * userGenerator->RegisterUserCallbacks() に登録するため
+     * static として宣言している。
+     * ty::UserContext::onPoseStart へのつなぎ役
+     *
+     * @see ty::onPoseStart
+     */
+    static void XN_CALLBACK_TYPE onPoseStartCallback(xn::PoseDetectionCapability& capability,
+                                                     const XnChar* strPose,
+                                                     XnUserID uid,
+                                                     void* t) {
+        static_cast<UserContext*>(t)->onPoseStart(uid);
+    }
+
+    /**
+     * @brief ポーズをとっているユーザのキャリブレーションが開始された時にコールバックされる関数
+     *
+     * userGenerator->GetSkeletonCap().RegisterCalibrationCallbacks() に登録するため
+     * static として宣言している。
+     * ty::UserContext::onCalibrationStart へのつなぎ役
+     *
+     * @see ty::onPoseStart
+     */
+    static void XN_CALLBACK_TYPE onCalibrationStartCallback(xn::SkeletonCapability& capability,
+                                                            XnUserID uid,
+                                                            void* t) {
+        static_cast<UserContext*>(t)->onCalibrationStart(uid);
+    }
+        
+    /**
+     * @brief ポーズをとっているユーザのキャリブレーションが終了した時にコールバックされる関数
+     *
+     * userGenerator->GetSkeletonCap().RegisterCalibrationCallbacks() に登録するため
+     * static として宣言している。
+     * ty::UserContext::onCalibrationEnd へのつなぎ役
+     *
+     * @see ty::onPoseStart
+     */
+    static void XN_CALLBACK_TYPE onCalibrationEndCallback(xn::SkeletonCapability& capability,
+                                                          XnUserID uid,
+                                                          XnBool bSuccess,
+                                                          void* t) {
+        static_cast<UserContext*>(t)->onCalibrationEnd(uid, bSuccess);
+    }
 
 protected:
     /**
@@ -55,9 +112,14 @@ protected:
      */
     UserContext(void);
 
+    virtual void onNewUser(XnUserID uid);
+    virtual void onPoseStart(XnUserID uid);
+    virtual void onCalibrationStart(XnUserID uid);
+    virtual void onCalibrationEnd(XnUserID uid, bool isCalibration);
+
 private:
     /**
-     *
+     * UserGenerator インスタンス
      */
     xn::UserGenerator* userGenerator;
 

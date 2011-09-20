@@ -19,7 +19,7 @@ UserContext::UserContext(xn::Context *ctx)
 
     userGenerator->GetSkeletonCap().GetCalibrationPose(poseName);
     ty::xnRuntimeCheck(userGenerator->RegisterUserCallbacks(UserContext::onNewUserCallback,
-                                                            NULL,
+                                                            UserContext::onLostUserCallback,
                                                             this,
                                                             handleUserCallbacks));
     ty::xnRuntimeCheck(userGenerator->GetPoseDetectionCap().RegisterToPoseCallbacks(UserContext::onPoseStartCallback,
@@ -65,6 +65,11 @@ void UserContext::onNewUser(XnUserID uid)
 {
     printf("onNewUser[%02d]\n", uid);
     ty::xnRuntimeCheck(userGenerator->GetPoseDetectionCap().StartPoseDetection(poseName, uid));
+}
+
+void UserContext::onLostUser(XnUserID uid)
+{
+    printf("onLostUser[%02d]\n", uid);
 }
 
 void UserContext::onCalibrationStart(XnUserID uid)

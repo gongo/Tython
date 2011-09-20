@@ -55,6 +55,21 @@ public:
     }
 
     /**
+     * @brief ユーザを見失ったときにコールバックされる関数
+     *
+     * userGenerator->RegisterUserCallbacks() に登録するため
+     * static として宣言している。
+     * ty::UserContext::onLostUser へのつなぎ役
+     *
+     * @see ty::onListUser
+     */
+    static void XN_CALLBACK_TYPE onLostUserCallback(xn::UserGenerator& generator,
+                                                    XnUserID uid,
+                                                    void* t) {
+        static_cast<UserContext*>(t)->onLostUser(uid);
+    }
+
+    /**
      * @brief 検出されたユーザがポーズを取り始めたときにコールバックされる関数
      *
      * userGenerator->RegisterUserCallbacks() に登録するため
@@ -113,6 +128,7 @@ protected:
     UserContext(void);
 
     virtual void onNewUser(XnUserID uid);
+    virtual void onLostUser(XnUserID uid);
     virtual void onPoseStart(XnUserID uid);
     virtual void onCalibrationStart(XnUserID uid);
     virtual void onCalibrationEnd(XnUserID uid, bool isCalibration);

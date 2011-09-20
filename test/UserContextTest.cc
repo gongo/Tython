@@ -59,6 +59,15 @@ protected:
     } while (0)
     
 
+TEST_F(UserContextTest, NoNewUser) {
+    SET_ONIFILE("./test/oni/depth_only.oni");
+    MockUserContext object(&context);
+
+    EXPECT_CALL(object, onNewUser(_)).Times(0);
+
+    EXEC_ONIFILE();
+}
+
 TEST_F(UserContextTest, NewUserAndNoPoseUser) {
     SET_ONIFILE("./test/oni/user_appearance.oni");
     MockUserContext object(&context);
@@ -82,11 +91,34 @@ TEST_F(UserContextTest, NewUserAndCalibrateUser) {
         .WillByDefault(Invoke(&object, &MockUserContext::fakeOnPoseStart));
     ON_CALL(object, onCalibrationStart(_))
         .WillByDefault(Invoke(&object, &MockUserContext::fakeOnCalibrationStart));
+    ON_CALL(object, onCalibrationEnd(_, _))
+        .WillByDefault(Invoke(&object, &MockUserContext::fakeOnCalibrationEnd));
     
     EXPECT_CALL(object, onNewUser(_)).Times(1);
     EXPECT_CALL(object, onPoseStart(_)).Times(1);
     EXPECT_CALL(object, onCalibrationStart(_)).Times(1);
     EXPECT_CALL(object, onCalibrationEnd(_, true)).Times(1);
+
+    EXEC_ONIFILE();
+}
+
+TEST_F(UserContextTest, NewUserAndCalibrateUserFailure) {
+    SET_ONIFILE("./test/oni/user_and_calibrate_failure.oni");
+    MockUserContext object(&context);
+
+    ON_CALL(object, onNewUser(_))
+        .WillByDefault(Invoke(&object, &MockUserContext::fakeOnNewUser));
+    ON_CALL(object, onPoseStart(_))
+        .WillByDefault(Invoke(&object, &MockUserContext::fakeOnPoseStart));
+    ON_CALL(object, onCalibrationStart(_))
+        .WillByDefault(Invoke(&object, &MockUserContext::fakeOnCalibrationStart));
+    ON_CALL(object, onCalibrationEnd(_, _))
+        .WillByDefault(Invoke(&object, &MockUserContext::fakeOnCalibrationEnd));
+    
+    EXPECT_CALL(object, onNewUser(_)).Times(1);
+    EXPECT_CALL(object, onPoseStart(_)).Times(1);
+    EXPECT_CALL(object, onCalibrationStart(_)).Times(1);
+    EXPECT_CALL(object, onCalibrationEnd(_, false)).Times(1);
 
     EXEC_ONIFILE();
 }

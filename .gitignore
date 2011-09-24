@@ -2,9 +2,9 @@
 *.gcda
 *.gcno
 Tython
-TestTython
 .cimg/
 libTython.so
+libTythonTest
 GPATH
 GRTAGS
 GSYMS

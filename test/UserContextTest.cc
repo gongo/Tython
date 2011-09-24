@@ -69,7 +69,7 @@ TEST_F(UserContextTest, NoNewUser) {
 }
 
 TEST_F(UserContextTest, NewUserAndNoPoseUser) {
-    SET_ONIFILE("./test/oni/user_appearance.oni");
+    SET_ONIFILE("./test/oni/user_new.oni");
     MockUserContext object(&context);
 
     ON_CALL(object, onNewUser(_))
@@ -82,7 +82,7 @@ TEST_F(UserContextTest, NewUserAndNoPoseUser) {
 }
 
 TEST_F(UserContextTest, NewUserAndCalibrateUser) {
-    SET_ONIFILE("./test/oni/user_and_calibrate.oni");
+    SET_ONIFILE("./test/oni/user_calibrate.oni");
     MockUserContext object(&context);
 
     ON_CALL(object, onNewUser(_))
@@ -103,7 +103,7 @@ TEST_F(UserContextTest, NewUserAndCalibrateUser) {
 }
 
 TEST_F(UserContextTest, NewUserAndCalibrateUserFailure) {
-    SET_ONIFILE("./test/oni/user_and_calibrate_failure.oni");
+    SET_ONIFILE("./test/oni/user_calibrate_failure.oni");
     MockUserContext object(&context);
 
     ON_CALL(object, onNewUser(_))

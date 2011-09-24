@@ -12,7 +12,7 @@ COVERAGE = $(TEST_XML)
 
 .SUFFIXES: .cc .o 
 
-.PHONY: test clean tags force all
+.PHONY: test test-all clean tags force all
 
 %.o : %.cc
 $(TEST_SRCS_DIR)/%.o : $(TEST_SRCS_DIR)/%.cc
@@ -27,6 +27,10 @@ $(TEST_TARGET): $(TARGET) $(TEST_OBJS)
 	$(CXX) $(TEST_LIBS) -L. -l$(TARGET_LIB) $(TEST_OBJS) -o $@
 
 test: $(TEST_TARGET) force
+	GTEST_FILTER="-UserContextTest.*" \
+	./$(TEST_TARGET) --gtest_output="xml:$(TEST_XML)" 
+
+test-all: $(TEST_TARGET) force
 	./$(TEST_TARGET) --gtest_output="xml:$(TEST_XML)"
 
 clean:

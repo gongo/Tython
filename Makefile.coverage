@@ -12,7 +12,7 @@ COVERAGE_XML = coverage.xml
 
 COVERAGE += $(GCOV_OBJS) $(LCOV_INFO) $(LCOV_DIR) $(COVERAGE_XML)
 
-coverage: test
+coverage: test-all
 	$(RM) -r $(LCOV_INFO) $(LCOV_DIR)
 	gcovr -f "`pwd`/(src|include)" -b -x > $(COVERAGE_XML)
 	lcov -c -b . -d $(SRCS_DIR) -d $(TEST_SRCS_DIR) -o lcov2.info

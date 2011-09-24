@@ -43,6 +43,11 @@ bool User::isCalibrated(void) const
     return context->isCalibrated(userId);
 }
 
+bool User::isAvailable(void) const
+{
+    return context->isAvailable(userId);
+}
+
 void User::updateSkeletonJointPosition(XnSkeletonJoint j)
 {
     XnSkeletonJointPosition p = context->getSkeletonJointPosition(userId, j);

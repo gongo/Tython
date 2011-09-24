@@ -55,35 +55,53 @@ protected:
         while (!player.IsEOF()) {               \
             context.WaitAndUpdateAll();         \
         }                                       \
+    } while (0)
+
+#define FINISH_ONIFILE() do {                   \
         context.StopGeneratingAll();            \
     } while (0)
-    
+
 
 TEST_F(UserContextTest, NoNewUser) {
     SET_ONIFILE("./test/oni/depth_only.oni");
     MockUserContext object(&context);
+    int userId = 1;
 
-    EXPECT_CALL(object, onNewUser(_)).Times(0);
+    EXPECT_CALL(object, onNewUser(userId)).Times(0);
 
     EXEC_ONIFILE();
+
+    ASSERT_FALSE(object.isAvailable(userId));
+    ASSERT_FALSE(object.isCalibrated(userId));
+    ASSERT_FALSE(object.isTracking(userId));
+
+    FINISH_ONIFILE();
 }
 
 TEST_F(UserContextTest, NewUserAndNoPoseUser) {
     SET_ONIFILE("./test/oni/user_new.oni");
     MockUserContext object(&context);
+    int userId = 1;
 
     ON_CALL(object, onNewUser(_))
         .WillByDefault(Invoke(&object, &MockUserContext::fakeOnNewUser));
     
-    EXPECT_CALL(object, onNewUser(_)).Times(1);
-    EXPECT_CALL(object, onPoseStart(_)).Times(0);
+    EXPECT_CALL(object, onNewUser(userId)).Times(1);
+    EXPECT_CALL(object, onPoseStart(userId)).Times(0);
 
     EXEC_ONIFILE();
+
+    ASSERT_TRUE(object.isAvailable(userId));
+    ASSERT_FALSE(object.isCalibrated(userId));
+    ASSERT_FALSE(object.isTracking(userId));
+
+    FINISH_ONIFILE();
 }
 
 TEST_F(UserContextTest, NewUserAndCalibrateUser) {
     SET_ONIFILE("./test/oni/user_calibrate.oni");
     MockUserContext object(&context);
+    int userId = 1;
 
     ON_CALL(object, onNewUser(_))
         .WillByDefault(Invoke(&object, &MockUserContext::fakeOnNewUser));
@@ -94,17 +112,24 @@ TEST_F(UserContextTest, NewUserAndCalibrateUser) {
     ON_CALL(object, onCalibrationEnd(_, _))
         .WillByDefault(Invoke(&object, &MockUserContext::fakeOnCalibrationEnd));
     
-    EXPECT_CALL(object, onNewUser(_)).Times(1);
-    EXPECT_CALL(object, onPoseStart(_)).Times(1);
-    EXPECT_CALL(object, onCalibrationStart(_)).Times(1);
-    EXPECT_CALL(object, onCalibrationEnd(_, true)).Times(1);
+    EXPECT_CALL(object, onNewUser(userId)).Times(1);
+    EXPECT_CALL(object, onPoseStart(userId)).Times(1);
+    EXPECT_CALL(object, onCalibrationStart(userId)).Times(1);
+    EXPECT_CALL(object, onCalibrationEnd(userId, true)).Times(1);
 
     EXEC_ONIFILE();
+
+    ASSERT_TRUE(object.isAvailable(userId));
+    ASSERT_TRUE(object.isCalibrated(userId));
+    ASSERT_TRUE(object.isTracking(userId));
+
+    FINISH_ONIFILE();
 }
 
 TEST_F(UserContextTest, NewUserAndCalibrateUserFailure) {
     SET_ONIFILE("./test/oni/user_calibrate_failure.oni");
     MockUserContext object(&context);
+    int userId = 1;
 
     ON_CALL(object, onNewUser(_))
         .WillByDefault(Invoke(&object, &MockUserContext::fakeOnNewUser));
@@ -115,11 +140,17 @@ TEST_F(UserContextTest, NewUserAndCalibrateUserFailure) {
     ON_CALL(object, onCalibrationEnd(_, _))
         .WillByDefault(Invoke(&object, &MockUserContext::fakeOnCalibrationEnd));
     
-    EXPECT_CALL(object, onNewUser(_)).Times(1);
-    EXPECT_CALL(object, onPoseStart(_)).Times(1);
-    EXPECT_CALL(object, onCalibrationStart(_)).Times(1);
-    EXPECT_CALL(object, onCalibrationEnd(_, false)).Times(1);
+    EXPECT_CALL(object, onNewUser(userId)).Times(1);
+    EXPECT_CALL(object, onPoseStart(userId)).Times(1);
+    EXPECT_CALL(object, onCalibrationStart(userId)).Times(1);
+    EXPECT_CALL(object, onCalibrationEnd(userId, false)).Times(1);
 
     EXEC_ONIFILE();
+
+    ASSERT_TRUE(object.isAvailable(userId));
+    ASSERT_FALSE(object.isTracking(userId));
+    ASSERT_FALSE(object.isCalibrated(userId));
+
+    FINISH_ONIFILE();
 }
 

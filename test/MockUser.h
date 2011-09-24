@@ -14,6 +14,7 @@ public:
     MockUser(void) : User(NULL) {
         ON_CALL(*this, isTracking()).WillByDefault(Return(true));
         ON_CALL(*this, isCalibrated()).WillByDefault(Return(true));
+        ON_CALL(*this, isAvailable()).WillByDefault(Return(true));
         ON_CALL(*this, isConfident(_)).WillByDefault(Return(true));
     }
     virtual ~MockUser(void) {}
@@ -64,6 +65,7 @@ public:
     MOCK_METHOD0(leftArmIsBentRightAngle, bool(void));
     MOCK_CONST_METHOD0(isTracking, bool(void));
     MOCK_CONST_METHOD0(isCalibrated, bool(void));
+    MOCK_CONST_METHOD0(isAvailable, bool(void));
     MOCK_CONST_METHOD1(isConfident, bool(XnSkeletonJointPosition p));
 
     ty::Vector FakeVectorRightUpperArm(void) {

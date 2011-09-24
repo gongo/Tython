@@ -37,6 +37,14 @@ public:
      */
     bool isCalibrated(int userId);
 
+    /**
+     * 指定したユーザが認識されているかチェックする
+     *
+     * @param   userId  ユーザID
+     * @return  認識されていれば true
+     */
+    bool isAvailable(int userId);
+
     XnSkeletonJointPosition getSkeletonJointPosition(int userId, XnSkeletonJoint joint);
 
     /**

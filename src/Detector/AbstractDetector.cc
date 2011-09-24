@@ -13,7 +13,7 @@ AbstractDetector::~AbstractDetector(void)
 
 bool AbstractDetector::detect()
 {
-    return user->isCalibrated() && isPosing();
+    return user->isTracking() && isPosing();
 }
 
 } // namespace ty

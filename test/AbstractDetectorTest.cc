@@ -51,6 +51,6 @@ TEST_F(AbstractDetectorTest, TestIsDetectError) {
 }
 
 TEST_F(AbstractDetectorTest, TestIsDetectErrorNoCalibrated) {
-    EXPECT_CALL(*user, isCalibrated()).WillOnce(Return(false));
+    EXPECT_CALL(*user, isTracking()).WillOnce(Return(false));
     ASSERT_FALSE(s_object->detect());
 }

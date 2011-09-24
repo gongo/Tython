@@ -62,6 +62,15 @@ public:
     virtual bool isCalibrated(void) const;
 
     /**
+     * ユーザが認識されているかチェックする
+     *
+     * @see userId
+     *
+     * @return  認識されていれば true
+     */
+    bool isAvailable(void) const;
+
+    /**
      * ユーザの ID を返す
      *
      * @see userId

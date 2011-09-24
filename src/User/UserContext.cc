@@ -54,6 +54,26 @@ bool UserContext::isCalibrated(int userId)
         && userGenerator->GetSkeletonCap().IsCalibrated(userId);
 }
 
+/**
+ * @todo マジックナンバーぇ...
+ * @todo 標準で準備されてそうなもんだけど見つからない
+ */
+bool UserContext::isAvailable(int userId)
+{
+    XnUserID aUsers[15];
+    XnUInt16 nUsers = 15;
+
+    userGenerator->GetUsers(aUsers, nUsers);
+
+    for (int i = 0; i < nUsers; i++) {
+        if (aUsers[i] == userId) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 XnSkeletonJointPosition UserContext::getSkeletonJointPosition(int userId, XnSkeletonJoint joint)
 {
     XnSkeletonJointPosition p;

@@ -23,37 +23,36 @@ Requirements
 
 ### Libraries
 
-1. OpenNI
-   * source [https://github.com/OpenNI/OpenNI](https://github.com/OpenNI/OpenNI)
-   * binary [http://www.openni.org/downloadfiles/2-openni-binaries](http://www.openni.org/downloadfiles/2-openni-binaries)
-2. Sensor - OpenNI Compliant Hardware 
-   * source [https://github.com/PrimeSense/Sensor](https://github.com/PrimeSense/Sensor)
-   * binary [http://www.openni.org/downloadfiles/30-openni-compliant-hardware-binaries](http://www.openni.org/downloadfiles/30-openni-compliant-hardware-binaries)
-3. NITE - OpenNI Compliant Middleware 
-   * binary [http://www.openni.org/downloadfiles/12-openni-compliant-middleware-binaries](http://www.openni.org/downloadfiles/12-openni-compliant-middleware-binaries)
+1. OpenNI v1.3.2.3
+   * source [https://github.com/OpenNI/OpenNI/tree/unstable](https://github.com/OpenNI/OpenNI/tree/unstable)
+   * binary [http://www.openni.org/downloadfiles/opennimodules/openni-binaries/20-latest-unstable](http://www.openni.org/downloadfiles/opennimodules/openni-binaries/20-latest-unstable)
+2. SensorKinect v5.0.3.4 - OpenNI Compliant Hardware
+   * source/binary [https://github.com/avin2/SensorKinect](https://github.com/avin2/SensorKinect)
+3. NITE v1.4.1.2 - OpenNI Compliant Middleware 
+   * binary [http://www.openni.org/downloadfiles/opennimodules/openni-compliant-middleware-binaries/33-latest-unstable](http://www.openni.org/downloadfiles/opennimodules/openni-compliant-middleware-binaries/33-latest-unstable)
 
 ### Optional (To test)
 
- 1. GoogleTest - Google C++ Testing Framework
+ 1. GoogleTest v1.5.0 - Google C++ Testing Framework
     [http://code.google.com/p/googletest/](http://code.google.com/p/googletest/)
- 2. GoogleMock - Google C++ Mocking Framework
+ 2. GoogleMock v1.5.0 - Google C++ Mocking Framework
     [http://code.google.com/p/googlemock/](http://code.google.com/p/googlemock/)
 
-Run
-=======
+Make Tython Library
+====================
 
 ### Build
 
     $ make
-    $ ./Tython
 
 ### Run tests
 
     $ make test
+    $ make test-all # slow test with .oni file
 
 ### Coverage measure
 
-    $ make -f Makefile.coverage test coverage
+    $ make -f Makefile.coverage coverage
     $ $(BROWSER) ./gcov/index.html
    
 

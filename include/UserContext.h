@@ -50,7 +50,7 @@ public:
     /**
      * @brief ユーザを検出したときにコールバックされる関数
      *
-     * userGenerator->RegisterUserCallbacks() に登録するため
+     * generator.RegisterUserCallbacks() に登録するため
      * static として宣言している。
      * ty::UserContext::onNewUser へのつなぎ役
      *
@@ -65,7 +65,7 @@ public:
     /**
      * @brief ユーザを見失ったときにコールバックされる関数
      *
-     * userGenerator->RegisterUserCallbacks() に登録するため
+     * generator.RegisterUserCallbacks() に登録するため
      * static として宣言している。
      * ty::UserContext::onLostUser へのつなぎ役
      *
@@ -80,7 +80,7 @@ public:
     /**
      * @brief 検出されたユーザがポーズを取り始めたときにコールバックされる関数
      *
-     * userGenerator->RegisterUserCallbacks() に登録するため
+     * generator.RegisterUserCallbacks() に登録するため
      * static として宣言している。
      * ty::UserContext::onPoseStart へのつなぎ役
      *
@@ -96,7 +96,7 @@ public:
     /**
      * @brief ポーズをとっているユーザのキャリブレーションが開始された時にコールバックされる関数
      *
-     * userGenerator->GetSkeletonCap().RegisterCalibrationCallbacks() に登録するため
+     * generator.GetSkeletonCap().RegisterCalibrationCallbacks() に登録するため
      * static として宣言している。
      * ty::UserContext::onCalibrationStart へのつなぎ役
      *
@@ -111,7 +111,7 @@ public:
     /**
      * @brief ポーズをとっているユーザのキャリブレーションが終了した時にコールバックされる関数
      *
-     * userGenerator->GetSkeletonCap().RegisterCalibrationCallbacks() に登録するため
+     * generator.GetSkeletonCap().RegisterCalibrationCallbacks() に登録するため
      * static として宣言している。
      * ty::UserContext::onCalibrationEnd へのつなぎ役
      *
@@ -119,9 +119,9 @@ public:
      */
     static void XN_CALLBACK_TYPE onCalibrationEndCallback(xn::SkeletonCapability& capability,
                                                           XnUserID uid,
-                                                          XnBool bSuccess,
+                                                          XnCalibrationStatus status,
                                                           void* t) {
-        static_cast<UserContext*>(t)->onCalibrationEnd(uid, bSuccess);
+        static_cast<UserContext*>(t)->onCalibrationEnd(uid, (status == XN_CALIBRATION_STATUS_OK));
     }
 
 protected:
@@ -143,9 +143,23 @@ protected:
 
 private:
     /**
+     * UserGenerator の SkeletonCapability を返す
+     *
+     * @return SkeletonCapability
+     */
+    xn::SkeletonCapability skeletonCap(void);
+
+    /**
+     * UserGenerator の PoseDetectionCapability を返す
+     *
+     * @return PoseDetectionCapability
+     */
+    xn::PoseDetectionCapability poseDetectionCap(void);
+
+    /**
      * UserGenerator インスタンス
      */
-    xn::UserGenerator* userGenerator;
+    xn::UserGenerator generator;
 
     /**
      *

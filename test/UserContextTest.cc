@@ -37,7 +37,7 @@ public:
     }    
 
     virtual void TearDown() {
-        context.Shutdown();
+        context.Release();
     }
 
 protected:

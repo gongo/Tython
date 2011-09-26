@@ -40,7 +40,7 @@ Controller::~Controller(void)
     delete ctxUser;
     delete world;
     ctxGlobal.StopGeneratingAll();
-    ctxGlobal.Shutdown();
+    ctxGlobal.Release();
 }
 
 void Controller::main(void)

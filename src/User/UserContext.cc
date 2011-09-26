@@ -6,52 +6,53 @@ namespace ty {
 UserContext::UserContext(xn::Context *ctx)
 {
     XnStatus rc;
-
-    userGenerator = new xn::UserGenerator;
     
-    rc = ctx->FindExistingNode(XN_NODE_TYPE_USER, *userGenerator);
-    if (!ty::xnCheck(rc)) {
-        ty::xnRuntimeCheck(userGenerator->Create(*ctx));
+    if (!ty::xnCheck(ctx->FindExistingNode(XN_NODE_TYPE_USER, generator))) {
+        ty::xnRuntimeCheck(generator.Create(*ctx));
     }
-    userGenerator->GetSkeletonCap().SetSkeletonProfile(XN_SKEL_PROFILE_ALL);
 
-    DIE_IF(!userGenerator->IsCapabilitySupported(XN_CAPABILITY_SKELETON), "This configuration is not supported.");
+    skeletonCap().SetSkeletonProfile(XN_SKEL_PROFILE_ALL);
 
-    userGenerator->GetSkeletonCap().GetCalibrationPose(poseName);
-    ty::xnRuntimeCheck(userGenerator->RegisterUserCallbacks(UserContext::onNewUserCallback,
+    DIE_IF(!generator.IsCapabilitySupported(XN_CAPABILITY_SKELETON),
+           "This configuration is not supported.");
+
+    skeletonCap().GetCalibrationPose(poseName);
+    ty::xnRuntimeCheck(generator.RegisterUserCallbacks(UserContext::onNewUserCallback,
                                                             UserContext::onLostUserCallback,
                                                             this,
                                                             handleUserCallbacks));
-    ty::xnRuntimeCheck(userGenerator->GetPoseDetectionCap().RegisterToPoseCallbacks(UserContext::onPoseStartCallback,
-                                                                                    NULL,
-                                                                                    this,
-                                                                                    handlePoseCallbacks));
-    userGenerator->GetSkeletonCap().RegisterCalibrationCallbacks(UserContext::onCalibrationStartCallback,
-                                                                 UserContext::onCalibrationEndCallback,
+
+    ty::xnRuntimeCheck(poseDetectionCap().RegisterToPoseDetected(UserContext::onPoseStartCallback,
                                                                  this,
-                                                                 handleCalibrationCallbacks);
+                                                                 handlePoseCallbacks));
+    ty::xnRuntimeCheck(skeletonCap().RegisterToCalibrationStart(UserContext::onCalibrationStartCallback,
+                                                                this,
+                                                                handleCalibrationCallbacks));
+    ty::xnRuntimeCheck(skeletonCap().RegisterToCalibrationComplete(UserContext::onCalibrationEndCallback,
+                                                                   this,
+                                                                   handleCalibrationCallbacks));
 }
 
 UserContext::~UserContext(void)
 {
-    delete userGenerator;
+    generator.Release();
 }
 
 void UserContext::setSceneData(int userId, xn::SceneMetaData* data)
 {
-    userGenerator->GetUserPixels(userId, *data);
+    generator.GetUserPixels(userId, *data);
 }
 
 bool UserContext::isTracking(int userId)
 {
-    return userGenerator->IsValid()
-        && userGenerator->GetSkeletonCap().IsTracking(userId);
+    return generator.IsValid()
+        && skeletonCap().IsTracking(userId);
 }
 
 bool UserContext::isCalibrated(int userId)
 {
-    return userGenerator->IsValid()
-        && userGenerator->GetSkeletonCap().IsCalibrated(userId);
+    return generator.IsValid()
+        && skeletonCap().IsCalibrated(userId);
 }
 
 /**
@@ -63,10 +64,10 @@ bool UserContext::isAvailable(int userId)
     XnUserID aUsers[15];
     XnUInt16 nUsers = 15;
 
-    userGenerator->GetUsers(aUsers, nUsers);
+    generator.GetUsers(aUsers, nUsers);
 
     for (int i = 0; i < nUsers; i++) {
-        if (aUsers[i] == userId) {
+        if (aUsers[i] == (XnUserID)userId) {
             return true;
         }
     }
@@ -77,14 +78,24 @@ bool UserContext::isAvailable(int userId)
 XnSkeletonJointPosition UserContext::getSkeletonJointPosition(int userId, XnSkeletonJoint joint)
 {
     XnSkeletonJointPosition p;
-    userGenerator->GetSkeletonCap().GetSkeletonJointPosition(userId, joint, p);
+    skeletonCap().GetSkeletonJointPosition(userId, joint, p);
     return p;
+}
+
+xn::SkeletonCapability UserContext::skeletonCap(void)
+{
+    return generator.GetSkeletonCap();
+}
+
+xn::PoseDetectionCapability UserContext::poseDetectionCap(void)
+{
+    return generator.GetPoseDetectionCap();
 }
 
 void UserContext::onNewUser(XnUserID uid)
 {
     printf("onNewUser[%02d]\n", uid);
-    ty::xnRuntimeCheck(userGenerator->GetPoseDetectionCap().StartPoseDetection(poseName, uid));
+    ty::xnRuntimeCheck(poseDetectionCap().StartPoseDetection(poseName, uid));
 }
 
 void UserContext::onLostUser(XnUserID uid)
@@ -101,18 +112,18 @@ void UserContext::onCalibrationEnd(XnUserID uid, bool isCalibration)
 {
     if (isCalibration) {
         printf("onCalibrationEnd - user[%02d] Success!\n", uid);
-        ty::xnRuntimeCheck(userGenerator->GetSkeletonCap().StartTracking(uid));
+        ty::xnRuntimeCheck(skeletonCap().StartTracking(uid));
     } else {
         printf("onCalibrationEnd - user[%02d] Failure...\n", uid);
-        ty::xnRuntimeCheck(userGenerator->GetPoseDetectionCap().StartPoseDetection(poseName, uid));
+        ty::xnRuntimeCheck(poseDetectionCap().StartPoseDetection(poseName, uid));
     }
 }
 
 void UserContext::onPoseStart(XnUserID uid)
 {
     printf("onPoseStart user[%02d]\n", uid);
-    ty::xnRuntimeCheck(userGenerator->GetPoseDetectionCap().StopPoseDetection(uid));
-    ty::xnRuntimeCheck(userGenerator->GetSkeletonCap().RequestCalibration(uid, true));
+    ty::xnRuntimeCheck(poseDetectionCap().StopPoseDetection(uid));
+    ty::xnRuntimeCheck(skeletonCap().RequestCalibration(uid, true));
 }
 
 } // namespace ty

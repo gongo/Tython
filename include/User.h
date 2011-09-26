@@ -383,6 +383,19 @@ protected:
     User(void);
 
     /**
+     * @brief 座標の認識度がしきい値を超えているかチェックする
+     *
+     * 超えていなければ、認識できていないと判断し、
+     * skeletonPosition に保存された値を使うようにする
+     *
+     * @see updateSkeletonJointPosition
+     *
+     * @param   p
+     * @return    しきい値を超えていれば true
+     */
+    bool isConfident(XnSkeletonJointPosition p) const;
+
+    /**
      * 自身の骨格座標を持つ
      *
      * @see XnSkeletonJoint
@@ -398,19 +411,6 @@ private:
      * @param  j  パーツ
      */
     virtual void updateSkeletonJointPosition(XnSkeletonJoint j);
-
-    /**
-     * 座標の認識度がしきい値を超えているかチェックする
-     *
-     * 超えていなければ、認識できていないと判断し、
-     * skeletonPosition に保存された値を使うようにする
-     *
-     * @see updateSkeletonJointPosition
-     *
-     * @param   p
-     * @return    しきい値を超えていれば true
-     */
-    bool isConfident(XnSkeletonJointPosition p) const;
     
     /**
      * UserContext のインスタンス

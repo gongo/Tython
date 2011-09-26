@@ -27,7 +27,7 @@ $(TEST_TARGET): $(TARGET) $(TEST_OBJS)
 	$(CXX) $(TEST_LIBS) -L. -l$(TARGET_LIB) $(TEST_OBJS) -o $@
 
 test: $(TEST_TARGET) force
-	GTEST_FILTER="-UserContextTest.*" \
+	GTEST_FILTER="-UserContextTest.*:UserFactoryTest.TestSetAndDeleteContext" \
 	./$(TEST_TARGET) --gtest_output="xml:$(TEST_XML)" 
 
 test-all: $(TEST_TARGET) force

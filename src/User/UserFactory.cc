@@ -8,11 +8,25 @@ User* UserFactory::list[UserFactory::MAX];
 
 void UserFactory::setContext(xn::Context *ctx)
 {
+    if (context != NULL) {
+        deleteContext();
+    }
+    
     context = new UserContext(ctx);
     
     for (int i = 0; i < UserFactory::MAX; i++) {
         list[i] = new User(context, i + 1);
     }
+}
+
+void UserFactory::deleteContext(void)
+{
+    for (int i = 0; i < UserFactory::MAX; i++) {
+        delete list[i];
+    }        
+
+    delete context;
+    context = NULL;    
 }
 
 User* UserFactory::get(int userId)

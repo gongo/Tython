@@ -16,6 +16,11 @@ public:
      * UserContext を生成し、User List を構築する
      */
     static void setContext(xn::Context *ctx);
+
+    /**
+     * User プールを破棄する
+     */
+    static void deleteContext(void);
     
     /**
      * User を取得する

@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
 #include "UserContext.h"
-#include "WorldContext.h"
+#include "User.h"
 #include "util.h"
 
 using ::testing::Return;
@@ -38,6 +38,10 @@ public:
 
     virtual void TearDown() {
         context.Release();
+
+        if (player.IsValid()) {
+            player.Release();
+        }
     }
 
 protected:
@@ -66,13 +70,14 @@ TEST_F(UserContextTest, NoNewUser) {
     SET_ONIFILE("./test/oni/depth_only.oni");
     MockUserContext object(&context);
     int userId = 1;
+    ty::User user(&object, userId);
 
     EXPECT_CALL(object, onNewUser(userId)).Times(0);
 
     EXEC_ONIFILE();
 
-    ASSERT_FALSE(object.isAvailable(userId));
-    ASSERT_FALSE(object.isCalibrated(userId));
+    ASSERT_FALSE(user.isAvailable());
+    ASSERT_FALSE(user.isCalibrated());
     ASSERT_FALSE(object.isTracking(userId));
 
     FINISH_ONIFILE();
@@ -82,6 +87,7 @@ TEST_F(UserContextTest, NewUserAndNoPoseUser) {
     SET_ONIFILE("./test/oni/user_new.oni");
     MockUserContext object(&context);
     int userId = 1;
+    ty::User user(&object, userId);
 
     ON_CALL(object, onNewUser(_))
         .WillByDefault(Invoke(&object, &MockUserContext::fakeOnNewUser));
@@ -91,9 +97,9 @@ TEST_F(UserContextTest, NewUserAndNoPoseUser) {
 
     EXEC_ONIFILE();
 
-    ASSERT_TRUE(object.isAvailable(userId));
-    ASSERT_FALSE(object.isCalibrated(userId));
-    ASSERT_FALSE(object.isTracking(userId));
+    ASSERT_TRUE(user.isAvailable());
+    ASSERT_FALSE(user.isCalibrated());
+    ASSERT_FALSE(user.isTracking());
 
     FINISH_ONIFILE();
 }
@@ -102,6 +108,7 @@ TEST_F(UserContextTest, NewUserAndCalibrateUser) {
     SET_ONIFILE("./test/oni/user_calibrate.oni");
     MockUserContext object(&context);
     int userId = 1;
+    ty::User user(&object, userId);
 
     ON_CALL(object, onNewUser(_))
         .WillByDefault(Invoke(&object, &MockUserContext::fakeOnNewUser));
@@ -119,9 +126,9 @@ TEST_F(UserContextTest, NewUserAndCalibrateUser) {
 
     EXEC_ONIFILE();
 
-    ASSERT_TRUE(object.isAvailable(userId));
-    ASSERT_TRUE(object.isCalibrated(userId));
-    ASSERT_TRUE(object.isTracking(userId));
+    ASSERT_TRUE(user.isAvailable());
+    ASSERT_TRUE(user.isCalibrated());
+    ASSERT_TRUE(user.isTracking());
 
     FINISH_ONIFILE();
 }
@@ -130,6 +137,7 @@ TEST_F(UserContextTest, NewUserAndCalibrateUserFailure) {
     SET_ONIFILE("./test/oni/user_calibrate_failure.oni");
     MockUserContext object(&context);
     int userId = 1;
+    ty::User user(&object, userId);
 
     ON_CALL(object, onNewUser(_))
         .WillByDefault(Invoke(&object, &MockUserContext::fakeOnNewUser));
@@ -147,9 +155,9 @@ TEST_F(UserContextTest, NewUserAndCalibrateUserFailure) {
 
     EXEC_ONIFILE();
 
-    ASSERT_TRUE(object.isAvailable(userId));
-    ASSERT_FALSE(object.isTracking(userId));
-    ASSERT_FALSE(object.isCalibrated(userId));
+    ASSERT_TRUE(user.isAvailable());
+    ASSERT_FALSE(user.isTracking());
+    ASSERT_FALSE(user.isCalibrated());
 
     FINISH_ONIFILE();
 }

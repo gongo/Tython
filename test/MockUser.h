@@ -188,6 +188,12 @@ public:
     bool FakeIsCalibrated(void) {
         return ty::User::isCalibrated();
     }
+    bool FakeIsAvailable(void) {
+        return ty::User::isAvailable();
+    }
+    bool FakeIsConfident(XnSkeletonJointPosition p) {
+        return ty::User::isConfident(p);
+    }
 };
 
 #endif // _TYTHON_MOCK_USER_H

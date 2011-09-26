@@ -431,3 +431,20 @@ TEST_F(UserTest, TestRightArmIsStriaght) {
     ASSERT_TRUE(object->rightArmIsStraight());
     ASSERT_FALSE(object->rightArmIsStraight());
 }
+
+TEST_F(UserTest, TestIsConfident) {
+    ON_CALL(*object, isConfident(_))
+        .WillByDefault(Invoke(object, &MockUser::FakeIsConfident));
+
+    XnSkeletonJointPosition p;
+    p.position    = ty::Vector(0.0f, 0.0f, 0.0f);
+
+    p.fConfidence = ty::User::THRESHOLD_CONFIDENCE;
+    ASSERT_TRUE(object->isConfident(p));
+
+    p.fConfidence = ty::User::THRESHOLD_CONFIDENCE + 0.1;
+    ASSERT_TRUE(object->isConfident(p));
+
+    p.fConfidence = ty::User::THRESHOLD_CONFIDENCE - 0.1;
+    ASSERT_FALSE(object->isConfident(p));
+}

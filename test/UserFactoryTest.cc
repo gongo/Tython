@@ -1,8 +1,9 @@
 #include <gtest/gtest.h>
 #include <stdexcept>
+#include <limits.h>
 #include "UserFactory.h"
 
-class UserFactoryTest : public ::testing::TestWithParam<int> {
+class UserFactoryTest : public ::testing::Test {
 public:
     virtual void SetUp() {
         context.Init();
@@ -26,24 +27,14 @@ protected:
     xn::Player player;
 };
 
-class UserFactoryFailureTest : public UserFactoryTest {
-};
-
-
-TEST_P(UserFactoryTest, TestGet) {
-    ASSERT_EQ(GetParam(), factory->get(GetParam())->id());
+TEST_F(UserFactoryTest, TestGet) {
+    for (const int id : {1, ty::UserFactory::MAX, (1 + ty::UserFactory::MAX)/2}) {
+        ASSERT_EQ(id, factory->get(id)->id());
+    }
 }
 
-INSTANTIATE_TEST_CASE_P(ValidId,
-                        UserFactoryTest,
-                        testing::Values(1,
-                                        ty::UserFactory::MAX,
-                                        (1 + ty::UserFactory::MAX)/2));
-
-TEST_P(UserFactoryFailureTest, TestGetThrowException) {
-    ASSERT_THROW(factory->get(GetParam()), std::out_of_range);
+TEST_F(UserFactoryTest, TestGetThrowException) {
+    for (const int id : {-1, 0, ty::UserFactory::MAX + 1, INT_MAX}) {
+        ASSERT_THROW(factory->get(id), std::out_of_range);
+    }
 }
-
-INSTANTIATE_TEST_CASE_P(InvalidId,
-                        UserFactoryFailureTest,
-                        testing::Values(-1, 0, ty::UserFactory::MAX + 1, INT_MAX));

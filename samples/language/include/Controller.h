@@ -5,7 +5,7 @@
 
 #include <XnCppWrapper.h>
 #include <string>
-#include "User.h"
+#include "UserFactory.h"
 #include "WorldContext.h"
 #include "Compiler.h"
 #include "VM.h"
@@ -33,13 +33,8 @@ private:
      */
     xn::Context ctxGlobal;
 
-    /**
-     *
-     */
-    ty::UserContext *ctxUser;
-
     ty::User *user;
-
+    ty::UserFactory *factory;
     ty::WorldContext *world;
 
     /**

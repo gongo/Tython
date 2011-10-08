@@ -3,15 +3,8 @@
 
 namespace ty {
 
-UserContext* UserFactory::context = NULL;
-User* UserFactory::list[UserFactory::MAX];
-
-void UserFactory::setContext(xn::Context *ctx)
+UserFactory::UserFactory(xn::Context *ctx)
 {
-    if (context != NULL) {
-        deleteContext();
-    }
-    
     context = new UserContext(ctx);
     
     for (int i = 0; i < UserFactory::MAX; i++) {
@@ -19,19 +12,18 @@ void UserFactory::setContext(xn::Context *ctx)
     }
 }
 
-void UserFactory::deleteContext(void)
+UserFactory::~UserFactory(void)
 {
     for (int i = 0; i < UserFactory::MAX; i++) {
         delete list[i];
     }        
 
     delete context;
-    context = NULL;    
 }
 
 User* UserFactory::get(int userId)
 {
-    if (MAX < userId || userId < 1) {
+    if (userId < 1 || MAX < userId) {
         throw std::out_of_range("\"userId\" must between 1 and UserFactory::MAX");
     }
 

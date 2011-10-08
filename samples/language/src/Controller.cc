@@ -11,6 +11,7 @@
 
 AbstractRenderer *renderer;
 xn::Player player;
+
 Controller::Controller(const XnChar* recordFileName)
 {
     ty::xnRuntimeCheck(ctxGlobal.Init());
@@ -36,9 +37,8 @@ Controller::~Controller(void)
 {
     delete im;
     delete renderer;
-    delete user;
-    delete ctxUser;
     delete world;
+    delete factory;
     ctxGlobal.StopGeneratingAll();
     ctxGlobal.Release();
 }
@@ -90,8 +90,8 @@ void Controller::main(void)
 
 void Controller::initXN(void)
 {
-    ty::UserFactory::setContext(&ctxGlobal);
-    user     = ty::UserFactory::get(1);
+    factory  = new ty::UserFactory(&ctxGlobal);
+    user     = factory->get(1);
     world    = new ty::WorldContext(&ctxGlobal,
                                     ty::WorldContext::NODE_USE_IMAGE |
                                     ty::WorldContext::NODE_USE_DEPTH

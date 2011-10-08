@@ -2,37 +2,48 @@
 #include <stdexcept>
 #include "UserFactory.h"
 
-TEST(UserFactoryTest, TestSetAndDeleteContext) {
+class UserFactoryTest : public ::testing::TestWithParam<int> {
+public:
+    virtual void SetUp() {
+        context.Init();
+        context.OpenFileRecording("./test/oni/depth_only.oni", player);
+        player.SetRepeat(false);
+        factory = new ty::UserFactory(&context);
+        context.StartGeneratingAll();
+        while (!player.IsEOF()) { context.WaitAndUpdateAll(); }
+    }
+
+    virtual void TearDown() {
+        context.StopGeneratingAll();
+        delete factory;
+        player.Release();
+        context.Release();
+    }
+
+protected:
+    ty::UserFactory *factory;
     xn::Context context;
     xn::Player player;
-    ty::User *user;
+};
 
-    // Init
-    context.Init();
-    context.OpenFileRecording("./test/oni/depth_only.oni", player);
-    player.SetRepeat(false);
-    ty::UserFactory::setContext(&context);
+class UserFactoryFailureTest : public UserFactoryTest {
+};
 
-    // Play
-    context.StartGeneratingAll();
-    while (!player.IsEOF()) { context.WaitAndUpdateAll(); }
 
-    user = ty::UserFactory::get(1);
-    ASSERT_EQ(1, user->id());
-
-    // Stop
-    context.StopGeneratingAll();
-    
-    // Release
-    ty::UserFactory::deleteContext();
-    player.Release();
-    context.Release();
+TEST_P(UserFactoryTest, TestGet) {
+    ASSERT_EQ(GetParam(), factory->get(GetParam())->id());
 }
 
-TEST(UserFactoryTest, TestGetThrowException) {
-    ASSERT_THROW(ty::UserFactory::get(0), std::out_of_range);
-    ASSERT_THROW(ty::UserFactory::get(ty::UserFactory::MAX + 1), std::out_of_range);
+INSTANTIATE_TEST_CASE_P(ValidId,
+                        UserFactoryTest,
+                        testing::Values(1,
+                                        ty::UserFactory::MAX,
+                                        (1 + ty::UserFactory::MAX)/2));
 
-    ASSERT_NO_THROW(ty::UserFactory::get(1));
-    ASSERT_NO_THROW(ty::UserFactory::get(ty::UserFactory::MAX));
+TEST_P(UserFactoryFailureTest, TestGetThrowException) {
+    ASSERT_THROW(factory->get(GetParam()), std::out_of_range);
 }
+
+INSTANTIATE_TEST_CASE_P(InvalidId,
+                        UserFactoryFailureTest,
+                        testing::Values(-1, 0, ty::UserFactory::MAX + 1, INT_MAX));

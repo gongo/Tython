@@ -18,15 +18,18 @@ Camera::Camera(xn::Context *_ctx, const int nodeType) : ctxGlobal(_ctx)
         && ctxImage.IsValid()) {
         xnRuntimeCheck(ctxDepth.GetAlternativeViewPointCap().SetViewPoint(ctxImage));
     }
-
-    updateDepth();
-    updateImage();
 }
 
 Camera::~Camera(void)
 {
     ctxImage.Release();
     ctxDepth.Release();
+}
+
+void Camera::update(void)
+{
+    updateDepth();
+    updateImage();
 }
 
 void Camera::updateDepth(void)

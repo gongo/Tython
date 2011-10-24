@@ -89,14 +89,14 @@ public:
     XnUInt32 depthHeight(void) const;
 
     /**
-     * @brief Depth Meta Data の更新
+     * @brief 入力ジェネレータの更新
+     *
+     * 有効になっているジェネレータ (depth, image) を更新
+     *
+     * @see updateDepth()
+     * @see updateImage()
      */
-    void updateDepth(void);
-
-    /**
-     * @brief Image Meta Data の更新
-     */
-    void updateImage(void);
+    void update(void);
 
     /**
      * @brief Recorder を有効化する
@@ -127,6 +127,16 @@ protected:
     void initXN(void);
 
 private:
+    /**
+     * @brief Depth Meta Data の更新
+     */
+    void updateDepth(void);
+
+    /**
+     * @brief Image Meta Data の更新
+     */
+    void updateImage(void);
+
     /**
      * @brief xn::Context インスタンス
      */

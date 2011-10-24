@@ -19,8 +19,7 @@ AbstractRenderer::~AbstractRenderer(void)
 
 void AbstractRenderer::draw(void)
 {
-    ctx->updateImage();
-    ctx->updateDepth();
+    ctx->update();
 
     xn::ImageMetaData imageMD;
     ctx->imageGenerator()->GetMetaData(imageMD);

@@ -15,7 +15,7 @@ public:
      * nodeType で生成する Generator を選択する
      *
      * @code
-     * Camera *camera = new Camera(ctx, NODE_USE_DEPTH | NODE_USE_IMAGE);
+     * Camera *camera = new Camera(ctx, USE_DEPTH | USE_IMAGE);
      * @endcode
      *
      * @param  _ctx      Init 済みの xn::Context のインスタンス
@@ -111,12 +111,12 @@ public:
     /**
      * @brief Depth Node を使うフラグ値
      */
-    static const int NODE_USE_DEPTH = (1 << 0);
+    static const int USE_DEPTH = (1 << 0);
 
     /**
      * @brief Image Node を使うフラグ値
      */
-    static const int NODE_USE_IMAGE = (1 << 1);
+    static const int USE_IMAGE = (1 << 1);
 
 protected:
     /**

@@ -5,11 +5,11 @@ namespace ty {
 
 Camera::Camera(xn::Context *_ctx, const int nodeType) : ctxGlobal(_ctx)
 {
-    if (nodeType & NODE_USE_IMAGE) {
+    if (nodeType & USE_IMAGE) {
         xnRuntimeCheck(ctxGlobal->FindExistingNode(XN_NODE_TYPE_IMAGE, ctxImage));
     }
 
-    if (nodeType & NODE_USE_DEPTH) {
+    if (nodeType & USE_DEPTH) {
         xnRuntimeCheck(ctxGlobal->FindExistingNode(XN_NODE_TYPE_DEPTH, ctxDepth));
     }
 
@@ -18,6 +18,8 @@ Camera::Camera(xn::Context *_ctx, const int nodeType) : ctxGlobal(_ctx)
         && ctxImage.IsValid()) {
         xnRuntimeCheck(ctxDepth.GetAlternativeViewPointCap().SetViewPoint(ctxImage));
     }
+
+    update();
 }
 
 Camera::~Camera(void)

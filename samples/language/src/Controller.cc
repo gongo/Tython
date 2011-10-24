@@ -92,10 +92,8 @@ void Controller::initXN(void)
 {
     factory  = new ty::UserFactory(&ctxGlobal);
     user     = factory->get(1);
-    camera    = new ty::Camera(&ctxGlobal,
-                                    ty::Camera::NODE_USE_IMAGE |
-                                    ty::Camera::NODE_USE_DEPTH
-                                    );
+    camera   = new ty::Camera(&ctxGlobal,
+                              ty::Camera::USE_IMAGE | ty::Camera::USE_DEPTH);
     renderer = new AbstractRenderer(camera, user);
     im       = new DefaultInputMethod(user);
     compiler = Compiler::instance();

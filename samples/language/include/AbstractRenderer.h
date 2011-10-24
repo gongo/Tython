@@ -6,16 +6,16 @@
 #include <XnCppWrapper.h>
 #include <opencv2/opencv.hpp>
 #include "User.h"
-#include "WorldContext.h"
+#include "Camera.h"
 #include "Vector.h"
 
 class AbstractRenderer {
 public:
-    AbstractRenderer(ty::WorldContext *ctx, ty::User* _user);
+    AbstractRenderer(ty::Camera *ctx, ty::User* _user);
     virtual ~AbstractRenderer(void);
     void draw(void);
 protected:
-    ty::WorldContext* ctx;
+    ty::Camera* ctx;
     ty::User* user;
 private:
     cv::Ptr<IplImage> camera;

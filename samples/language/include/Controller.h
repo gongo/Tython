@@ -6,7 +6,7 @@
 #include <XnCppWrapper.h>
 #include <string>
 #include "UserFactory.h"
-#include "WorldContext.h"
+#include "Camera.h"
 #include "Compiler.h"
 #include "VM.h"
 #include "AbstractInputMethod.h"
@@ -35,7 +35,7 @@ private:
 
     ty::User *user;
     ty::UserFactory *factory;
-    ty::WorldContext *world;
+    ty::Camera *camera;
 
     /**
      *

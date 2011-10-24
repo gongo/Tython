@@ -1,7 +1,7 @@
 #include "AbstractRenderer.h"
 #include "util.h"
 
-AbstractRenderer::AbstractRenderer(ty::WorldContext *_ctx, ty::User* _user)
+AbstractRenderer::AbstractRenderer(ty::Camera *_ctx, ty::User* _user)
     : ctx(_ctx), user(_user)
 {
     XnMapOutputMode outputMode;

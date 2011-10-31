@@ -1,7 +1,6 @@
 include Makefile
 
-CXX      = g++-4.2
-CXXFLAGS += -fprofile-arcs -ftest-coverage -g -arch x86_64
+CXXFLAGS += -fprofile-arcs -ftest-coverage 
 LIBS     += -lgcov -fprofile-arcs -ftest-coverage
 
 GCOV_OBJS = $(OBJS:.o=.gcno) $(TEST_OBJS:.o=.gcno) $(OBJS:.o=.gcda) $(TEST_OBJS:.o=.gcda)

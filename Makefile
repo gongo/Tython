@@ -5,10 +5,12 @@ TARGET      = lib$(TARGET_LIB).so
 TEST_TARGET = libTythonTest
 TEST_XML     = unittest.xml
 
+
 DOXYGEN  = doxygen
 DOXYCONF = Tython.doxygen
 DOXYOUT  = docs
 COVERAGE = $(TEST_XML)
+CPPCHECK_XML = cppcheck.xml
 
 .SUFFIXES: .cc .o 
 
@@ -33,12 +35,18 @@ test: $(TEST_TARGET) force
 test-all: $(TEST_TARGET) force
 	./$(TEST_TARGET) --gtest_output="xml:$(TEST_XML)"
 
+cppcheck:
+	git ls-files | egrep "^(src|include)" > cppcheck_list.txt
+	cppcheck -I include --file-list=cppcheck_list.txt -a --enable=all --xml 2> $(CPPCHECK_XML)
+	rm -f cppcheck_list.txt
+
 clean:
 	$(RM) $(RM_GC)
 	$(RM) $(TARGET) $(TEST_TARGET)
 	$(RM) $(OBJS) $(TEST_OBJS)
 	$(RM) $(TAGSFILE)
 	$(RM) $(OBJS_GCOV)
+	$(RM) $(CPPCHECK_XML)
 	$(RM) -r $(DOXYOUT) $(COVERAGE)
 	cd $(SRCS_DIR)      && $(RM) $(RM_GC)
 	cd $(TEST_SRCS_DIR) && $(RM) $(RM_GC)

@@ -21,7 +21,7 @@ TEST(CameraTest, TestDepth) {
 
     ONI_INIT("./test/oni/depth_only.oni");
 
-    ASSERT_NO_THROW(camera = new ty::Camera(&context, ty::Camera::USE_DEPTH));
+    ASSERT_NO_THROW(camera = new ty::Camera(context, ty::Camera::USE_DEPTH));
     ASSERT_EQ(640, (int)camera->depthWidth());
     ASSERT_EQ(480, (int)camera->depthHeight());
 
@@ -35,7 +35,7 @@ TEST(CameraTest, TestImage) {
 
     ONI_INIT("./test/oni/image_only.oni");
 
-    ASSERT_NO_THROW(camera = new ty::Camera(&context, ty::Camera::USE_IMAGE));
+    ASSERT_NO_THROW(camera = new ty::Camera(context, ty::Camera::USE_IMAGE));
     ASSERT_EQ(640, (int)camera->imageWidth());
     ASSERT_EQ(480, (int)camera->imageHeight());
 
@@ -47,7 +47,7 @@ TEST(CameraTest, TestDepthAndImage) {
     xn::Player player;
 
     ONI_INIT("./test/oni/image_depth.oni");
-    ASSERT_NO_THROW(ty::Camera camera(&context,
+    ASSERT_NO_THROW(ty::Camera camera(context,
                                       ty::Camera::USE_IMAGE | ty::Camera::USE_DEPTH));
     ONI_FINISH();
 }
@@ -57,7 +57,7 @@ TEST(CameraTest, TestImageFailure) {
     xn::Player player;
 
     ONI_INIT("./test/oni/depth_only.oni");
-    ASSERT_THROW(ty::Camera camera(&context,
+    ASSERT_THROW(ty::Camera camera(context,
                                    ty::Camera::USE_IMAGE | ty::Camera::USE_DEPTH),
                  std::runtime_error);
     ONI_FINISH();
@@ -68,7 +68,7 @@ TEST(CameraTest, TestDepthFailure) {
     xn::Player player;
 
     ONI_INIT("./test/oni/image_only.oni");
-    ASSERT_THROW(ty::Camera camera(&context,
+    ASSERT_THROW(ty::Camera camera(context,
                                    ty::Camera::USE_IMAGE | ty::Camera::USE_DEPTH),
                  std::runtime_error);
     ONI_FINISH();

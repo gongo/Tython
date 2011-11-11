@@ -21,7 +21,7 @@ public:
      * @param  _ctx      Init 済みの xn::Context のインスタンス
      * @param  nodeType  生成するノード
      */
-    Camera(xn::Context* _ctx, const int nodeType);
+    Camera(xn::Context& _ctx, const int nodeType);
 
     /**
      * @brief デストラクタ
@@ -140,7 +140,7 @@ private:
     /**
      * @brief xn::Context インスタンス
      */
-    xn::Context* ctxGlobal;
+    xn::Context& ctxGlobal;
 
     /**
      * @brief xn::DepthGenerator インスタンス

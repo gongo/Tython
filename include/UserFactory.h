@@ -9,12 +9,12 @@
 namespace ty {
 
 class UserFactory {
-public: 
+public:
     /**
      * コンストラクタ
      */
-    UserFactory(xn::Context *ctx);
-    
+    UserFactory(xn::Context& ctx);
+
     /**
      * デストラクタ
      */

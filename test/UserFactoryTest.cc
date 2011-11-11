@@ -1,14 +1,15 @@
 #include <gtest/gtest.h>
 #include <stdexcept>
+#include <limits.h>
 #include "UserFactory.h"
 
-class UserFactoryTest : public ::testing::TestWithParam<int> {
+class UserFactoryTest : public ::testing::Test {
 public:
     virtual void SetUp() {
         context.Init();
         context.OpenFileRecording("./test/oni/depth_only.oni", player);
         player.SetRepeat(false);
-        factory = new ty::UserFactory(&context);
+        factory = new ty::UserFactory(context);
         context.StartGeneratingAll();
         while (!player.IsEOF()) { context.WaitAndUpdateAll(); }
     }
@@ -26,24 +27,22 @@ protected:
     xn::Player player;
 };
 
-class UserFactoryFailureTest : public UserFactoryTest {
-};
+TEST_F(UserFactoryTest, TestGet) {
+    int id;
 
+    id = 1;
+    ASSERT_EQ(id, factory->get(id)->id());
 
-TEST_P(UserFactoryTest, TestGet) {
-    ASSERT_EQ(GetParam(), factory->get(GetParam())->id());
+    id = ty::UserFactory::MAX;
+    ASSERT_EQ(id, factory->get(id)->id());
+
+    id = (1 + ty::UserFactory::MAX)/2;
+    ASSERT_EQ(id, factory->get(id)->id());
 }
 
-INSTANTIATE_TEST_CASE_P(ValidId,
-                        UserFactoryTest,
-                        testing::Values(1,
-                                        ty::UserFactory::MAX,
-                                        (1 + ty::UserFactory::MAX)/2));
-
-TEST_P(UserFactoryFailureTest, TestGetThrowException) {
-    ASSERT_THROW(factory->get(GetParam()), std::out_of_range);
+TEST_F(UserFactoryTest, TestGetThrowException) {
+    ASSERT_THROW(factory->get(-1), std::out_of_range);
+    ASSERT_THROW(factory->get(0), std::out_of_range);
+    ASSERT_THROW(factory->get(ty::UserFactory::MAX + 1), std::out_of_range);
+    ASSERT_THROW(factory->get(INT_MAX), std::out_of_range);
 }
-
-INSTANTIATE_TEST_CASE_P(InvalidId,
-                        UserFactoryFailureTest,
-                        testing::Values(-1, 0, ty::UserFactory::MAX + 1, INT_MAX));

@@ -3,14 +3,14 @@
 
 namespace ty {
 
-Camera::Camera(xn::Context *_ctx, const int nodeType) : ctxGlobal(_ctx)
+Camera::Camera(xn::Context& _ctx, const int nodeType) : ctxGlobal(_ctx)
 {
     if (nodeType & USE_IMAGE) {
-        xnRuntimeCheck(ctxGlobal->FindExistingNode(XN_NODE_TYPE_IMAGE, ctxImage));
+        xnRuntimeCheck(ctxGlobal.FindExistingNode(XN_NODE_TYPE_IMAGE, ctxImage));
     }
 
     if (nodeType & USE_DEPTH) {
-        xnRuntimeCheck(ctxGlobal->FindExistingNode(XN_NODE_TYPE_DEPTH, ctxDepth));
+        xnRuntimeCheck(ctxGlobal.FindExistingNode(XN_NODE_TYPE_DEPTH, ctxDepth));
     }
 
     if (ctxDepth.IsValid()
@@ -90,7 +90,7 @@ const xn::RGB24Map& Camera::imageRGB24Map(void) const
 
 void Camera::enableRecord(const XnChar* recordFileName)
 {
-    xnRuntimeCheck(ctxRecorder.Create(*ctxGlobal));
+    xnRuntimeCheck(ctxRecorder.Create(ctxGlobal));
     xnRuntimeCheck(ctxRecorder.SetDestination(XN_RECORD_MEDIUM_FILE, recordFileName));
 
     if (ctxImage.IsValid()) {

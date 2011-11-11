@@ -4,7 +4,7 @@
 
 namespace ty {
 
-CommandDetector::CommandDetector(User* _user) : AbstractDetector(_user)
+CommandDetector::CommandDetector(User* _user) : AbstractDetector(_user), commandNum(0)
 {
     commandList   = NULL;
     resetCommand();

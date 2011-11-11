@@ -14,7 +14,7 @@ CPPCHECK_XML = cppcheck.xml
 
 .SUFFIXES: .cc .o 
 
-.PHONY: test test-all clean tags force all
+.PHONY: test test-all clean distclean tags force all
 
 %.o : %.cc
 $(TEST_SRCS_DIR)/%.o : $(TEST_SRCS_DIR)/%.cc
@@ -36,21 +36,20 @@ test-all: $(TEST_TARGET) force
 	./$(TEST_TARGET) --gtest_output="xml:$(TEST_XML)"
 
 cppcheck:
-	git ls-files | egrep "^(src|include)" > cppcheck_list.txt
-	cppcheck -I include --file-list=cppcheck_list.txt -a --enable=all --xml 2> $(CPPCHECK_XML)
-	rm -f cppcheck_list.txt
+	cppcheck --enable=all --enable=style src -I include --xml 2> $(CPPCHECK_XML)
 
 clean:
 	$(RM) $(RM_GC)
 	$(RM) $(TARGET) $(TEST_TARGET)
 	$(RM) $(OBJS) $(TEST_OBJS)
-	$(RM) $(TAGSFILE)
 	$(RM) $(OBJS_GCOV)
 	$(RM) $(CPPCHECK_XML)
-	$(RM) -r $(DOXYOUT) $(COVERAGE)
 	cd $(SRCS_DIR)      && $(RM) $(RM_GC)
 	cd $(TEST_SRCS_DIR) && $(RM) $(RM_GC)
 
+distclean: clean
+	$(RM) $(TAGSFILE)
+	$(RM) -r $(DOXYOUT) $(COVERAGE)
 
 tags:
 	@$(TAGS) $(TAGSOPTION)

@@ -29,7 +29,7 @@ Controller::Controller(void)
 
     initXN();
 
-    world->enableRecord("hoge.oni");
+    camera->enableRecord("hoge.oni");
     ctxGlobal.StartGeneratingAll();
 }
 
@@ -37,7 +37,7 @@ Controller::~Controller(void)
 {
     delete im;
     delete renderer;
-    delete world;
+    delete camera;
     delete factory;
     ctxGlobal.StopGeneratingAll();
     ctxGlobal.Release();
@@ -92,11 +92,9 @@ void Controller::initXN(void)
 {
     factory  = new ty::UserFactory(&ctxGlobal);
     user     = factory->get(1);
-    world    = new ty::WorldContext(&ctxGlobal,
-                                    ty::WorldContext::NODE_USE_IMAGE |
-                                    ty::WorldContext::NODE_USE_DEPTH
-                                    );
-    renderer = new AbstractRenderer(world, user);
+    camera   = new ty::Camera(&ctxGlobal,
+                              ty::Camera::USE_IMAGE | ty::Camera::USE_DEPTH);
+    renderer = new AbstractRenderer(camera, user);
     im       = new DefaultInputMethod(user);
     compiler = Compiler::instance();
     vm       = VM::instance();

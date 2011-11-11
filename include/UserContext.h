@@ -9,8 +9,8 @@
 namespace ty {
 
 class UserContext {
-public: 
-    UserContext(xn::Context *ctx);
+public:
+    UserContext(xn::Context& ctx);
     ~UserContext(void);
 
     /**
@@ -107,7 +107,7 @@ public:
                                                             void* t) {
         static_cast<UserContext*>(t)->onCalibrationStart(uid);
     }
-        
+
     /**
      * @brief ポーズをとっているユーザのキャリブレーションが終了した時にコールバックされる関数
      *

@@ -1,54 +1,54 @@
 // -*- C++ -*-
 
-#ifndef _TYTHON_WORLD_CONTEXT_H_
-#define _TYTHON_WORLD_CONTEXT_H_
+#ifndef _TYTHON_CAMERA_H_
+#define _TYTHON_CAMERA_H_
 
 #include <XnCppWrapper.h>
 
 namespace ty {
 
-class WorldContext {
+class Camera {
 public:
     /**
      * @brief コンストラクタ
      *
      * nodeType で生成する Generator を選択する
      *
-     * @code 
-     * WorldContext *world = new WorldContext(ctx, NODE_USE_DEPTH | NODE_USE_IMAGE);
+     * @code
+     * Camera *camera = new Camera(ctx, USE_DEPTH | USE_IMAGE);
      * @endcode
-     * 
+     *
      * @param  _ctx      Init 済みの xn::Context のインスタンス
      * @param  nodeType  生成するノード
      */
-    WorldContext(xn::Context* _ctx, const int nodeType);
+    Camera(xn::Context& _ctx, const int nodeType);
 
     /**
      * @brief デストラクタ
      */
-    virtual ~WorldContext(void);
+    virtual ~Camera(void);
 
     /**
-     * xn::DepthGenerator インスタンスを返す
+     * @brief xn::DepthGenerator インスタンスを返す
      *
      * @return xn::DepthGenerator インスタンスポインタ
      */
     xn::DepthGenerator* depthGenerator(void);
 
     /**
-     * xn::ImageGenerator インスタンスを返す
+     * @brief xn::ImageGenerator インスタンスを返す
      *
      * @return xn::ImageGenerator インスタンスポインタ
      */
     xn::ImageGenerator* imageGenerator(void);
 
     /**
-     * 深度データを返す
+     * @brief 深度データを返す
      */
     const XnDepthPixel* depthData(void) const;
 
     /**
-     * RGB24Map を返す
+     * @brief RGB24Map を返す
      */
     const xn::RGB24Map& imageRGB24Map(void) const;
 
@@ -59,7 +59,7 @@ public:
      *
      * @return Image の横ピクセル数
      */
-    XnUInt32 imageWidth(void) const;    
+    XnUInt32 imageWidth(void) const;
 
     /**
      * @brief Image の縦ピクセル数を返す
@@ -68,7 +68,7 @@ public:
      *
      * @return Image の縦ピクセル数
      */
-    XnUInt32 imageHeight(void) const;    
+    XnUInt32 imageHeight(void) const;
 
     /**
      * @brief Depth の横ピクセル数を返す
@@ -77,7 +77,7 @@ public:
      *
      * @return Depth の横ピクセル数
      */
-    XnUInt32 depthWidth(void) const;    
+    XnUInt32 depthWidth(void) const;
 
     /**
      * @brief Depth の縦ピクセル数を返す
@@ -86,17 +86,17 @@ public:
      *
      * @return Depth の縦ピクセル数
      */
-    XnUInt32 depthHeight(void) const;    
+    XnUInt32 depthHeight(void) const;
 
     /**
-     * @brief Depth Meta Data の更新
+     * @brief 入力ジェネレータの更新
+     *
+     * 有効になっているジェネレータ (depth, image) を更新
+     *
+     * @see updateDepth()
+     * @see updateImage()
      */
-    void updateDepth(void);
-
-    /**
-     * @brief Image Meta Data の更新
-     */
-    void updateImage(void);
+    void update(void);
 
     /**
      * @brief Recorder を有効化する
@@ -109,14 +109,14 @@ public:
     void enableRecord(const XnChar* recordFileName);
 
     /**
-     * Depth Node を使うフラグ値
+     * @brief Depth Node を使うフラグ値
      */
-    static const int NODE_USE_DEPTH = (1 << 0);
+    static const int USE_DEPTH = (1 << 0);
 
     /**
-     * Image Node を使うフラグ値
+     * @brief Image Node を使うフラグ値
      */
-    static const int NODE_USE_IMAGE = (1 << 1);
+    static const int USE_IMAGE = (1 << 1);
 
 protected:
     /**
@@ -128,36 +128,46 @@ protected:
 
 private:
     /**
-     * xn::Context インスタンス
+     * @brief Depth Meta Data の更新
      */
-    xn::Context* ctxGlobal;
+    void updateDepth(void);
 
     /**
-     * xn::DepthGenerator インスタンス
+     * @brief Image Meta Data の更新
+     */
+    void updateImage(void);
+
+    /**
+     * @brief xn::Context インスタンス
+     */
+    xn::Context& ctxGlobal;
+
+    /**
+     * @brief xn::DepthGenerator インスタンス
      */
     xn::DepthGenerator ctxDepth;
 
     /**
-     * xn::ImageGenerator インスタンス
+     * @brief xn::ImageGenerator インスタンス
      */
     xn::ImageGenerator ctxImage;
 
     /**
-     * xn::Recorder インスタンス
+     * @brief xn::Recorder インスタンス
      */
     xn::Recorder ctxRecorder;
 
     /**
-     * xn::DepthMetaData インスタンス
+     * @brief xn::DepthMetaData インスタンス
      */
     xn::DepthMetaData metaDepth;
 
     /**
-     * xn::DepthMetaData インスタンス
+     * @brief xn::DepthMetaData インスタンス
      */
     xn::ImageMetaData metaImage;
 };
 
 } // namespace ty
 
-#endif // _TYTHON_WORLD_CONTEXT_H_
+#endif // _TYTHON_CAMERA_H_

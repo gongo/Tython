@@ -86,6 +86,8 @@ public:
     /**
      * 2つのベクトルが成す角度が、指定した角度かチェックする
      *
+     * @see Vector::THRESHOLD_ORTHOGONAL
+     *
      * @param    v    角度をチェックするベクトル
      * @param  angle  判定基準とする角度
      * @return        指定した角度であれば true
@@ -94,6 +96,8 @@ public:
 
     /**
      * 2つのベクトルが指定した角度より鋭角かチェックする
+     *
+     * @see Vector::THRESHOLD_ORTHOGONAL
      *
      * @param    v    角度をチェックするベクトル
      * @param  angle  鋭角と判定基準とする角度
@@ -123,13 +127,15 @@ public:
     bool isOrthogonal(const Vector& v) const;
 
     /**
-     * 2つのベクトルがなす角度が直線かどうかチェックする
+     * @brief 2つのベクトルがなす角度が直線かどうかチェックする
      *
+     * <pre>
      * ベクトルの向きに注意。
      *
      *         A     B
      * true    <-   ->
      * false   ->   ->
+     * </pre>
      *
      * @see Vector::THRESHOLD_STRAIGHT
      * @see Vector::isParallel()
@@ -140,13 +146,15 @@ public:
     bool isStraight(const Vector& v) const;
 
     /**
-     * 2つのベクトルが平行かどうかチェックする
+     * @brief 2つのベクトルが平行かどうかチェックする
      *
+     * <pre>
      * isStraight() と違うのは、ベクトルの向きは気にしない
      *
      *       A   B
      * true  <-  ->
      * true  ->  ->
+     * </pre>
      *
      * @see Vector::THRESHOLD_STRAIGHT
      * @see Vector::isParallel()

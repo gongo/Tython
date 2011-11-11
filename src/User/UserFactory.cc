@@ -3,10 +3,10 @@
 
 namespace ty {
 
-UserFactory::UserFactory(xn::Context *ctx)
+UserFactory::UserFactory(xn::Context& ctx)
 {
     context = new UserContext(ctx);
-    
+
     for (int i = 0; i < UserFactory::MAX; i++) {
         list[i] = new User(context, i + 1);
     }
@@ -16,7 +16,7 @@ UserFactory::~UserFactory(void)
 {
     for (int i = 0; i < UserFactory::MAX; i++) {
         delete list[i];
-    }        
+    }
 
     delete context;
 }

@@ -1,7 +1,7 @@
 #include "AbstractRenderer.h"
 #include "util.h"
 
-AbstractRenderer::AbstractRenderer(ty::WorldContext *_ctx, ty::User* _user)
+AbstractRenderer::AbstractRenderer(ty::Camera *_ctx, ty::User* _user)
     : ctx(_ctx), user(_user)
 {
     XnMapOutputMode outputMode;
@@ -19,8 +19,7 @@ AbstractRenderer::~AbstractRenderer(void)
 
 void AbstractRenderer::draw(void)
 {
-    ctx->updateImage();
-    ctx->updateDepth();
+    ctx->update();
 
     xn::ImageMetaData imageMD;
     ctx->imageGenerator()->GetMetaData(imageMD);

@@ -3,12 +3,12 @@
 
 namespace ty {
 
-UserContext::UserContext(xn::Context *ctx)
+UserContext::UserContext(xn::Context& ctx)
 {
     XnStatus rc;
-    
-    if (!ty::xnCheck(ctx->FindExistingNode(XN_NODE_TYPE_USER, generator))) {
-        ty::xnRuntimeCheck(generator.Create(*ctx));
+
+    if (!ty::xnCheck(ctx.FindExistingNode(XN_NODE_TYPE_USER, generator))) {
+        ty::xnRuntimeCheck(generator.Create(ctx));
     }
 
     skeletonCap().SetSkeletonProfile(XN_SKEL_PROFILE_ALL);
@@ -18,9 +18,9 @@ UserContext::UserContext(xn::Context *ctx)
 
     skeletonCap().GetCalibrationPose(poseName);
     ty::xnRuntimeCheck(generator.RegisterUserCallbacks(UserContext::onNewUserCallback,
-                                                            UserContext::onLostUserCallback,
-                                                            this,
-                                                            handleUserCallbacks));
+                                                       UserContext::onLostUserCallback,
+                                                       this,
+                                                       handleUserCallbacks));
 
     ty::xnRuntimeCheck(poseDetectionCap().RegisterToPoseDetected(UserContext::onPoseStartCallback,
                                                                  this,

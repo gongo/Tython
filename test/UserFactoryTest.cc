@@ -9,7 +9,7 @@ public:
         context.Init();
         context.OpenFileRecording("./test/oni/depth_only.oni", player);
         player.SetRepeat(false);
-        factory = new ty::UserFactory(&context);
+        factory = new ty::UserFactory(context);
         context.StartGeneratingAll();
         while (!player.IsEOF()) { context.WaitAndUpdateAll(); }
     }

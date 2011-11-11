@@ -36,7 +36,7 @@ protected:
      *
      * Singleton だが、 MockTimer のため protected で定義
      */
-    Timer(const Timer& obj) {}
+    Timer(const Timer& obj) { tick = {}; }
 
 private:
     /**

@@ -13,7 +13,7 @@ public:
      * @brief コンストラクタ
      *
      * コマンドのリストと経過時間を初期化する
-     * 
+     *
      * @param _user User インスタンス
      */
     CommandDetector(User* _user);
@@ -27,7 +27,7 @@ public:
 
     /**
      * @brief ポーズをとっているか判定
-     * 
+     *
      * 定められた時間内に指定された順番の Pose をしたかを確認する
      *
      * @return ポーズを検出できれば true

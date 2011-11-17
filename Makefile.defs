@@ -12,7 +12,7 @@ OPENNI_INCLUDE_PATH = $(HOME)/.kinect/usr/include/ni
 OPENNI_LIBRARY_PATH = $(HOME)/.kinect/usr/lib
 
 # Compile Option
-CXX       = g++
+CXX       = g++-4.6
 INCLUDE   = -I./include -I$(OPENNI_INCLUDE_PATH) 
 CXXFLAGS  = -Wall -std=gnu++0x -g \
             -Wno-unknown-pragmas \

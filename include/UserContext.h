@@ -143,6 +143,42 @@ protected:
 
 private:
     /**
+     * User ノードを作成する
+     *
+     * @param  ctx Context
+     * @return ノード作成に成功したら true
+     */
+    XnStatus createNode(xn::Context& ctx);
+
+    /**
+     * ユーザの出現及び消失検知時のコールバックを設定
+     *
+     * @return  コールバック設定に成功したら true
+     */
+    XnStatus cbUserDetect(void);
+
+    /**
+     * ユーザのキャリブレーションポーズ検知時のコールバックを設定
+     *
+     * @return  コールバック設定に成功したら true
+     */
+    XnStatus cbPoseDetect(void);
+
+    /**
+     * ユーザのキャリブレーション開始時のコールバックを設定
+     *
+     * @return  コールバック設定に成功したら true
+     */
+    XnStatus cbCalibrationStart(void);
+
+    /**
+     * ユーザのキャリブレーション終了時のコールバックを設定
+     *
+     * @return  コールバック設定に成功したら true
+     */
+    XnStatus cbCalibrationComplete(void);
+
+    /**
      * UserGenerator の SkeletonCapability を返す
      *
      * @return SkeletonCapability

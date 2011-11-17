@@ -14,8 +14,11 @@ xn::Player player;
 
 Controller::Controller(const XnChar* recordFileName)
 {
-    ty::xnRuntimeCheck(ctxGlobal.Init());
-    ty::xnRuntimeCheck(ctxGlobal.OpenFileRecording(recordFileName, player));
+    ty::throwRuntimeErrorIf({ ctxGlobal.Init(),
+                              ctxGlobal.OpenFileRecording(recordFileName, player)
+                           });
+
+
     player.SetRepeat(false);
 
     initXN();
@@ -24,8 +27,8 @@ Controller::Controller(const XnChar* recordFileName)
 }
 Controller::Controller(void)
 {
-    ty::xnRuntimeCheck(ctxGlobal.InitFromXmlFile("Tython.xml"));
-    ty::xnRuntimeCheck(ctxGlobal.SetGlobalMirror(true));
+    ty::throwRuntimeErrorIf({ ctxGlobal.InitFromXmlFile("Tython.xml"),
+                ctxGlobal.SetGlobalMirror(true) });
 
     initXN();
 
@@ -90,9 +93,9 @@ void Controller::main(void)
 
 void Controller::initXN(void)
 {
-    factory  = new ty::UserFactory(&ctxGlobal);
+    factory  = new ty::UserFactory(ctxGlobal);
     user     = factory->get(1);
-    camera   = new ty::Camera(&ctxGlobal,
+    camera   = new ty::Camera(ctxGlobal,
                               ty::Camera::USE_IMAGE | ty::Camera::USE_DEPTH);
     renderer = new AbstractRenderer(camera, user);
     im       = new DefaultInputMethod(user);

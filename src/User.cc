@@ -54,7 +54,7 @@ void User::updateSkeletonJointPosition(XnSkeletonJoint j)
 
     if (isConfident(p)) {
         skeletonPosition[j - 1] = p;
-    }    
+    }
 }
 
 Vector User::getSkeletonPosition(XnSkeletonJoint j)

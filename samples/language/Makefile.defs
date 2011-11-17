@@ -29,8 +29,12 @@ LIBS      = -lm \
             -L$(OPENNI_LIBRARY_PATH) -lOpenNI \
             -L$(TYTHON_LIBRARY_PATH) -lTython \
 	    -L$(OPENCV_LIBRARY_PATH) -lopencv_core -lopencv_highgui -lopencv_video -lopencv_imgproc
-CXXFLAGS  = -Wall -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 $(INCLUDE) -g
-CXX       = g++
+CXXFLAGS  = -Wall -std=gnu++0x -fno-tree-pre -fno-strict-aliasing -msse3 -mssse3 $(INCLUDE) -g \
+            -Wno-unknown-pragmas \
+            -Wno-reorder         \
+            -Wno-unused-but-set-variable
+
+CXX       = g++-4.6
 
 TEST_CXXFLAGS = $(shell gmock-config --cppflags --cxxflags) $(CXXFLAGS)
 TEST_LIBS     = -L$(shell gtest-config --libdir) -lgtest -L$(shell gmock-config --libdir) -lgmock $(LIBS)

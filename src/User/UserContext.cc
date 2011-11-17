@@ -5,37 +5,78 @@ namespace ty {
 
 UserContext::UserContext(xn::Context& ctx)
 {
-    XnStatus rc;
+    ty::throwRuntimeErrorIf({
+        createNode(ctx),
+        skeletonCap().SetSkeletonProfile(XN_SKEL_PROFILE_ALL),
+        skeletonCap().GetCalibrationPose(poseName)
+    });
 
-    if (!ty::xnCheck(ctx.FindExistingNode(XN_NODE_TYPE_USER, generator))) {
-        ty::xnRuntimeCheck(generator.Create(ctx));
-    }
+    ty::throwRuntimeErrorIf({
+            std::make_tuple(generator.IsCapabilitySupported(XN_CAPABILITY_SKELETON),
+                            "This configuration is not supported.")
+    });
 
-    skeletonCap().SetSkeletonProfile(XN_SKEL_PROFILE_ALL);
-
-    DIE_IF(!generator.IsCapabilitySupported(XN_CAPABILITY_SKELETON),
-           "This configuration is not supported.");
-
-    skeletonCap().GetCalibrationPose(poseName);
-    ty::xnRuntimeCheck(generator.RegisterUserCallbacks(UserContext::onNewUserCallback,
-                                                       UserContext::onLostUserCallback,
-                                                       this,
-                                                       handleUserCallbacks));
-
-    ty::xnRuntimeCheck(poseDetectionCap().RegisterToPoseDetected(UserContext::onPoseStartCallback,
-                                                                 this,
-                                                                 handlePoseCallbacks));
-    ty::xnRuntimeCheck(skeletonCap().RegisterToCalibrationStart(UserContext::onCalibrationStartCallback,
-                                                                this,
-                                                                handleCalibrationCallbacks));
-    ty::xnRuntimeCheck(skeletonCap().RegisterToCalibrationComplete(UserContext::onCalibrationEndCallback,
-                                                                   this,
-                                                                   handleCalibrationCallbacks));
+    ty::throwRuntimeErrorIf({
+        cbUserDetect(),
+        cbPoseDetect(),
+        cbCalibrationStart(),
+        cbCalibrationComplete()
+    });
 }
 
 UserContext::~UserContext(void)
 {
     generator.Release();
+}
+
+XnStatus UserContext::createNode(xn::Context& ctx)
+{
+    XnStatus rc = XN_STATUS_OK;
+
+    rc = ctx.FindExistingNode(XN_NODE_TYPE_USER, generator);
+
+    if (!ty::isXnOK(rc)) {
+        rc = generator.Create(ctx);
+    }
+
+    return rc;
+}
+
+XnStatus UserContext::cbUserDetect(void)
+{
+    return generator.RegisterUserCallbacks(
+               UserContext::onNewUserCallback,
+               UserContext::onLostUserCallback,
+               this,
+               handleUserCallbacks
+           );
+}
+
+XnStatus UserContext::cbPoseDetect(void)
+{
+    return poseDetectionCap().RegisterToPoseDetected(
+               UserContext::onPoseStartCallback,
+               this,
+               handlePoseCallbacks
+           );
+}
+
+XnStatus UserContext::cbCalibrationStart(void)
+{
+    return skeletonCap().RegisterToCalibrationStart(
+               UserContext::onCalibrationStartCallback,
+               this,
+               handleCalibrationCallbacks
+           );
+}
+
+XnStatus UserContext::cbCalibrationComplete(void)
+{
+    return skeletonCap().RegisterToCalibrationComplete(
+               UserContext::onCalibrationEndCallback,
+               this,
+               handleCalibrationCallbacks
+           );
 }
 
 void UserContext::setSceneData(int userId, xn::SceneMetaData* data)
@@ -95,7 +136,7 @@ xn::PoseDetectionCapability UserContext::poseDetectionCap(void)
 void UserContext::onNewUser(XnUserID uid)
 {
     printf("onNewUser[%02d]\n", uid);
-    ty::xnRuntimeCheck(poseDetectionCap().StartPoseDetection(poseName, uid));
+    ty::throwRuntimeErrorIf(poseDetectionCap().StartPoseDetection(poseName, uid));
 }
 
 void UserContext::onLostUser(XnUserID uid)
@@ -110,20 +151,27 @@ void UserContext::onCalibrationStart(XnUserID uid)
 
 void UserContext::onCalibrationEnd(XnUserID uid, bool isCalibration)
 {
+    XnStatus rc = XN_STATUS_OK;
+
     if (isCalibration) {
         printf("onCalibrationEnd - user[%02d] Success!\n", uid);
-        ty::xnRuntimeCheck(skeletonCap().StartTracking(uid));
+        rc = skeletonCap().StartTracking(uid);
     } else {
         printf("onCalibrationEnd - user[%02d] Failure...\n", uid);
-        ty::xnRuntimeCheck(poseDetectionCap().StartPoseDetection(poseName, uid));
+        rc = poseDetectionCap().StartPoseDetection(poseName, uid);
     }
+
+    ty::throwRuntimeErrorIf(rc);
 }
 
 void UserContext::onPoseStart(XnUserID uid)
 {
     printf("onPoseStart user[%02d]\n", uid);
-    ty::xnRuntimeCheck(poseDetectionCap().StopPoseDetection(uid));
-    ty::xnRuntimeCheck(skeletonCap().RequestCalibration(uid, true));
+
+    ty::throwRuntimeErrorIf({
+        poseDetectionCap().StopPoseDetection(uid),
+        skeletonCap().RequestCalibration(uid, true)
+    });
 }
 
 } // namespace ty

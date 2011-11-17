@@ -6,17 +6,17 @@ namespace ty {
 Camera::Camera(xn::Context& _ctx, const int nodeType) : ctxGlobal(_ctx)
 {
     if (nodeType & USE_IMAGE) {
-        xnRuntimeCheck(ctxGlobal.FindExistingNode(XN_NODE_TYPE_IMAGE, ctxImage));
+        throwRuntimeErrorIf(ctxGlobal.FindExistingNode(XN_NODE_TYPE_IMAGE, ctxImage));
     }
 
     if (nodeType & USE_DEPTH) {
-        xnRuntimeCheck(ctxGlobal.FindExistingNode(XN_NODE_TYPE_DEPTH, ctxDepth));
+        throwRuntimeErrorIf(ctxGlobal.FindExistingNode(XN_NODE_TYPE_DEPTH, ctxDepth));
     }
 
     if (ctxDepth.IsValid()
         && ctxDepth.IsCapabilitySupported(XN_CAPABILITY_ALTERNATIVE_VIEW_POINT)
         && ctxImage.IsValid()) {
-        xnRuntimeCheck(ctxDepth.GetAlternativeViewPointCap().SetViewPoint(ctxImage));
+        throwRuntimeErrorIf(ctxDepth.GetAlternativeViewPointCap().SetViewPoint(ctxImage));
     }
 
     update();
@@ -90,18 +90,20 @@ const xn::RGB24Map& Camera::imageRGB24Map(void) const
 
 void Camera::enableRecord(const XnChar* recordFileName)
 {
-    xnRuntimeCheck(ctxRecorder.Create(ctxGlobal));
-    xnRuntimeCheck(ctxRecorder.SetDestination(XN_RECORD_MEDIUM_FILE, recordFileName));
+    throwRuntimeErrorIf({
+        ctxRecorder.Create(ctxGlobal),
+        ctxRecorder.SetDestination(XN_RECORD_MEDIUM_FILE, recordFileName)
+    });
 
     if (ctxImage.IsValid()) {
-        xnRuntimeCheck(ctxRecorder.AddNodeToRecording(ctxImage, XN_CODEC_NULL));
+        throwRuntimeErrorIf(ctxRecorder.AddNodeToRecording(ctxImage, XN_CODEC_NULL));
     }
 
     if (ctxDepth.IsValid()) {
-        xnRuntimeCheck(ctxRecorder.AddNodeToRecording(ctxDepth, XN_CODEC_NULL));
+        throwRuntimeErrorIf(ctxRecorder.AddNodeToRecording(ctxDepth, XN_CODEC_NULL));
     }
 
-    xnRuntimeCheck(ctxRecorder.Record());
+    throwRuntimeErrorIf(ctxRecorder.Record());
 }
 
 } // namespace ty

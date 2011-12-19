@@ -10,7 +10,7 @@ namespace ty {
 
 class UserContext {
 public:
-    UserContext(xn::Context& ctx);
+    UserContext(xn::Context& ctx, XnBool needPoseFlag = false);
     ~UserContext(void);
 
     /**
@@ -123,6 +123,11 @@ public:
                                                           void* t) {
         static_cast<UserContext*>(t)->onCalibrationEnd(uid, (status == XN_CALIBRATION_STATUS_OK));
     }
+
+    /**
+     * @brief キャリブレーションにポーズを必要とするか否か
+     */
+    XnBool isNeedPoseForCalibration;
 
 protected:
     /**

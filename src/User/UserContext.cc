@@ -3,7 +3,7 @@
 
 namespace ty {
 
-UserContext::UserContext(xn::Context& ctx)
+UserContext::UserContext(xn::Context& ctx, XnBool needPoseFlag)
 {
     ty::throwRuntimeErrorIf({
         createNode(ctx),
@@ -15,6 +15,12 @@ UserContext::UserContext(xn::Context& ctx)
             std::make_tuple(generator.IsCapabilitySupported(XN_CAPABILITY_SKELETON),
                             "This configuration is not supported.")
     });
+
+
+    isNeedPoseForCalibration = (needPoseFlag || skeletonCap().NeedPoseForCalibration());
+    if (isNeedPoseForCalibration) {
+        printf("ポーズが必要です！！\n");
+    }
 
     ty::throwRuntimeErrorIf({
         cbUserDetect(),
@@ -136,7 +142,12 @@ xn::PoseDetectionCapability UserContext::poseDetectionCap(void)
 void UserContext::onNewUser(XnUserID uid)
 {
     printf("onNewUser[%02d]\n", uid);
-    ty::throwRuntimeErrorIf(poseDetectionCap().StartPoseDetection(poseName, uid));
+
+    if (isNeedPoseForCalibration) {
+        ty::throwRuntimeErrorIf(poseDetectionCap().StartPoseDetection(poseName, uid));
+    } else {
+        ty::throwRuntimeErrorIf(skeletonCap().RequestCalibration(uid, TRUE));
+    }
 }
 
 void UserContext::onLostUser(XnUserID uid)
@@ -158,7 +169,12 @@ void UserContext::onCalibrationEnd(XnUserID uid, bool isCalibration)
         rc = skeletonCap().StartTracking(uid);
     } else {
         printf("onCalibrationEnd - user[%02d] Failure...\n", uid);
-        rc = poseDetectionCap().StartPoseDetection(poseName, uid);
+
+        if (isNeedPoseForCalibration) {
+            poseDetectionCap().StartPoseDetection(poseName, uid);
+        } else {
+            skeletonCap().RequestCalibration(uid, TRUE);
+        }
     }
 
     ty::throwRuntimeErrorIf(rc);

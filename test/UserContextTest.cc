@@ -9,7 +9,8 @@ using ::testing::_;
 
 class MockUserContext : public ty::UserContext {
 public:
-    MockUserContext(xn::Context& context) : ty::UserContext(context) {}
+    MockUserContext(xn::Context& context, XnBool flag = false)
+        : ty::UserContext(context, flag) {}
 
     MOCK_METHOD1(onNewUser, void(XnUserID));
     MOCK_METHOD1(onPoseStart, void(XnUserID));
@@ -105,8 +106,37 @@ TEST_F(UserContextTest, NewUserAndNoPoseUser) {
 }
 
 TEST_F(UserContextTest, NewUserAndCalibrateUser) {
-    SET_ONIFILE("./test/oni/user_calibrate.oni");
+    SET_ONIFILE("./test/oni/user_calibrate_no_pose.oni");
     MockUserContext object(context);
+    int userId = 1;
+    ty::User user(&object, userId);
+
+    ON_CALL(object, onNewUser(_))
+        .WillByDefault(Invoke(&object, &MockUserContext::fakeOnNewUser));
+    ON_CALL(object, onPoseStart(_))
+        .WillByDefault(Invoke(&object, &MockUserContext::fakeOnPoseStart));
+    ON_CALL(object, onCalibrationStart(_))
+        .WillByDefault(Invoke(&object, &MockUserContext::fakeOnCalibrationStart));
+    ON_CALL(object, onCalibrationEnd(_, _))
+        .WillByDefault(Invoke(&object, &MockUserContext::fakeOnCalibrationEnd));
+
+    EXPECT_CALL(object, onNewUser(userId)).Times(1);
+    EXPECT_CALL(object, onPoseStart(userId)).Times(0);
+    EXPECT_CALL(object, onCalibrationStart(userId)).Times(1);
+    EXPECT_CALL(object, onCalibrationEnd(userId, true)).Times(1);
+
+    EXEC_ONIFILE();
+
+    ASSERT_TRUE(user.isAvailable());
+    ASSERT_TRUE(user.isCalibrated());
+    ASSERT_TRUE(user.isTracking());
+
+    FINISH_ONIFILE();
+}
+
+TEST_F(UserContextTest, NewUserAndCalibrateUserWithPose) {
+    SET_ONIFILE("./test/oni/user_calibrate.oni");
+    MockUserContext object(context, true);
     int userId = 1;
     ty::User user(&object, userId);
 
@@ -132,33 +162,3 @@ TEST_F(UserContextTest, NewUserAndCalibrateUser) {
 
     FINISH_ONIFILE();
 }
-
-TEST_F(UserContextTest, NewUserAndCalibrateUserFailure) {
-    SET_ONIFILE("./test/oni/user_calibrate_failure.oni");
-    MockUserContext object(context);
-    int userId = 1;
-    ty::User user(&object, userId);
-
-    ON_CALL(object, onNewUser(_))
-        .WillByDefault(Invoke(&object, &MockUserContext::fakeOnNewUser));
-    ON_CALL(object, onPoseStart(_))
-        .WillByDefault(Invoke(&object, &MockUserContext::fakeOnPoseStart));
-    ON_CALL(object, onCalibrationStart(_))
-        .WillByDefault(Invoke(&object, &MockUserContext::fakeOnCalibrationStart));
-    ON_CALL(object, onCalibrationEnd(_, _))
-        .WillByDefault(Invoke(&object, &MockUserContext::fakeOnCalibrationEnd));
-
-    EXPECT_CALL(object, onNewUser(userId)).Times(1);
-    EXPECT_CALL(object, onPoseStart(userId)).Times(1);
-    EXPECT_CALL(object, onCalibrationStart(userId)).Times(1);
-    EXPECT_CALL(object, onCalibrationEnd(userId, false)).Times(1);
-
-    EXEC_ONIFILE();
-
-    ASSERT_TRUE(user.isAvailable());
-    ASSERT_FALSE(user.isTracking());
-    ASSERT_FALSE(user.isCalibrated());
-
-    FINISH_ONIFILE();
-}
-

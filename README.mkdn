@@ -35,9 +35,10 @@ Do your best!
 
 ### Libraries
 
-1. OpenNI v1.3.4.6
-2. SensorKinect v5.0.4.4 - OpenNI Compliant Hardware
-3. NITE v1.4.2.5 - OpenNI Compliant Middleware
+1. OpenNI v1.5.2.7
+2. SensorKinect v5.0.5.1 - OpenNI Compliant Hardware
+   - No offical, need [avin2/SensorKinect](https://github.com/avin2/SensorKinect/tree/unstable)
+3. NITE v1.5.2.7 - OpenNI Compliant Middleware
 
 #### binaries
 
@@ -47,8 +48,8 @@ Do your best!
 
 1. OpenNI
     - [https://github.com/OpenNI/OpenNI/tree/unstable](https://github.com/OpenNI/OpenNI/tree/unstable)
-2. SensorKinect
-    - [https://github.com/PrimeSense/Sensor/tree/unstable](https://github.com/PrimeSense/Sensor/tree/unstable)
+2. SensorKinect (avin2)
+    - [https://github.com/avin2/SensorKinect/tree/unstable](https://github.com/avin2/SensorKinect/tree/unstable)
 
 ### Optional (To test)
 

@@ -1,10 +1,17 @@
 肉体言語 Tython
-------------------
+==================
+
+[![Stillmaintained](http://stillmaintained.com/gongo/Tython.png)](http://stillmaintained.com/gongo/Tython)
 
 Tython is programming language, interface and exercise.
 
+News
+---------
+
+OpenNI 1 is closed on April 23, 2014. Thanks for muscle play!! :pizza:
+
 Article
-=========
+---------
 
 [肉体言語 Tython - 質のないDiary H](http://d.hatena.ne.jp/gongoZ/20110514/1305372647)
 
@@ -15,7 +22,7 @@ Article
 [肉体言語 Tython - slideshare](http://www.slideshare.net/gongoZ/tython-7953587)
 
 Requirements
-================
+----------------
 
 ### Devices
 
@@ -39,7 +46,7 @@ Requirements
     [http://code.google.com/p/googlemock/](http://code.google.com/p/googlemock/)
 
 Make Tython Library
-====================
+--------------------
 
 ### Build
 
@@ -57,5 +64,5 @@ Make Tython Library
    
 
 Future
-=========
+---------
 
